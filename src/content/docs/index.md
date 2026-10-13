@@ -1,6 +1,6 @@
 ---
 title: Kinex documentation
-description: A robotics harness for coding agents — devices, tools and skills on top of the Pi coding agent.
+description: A robotics harness for coding agents — skills, tools and devices on top of the Pi coding agent.
 group: Get started
 order: 10
 label: Overview
@@ -11,9 +11,9 @@ Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev)
 
 | Layer | Gives the agent | Example |
 | --- | --- | --- |
-| **Devices** | Typed access to hardware, simulators and model services | `arm`, `wrist_cam`, `world`, `sam3` |
-| **Tools** | Executable operations over devices and computation | `device`, `exec`, `servo`, `locate_object_3d` |
 | **Skills** | Task procedures the agent loads on demand | `setup-device`, `calibrate-camera-extrinsics` |
+| **Tools** | Executable operations over devices and computation | `device`, `exec`, `servo`, `locate_object_3d` |
+| **Devices** | Typed access to hardware, simulators and model services | `arm`, `wrist_cam`, `world`, `sam3` |
 
 Kinex lets you work with real hardware the way you already work with a coding agent. Describe the task in plain language and the robot carries it out.
 
@@ -46,7 +46,7 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 
 ## Understand the design of Kinex
 
-- [Architecture](/docs/architecture/) — devices, tools, skills and who owns what.
+- [Architecture](/docs/architecture/) — skills, tools, devices and who owns what.
 - [Devices](/docs/devices/) — types, profiles, drivers, frames and clocks.
 - [Tools & skills](/docs/tools-and-skills/) — the built-in tools and skills, and how custom ones are discovered.
 - [Runtime](/docs/runtime/) — what Kinex handles for you: devices, discovery, permissions, frames, time and context.
