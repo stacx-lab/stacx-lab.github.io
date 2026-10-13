@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Terminal from '../components/Terminal.astro';
 import ArchDiagram from '../components/ArchDiagram.astro';
 import CopyCmd from '../components/CopyCmd.astro';
+import VideoGallery from '../components/VideoGallery.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 const paths = [
@@ -24,6 +25,7 @@ const paths = [
           <p class="platform-note">Install on macOS and Ubuntu.</p>
           <div class="cta">
             <a class="btn primary" href={url('/docs/')}>Get started →</a>
+            <a class="btn" href="#gallery">Watch the demos ↓</a>
             <a class="btn" href={url('/blog/')}>Read the blog</a>
             <a class="btn" href={site.repo} rel="noopener">GitHub ↗</a>
           </div>
@@ -32,14 +34,16 @@ const paths = [
       </div>
     </section>
 
+    <VideoGallery />
+
     <section class="wrap sec">
-      <p class="kicker">01 · Architecture</p>
+      <p class="kicker">02 · Architecture</p>
       <h2>Three layers. One loop.</h2>
       <ArchDiagram />
     </section>
 
     <section class="wrap sec">
-      <p class="kicker">02 · Where to start</p>
+      <p class="kicker">03 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>

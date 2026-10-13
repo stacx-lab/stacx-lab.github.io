@@ -1,0 +1,159 @@
+---
+import { galleryVideos } from '../data/gallery';
+import { url } from '../lib/url';
+const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}.${extension}`);
+---
+
+<section class="wrap gallery" id="gallery" aria-labelledby="gallery-heading" aria-roledescription="carousel">
+  <div class="intro">
+    <div>
+      <p class="kicker">01 · Gallery</p>
+      <h2 id="gallery-heading">See the agent at work.</h2>
+      <p class="lead">Robot recording on the left. Kinex session on the right.</p>
+    </div>
+    <div class="navigation" aria-label="Gallery navigation">
+      <span class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / 02</span>
+      <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track" disabled>←</button>
+      <button type="button" class="arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track">→</button>
+    </div>
+  </div>
+  <div class="videos" id="gallery-track" tabindex="0" aria-label="Videos. Swipe or use left and right arrow keys to browse.">
+    {galleryVideos.map((clip, index) => (
+      <article class:list={['video-card', { 'is-active': index === 0 }]} aria-roledescription="slide" aria-label={`${index + 1} of ${galleryVideos.length}: ${clip.title}`}>
+        <video
+          controls playsinline preload="none"
+          poster={media(clip.id, 'poster.jpg')}
+          aria-labelledby={`${clip.id}-title`}
+          aria-describedby={`${clip.id}-description`}
+          data-gallery-video
+        >
+          <source src={media(clip.id, 'mp4')} type="video/mp4" />
+          <source src={media(clip.id, 'webm')} type="video/webm" />
+          <a href={media(clip.id, 'mp4')}>Download {clip.title}</a>
+        </video>
+        <div class="details">
+          <div class="title-row">
+            <h3 id={`${clip.id}-title`}>{clip.title}</h3>
+            <span class="duration" aria-label={`${clip.duration === '01:00' ? '60' : '30'} seconds`}>{clip.duration}</span>
+          </div>
+          <p id={`${clip.id}-description`} class="description">{clip.description}</p>
+          <div class="video-footer">
+            <span class="model">{clip.model} · {clip.effort} effort <span class="environment">· {clip.environment}</span></span>
+            <a class="full-size" href={media(clip.id, 'mp4')} target="_blank" rel="noopener" aria-label={`Open ${clip.title} at full size in a new tab`}>Full size <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="pagination" aria-label="Choose a video">
+    {galleryVideos.map((clip, index) => (
+      <button type="button" class="dot" data-gallery-dot={index} aria-label={`Show ${clip.title}`} aria-current={index === 0 ? 'true' : 'false'} aria-controls="gallery-track"><span></span></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>('#gallery');
+  if (gallery) {
+    const track = gallery.querySelector<HTMLElement>('.videos')!;
+    const cards = Array.from(gallery.querySelectorAll<HTMLElement>('.video-card'));
+    const players = Array.from(gallery.querySelectorAll<HTMLVideoElement>('[data-gallery-video]'));
+    const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-dot]'));
+    const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]')!;
+    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]')!;
+    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')!;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let active = 0;
+    let scrollFrame = 0;
+    const position = (index: number) => cards[index].offsetLeft - cards[0].offsetLeft;
+    const select = (index: number) => {
+      active = index;
+      cards.forEach((card, i) => card.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
+      players.forEach((player, i) => { if (i !== index) player.pause(); });
+      previous.disabled = index === 0;
+      next.disabled = index === cards.length - 1;
+      counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    };
+    const goTo = (index: number) => {
+      index = Math.max(0, Math.min(cards.length - 1, index));
+      track.scrollTo({ left: position(index), behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    };
+    previous.addEventListener('click', () => goTo(active - 1));
+    next.addEventListener('click', () => goTo(active + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    track.addEventListener('keydown', (event) => {
+      if (event.target !== track) return;
+      const target = { ArrowLeft: active - 1, ArrowRight: active + 1, Home: 0, End: cards.length - 1 }[event.key];
+      if (target !== undefined) { event.preventDefault(); goTo(target); }
+    });
+    track.addEventListener('scroll', () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const nearest = cards.reduce((best, _, i) => Math.abs(position(i) - track.scrollLeft) < Math.abs(position(best) - track.scrollLeft) ? i : best, 0);
+        if (nearest !== active) select(nearest);
+      });
+    }, { passive: true });
+    window.addEventListener('resize', () => track.scrollTo({ left: position(active), behavior: 'instant' }));
+    players.forEach((player, i) => {
+      player.addEventListener('play', () => {
+        players.forEach((other) => { if (other !== player) other.pause(); });
+        if (i !== active) goTo(i);
+      });
+    });
+    gallery.classList.add('is-enhanced');
+  }
+</script>
+
+<style>
+  .gallery { padding-top: 72px; scroll-margin-top: 20px; }
+  .intro { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 16px; }
+  h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 10px; }
+  .lead { color: var(--ink-2); margin: 0; max-width: 62ch; }
+  .navigation { display: none; align-items: center; gap: 8px; flex-shrink: 0; }
+  .is-enhanced .navigation { display: flex; }
+  .counter { font: 11px var(--font-mono); color: var(--ink-3); margin-right: 8px; white-space: nowrap; }
+  .arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--rule); border-radius: 50%; background: var(--panel); color: var(--ink); font-size: 20px; cursor: pointer; transition: color 160ms, border-color 160ms, transform 160ms; }
+  .arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); transform: translateX(2px); }
+  .arrow:disabled { opacity: .3; cursor: default; }
+  .videos { position: relative; display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; padding: 10px 0 14px; }
+  .videos::after { content: ''; flex: 0 0 max(0px, calc(14% - 20px)); }
+  .video-card { flex: 0 0 86%; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; scroll-snap-align: start; transform-origin: center; transition: transform 450ms ease, opacity 450ms ease, border-color 450ms ease; }
+  .is-enhanced .video-card:not(.is-active) { transform: scale(.975); opacity: .65; }
+  .is-enhanced .video-card.is-active { border-color: color-mix(in srgb, var(--accent) 30%, var(--rule)); }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #f3f0e9; border-bottom: 1px solid var(--rule); }
+  button:focus-visible, .videos:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  video:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .details { padding: 10px 14px 9px; }
+  .title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  h3 { font-size: 15px; line-height: 1.3; margin: 0; font-weight: 600; }
+  .duration { flex-shrink: 0; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+  .description { font-size: 12px; line-height: 1.4; color: var(--ink-2); margin: 3px 0 7px; }
+  .video-footer { border-top: 1px solid var(--rule); padding-top: 6px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 3px 12px; }
+  .model { font-family: var(--font-mono); font-size: 10px; line-height: 1.5; color: var(--ink-2); }
+  .environment { white-space: nowrap; }
+  .full-size { font-size: 11px; color: var(--accent-ink); white-space: nowrap; }
+  .full-size:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .pagination { display: none; justify-content: center; gap: 2px; }
+  .is-enhanced .pagination { display: flex; }
+  .dot { border: 0; background: transparent; padding: 10px 5px; cursor: pointer; }
+  .dot span { display: block; width: 6px; height: 6px; border-radius: 6px; background: var(--ink-3); opacity: .4; transition: width 300ms ease, opacity 300ms ease, background 300ms ease; }
+  .dot[aria-current='true'] span { width: 24px; opacity: 1; background: var(--accent); }
+  @media (max-width: 600px) {
+    .gallery { padding-top: 48px; }
+    .intro { flex-wrap: wrap; gap: 14px; margin-bottom: 4px; }
+    .navigation { margin-left: auto; }
+    .videos { gap: 12px; }
+    .video-card { flex-basis: 94%; }
+    .videos::after { flex-basis: max(0px, calc(6% - 12px)); }
+    .details { padding: 8px 10px; }
+    h3 { font-size: 14px; }
+    .description { font-size: 11px; }
+    .model { font-size: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-card, .arrow, .dot span { transition: none; }
+    .is-enhanced .video-card:not(.is-active) { transform: none; }
+  }
+</style>

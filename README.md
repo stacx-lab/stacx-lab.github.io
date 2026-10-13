@@ -69,11 +69,31 @@ Dialogue and tool displays condense that session; intermediate retries are omitt
 contact is inspected before release. This is an adapted replay, not a live robot.
 Setup runs in a subshell because `roboenv setup` exports into its current directory.
 
-## Demo video
+## Homepage video gallery
 
-The homepage does not currently include a demo section. When a video is available, put the files in
-`public/media/`, import `DemoBanner` in `src/pages/index.astro`, and use
-`<DemoBanner src="/media/reel.mp4" poster="/media/reel.jpg" />`.
+`src/components/VideoGallery.astro` sits below the hero. The two entries are defined
+in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
+
+- `real-hang-mug`: the original 60-second demo, compressed without changing its
+  duration, frame order, or existing speed changes.
+- `yam-hang-mug`: the 30-second recording/session replay, also compressed.
+
+Delivery MP4s retain 1080p/30 FPS (x264 slow, CRF 28, faststart); WebM fallbacks
+use VP9 good, cpu-used 3, CRF 38. Archival MP4s remain in the parent workspace's
+`gallery/.masters/`, outside the published site. Each clip has an opening poster.
+
+The gallery uses horizontal scroll snapping, arrows, slide selectors, and a
+subtle scale transition. Touch/trackpad scrolling and arrow/Home/End keys on the
+track work; reduced-motion preferences disable smooth scrolling and transitions.
+Compact card footers identify model, effort, and Real world / Simulator. Both
+clips show high effort: the real clip's original footer says high, and all 178
+assistant entries in new7 report high after a pre-task change from medium.
+
+Players load on demand and use native controls at normal playback rate. Starting
+one pauses the other, and changing the selected card pauses the outgoing player.
+`public/media/gallery/manifest.json` records master/delivery hashes, file sizes,
+durations, and metadata evidence. Use `url()` for every media link so they resolve
+beneath `/kinex/` in both local builds and GitHub Pages.
 
 ## Deploy
 
