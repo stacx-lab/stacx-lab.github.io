@@ -23,13 +23,13 @@ A type describes what a device can do, not who made it. A robot is usually sever
 | `joint` | Joint-position control and feedback, plus forward/inverse kinematics if the profile declares them |
 | `dexterous_hand` | Joint-position control, with optional finger geometry |
 | `gripper` | Numeric commands for opening and closing a gripper |
-| `suction` | Numeric commands for controlling suction |
+| `suction` | Numeric commands for turning suction on and off |
 | `velocity` | Velocity commands on named axes, with optional posture control (for example, a mobile base) |
 | `legged_base` | High-level modes from the robot's SDK, such as stand, crouch and drive |
 | `rgb` | Color images |
 | `rgbd` | Color images and depth |
 | `imu` | Inertial readings |
-| `force_torque` | Force and torque readings |
+| `force_torque` | Force or torque readings, or both |
 | `model` | Inference operations whose inputs and outputs are declared in the profile |
 | `detection` | Find objects from an image and a text prompt (`detect`) |
 | `segmentation` | Find objects from an image and a text prompt (`detect`), with a mask for each |
