@@ -5,10 +5,9 @@ import mdx from '@astrojs/mdx';
 import remarkBaseLinks from './src/lib/remark-base-links.mjs';
 
 // Deploy target. CI passes the values GitHub Pages reports (see deploy.yml);
-// the defaults match https://stacx-lab.github.io/kinex/.
+// the defaults match https://stacx-lab.github.io/.
 const site = process.env.SITE_URL || 'https://stacx-lab.github.io';
-// An empty BASE_PATH (site served at the domain root) means '/', not the local default.
-const base = process.env.BASE_PATH === undefined ? '/kinex' : process.env.BASE_PATH || '/';
+const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({
   site,
