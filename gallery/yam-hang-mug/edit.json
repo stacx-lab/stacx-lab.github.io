@@ -1,0 +1,1439 @@
+{
+  "title": "Hang a mug on the rack",
+  "subtitle": "A coding agent sees, computes, and controls the robot.",
+  "session_label": "Recorded Kinex session · from the beginning",
+  "recording": "third_person.mp4",
+  "duration": 30,
+  "review_times": [
+    0.7,
+    2.6,
+    3.8,
+    5,
+    8,
+    11,
+    14,
+    17,
+    20,
+    23,
+    26,
+    29.9
+  ],
+  "typography": {
+    "body": "Lato Regular",
+    "headings": "Lato Regular / Bold",
+    "session": "Commit Mono Regular / Bold",
+    "reference_note": "Chosen from site typography and visual comparison; reference MP4 has no font metadata."
+  },
+  "from_start": true,
+  "continuous_source": true,
+  "poster_time": 2.6,
+  "events": [
+    {
+      "entry": 5,
+      "duration": 1.0,
+      "chapter": "Start the task",
+      "caption": "Begin with the original task and the initial scene.",
+      "kind": "user",
+      "text": "Task: hang mug on mug rack",
+      "typing_fraction": 0.75,
+      "result_fraction": 0.9
+    },
+    {
+      "entry": 19,
+      "duration": 0.65,
+      "chapter": "Read devices",
+      "caption": "Read the initial joint state and camera.",
+      "call": 0,
+      "result_fields": [
+        "results.3.data.positions"
+      ],
+      "typing_fraction": 0.3,
+      "result_fraction": 0.58
+    },
+    {
+      "entry": 21,
+      "duration": 1.15,
+      "chapter": "Observe the initial scene",
+      "caption": "The first camera observation appears inside the session.",
+      "call": 0,
+      "typing_fraction": 0.16,
+      "result_fraction": 0.3
+    },
+    {
+      "entry": 28,
+      "duration": 1.2,
+      "chapter": "Compute scene geometry",
+      "caption": "Backproject depth and transform camera coordinates.",
+      "code_field": "control.python",
+      "code_lines": [
+        2,
+        3,
+        6,
+        8
+      ],
+      "typing_fraction": 0.6,
+      "result_fraction": 0.8
+    },
+    {
+      "entry": 32,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'left','points':[[.707,.236,.93],[.707,.236,.805]],'grip':0,'speed_fraction':.6})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 39,
+      "following_calls": [
+        {
+          "entry": 38,
+          "code_field": "control.python",
+          "code_excerpt": "device('left_gripper','write',actions=[1],duration_s=.3)",
+          "call": 0
+        }
+      ],
+      "duration": 1.2746721922638673,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": 6.2,
+            "speed": 28.0959732006965,
+            "reason": "Approach the first grasp"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 1,
+            "reason": "Inspect the first closure"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 40,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'left','points':[[.707,.236,.86]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.06,'speed_fraction':.6})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.10477509965623089,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 42,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828547207,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 44,
+      "duration": 0.55,
+      "chapter": "Observe and replan",
+      "caption": "Read fresh camera evidence before continuing.",
+      "call": 0,
+      "typing_fraction": 0.16,
+      "result_fraction": 0.3
+    },
+    {
+      "entry": 48,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'left','points':[[.707,.236,.98],[.707,-.045,.98]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.06,'speed_fraction':.65})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 53,
+      "following_calls": [
+        {
+          "entry": 52,
+          "code_field": "control.python",
+          "code_excerpt": "m.main({'side':'left','points':[[.707,.236,.806]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'grip':1,'speed_fraction':.5})",
+          "call": 0
+        }
+      ],
+      "duration": 0.14955019931249325,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 54,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828547207,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 60,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.737,.229,.808]],grip=0))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.177383369369079,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 62,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'left','points':[[.70,.17,.97],[.70,-.055,.97]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.07,'speed_fraction':.6})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 67,
+      "following_calls": [
+        {
+          "entry": 66,
+          "code_field": "control.python",
+          "code_excerpt": "m.main(dict(a,points=[[.64,.03,.91],[.64,.03,.812]],minimum_aperture_m=.07))",
+          "call": 0
+        }
+      ],
+      "duration": 0.43151231336372087,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 68,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828546131,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 74,
+      "code_field": "control.python",
+      "code_excerpt": "device('right_gripper','write',actions=[1],duration_s=.3)",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 79,
+      "duration": 0.2790349469668498,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 82,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.48,-.12,1.08],[.48,.03,.95],[.64,.03,.91],[.64,.03,.808]],grip=0))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 85,
+      "following_calls": [
+        {
+          "entry": 84,
+          "code_field": "control.python",
+          "code_excerpt": "m.main(dict(a,points=[[.48,-.12,1.0],[.48,.03,.95],[.64,.03,.91],[.64,.03,.808]],grip=0))",
+          "call": 0
+        }
+      ],
+      "duration": 0.39520817850779605,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 86,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.64,.03,.87],[.49,.03,.90],[.49,-.34,.94],[.70,-.34,.98]]))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.4472441051354499,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 88,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.01121013782854828,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 95,
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 98,
+      "duration": 0.23183957165385588,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 99,
+      "duration": 0.55,
+      "chapter": "Observe and replan",
+      "caption": "Read fresh camera evidence before continuing.",
+      "call": 0,
+      "typing_fraction": 0.16,
+      "result_fraction": 0.3
+    },
+    {
+      "entry": 103,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.700,-.29,.994]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.07,'speed_fraction':.35})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.10719537531338297,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 105,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.01121013782854828,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 113,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.700,-.265,.994],[.704,-.245,.989]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.07,'speed_fraction':.3})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 118,
+      "duration": 0.13260826971289685,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 129,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.70,-.33,.994]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'minimum_aperture_m':.07,'speed_fraction':.35})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.28508563610977083,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 131,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828543982,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 137,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.68155,-.273,1.02932],[.68455,-.248,1.02532]],'quaternion':[.612372436,.612372436,.353553389,.353553389],'minimum_aperture_m':.07,'speed_fraction':.3})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.15560088845497455,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 139,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828543982,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 143,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.688,-.232,1.015]],'quaternion':[.612372436,.612372436,.353553389,.353553389],'minimum_aperture_m':.07,'speed_fraction':.25})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 148,
+      "duration": 0.09872441051340741,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 153,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.681,-.29,1.029],[.694,-.29,1.029],[.694,-.245,1.029]],'quaternion':[.612372436,.612372436,.353553389,.353553389],'minimum_aperture_m':.07,'speed_fraction':.25})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 160,
+      "following_calls": [
+        {
+          "entry": 159,
+          "code_field": "control.python",
+          "code_excerpt": "m.main({'side':'right','points':[[.694,-.38,1.029]],'quaternion':[.612372436,.612372436,.353553389,.353553389],'minimum_aperture_m':.07,'speed_fraction':.4})",
+          "call": 0
+        }
+      ],
+      "duration": 0.5791491284453681,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 161,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.712,-.38,.91]],'quaternion':[.6830127,.6830127,.1830127,.1830127],'speed_fraction':.5})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 166,
+      "duration": 0.4278818998773704,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 170,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.733,-.363,1.0]],'quaternion':[.9659258,0,.258819,0],'grip':1,'speed_fraction':.35})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.27419439565228476,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 172,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.09751427268486343,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 182,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.69,-.39,.87],[.69,-.39,.815]],'quaternion':[1,0,0,0],'grip':0,'speed_fraction':.4})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.21489764205362963,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 184,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.69,-.39,.865]],'quaternion':[1,0,0,0],'minimum_aperture_m':.07,'speed_fraction':.45})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 189,
+      "duration": 0.24757136342431715,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 195,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.09630413485941847,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 199,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.64,-.37,.85],[.64,-.37,.81]],'quaternion':[1,0,0,0],'grip':1,'speed_fraction':.45})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 204,
+      "duration": 0.20400640159363478,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 205,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.64,-.37,.94]],'quaternion':[1,0,0,0],'speed_fraction':.45})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 208,
+      "following_calls": [
+        {
+          "entry": 207,
+          "code_field": "control.python",
+          "code_excerpt": "m.main({'side':'right','points':[[.64,-.37,.92]],'quaternion':[.9659258,0,.258819,0],'speed_fraction':.45})",
+          "call": 0
+        }
+      ],
+      "duration": 0.16891240456895834,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 209,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828543982,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 219,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.52,-.39,.91]],'quaternion':[.9659258,0,.258819,0],'speed_fraction':.6})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.12534744274137502,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 221,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828543982,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 227,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.68,-.375,.87],[.68,-.375,.808]],grip=0))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.5404247179336394,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 229,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.50,-.34,.87],[.50,-.25,.925]],'quaternion':[1,0,0,0],'minimum_aperture_m':.07,'speed_fraction':.45})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.39641831633761726,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 231,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 238,
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 243,
+      "duration": 0.3262303222818691,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 246,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.07452165394255814,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 256,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.545,-.232,.923]],'quaternion':[1,0,0,0],'minimum_aperture_m':.07,'speed_fraction':.35})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.1132460644560849,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 258,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 264,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.558,-.232,.928],[.578,-.234,.924]],'quaternion':[1,0,0,0],'minimum_aperture_m':.07,'speed_fraction':.25})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 269,
+      "duration": 0.14712992365578578,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 272,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.50,-.28,.928],[.50,-.34,.81]],grip=1))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "duration": 0.671119603419053,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 274,
+      "code_field": "control.python",
+      "code_excerpt": "m.main({'side':'right','points':[[.50,-.34,.89],[.545,-.232,.928]],'quaternion':[.70710678,.70710678,0,0],'minimum_aperture_m':.07,'speed_fraction':.45})",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 279,
+      "duration": 0.17375295588394254,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 285,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.49,-.32,.88],[.49,-.32,.808]],grip=1))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 290,
+      "following_calls": [
+        {
+          "entry": 289,
+          "code_field": "control.python",
+          "code_excerpt": "device('right_gripper','write',actions=[1],duration_s=.5)",
+          "call": 0
+        }
+      ],
+      "duration": 0.3818966623949863,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 291,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 297,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.514,-.348,.9],[.514,-.348,.802]],grip=0))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 306,
+      "following_calls": [
+        {
+          "entry": 301,
+          "code_field": "control.python",
+          "code_excerpt": "m.main(dict(a,points=[[.514,-.348,.91],[.514,-.397,.91]],grip=.5))",
+          "call": 0,
+          "result_text": "RuntimeError: TCP failed arrival: {'target': [0.514, -0.397, 0.809], 'actual': [0.527"
+        },
+        {
+          "entry": 305,
+          "code_field": "control.python",
+          "code_excerpt": "m.main({'side':'right','points':[[.52,-.43,.92],[.45,-.45,.92]],'quaternion':[.70710678,.70710678,0,0],'grip':1,'speed_fraction':.5})",
+          "call": 0
+        }
+      ],
+      "duration": 0.5912505067345827,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 307,
+      "call": 0,
+      "chapter": "Read feedback",
+      "caption": "Refresh camera and device feedback.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 313,
+      "code_field": "control.python",
+      "code_excerpt": "m.main(dict(a,points=[[.498,-.372,.91]],grip=.55))",
+      "call": 0,
+      "chapter": "Grasp, inspect, and adjust",
+      "caption": "Recorded attempts and alignment, accelerated.",
+      "end_clock_entry": 318,
+      "duration": 0.24999163908275507,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 319,
+      "duration": 0.55,
+      "chapter": "Observe the mug",
+      "caption": "Inspect the rim from the right wrist camera.",
+      "call": 0,
+      "typing_fraction": 0.18,
+      "result_fraction": 0.32
+    },
+    {
+      "entry": 323,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        4,
+        5
+      ],
+      "result_fields": [
+        "last.1.gripper.aperture_m"
+      ],
+      "chapter": "Grasp the rim and lift",
+      "caption": "Close on the rim, then check the gripper aperture.",
+      "duration": 1.8485901509707934,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": 210.85,
+            "speed": 28.0959732006965,
+            "reason": "Reposition for the rim grasp"
+          },
+          {
+            "end_source_s": 211.65,
+            "speed": 0.8,
+            "reason": "Show rim closure"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 4,
+            "reason": "Inspect the initial lift"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 325,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        4
+      ],
+      "result_fields": [
+        "last.gripper.aperture_m"
+      ],
+      "chapter": "Carry toward the rack",
+      "caption": "Maintain the grasp while moving the handle toward a peg.",
+      "duration": 0.3492313019413116,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Carry toward the rack"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 327,
+      "call": 0,
+      "chapter": "Read the other wrist",
+      "caption": "Acquire a complementary view of the handle.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 329,
+      "duration": 0.65,
+      "chapter": "Inspect the handle",
+      "caption": "The opposite wrist reveals the opening and peg.",
+      "call": 0,
+      "typing_fraction": 0.18,
+      "result_fraction": 0.32
+    },
+    {
+      "entry": 333,
+      "duration": 0.7,
+      "chapter": "Measure the handle boundary",
+      "caption": "Transform selected depth samples into world coordinates.",
+      "code_field": "control.python",
+      "code_lines": [
+        6,
+        7,
+        8
+      ],
+      "result_fields": [
+        "last.(295, 240)"
+      ],
+      "typing_fraction": 0.55,
+      "result_fraction": 0.78
+    },
+    {
+      "entry": 335,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        4
+      ],
+      "result_fields": [
+        "last.waypoints.2.error_m"
+      ],
+      "chapter": "Align the handle with the peg",
+      "caption": "Refine the position while checking the grasp.",
+      "duration": 0.1652819910840745,
+      "retime": {
+        "typing_s": 0.035,
+        "result_hold_s": 0.025,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 337,
+      "call": 0,
+      "chapter": "Read after moving",
+      "caption": "Acquire a fresh view of the peg and handle.",
+      "duration": 0.011210137828552581,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 341,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        4
+      ],
+      "result_fields": [
+        "last.waypoints.0.error_m"
+      ],
+      "chapter": "Thread the handle onto the peg",
+      "caption": "Make the final controlled insertion.",
+      "duration": 1.4500000000057298,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 0.85,
+            "reason": "Show final peg insertion"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 347,
+      "call": 0,
+      "chapter": "Read before release",
+      "caption": "Acquire the wrist view before opening the gripper.",
+      "duration": 0.01242027565710516,
+      "retime": {
+        "typing_s": 0.005,
+        "result_hold_s": 0.005,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 28.0959732006965,
+            "reason": "Condense repeated attempts without a source-time cut"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 349,
+      "duration": 0.7,
+      "chapter": "Inspect peg engagement",
+      "caption": "Check that the peg appears threaded through the handle.",
+      "call": 0,
+      "typing_fraction": 0.18,
+      "result_fraction": 0.32
+    },
+    {
+      "entry": 351,
+      "duration": 0.9,
+      "chapter": "Release and verify",
+      "caption": "The agent checks support after opening the gripper.",
+      "kind": "assistant",
+      "text": "The peg now appears threaded through the handle. I’ll release the rim grasp, withdraw, and check that the rack supports the mug.",
+      "typing_fraction": 0.78,
+      "result_fraction": 0.9
+    },
+    {
+      "entry": 351,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        5,
+        6
+      ],
+      "result_fields": [
+        "last.gripper.aperture_m"
+      ],
+      "chapter": "Release and withdraw",
+      "caption": "Open the fingers, then move the gripper clear.",
+      "duration": 2.5114615380072536,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": 221.4,
+            "speed": 0.65,
+            "reason": "Show release and initial clearance"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 8,
+            "reason": "Withdraw after release"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 353,
+      "call": 0,
+      "result_fields": [
+        "waited_s"
+      ],
+      "chapter": "Let the mug settle",
+      "caption": "Wait before verifying that the rack supports the mug.",
+      "duration": 0.9299999998800482,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 3,
+            "reason": "Let the mug settle"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 357,
+      "duration": 0.85,
+      "chapter": "Verify from the wrist",
+      "caption": "The mug remains supported after the gripper withdraws.",
+      "call": 0,
+      "typing_fraction": 0.18,
+      "result_fraction": 0.32
+    },
+    {
+      "entry": 357,
+      "duration": 0.95,
+      "chapter": "Verify from above",
+      "caption": "A second view confirms the mug remains on the rack.",
+      "call": 1,
+      "typing_fraction": 0.18,
+      "result_fraction": 0.32
+    },
+    {
+      "entry": 368,
+      "code_field": "control.python",
+      "call": 0,
+      "code_lines": [
+        4
+      ],
+      "result_fields": [
+        "last.gripper.faults"
+      ],
+      "chapter": "Check the final gripper state",
+      "caption": "The gripper remains open and clear of the mug.",
+      "duration": 0.4426666666675866,
+      "retime": {
+        "typing_s": 0.15,
+        "result_hold_s": 0.1,
+        "segments": [
+          {
+            "end_source_s": "end",
+            "speed": 3,
+            "reason": "Check the open gripper"
+          }
+        ]
+      }
+    },
+    {
+      "entry": 374,
+      "duration": 1.35,
+      "chapter": "Mug hanging, gripper clear",
+      "caption": "Verified after release and withdrawal.",
+      "kind": "assistant",
+      "text": "Mug hung on the rack and verified after releasing and withdrawing the gripper.",
+      "typing_fraction": 0.7,
+      "result_fraction": 0.9
+    }
+  ]
+}

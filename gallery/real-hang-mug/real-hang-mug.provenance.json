@@ -1,0 +1,38 @@
+{
+  "source": "gallery/demo.mp4",
+  "source_sha256": "b3c4eba3cbf71cc624e7d925a890837ba148974003e9d4a09d16c28581b2ef8e",
+  "duration_s": 60,
+  "fps": 30,
+  "notes": [
+    "Delivery videos are compressed at 1920\u00d71080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
+    "Original frame order, duration, cuts, and variable speed are preserved; container timestamp origins are normalized to zero.",
+    "H.264: libx264 slow CRF 28, faststart. WebM: libvpx-vp9 good cpu-used 3 CRF 38."
+  ],
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "metadata_source": "Visible model/effort in the original session footer.",
+  "delivery": {
+    "master": "gallery/.masters/real-hang-mug.mp4",
+    "source_sha256": "b3c4eba3cbf71cc624e7d925a890837ba148974003e9d4a09d16c28581b2ef8e",
+    "files": {
+      "mp4": {
+        "bytes": 7964451,
+        "sha256": "8fe0576f4da90af4e90b2b1ab9e3d21ca7600bc2cd69d0432cd2f6448b870e16"
+      },
+      "webm": {
+        "bytes": 8674287,
+        "sha256": "319fab29cd0f75822f7be9f9919c261793d5b784cf26f8e01dbfedef0033896e"
+      }
+    },
+    "notes": [
+      "Delivery videos are compressed at 1920\u00d71080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
+      "Original frame order, duration, cuts, and variable speed are preserved; container timestamp origins are normalized to zero.",
+      "H.264: libx264 slow CRF 28, faststart. WebM: libvpx-vp9 good cpu-used 3 CRF 38."
+    ],
+    "frame_count": 1800,
+    "duration_s": 60,
+    "environment": "Real world",
+    "source_first_pts_s": 0.066667,
+    "delivery_first_pts_s": 0
+  }
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kinex · Robot sessions</title>
+<style>
+:root{color-scheme:light;background:#f3f0e9;color:#30362e;font-family:system-ui,sans-serif}*{box-sizing:border-box}body{max-width:1480px;margin:auto;padding:42px 32px 60px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:66px}a{color:inherit;text-underline-offset:5px}.brand{font-size:25px;font-weight:650;text-decoration:none}.eyebrow{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#6f756b}h1{font-size:clamp(36px,5vw,62px);font-weight:450;letter-spacing:-.04em;margin:12px 0 18px}p{color:#70776c;line-height:1.6;font-size:18px;max-width:760px}.intro{margin-bottom:42px}video{display:block;width:100%;aspect-ratio:16/9;background:#e8e7e0;border:1px solid #d6d7cf;border-radius:6px}.meta{display:flex;justify-content:space-between;gap:24px;margin-top:22px;align-items:flex-start}h2{font-size:24px;font-weight:500;margin:0 0 8px}.meta p{font-size:15px;margin:0}.tag{font-size:13px;color:#67705f;white-space:nowrap}.links{display:flex;gap:24px;margin-top:22px;font-size:14px}footer{margin-top:66px;border-top:1px solid #d6d7cf;padding-top:22px;font-size:13px;color:#777d71}@media(max-width:600px){body{padding:24px 16px}header{margin-bottom:42px}.meta{display:block}.tag{display:block;margin-top:16px}}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.run{font-size:13px;margin-top:16px}@media(max-width:860px){.gallery-grid{grid-template-columns:minmax(0,1fr)}}
+.meta{margin-top:10px;gap:12px}h2{font-size:16px;margin-bottom:3px}.meta p{font-size:12px}.tag{font-size:11px}.run{font-size:11px;margin:6px 0}.links{font-size:11px;margin-top:6px;gap:16px}
+</style>
+<header><a class="brand" href="./">Kinex</a><span class="eyebrow">Robot sessions</span></header>
+<div class="intro"><div class="eyebrow">See the agent at work</div><h1>From code to robot motion.</h1><p>The recording on the left. The Kinex session on the right.<br>Watch the agent read camera images, compute poses, move, and verify.</p></div>
+<main class="gallery-grid"><article>
+<video controls playsinline preload="none" poster="../public/media/gallery/real-hang-mug/real-hang-mug.poster.jpg" aria-label="Hang a red cup: robot recording with a Kinex session"><source src="../public/media/gallery/real-hang-mug/real-hang-mug.mp4" type="video/mp4"><source src="../public/media/gallery/real-hang-mug/real-hang-mug.webm" type="video/webm">Your browser does not support this video. <a href="../public/media/gallery/real-hang-mug/real-hang-mug.mp4">Download it here.</a></video>
+<div class="meta"><div><h2>Hang a red cup</h2><p>Watch the agent grasp, recover, and hang a cup on a real robot.</p></div><span class="tag">60 seconds</span></div>
+<p class="run">gpt-6-astra · high effort · Real world</p><div class="links"><a href="../public/media/gallery/real-hang-mug/real-hang-mug.mp4">Open full size ↗</a><a href="../public/media/gallery/real-hang-mug/real-hang-mug.mp4" download>Download MP4</a></div>
+</article><article>
+<video controls playsinline preload="none" poster="../public/media/gallery/yam-hang-mug/yam-hang-mug.poster.jpg" aria-label="Hang a mug on the rack: robot recording with a Kinex session"><source src="../public/media/gallery/yam-hang-mug/yam-hang-mug.mp4" type="video/mp4"><source src="../public/media/gallery/yam-hang-mug/yam-hang-mug.webm" type="video/webm">Your browser does not support this video. <a href="../public/media/gallery/yam-hang-mug/yam-hang-mug.mp4">Download it here.</a></video>
+<div class="meta"><div><h2>Hang a mug on the rack</h2><p>Depth geometry, wrist observations, controlled motion, and verification after release.</p></div><span class="tag">30 seconds</span></div>
+<p class="run">gpt-6-astra · high effort · Simulator</p><div class="links"><a href="../public/media/gallery/yam-hang-mug/yam-hang-mug.mp4">Open full size ↗</a><a href="../public/media/gallery/yam-hang-mug/yam-hang-mug.mp4" download>Download MP4</a></div>
+</article></main>
+<footer>Robot recordings with Kinex sessions and inline camera observations.</footer>
+</html>

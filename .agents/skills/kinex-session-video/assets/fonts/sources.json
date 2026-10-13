@@ -1,0 +1,20 @@
+{
+  "families": {
+    "Lato": "https://www.latofonts.com/download/",
+    "Commit Mono": "https://commitmono.com/"
+  },
+  "source_packages": {
+    "lato": "5.3.0",
+    "commit-mono": "5.3.0"
+  },
+  "weights": [
+    400,
+    700
+  ],
+  "subset": "latin",
+  "conversion": "Existing Fontsource WOFF files decoded to their original SFNT/TTF container with fontTools; outlines and family names unchanged.",
+  "licenses": [
+    "Lato-LICENSE.txt",
+    "CommitMono-LICENSE.txt"
+  ]
+}
