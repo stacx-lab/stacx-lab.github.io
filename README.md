@@ -55,7 +55,8 @@ Create `src/content/blog/<slug>.md` with `title`, `date`, `summary` and `tags`. 
 
 ## Demo video
 
-`src/pages/index.astro` renders `<DemoBanner />` as a placeholder. Put files in `public/media/` and use
+The homepage does not currently include a demo section. When a video is available, put the files in
+`public/media/`, import `DemoBanner` in `src/pages/index.astro`, and use
 `<DemoBanner src="/media/reel.mp4" poster="/media/reel.jpg" />`.
 
 ## Deploy

@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import Terminal from '../components/Terminal.astro';
 import ArchDiagram from '../components/ArchDiagram.astro';
-import DemoBanner from '../components/DemoBanner.astro';
 import CopyCmd from '../components/CopyCmd.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
@@ -39,13 +38,7 @@ const paths = [
     </section>
 
     <section class="wrap sec">
-      <p class="kicker">02 · Demo</p>
-      <h2>See it move.</h2>
-      <DemoBanner />
-    </section>
-
-    <section class="wrap sec">
-      <p class="kicker">03 · Where to start</p>
+      <p class="kicker">02 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>
