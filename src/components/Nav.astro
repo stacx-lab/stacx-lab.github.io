@@ -10,6 +10,9 @@ import Logo from './Logo.astro';
       <span class="word">Kinex</span>
       <span class="ver">v{site.version}</span>
     </a>
+    <div class="links">
+      <a class="link" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>
+    </div>
     <div class="tools">
       <button class="search-trigger" type="button" data-search-open aria-label="search">
         <span class="q">Search</span><kbd>/</kbd>
@@ -41,6 +44,10 @@ import Logo from './Logo.astro';
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; }
   .word { font-family: var(--font-head); font-size: 17px; }
   .ver { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--ink-3); border: 1px solid var(--rule); padding: 0 5px; border-radius: 3px; }
+  .links { display: flex; gap: 22px; font-size: 14.5px; }
+  .link { color: var(--ink-2); }
+  .link:hover { color: var(--ink); }
+  .ext { font-size: 10px; margin-left: 2px; color: var(--ink-3); }
   .tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
   .search-trigger {
     display: flex; align-items: center; gap: 24px; height: 30px; padding: 0 6px 0 10px;
@@ -56,7 +63,8 @@ import Logo from './Logo.astro';
   :global(:root[data-theme='dark']) .sun, :global(:root[data-theme='light']) .moon { display: none; }
   @media (max-width: 640px) {
     .bar { gap: 14px; }
-    .ver, .q { display: none; }
+    .ver, .ext, .q { display: none; }
+    .links { gap: 12px; }
     .search-trigger { gap: 0; padding: 0 6px; }
   }
 </style>
