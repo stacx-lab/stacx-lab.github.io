@@ -25,8 +25,10 @@ The standard [onboarding workflow](/docs/onboarding/#onboarding) uses the [`onbo
 
 - **Reuse packages.** Prefer installed ROS packages, then official apt packages. Build from source only for a specific need or your request.
 - **Resolve dependencies.** If installation requires `sudo`, provide the commands and target host for you to run them on.
-- **Prepare drivers.** Create a versioned bundle for each device. A failed rebuild preserves the working version.
+- **Prepare drivers.** Create a versioned bundle for your hardware using Kinex's common ROS adapters and compatible ROS packages. A failed rebuild preserves the working version.
 - **Verify interfaces.** After loading, measure live ROS interfaces and record the results. Report failed checks explicitly.
+
+Start the robot's ROS stack before loading devices; unloading a Kinex device leaves the stack running.
 
 Continue with [calibration](/docs/onboarding/#calibration) for the measurements your task needs.
 
