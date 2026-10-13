@@ -1,13 +1,15 @@
 ---
 // Animated version of kinex/assets/architecture.svg. Hover a definition to light up its layer.
 import { url } from '../lib/url';
+interface Props { diagramOnly?: boolean }
+const { diagramOnly = false } = Astro.props;
 const layers = [
   { id: 'skills', name: 'Skills', what: 'Instructions, procedures', eg: 'setup-device · calibration · verification', href: '/docs/tools-and-skills/' },
   { id: 'tools', name: 'Tools', what: 'Executable perception, computation, control', eg: 'locate_object_3d · servo · calib_sample', href: '/docs/tools-and-skills/' },
   { id: 'devices', name: 'Devices', what: 'Typed interfaces, profiles, drivers', eg: 'arm · camera · detector · world', href: '/docs/devices/' },
 ];
 ---
-<div class="arch">
+<div class:list={['arch', { 'diagram-only': diagramOnly }]} tabindex={diagramOnly ? 0 : undefined}>
   <svg viewBox="0 0 900 560" role="img" aria-labelledby="arch-t arch-d">
     <title id="arch-t">Kinex architecture</title>
     <desc id="arch-d">The agent loads skills, calls tools and calls devices. Tools operate devices. Device drivers talk to hardware, simulators and model services.</desc>
@@ -59,7 +61,7 @@ const layers = [
     </g>
   </svg>
 
-  <ul class="defs">
+  {!diagramOnly && <ul class="defs">
     {layers.map((l, i) => (
       <li class={`d-${l.id}`}>
         <a href={url(l.href)}>
@@ -69,7 +71,7 @@ const layers = [
         </a>
       </li>
     ))}
-  </ul>
+  </ul>}
 </div>
 
 <style>
@@ -78,6 +80,8 @@ const layers = [
           --svg-w: calc(100cqw - 340px); }
   @media (max-width: 900px) { .arch { grid-template-columns: 1fr; gap: 20px; } .defs { margin-top: 0; height: auto; } .defs li { flex: none; } }
   svg { width: 100%; height: auto; display: block; font-family: var(--font-body); }
+  .arch.diagram-only { display: block; overflow-x: auto; }
+  .diagram-only svg { min-width: 600px; }
 
   .frame { fill: none; stroke: var(--rule-2); stroke-dasharray: 4 4; }
   .tag, .lbl, .e { font-family: var(--font-mono); }

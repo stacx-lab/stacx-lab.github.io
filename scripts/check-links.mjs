@@ -1,9 +1,10 @@
 // Verify every internal href/src in dist/ resolves to a built file (and #anchor, when given).
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const dist = new URL('../dist/', import.meta.url).pathname;
-const base = (process.env.BASE_PATH === undefined ? '/kinex' : process.env.BASE_PATH).replace(/\/$/, '');
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
+const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
 
 const htmlFiles = [];
 (function walk(dir) {

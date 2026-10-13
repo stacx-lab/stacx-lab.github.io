@@ -8,7 +8,7 @@ export async function GET(context) {
   return rss({
     title: 'Kinex Blog',
     description: cfg.description,
-    site: context.site + base.slice(1) + '/',
+    site: new URL(`${base}/`, context.site).href,
     items: posts.map((p) => ({
       title: p.data.title,
       pubDate: p.data.date,

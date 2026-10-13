@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import Terminal from '../components/Terminal.astro';
 import ArchDiagram from '../components/ArchDiagram.astro';
-import DemoBanner from '../components/DemoBanner.astro';
 import CopyCmd from '../components/CopyCmd.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
@@ -22,6 +21,7 @@ const paths = [
             works with code: see through cameras, move arms and run tasks, in simulation or on real hardware.
           </p>
           <CopyCmd cmd={site.install} />
+          <p class="platform-note">Install on macOS and Ubuntu.</p>
           <div class="cta">
             <a class="btn primary" href={url('/docs/')}>Get started →</a>
             <a class="btn" href={url('/blog/')}>Read the blog</a>
@@ -39,13 +39,7 @@ const paths = [
     </section>
 
     <section class="wrap sec">
-      <p class="kicker">02 · Demo</p>
-      <h2>See it move.</h2>
-      <DemoBanner />
-    </section>
-
-    <section class="wrap sec">
-      <p class="kicker">03 · Where to start</p>
+      <p class="kicker">02 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>
@@ -73,6 +67,7 @@ const paths = [
   @keyframes blink { 50% { opacity: 0; } }
   .sub { color: var(--ink-2); max-width: 46ch; margin: 0 0 26px; }
   .sub b { color: var(--ink); font-weight: 600; }
+  .platform-note { margin: 8px 0 0; font-size: var(--fs-1); color: var(--ink-2); }
   .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
   .sec { padding-top: 72px; }
