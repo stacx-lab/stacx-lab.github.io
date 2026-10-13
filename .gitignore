@@ -3,3 +3,4 @@ dist/
 .astro/
 test-results/
 .omc/
+_site/

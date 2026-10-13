@@ -26,13 +26,19 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       - run: npm ci
+      # This repo is the org site (stacx-lab.github.io); Kinex lives under /kinex/.
       - run: npm run check
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          BASE_PATH: /kinex
+      # Publish dist/ under kinex/; the root keeps only a 404 page.
+      - run: |
+          mkdir -p _site/kinex
+          cp -r dist/. _site/kinex/
+          cp dist/404.html _site/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
 
   deploy:
     needs: build
