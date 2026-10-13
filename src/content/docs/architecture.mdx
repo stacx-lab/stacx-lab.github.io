@@ -6,11 +6,13 @@ order: 10
 sources: ["docs/architecture.md", "docs/overview.md", "src/application.ts"]
 ---
 
+import ArchDiagram from '../../components/ArchDiagram.astro';
+
 ## Architecture overview
 
 Kinex connects a coding agent to robots and simulators through three layers.
 
-![Kinex architecture: the agent loads skills and calls tools or devices; tools also operate devices; device drivers connect to hardware, simulators and services.](/img/architecture.svg)
+<ArchDiagram diagramOnly />
 
 ### Devices: typed physical or virtual resources
 

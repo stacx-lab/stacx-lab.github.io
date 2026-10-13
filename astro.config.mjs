@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 import remarkBaseLinks from './src/lib/remark-base-links.mjs';
 
 // Deploy target. CI passes the values GitHub Pages reports (see deploy.yml);
@@ -13,7 +14,7 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [sitemap(), mdx()],
   markdown: {
     remarkPlugins: [[remarkBaseLinks, { base }]],
     shikiConfig: {

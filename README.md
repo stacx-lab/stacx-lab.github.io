@@ -39,7 +39,8 @@ sources: ["docs/commands.md"]   # kinex repo paths backing the page, linked at v
 ---
 ```
 
-Write plain Markdown starting at `##`. Link other pages as `/docs/<slug>/`; the base path is added at build time.
+Write plain Markdown starting at `##`. Use `.mdx` when a page needs an imported Astro component, as in `architecture.mdx`.
+Link other pages as `/docs/<slug>/`; the base path is added at build time.
 The sidebar, prev/next links, one-page view (`/docs/all/`) and search update automatically.
 
 ## Add a blog post
