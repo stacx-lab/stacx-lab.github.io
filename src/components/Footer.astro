@@ -3,22 +3,41 @@ import { site } from '../config';
 import { url } from '../lib/url';
 import Logo from './Logo.astro';
 ---
-<footer class="foot">
-  <div class="wrap row">
-    <span class="mark"><Logo size={14} /> Kinex v{site.version}</span>
-    <span class="links">
-      <a href={url('/docs/')}>Docs</a><i>·</i>
-      <a href={site.repo} rel="noopener">GitHub</a>
-    </span>
-    <span class="dim">Built on the Pi coding agent · © {new Date().getFullYear()} stacx-lab</span>
+<footer class="foot" data-pagefind-ignore>
+  <div class="wrap">
+    <div class="main-row">
+      <div class="identity">
+        <a class="mark" href={url('/')} aria-label="Kinex home"><Logo size={18} /><span>Kinex</span></a>
+        <span class="version">v{site.version}</span>
+      </div>
+      <nav class="links" aria-label="Footer">
+        <a href={url('/docs/')}>Docs</a>
+        <a href={site.repo} rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+    <div class="meta-row">
+      <p class="credit">With thanks to <a href="https://pi.dev" rel="noopener">Pi</a></p>
+      <p>© {new Date().getFullYear()} stacx-lab</p>
+    </div>
   </div>
 </footer>
 <style>
-  .foot { border-top: 1px solid var(--rule); margin-top: 72px; font-size: 12px; color: var(--ink-2); }
-  .row { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; padding-block: 18px; }
-  .mark { display: inline-flex; gap: 8px; align-items: center; color: var(--ink); }
-  .links a:hover { color: var(--accent); }
-  .links i { font-style: normal; color: var(--ink-3); margin: 0 8px; }
-  .row > :last-child { margin-left: auto; }
-  @media (max-width: 640px) { .row > :last-child { margin-left: 0; } }
+  .foot { border-top: 1px solid var(--rule); margin-top: 72px; background: var(--bg-2); font-size: 12px; color: var(--ink-2); }
+  :global(.docs-page) .foot { margin-top: 0; }
+  .main-row, .meta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; }
+  .main-row { padding-block: 24px 20px; }
+  .identity { display: flex; align-items: center; gap: 12px; }
+  .mark { display: inline-flex; gap: 8px; align-items: center; color: var(--ink); font-family: var(--font-head); font-size: 17px; font-weight: 600; }
+  .version { border: 1px solid var(--rule-2); border-radius: 3px; padding: 1px 6px; font-family: var(--font-mono); font-size: 10px; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-size: 13px; }
+  .links a { padding-block: 4px; }
+  .mark:hover, .links a:hover { color: var(--accent-ink); }
+  .meta-row { border-top: 1px solid var(--rule); padding-block: 16px 20px; }
+  .meta-row p { margin: 0; }
+  .credit a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .credit a:hover { color: var(--ink); }
+  @media (max-width: 480px) {
+    .main-row { align-items: flex-start; gap: 16px 24px; }
+    .meta-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
 </style>
