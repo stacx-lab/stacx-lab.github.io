@@ -1,10 +1,7 @@
 ---
-import { site, nav } from '../config';
+import { site } from '../config';
 import { url } from '../lib/url';
 import Logo from './Logo.astro';
-
-const path = Astro.url.pathname;
-const active = (href: string) => path.startsWith(url(href));
 ---
 <header class="topbar">
   <nav class="wrap bar" aria-label="main">
@@ -13,10 +10,6 @@ const active = (href: string) => path.startsWith(url(href));
       <span class="word">Kinex</span>
       <span class="ver">v{site.version}</span>
     </a>
-    <div class="links">
-      {nav.map((n) => <a href={url(n.href)} class:list={['link', { on: active(n.href) }]}>{n.label}</a>)}
-      <a class="link" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>
-    </div>
     <div class="tools">
       <button class="search-trigger" type="button" data-search-open aria-label="search">
         <span class="q">Search</span><kbd>/</kbd>
@@ -48,11 +41,6 @@ const active = (href: string) => path.startsWith(url(href));
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; }
   .word { font-family: var(--font-head); font-size: 17px; }
   .ver { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--ink-3); border: 1px solid var(--rule); padding: 0 5px; border-radius: 3px; }
-  .links { display: flex; gap: 22px; font-size: 14.5px; }
-  .link { color: var(--ink-2); }
-  .link:hover, .link.on { color: var(--ink); }
-  .link.on::before { content: '>'; color: var(--accent); margin-right: 4px; }
-  .ext { font-size: 10px; margin-left: 2px; color: var(--ink-3); }
   .tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
   .search-trigger {
     display: flex; align-items: center; gap: 24px; height: 30px; padding: 0 6px 0 10px;
@@ -68,8 +56,7 @@ const active = (href: string) => path.startsWith(url(href));
   :global(:root[data-theme='dark']) .sun, :global(:root[data-theme='light']) .moon { display: none; }
   @media (max-width: 640px) {
     .bar { gap: 14px; }
-    .ver, .ext, .q { display: none; }
-    .links { gap: 12px; }
+    .ver, .q { display: none; }
     .search-trigger { gap: 0; padding: 0 6px; }
   }
 </style>
