@@ -2,6 +2,9 @@
 import { galleryVideos } from '../data/gallery';
 import { url } from '../lib/url';
 const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}.${extension}`);
+// Repeat the two clips around a full ring so both neighbors have a real face.
+const slotCount = galleryVideos.length * Math.ceil(8 / galleryVideos.length);
+const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVideos[slot % galleryVideos.length], slot }));
 ---
 
 <section class="wrap gallery" id="gallery" aria-labelledby="gallery-heading" aria-roledescription="carousel">
@@ -12,19 +15,21 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
       <p class="lead">Robot recording on the left. Kinex session on the right.</p>
     </div>
     <div class="navigation" aria-label="Gallery navigation">
-      <span class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / 02</span>
-      <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track" disabled>←</button>
+      <span class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / {String(galleryVideos.length).padStart(2, '0')}</span>
+      <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track">←</button>
       <button type="button" class="arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track">→</button>
     </div>
   </div>
   <div class="videos" id="gallery-track" tabindex="0" aria-label="Videos. Swipe or use left and right arrow keys to browse.">
-    {galleryVideos.map((clip, index) => (
-      <article class:list={['video-card', { 'is-active': index === 0 }]} aria-roledescription="slide" aria-label={`${index + 1} of ${galleryVideos.length}: ${clip.title}`}>
+    <div class="rotor" data-gallery-rotor>
+    {slots.map(({ clip, slot }) => (
+      <article class:list={['video-card', { 'is-active': slot === 0, 'is-copy': slot >= galleryVideos.length }]} style={`--face-angle: ${slot * 360 / slotCount}deg`} data-gallery-slot={slot} data-clip={slot % galleryVideos.length} aria-roledescription="slide" aria-label={`${slot % galleryVideos.length + 1} of ${galleryVideos.length}: ${clip.title}`}>
+        <button type="button" class="preview-select" data-gallery-preview aria-label={`Show ${clip.title}`} aria-controls="gallery-track" tabindex="-1"></button>
         <video
           controls playsinline preload="none"
           poster={media(clip.id, 'poster.jpg')}
-          aria-labelledby={`${clip.id}-title`}
-          aria-describedby={`${clip.id}-description`}
+          aria-labelledby={`${clip.id}-${slot}-title`}
+          aria-describedby={`${clip.id}-${slot}-description`}
           data-gallery-video
         >
           <source src={media(clip.id, 'mp4')} type="video/mp4" />
@@ -33,10 +38,10 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
         </video>
         <div class="details">
           <div class="title-row">
-            <h3 id={`${clip.id}-title`}>{clip.title}</h3>
+            <h3 id={`${clip.id}-${slot}-title`}>{clip.title}</h3>
             <span class="duration" aria-label={`${clip.duration === '01:00' ? '60' : '30'} seconds`}>{clip.duration}</span>
           </div>
-          <p id={`${clip.id}-description`} class="description">{clip.description}</p>
+          <p id={`${clip.id}-${slot}-description`} class="description">{clip.description}</p>
           <div class="video-footer">
             <span class="model">{clip.model} · {clip.effort} effort <span class="environment">· {clip.environment}</span></span>
             <a class="full-size" href={media(clip.id, 'mp4')} target="_blank" rel="noopener" aria-label={`Open ${clip.title} at full size in a new tab`}>Full size <span aria-hidden="true">↗</span></a>
@@ -44,6 +49,7 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
         </div>
       </article>
     ))}
+    </div>
   </div>
   <div class="pagination" aria-label="Choose a video">
     {galleryVideos.map((clip, index) => (
@@ -62,47 +68,86 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
     const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]')!;
     const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]')!;
     const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')!;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const rotor = gallery.querySelector<HTMLElement>('[data-gallery-rotor]')!;
+    const previews = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-preview]'));
     let active = 0;
-    let scrollFrame = 0;
-    const position = (index: number) => cards[index].offsetLeft - cards[0].offsetLeft;
+    const wrap = (index: number, count = cards.length) => ((index % count) + count) % count;
+    const offset = (index: number) => wrap(index - active + cards.length / 2) - cards.length / 2;
     const select = (index: number) => {
       active = index;
-      cards.forEach((card, i) => card.classList.toggle('is-active', i === index));
-      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
-      players.forEach((player, i) => { if (i !== index) player.pause(); });
-      previous.disabled = index === 0;
-      next.disabled = index === cards.length - 1;
-      counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      rotor.style.setProperty('--rotation', `${-active * 360 / cards.length}deg`);
+      cards.forEach((card, i) => {
+        const centered = i === wrap(active);
+        const neighbor = Math.abs(offset(i)) === 1;
+        card.classList.toggle('is-active', centered);
+        card.inert = !centered && !neighbor;
+        card.setAttribute('aria-hidden', String(!centered && !neighbor));
+        players[i].controls = centered;
+        players[i].tabIndex = centered ? 0 : -1;
+        // Only the centered card's content participates in keyboard navigation.
+        card.querySelector<HTMLAnchorElement>('.full-size')!.tabIndex = centered ? 0 : -1;
+        previews[i].hidden = centered;
+        previews[i].tabIndex = neighbor ? 0 : -1;
+        if (!centered) players[i].pause();
+      });
+      const clip = wrap(active, dots.length);
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === clip)));
+      counter.textContent = `${String(clip + 1).padStart(2, '0')} / ${String(dots.length).padStart(2, '0')}`;
     };
     const goTo = (index: number) => {
-      index = Math.max(0, Math.min(cards.length - 1, index));
-      track.scrollTo({ left: position(index), behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+      select(index);
+      void players[wrap(active)].play().catch(() => {});
+    };
+    const goToClip = (clip: number) => {
+      let distance = wrap(clip - active, dots.length);
+      if (distance > dots.length / 2) distance -= dots.length;
+      if (distance) goTo(active + distance);
     };
     previous.addEventListener('click', () => goTo(active - 1));
     next.addEventListener('click', () => goTo(active + 1));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goToClip(i)));
+    previews.forEach((preview, i) => preview.addEventListener('click', () => {
+      // Move focus before this preview becomes the center and its button hides.
+      track.focus({ preventScroll: true });
+      goTo(active + offset(i));
+    }));
     track.addEventListener('keydown', (event) => {
       if (event.target !== track) return;
-      const target = { ArrowLeft: active - 1, ArrowRight: active + 1, Home: 0, End: cards.length - 1 }[event.key];
-      if (target !== undefined) { event.preventDefault(); goTo(target); }
+      if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault(); goToClip(event.key === 'Home' ? 0 : dots.length - 1);
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault(); goTo(active + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
     });
-    track.addEventListener('scroll', () => {
-      if (scrollFrame) return;
-      scrollFrame = requestAnimationFrame(() => {
-        scrollFrame = 0;
-        const nearest = cards.reduce((best, _, i) => Math.abs(position(i) - track.scrollLeft) < Math.abs(position(best) - track.scrollLeft) ? i : best, 0);
-        if (nearest !== active) select(nearest);
-      });
+    let touchStart: { x: number; y: number } | null = null;
+    track.addEventListener('touchstart', event => {
+      const touch = event.touches[0];
+      touchStart = { x: touch.clientX, y: touch.clientY };
     }, { passive: true });
-    window.addEventListener('resize', () => track.scrollTo({ left: position(active), behavior: 'instant' }));
+    track.addEventListener('touchend', event => {
+      if (!touchStart) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStart.x;
+      const dy = touch.clientY - touchStart.y;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) goTo(active + (dx < 0 ? 1 : -1));
+      touchStart = null;
+    }, { passive: true });
+    track.addEventListener('touchcancel', () => { touchStart = null; }, { passive: true });
     players.forEach((player, i) => {
       player.addEventListener('play', () => {
-        players.forEach((other) => { if (other !== player) other.pause(); });
-        if (i !== active) goTo(i);
+        if (i !== wrap(active)) { player.pause(); return; }
+        players.forEach(other => { if (other !== player) other.pause(); });
       });
     });
     gallery.classList.add('is-enhanced');
+    const sizeRing = () => {
+      // Tangent faces share one radius: left is -45°, right is +45°.
+      const radius = (cards[0].offsetWidth + 24) / (2 * Math.tan(Math.PI / cards.length));
+      rotor.style.setProperty('--radius', `${radius}px`);
+    };
+    sizeRing();
+    new ResizeObserver(sizeRing).observe(track);
+    select(0);
   }
 </script>
 
@@ -117,11 +162,15 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
   .arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--rule); border-radius: 50%; background: var(--panel); color: var(--ink); font-size: 20px; cursor: pointer; transition: color 160ms, border-color 160ms, transform 160ms; }
   .arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); transform: translateX(2px); }
   .arrow:disabled { opacity: .3; cursor: default; }
-  .videos { position: relative; display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; padding: 10px 0 14px; }
-  .videos::after { content: ''; flex: 0 0 max(0px, calc(14% - 20px)); }
-  .video-card { flex: 0 0 86%; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; scroll-snap-align: start; transform-origin: center; transition: transform 450ms ease, opacity 450ms ease, border-color 450ms ease; }
-  .is-enhanced .video-card:not(.is-active) { transform: scale(.975); opacity: .65; }
-  .is-enhanced .video-card.is-active { border-color: color-mix(in srgb, var(--accent) 30%, var(--rule)); }
+  .videos { position: relative; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 0 28px; }
+  .rotor { display: flex; gap: 20px; }
+  .video-card { position: relative; flex: 0 0 68%; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; scroll-snap-align: center; }
+  .is-copy, .preview-select { display: none; }
+  .is-enhanced .videos { overflow: hidden; perspective: 1800px; touch-action: pan-y; mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent); }
+  .is-enhanced .rotor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; transform-style: preserve-3d; transform: translateZ(calc(-1 * var(--radius))) rotateY(var(--rotation, 0deg)); transition: transform 760ms cubic-bezier(.22, .68, .2, 1); }
+  .is-enhanced .video-card { display: block; grid-area: 1 / 1; width: 68%; justify-self: center; backface-visibility: hidden; transform: rotateY(var(--face-angle)) translateZ(var(--radius)); border-color: color-mix(in srgb, var(--accent) 30%, var(--rule)); box-shadow: 0 16px 32px rgb(0 0 0 / .12); }
+  .is-enhanced .preview-select:not([hidden]) { display: block; position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
+  .preview-select:focus-visible { outline-offset: -3px; }
   video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #f3f0e9; border-bottom: 1px solid var(--rule); }
   button:focus-visible, .videos:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   video:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -144,9 +193,10 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
     .gallery { padding-top: 48px; }
     .intro { flex-wrap: wrap; gap: 14px; margin-bottom: 4px; }
     .navigation { margin-left: auto; }
-    .videos { gap: 12px; }
-    .video-card { flex-basis: 94%; }
-    .videos::after { flex-basis: max(0px, calc(6% - 12px)); }
+    .rotor { gap: 12px; }
+    .video-card { flex-basis: 82%; }
+    .is-enhanced .video-card { width: 82%; }
+    .is-enhanced .videos { perspective: 1000px; mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent); }
     .details { padding: 8px 10px; }
     h3 { font-size: 14px; }
     .description { font-size: 11px; }
@@ -154,6 +204,6 @@ const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}
   }
   @media (prefers-reduced-motion: reduce) {
     .video-card, .arrow, .dot span { transition: none; }
-    .is-enhanced .video-card:not(.is-active) { transform: none; }
+    .is-enhanced .rotor { transition: none; }
   }
 </style>
