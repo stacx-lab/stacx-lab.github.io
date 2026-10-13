@@ -3,12 +3,13 @@
 import Doc from '../../layouts/Doc.astro';
 import { render } from 'astro:content';
 import { getDocs, docHref } from '../../lib/content';
+import { site } from '../../config';
 
 const docs = await getDocs();
 const rendered = await Promise.all(docs.map(async (d) => ({ d, r: await render(d) })));
 const headings = docs.map((d) => ({ depth: 2, slug: `p-${d.id}`, text: d.data.label ?? d.data.title }));
 ---
-<Doc docs={docs} title="Documentation · Single-page view" description={`${docs.length} pages. ⌘F away from anything.`} headings={headings} current="__all" searchable={false}>
+<Doc docs={docs} title={`Kinex v${site.version} documentation · Single-page view`} description={`${docs.length} pages. ⌘F away from anything.`} headings={headings} current="__all" searchable={false}>
   {rendered.map(({ d, r: { Content } }) => (
     <section class="page">
       <h2 id={`p-${d.id}`}>{d.data.title} <a class="perma" href={docHref(d)}>→ Page</a></h2>
