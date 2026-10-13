@@ -1,0 +1,37 @@
+---
+title: ROS 2 onboarding
+description: Connect your robot to Kinex through its existing ROS 2 stack.
+group: Guides
+order: 25
+label: ROS 2 onboarding
+---
+
+import RosDiagram from '../../components/RosDiagram.astro';
+import DemoBanner from '../../components/DemoBanner.astro';
+
+## Supported setup
+
+The ROS driver host needs **ROS 2 Jazzy on Ubuntu 24.04** with **system Python 3.12**. Before onboarding, [install Kinex](/docs/#install-and-run) and [open a robot workspace](/docs/real-robots/#1-start-kinex-in-a-fresh-workspace).
+
+## Where ROS 2 fits
+
+ROS 2 connects through Kinex's [device layer](/docs/devices/). Adapters translate between Kinex device operations and ROS interfaces for joint trajectories, velocity commands, cameras and IMUs.
+
+<RosDiagram />
+
+## What onboarding handles
+
+The standard [onboarding workflow](/docs/onboarding/#onboarding) uses the [`onboard-ros2` skill](https://github.com/stacx-lab/kinex/blob/e6cc9defc51a8ca362b056867e759a7053cdc3d8/packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md) to:
+
+- **Reuse packages.** Prefer installed ROS packages, then official apt packages. Build from source only for a specific need or your request.
+- **Resolve dependencies.** If installation requires `sudo`, provide the commands and target host for you to run them on.
+- **Prepare drivers.** Create a versioned bundle for your hardware using Kinex's common ROS adapters and compatible ROS packages. A failed rebuild preserves the working version.
+- **Verify interfaces.** After loading, measure live ROS interfaces and record the results. Report failed checks explicitly.
+
+Start the robot's ROS stack before loading devices; unloading a Kinex device leaves the stack running.
+
+Continue with [calibration](/docs/onboarding/#calibration) for the measurements your task needs.
+
+## ROS 2 demo
+
+<DemoBanner label="ROS 2 demo" />

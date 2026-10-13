@@ -50,10 +50,12 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 
 ## Pick a path
 
+- **Already using ROS 2?**\
+  Connect your ROS 2 hardware with `/onboarding` or `/register`. See [ROS 2 onboarding](/docs/ros2/) for requirements and the setup workflow.
 - **Playing with a simulator?**\
   Launch a task in [RoboEnv](https://github.com/stacx-lab/RoboEnv) (RoboCasa, LIBERO, RoboTwin, Isaac Lab and more) and drive its robot like a real one. See [Simulators](/docs/simulators/).
 - **Working with real robots?**\
-  Describe your hardware and task with `/onboarding`. See [Real robots](/docs/real-robots/), then [Onboarding & calibration](/docs/onboarding/) for the details, including ROS 2.
+  Describe your hardware and task with `/onboarding`. See [Real robots](/docs/real-robots/), then [Onboarding & calibration](/docs/onboarding/) for the details.
 
 ## Understand the design of Kinex
 
@@ -67,7 +69,7 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 | Task | Page |
 | --- | --- |
 | Choose a model and approval mode; manage conversations, compaction and sessions | [Working with the agent](/docs/agent/) |
-| Set up new hardware, including ROS 2, and calibrate it | [Onboarding & calibration](/docs/onboarding/) |
+| Set up new hardware and calibrate it | [Onboarding & calibration](/docs/onboarding/) |
 | Run Python, add your own tools and skills | [Custom tools & skills](/docs/custom-tools/) |
 | Run VLA policies and feedback loops | [Using VLAs as tools](/docs/vla/) |
 | Find and locate objects with vision models | [Using vision models as tools](/docs/vision/) |

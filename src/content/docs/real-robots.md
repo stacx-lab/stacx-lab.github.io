@@ -38,7 +38,7 @@ You can also register devices one at a time with `/register <type-or-template>`:
 /register grounding-dino
 ```
 
-Each sets up a driver and writes an unloaded profile, validating it without touching the hardware; run `/load` to bring it up. ROS hardware is routed through `onboard-ros2` automatically (see [ROS 2 hardware](/docs/onboarding/#ros-2-hardware)).
+Each sets up a driver and writes an unloaded profile, validating it without touching the hardware; run `/load` to bring it up. ROS hardware is routed through `onboard-ros2` automatically (see [ROS 2 onboarding](/docs/ros2/)).
 
 ## 3. Calibrate
 

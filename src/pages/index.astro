@@ -7,6 +7,7 @@ import VideoGallery from '../components/VideoGallery.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 const paths = [
+  { k: 'Already using ROS 2?', cmd: 'onboard-ros2', prefix: 'Skill:', body: 'Reuse existing ROS packages with adapters for common interfaces. Supports ROS 2 Jazzy on Ubuntu 24.04.', href: '/docs/ros2/' },
   { k: 'Play with simulators', cmd: 'roboenv setup', body: 'RoboEnv exposes simulated robots as Kinex devices, with the same interfaces as real hardware.', href: '/docs/simulators/' },
   { k: 'Work with real robots', cmd: '/onboarding', body: 'Describe the hardware and the task. Kinex connects the devices and calibrates what the task needs.', href: '/docs/real-robots/' },
 ];
@@ -48,7 +49,7 @@ const paths = [
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>
             <span class="ck">{p.k}</span>
-            <code class="cc">{p.cmd}</code>
+            <code class="cc"><span>{p.prefix ?? '$'}</span> {p.cmd}</code>
             <span class="cb">{p.body}</span>
             <span class="go">→</span>
           </a>
@@ -78,15 +79,16 @@ const paths = [
   .sec { padding-top: 72px; }
   .sec h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 24px; }
 
-  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; border: 1px solid var(--rule); border-radius: 6px; }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; border: 1px solid var(--rule); border-radius: 6px; }
   @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
   .card { position: relative; display: grid; gap: 10px; align-content: start; padding: 18px 20px 22px; background: var(--panel); }
   .card + .card { border-left: 1px solid var(--rule); }
   @media (max-width: 860px) { .card + .card { border-left: 0; border-top: 1px solid var(--rule); } }
   .card:first-child { border-radius: 6px 0 0 6px; } .card:last-child { border-radius: 0 6px 6px 0; }
-  .ck { font-family: var(--font-head); font-weight: 700; font-size: 17px; }
+  @media (max-width: 860px) { .card:first-child { border-radius: 6px 6px 0 0; } .card:last-child { border-radius: 0 0 6px 6px; } }
+  .ck { padding-right: 24px; font-family: var(--font-head); font-weight: 700; font-size: 17px; }
   .cc { font-size: 12px; color: var(--accent-ink); }
-  .cc::before { content: '$ '; color: var(--ink-3); }
+  .cc span { color: var(--ink-3); }
   .cb { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
   .go { position: absolute; top: 22px; right: 22px; color: var(--ink-3); transition: transform .15s; }
   .card:hover { background: var(--bg); }
