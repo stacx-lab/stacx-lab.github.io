@@ -1,6 +1,6 @@
 # kinex site
 
-Website for [Kinex](https://github.com/stacx-lab/kinex): landing page, docs, blog.
+Website for [Kinex](https://github.com/stacx-lab/kinex): landing page and docs.
 Astro (static) + Pagefind. No UI framework.
 Fonts: Roboto Slab (headings), Lato (body), Commit Mono (code); self-hosted via `@fontsource`, declared in `src/components/Fonts.astro`.
 
@@ -31,10 +31,9 @@ the website.
 ```
 src/config.ts                 version, tagline, install cmd, repo, nav, doc groups
 src/content/docs/*.md         docs (one file = one page; index.md = /docs/)
-src/content/blog/*.md         blog posts
 src/data/hero-terminal.json   landing-page simulator walkthrough
 src/components/               Terminal, ArchDiagram, DemoBanner, Sidebar, Toc, Search…
-src/layouts/                  Base, Doc, Post
+src/layouts/                  Base, Doc
 src/styles/                   global.css (tokens, light/dark), prose.css (markdown)
 public/media/                 published camera observations and delivery videos
 .agents/skills/kinex-session-video/  video-generation skill, scripts, fonts, references
@@ -62,15 +61,10 @@ Write plain Markdown starting at `##`. Use `.mdx` when a page needs an imported 
 Link other pages as `/docs/<slug>/`; the base path is added at build time.
 The sidebar, prev/next links, one-page view (`/docs/all/`) and search update automatically.
 
-## Add a blog post
-
-Create `src/content/blog/<slug>.md` with `title`, `date`, `summary` and `tags`. If you set `draft: true`, the post appears only in `npm run dev`.
-
 ## Release a new version
 
 1. Bump `version` in `src/config.ts` and `package.json`.
 2. Update the docs against the tagged Kinex source, and keep each page's `sources` list accurate.
-3. Add a release post under `src/content/blog/`.
 
 ## Hero session demo
 

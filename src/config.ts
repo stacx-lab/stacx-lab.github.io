@@ -12,7 +12,6 @@ export const site = {
 
 export const nav = [
   { label: 'Docs', href: '/docs/' },
-  { label: 'Blog', href: '/blog/' },
 ];
 
 // Sidebar group order. Every doc's `group` frontmatter must be one of these.
