@@ -23,7 +23,7 @@ const prev = i > 0 ? docs[i - 1] : undefined;
 const next = i >= 0 && i < docs.length - 1 ? docs[i + 1] : undefined;
 const sourceUrl = (p: string) => `${site.repo}/blob/v${site.version}/${p}`;
 ---
-<Base title={title} description={description} footer={false}>
+<Base title={title} description={description} bodyClass="docs-page">
   <div class="docs wrap">
     <button class="menu" type="button" data-menu aria-expanded="false" aria-controls="docs-side">☰ Menu <span class="dim">/ {entry?.data.group ?? 'Docs'}</span></button>
     <aside class="col-side" id="docs-side"><Sidebar docs={docs} current={entry?.id ?? current} /></aside>
