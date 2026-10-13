@@ -1,17 +1,13 @@
 ---
 title: Kinex documentation
-description: A ROS 2-compatible robotics harness for coding agents, with support for ROS 2 Jazzy on Ubuntu 24.04.
+description: A robotics harness for coding agents — skills, tools and devices on top of the Pi coding agent.
 group: Get started
 order: 10
 label: Overview
-sources: ["README.md", "install.sh", "docs/architecture.md", "docs/overview.md", "packages/core/README.md", "packages/setup/README.md", "packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md", "src/application.ts"]
+sources: ["README.md", "install.sh", "docs/architecture.md", "docs/overview.md", "packages/core/README.md", "packages/setup/README.md", "src/application.ts"]
 ---
 
-Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev) coding agent. It works with **ROS 2 robots**, simulators and real hardware.
-
-**Already using ROS 2?** Kinex reuses existing ROS packages and provides adapters for common interfaces, including joint trajectories, velocity commands, IMUs and cameras. The supported setup is **ROS 2 Jazzy on Ubuntu 24.04**. See [ROS 2 onboarding](/docs/ros2/) to connect your robot.
-
-It gives an agent three layers to work with:
+Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev) coding agent. It gives an agent three layers to work with:
 
 | Layer | Gives the agent | Example |
 | --- | --- | --- |
@@ -73,7 +69,6 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 | Task | Page |
 | --- | --- |
 | Choose a model and approval mode; manage conversations, compaction and sessions | [Working with the agent](/docs/agent/) |
-| Connect ROS 2 hardware using existing packages and common interfaces | [ROS 2 onboarding](/docs/ros2/) |
 | Set up new hardware and calibrate it | [Onboarding & calibration](/docs/onboarding/) |
 | Run Python, add your own tools and skills | [Custom tools & skills](/docs/custom-tools/) |
 | Run VLA policies and feedback loops | [Using VLAs as tools](/docs/vla/) |

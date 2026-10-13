@@ -4,8 +4,6 @@ description: Connect your ROS 2 robot to Kinex using the packages you already ha
 group: Guides
 order: 25
 label: ROS 2 onboarding
-sourceRef: e6543950328ee4911f50b4f87189fa341648cab8
-sources: ["packages/setup/README.md", "packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md", "packages/setup/assets/builtin/skill/onboard-ros2/references/bundles.md"]
 ---
 
 import RosDiagram from '../../components/RosDiagram.astro';
@@ -27,7 +25,7 @@ Kinex connects to your existing ROS 2 stack through [device drivers and adapters
 
 ## ROS 2 setup
 
-For ROS 2 hardware, Kinex uses the `onboard-ros2` skill:
+For ROS 2 hardware, Kinex uses the [`onboard-ros2` skill](https://github.com/stacx-lab/kinex/blob/e6543950328ee4911f50b4f87189fa341648cab8/packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md):
 
 - **Packages.** It reuses installed ROS packages, then prefers official apt packages. It builds from source when needed or requested.
 - **Dependencies.** When installation requires `sudo`, it provides the commands and target host for you to run them on.

@@ -21,8 +21,7 @@ const { docs, entry, title, description, headings = [], current, searchable = tr
 const i = entry ? docs.findIndex((d) => d.id === entry.id) : -1;
 const prev = i > 0 ? docs[i - 1] : undefined;
 const next = i >= 0 && i < docs.length - 1 ? docs[i + 1] : undefined;
-const sourceRef = entry?.data.sourceRef ?? `v${site.version}`;
-const sourceUrl = (p: string) => `${site.repo}/blob/${sourceRef}/${p}`;
+const sourceUrl = (p: string) => `${site.repo}/blob/v${site.version}/${p}`;
 ---
 <Base title={title} description={description} footer={false}>
   <div class="docs wrap">
@@ -43,7 +42,7 @@ const sourceUrl = (p: string) => `${site.repo}/blob/${sourceRef}/${p}`;
         <footer class="df" data-pagefind-ignore>
           {entry.data.sources.length > 0 && (
             <p class="src">
-              <span class="dim">{entry.data.sourceRef ? 'Sources:' : `Sources @ v${site.version}:`}</span>
+              <span class="dim">Sources @ v{site.version}:</span>
               {entry.data.sources.map((s) => <a href={sourceUrl(s)} rel="noopener">{s}</a>)}
             </p>
           )}

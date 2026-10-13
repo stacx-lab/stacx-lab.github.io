@@ -11,7 +11,6 @@ const docs = defineCollection({
     order: z.number().int(),
     label: z.string().optional(),
     sources: z.array(z.string()).default([]),
-    sourceRef: z.string().min(1).optional(),
   }),
 });
 

@@ -7,7 +7,7 @@ const { src, poster, label = 'Demo reel', description = 'Real arms · sims · cl
 ---
 <figure class="demo">
   {src ? (
-    <video src={url(src)} poster={poster && url(poster)} aria-label={label} playsinline controls preload="none"></video>
+    <video src={url(src)} poster={poster && url(poster)} autoplay muted loop playsinline controls></video>
   ) : (
     <div class="ph" role="img" aria-label={`${label}: video coming soon`}>
       <div class="msg">
@@ -23,11 +23,12 @@ const { src, poster, label = 'Demo reel', description = 'Real arms · sims · cl
 </figure>
 <style>
   .demo { margin: 0; }
-  video, .ph { width: 100%; border: 1px solid var(--rule); border-radius: 6px; }
-  .demo video { display: block; max-width: none; aspect-ratio: 16 / 9; }
+  video, .ph { width: 100%; aspect-ratio: 16 / 9;
+  }
+  video, .ph { display: block; border-radius: 6px; border: 1px solid var(--rule-2); }
   .ph {
     display: grid; place-items: center; aspect-ratio: 21 / 9; min-height: 176px;
-    padding: 24px; background: var(--bg-2); border-style: dashed;
+    padding: 24px; background: var(--bg-2); border: 1px dashed var(--rule);
   }
   .msg { display: grid; justify-items: center; gap: 6px; max-width: 36ch; text-align: center; }
   .video-icon { width: 32px; height: 32px; margin-bottom: 8px; color: var(--ink-2); }

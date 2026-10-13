@@ -14,8 +14,6 @@ Kinex connects a coding agent to robots and simulators through three layers.
 
 <ArchDiagram diagramOnly />
 
-For ROS 2 robots, a driver and adapter connect the device layer to the existing ROS 2 stack. See [where ROS 2 fits](/docs/ros2/#where-ros-2-fits) for the expanded diagram.
-
 ### Devices: typed physical or virtual resources
 
 A device is anything the agent can read from or command: an arm, a camera, a gripper, but also a detection model or the simulator's clock. Each device has a **type**, which fixes its operations and data conventions; a **profile**, which records how to reach it and its specifications; and a **driver**, which talks to the real SDK, simulator or service. Because real hardware and simulators share the same types, the agent works with both the same way. → [Devices](/docs/devices/)
