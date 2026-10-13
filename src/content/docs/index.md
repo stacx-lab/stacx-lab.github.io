@@ -40,7 +40,7 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 
 | Need | For |
 | --- | --- |
-| Linux or macOS | The installer refuses other platforms |
+| macOS or Ubuntu | Installing and running Kinex |
 | Node.js ≥ 22.19 + npm | Kinex itself (the installer can install them) |
 | `curl` | The installer |
 | Python 3 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
@@ -78,4 +78,4 @@ Reference: [CLI](/docs/cli/), [slash commands](/docs/slash-commands/), [troubles
 
 ## About this version
 
-These pages describe **Kinex 1.0.0**, bundling the **Pi coding agent 1.1.0** (`@earendil-works/pi-coding-agent`). No separate Pi install is needed. Linux and macOS are supported; Node.js ≥ 22.19 is required.
+These pages describe **Kinex 1.0.0**, bundling the **Pi coding agent 1.1.0** (`@earendil-works/pi-coding-agent`). No separate Pi install is needed. Install on macOS and Ubuntu. Node.js ≥ 22.19 is required.
