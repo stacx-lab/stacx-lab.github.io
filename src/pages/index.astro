@@ -17,9 +17,6 @@ const paths = [
     <section class="hero grid-bg">
       <div class="wrap hero-in">
         <div class="pitch">
-          <a class="ros-badge" href={url('/docs/ros2/')}>
-            Works with ROS 2 <span aria-hidden="true">→</span>
-          </a>
           <h1>A robotics harness<br />for coding agents<span class="caret">_</span></h1>
           <p class="sub">
             Give a coding agent <b>devices</b>, <b>tools</b> and <b>skills</b>, and it works with robots the way it
@@ -71,12 +68,6 @@ const paths = [
   }
   @media (max-width: 960px) { .hero-in { grid-template-columns: minmax(0, 1fr); padding-block: 48px 56px; gap: 40px; } }
   .pitch { min-width: 0; }
-  .ros-badge {
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
-    padding: 5px 12px; border: 1px solid var(--accent); border-radius: var(--radius);
-    background: var(--accent-bg); color: var(--accent-ink); font-size: var(--fs-1); font-weight: 700;
-  }
-  .ros-badge:hover { text-decoration: underline; text-underline-offset: 3px; }
   h1 { font-size: clamp(38px, 3.8vw, 56px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
   .caret { color: var(--accent); animation: blink 1.1s steps(1) infinite; margin-left: 2px; }
   @keyframes blink { 50% { opacity: 0; } }
