@@ -11,15 +11,13 @@ sources: ["packages/setup/README.md", "packages/setup/assets/builtin/skill/onboa
 import RosDiagram from '../../components/RosDiagram.astro';
 import DemoBanner from '../../components/DemoBanner.astro';
 
-Kinex provides adapters for joint trajectories, velocity commands, cameras and IMUs. During onboarding, the agent prepares a driver for your hardware using these adapters and your ROS packages.
-
 ## Supported setup
 
-Use **ROS 2 Jazzy on Ubuntu 24.04** with **system Python 3.12**. [Install Kinex](/docs/#install-and-run) before starting, and have your hardware's drivers and documentation available.
+Use **ROS 2 Jazzy on Ubuntu 24.04** with **system Python 3.12**. For installation and workspace setup, follow [Real robots](/docs/real-robots/).
 
 ## Where ROS 2 fits
 
-ROS 2 connects through Kinex's [device layer](/docs/devices/). Skills and tools use the same typed interfaces as they do for other hardware and simulators.
+Kinex connects to your existing ROS 2 stack through [device drivers and adapters](/docs/devices/).
 
 <RosDiagram />
 
@@ -27,35 +25,12 @@ ROS 2 connects through Kinex's [device layer](/docs/devices/). Skills and tools 
 
 <DemoBanner label="ROS 2 demo" description="Robot recording with a synchronized Kinex session." />
 
-## Onboard your ROS 2 robot
+## ROS 2 setup
 
-Start Kinex in a robot workspace:
+For ROS 2 hardware, Kinex uses the `onboard-ros2` skill:
 
-```sh
-mkdir -p robot-workspace
-cd robot-workspace
-kinex
-```
+- **Packages.** It reuses installed ROS packages, then prefers official apt packages. It builds from source when needed or requested.
+- **Dependencies.** When installation requires `sudo`, it provides the commands and target host for you to run them on.
+- **Drivers.** Each device gets a versioned driver bundle; a failed rebuild preserves the working version. Verification records measurements from live ROS interfaces.
 
-Use `/login` to connect a model provider and `/model` to choose a model.
-
-Describe your hardware and task:
-
-```text
-/onboarding Set up my ROS 2 arm and camera for tabletop picking.
-```
-
-Kinex selects the `onboard-ros2` skill to prepare and verify the integration. To add [one device at a time](/docs/onboarding/#one-device-at-a-time), use `/register`.
-
-Supervise hardware checks and be ready to stop the robot.
-
-## How ROS 2 setup works
-
-- **Reuse packages.** Kinex prefers installed ROS packages, then official apt packages. Source builds are used when needed or requested.
-- **Install dependencies.** If installation requires `sudo`, Kinex provides the commands and target host for you to run them on.
-- **Prepare drivers.** Each device uses a versioned driver bundle. A failed rebuild leaves the working version intact.
-- **Verify interfaces.** After `/load`, checks record measurements from the live ROS interfaces. Failed checks remain explicit.
-
-## Calibration and next steps
-
-[Calibrate](/docs/onboarding/#calibration) the camera transforms, tool offsets and joint limits your task needs. Then [load your devices and give Kinex a task](/docs/real-robots/#4-bring-it-up-and-give-a-task).
+For hardware supervision, individual device registration and calibration, see [Onboarding & calibration](/docs/onboarding/).
