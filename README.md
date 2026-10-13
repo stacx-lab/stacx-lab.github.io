@@ -6,7 +6,7 @@ Fonts: Roboto Slab (headings), Lato (body), Commit Mono (code); self-hosted via 
 
 ```sh
 npm ci
-npm run dev        # http://localhost:4321/  (search needs a build)
+npm run dev        # http://localhost:4321/kinex/  (search needs a build)
 npm run build      # dist/ + pagefind index
 npm run preview
 npm run check      # astro check + build + internal link/anchor check
@@ -78,5 +78,8 @@ The homepage does not currently include a demo section. When a video is availabl
 ## Deploy
 
 `.github/workflows/deploy.yml` builds on every push to `main` and publishes to GitHub Pages. Before the first deploy, set *Settings → Pages → Source* to
-**GitHub Actions**. CI reads the site URL and base path from Pages, so forks and custom
-domains work without code changes. The build is published directly from `dist/`, with the homepage at `https://stacx-lab.github.io/` and documentation at `/docs/`. Locally, the defaults are `https://stacx-lab.github.io` and `/`; override them with `SITE_URL` and `BASE_PATH`.
+**GitHub Actions**. CI builds for `https://stacx-lab.github.io/kinex/` and stages
+`dist/` inside `_site/kinex/` before uploading `_site/`. This organization-site
+repository needs that directory so `/kinex/` serves the homepage and `/kinex`
+redirects to it. Documentation lives at `/kinex/docs/`. Local builds use the same
+origin and base path; override them with `SITE_URL` and `BASE_PATH` for other hosts.

@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
-const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
+const base = (process.env.BASE_PATH === undefined ? '/kinex' : process.env.BASE_PATH || '/').replace(/\/$/, '');
 
 const htmlFiles = [];
 (function walk(dir) {
