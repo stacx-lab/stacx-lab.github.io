@@ -11,7 +11,7 @@ const layouts = [
     {layouts.map(({ id, width, height, x, dy }) => (
     <svg class={`diagram-${id}`} viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`ros-arch-${id}-title ros-arch-${id}-desc`}>
       <title id={`ros-arch-${id}-title`}>Where ROS 2 fits in Kinex</title>
-      <desc id={`ros-arch-${id}-desc`}>The agent loads skills and calls tools or devices. The onboard-ros2 skill prepares the integration. Tools operate typed devices, whose ROS drivers and adapters connect to existing ROS 2 packages and nodes. ROS 2 connects to robot hardware, returning state and sensor data through the device interface.</desc>
+      <desc id={`ros-arch-${id}-desc`}>The agent loads skills and calls tools or devices. The onboard-ros2 skill prepares a driver bundle. Within the device layer, the Kinex driver uses bundled ROS adapters and owns an rclpy node. That node exchanges commands and feedback with the robot's existing ROS 2 drivers and controllers, which connect to the hardware.</desc>
       <defs>
         <marker id={`ros-arch-${id}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0 0L10 5L0 10z" class="arrowhead" />
@@ -54,16 +54,16 @@ const layouts = [
         <text x={x + 20} y={390 + dy} class="example">arm · camera · mobile base</text>
         <g class="adapter">
           <rect x={x + 20} y={408 + dy} width="500" height="62" rx="4" />
-          <text x={x + 36} y={434 + dy} class="adapter-title">ROS 2 driver + adapter</text>
-          <text x={x + 36} y={456 + dy} class="body">Bridge device operations to ROS interfaces</text>
+          <text x={x + 36} y={434 + dy} class="adapter-title">Kinex driver + ROS adapters</text>
+          <text x={x + 36} y={456 + dy} class="body">Own ROS node (rclpy)</text>
         </g>
       </g>
 
       <g class="ros-stack">
         <rect x={x} y={556 + dy} width="540" height="104" rx="5" />
-        <text x={x + 20} y={586 + dy} class="heading">ROS 2</text>
-        <text x={x + 20} y={610 + dy} class="body">Existing ROS packages and nodes</text>
-        <text x={x + 20} y={638 + dy} class="example">Joint trajectories · velocity · cameras · IMUs</text>
+        <text x={x + 20} y={586 + dy} class="heading">Robot’s ROS 2 stack</text>
+        <text x={x + 20} y={610 + dy} class="body">Existing drivers and controller nodes</text>
+        <text x={x + 20} y={638 + dy} class="example">Topics · services · actions</text>
       </g>
 
       <g class="hardware">
@@ -96,7 +96,7 @@ const layouts = [
     </svg>
     ))}
   </div>
-  <figcaption>Commands flow to the robot; state and sensor data return through the device interface.</figcaption>
+  <figcaption>Onboarding prepares the bundle; the loaded driver owns its ROS node.</figcaption>
 </figure>
 
 <style>
