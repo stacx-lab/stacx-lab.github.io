@@ -1,116 +1,299 @@
 ---
-// Tabbed, self-typing terminal. Content lives in src/data/hero-terminal.json.
-// Server-renders the final transcript (readable without JS / with reduced motion);
-// the script replays it line by line.
 import data from '../data/hero-terminal.json';
-
-const prefix: Record<string, string> = { sh: '$', in: '›', tool: '•', ok: '✓', out: ' ', agent: '»' };
+import { url } from '../lib/url';
+type Step = {
+  id: string; kind: string; duration: number; text?: string; title?: string;
+  detail?: string; result?: string; code?: string;
+  outcome?: string; busy?: number;
+  views?: { image: string; alt: string; camera: string; label: string }[];
+};
+const steps: Step[] = data.steps;
 ---
-<div class="term" data-term>
-  <div class="chrome">
-    <span class="dots"><i></i><i></i><i></i></span>
-    <div class="tabs" role="tablist">
-      {data.scenes.map((s, i) => (
-        <button type="button" role="tab" class:list={['tab', { on: i === 0 }]} aria-selected={i === 0 ? 'true' : 'false'} data-tab={i}>{s.label}</button>
-      ))}
+<figure class="demo">
+  <div class="term" data-term data-shell-duration={data.shellDuration}>
+    <div class="chrome">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="title">Kinex</span>
+      <div class="controls">
+        <button type="button" data-pause hidden>Pause</button>
+        <button type="button" data-replay hidden aria-label="Replay Kinex demo">↻ Replay</button>
+      </div>
     </div>
+    <div class="body">
+      <div class="shell" data-shell aria-label="Environment setup commands">
+        <div class="shell-label">RoboEnv <span>~/lab</span></div>
+        {data.shell.map(line => (
+          <div class:list={['shell-line', line.kind]} data-line>
+            <span class="prompt" aria-hidden="true">{line.kind === 'sh' ? '$' : ''}</span>
+            <span data-text>{line.text}</span>
+          </div>
+        ))}
+      </div>
+      <div class="session" data-session aria-label="Kinex session">
+        <div class="session-header"><b>Kinex</b><span>· robotics coding agent</span></div>
+        <div class="conversation" data-conversation tabindex="0" aria-label="Session transcript">
+          {steps.map(step => (
+            <div class="entry" data-step={step.id} data-kind={step.kind} data-duration={step.duration} data-outcome={step.outcome || 'success'} data-busy={step.busy || 180}>
+              {step.kind === 'user' && <div class="user-message" data-stream>{step.text}</div>}
+              {step.kind === 'agent' && <div class="agent-message" data-stream>{step.text}</div>}
+              {['tool', 'code', 'image'].includes(step.kind) && (
+                <div class="tool" data-tool data-state={step.outcome || 'success'}>
+                  <div class="tool-title"><b>{step.title}</b> <span data-detail>{step.detail}</span><span class="tool-state" data-tool-state>{step.outcome === 'error' ? '!' : '✓'}</span></div>
+                  {step.result && <div class="result" data-result data-stream>{step.result}</div>}
+                  {step.code && <pre class="code" data-result><code data-stream>{step.code}</code></pre>}
+                  {step.views && <div class:list={['views', { paired: step.views.length > 1 }]} data-result>
+                    {step.views.map(view => <figure class="camera-view">
+                      <img src={url(view.image)} alt={view.alt} width="640" height="480" loading="eager" decoding="async" />
+                      <figcaption>{view.camera} · {view.label}</figcaption>
+                    </figure>)}
+                  </div>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div class="session-bottom">
+          <div class="editor"><span aria-hidden="true">›</span> <span data-editor></span><span class="cursor" aria-hidden="true">▍</span></div>
+          <div class="session-footer"><span>~/lab/workspace</span><span>Kinex · ask</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="playback"><span class="status-dot" aria-hidden="true"></span><span data-status role="status">Session complete</span><span class="playback-label">Session demo</span></div>
   </div>
-  {data.scenes.map((s, i) => (
-    <div class="screen" data-scene={i} hidden={i !== 0} role="log" aria-label={`${s.label} session`}>
-      {s.lines.map((l) => (
-        <span class:list={['ln', l.kind]}><span class="p">{prefix[l.kind] ?? ' '}</span><span class="t">{l.text}</span></span>
-      ))}
-      <span class="cursor" aria-hidden="true">▍</span>
-    </div>
-  ))}
-</div>
+</figure>
 
 <script>
-  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-term]').forEach(term => {
+    const shell = term.querySelector<HTMLElement>('[data-shell]')!;
+    const session = term.querySelector<HTMLElement>('[data-session]')!;
+    const conversation = term.querySelector<HTMLElement>('[data-conversation]')!;
+    const editor = term.querySelector<HTMLElement>('[data-editor]')!;
+    const status = term.querySelector<HTMLElement>('[data-status]')!;
+    const pause = term.querySelector<HTMLButtonElement>('[data-pause]')!;
+    const replay = term.querySelector<HTMLButtonElement>('[data-replay]')!;
+    const steps = [...term.querySelectorAll<HTMLElement>('[data-step]')];
+    const original = new Map([...term.querySelectorAll<HTMLElement>('[data-stream], [data-detail], [data-text]')].map(el => [el, el.textContent!]));
+    const lines = [...shell.querySelectorAll<HTMLElement>('[data-line]')];
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let generation = 0;
+    let paused = false;
+    let visible = false;
+    let started = false;
+    let running = false;
+    let activeTime = 0;
+    const follow = () => { conversation.scrollTop = conversation.scrollHeight; };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !started && !motion.matches) { started = true; void play(); }
+    }, { threshold: 0.15 });
 
-  document.querySelectorAll<HTMLElement>('[data-term]').forEach((term) => {
-    const tabs = [...term.querySelectorAll<HTMLButtonElement>('[data-tab]')];
-    const screens = [...term.querySelectorAll<HTMLElement>('[data-scene]')];
-    const scripts = screens.map((s) =>
-      [...s.querySelectorAll<HTMLElement>('.ln')].map((ln) => ({ el: ln, text: ln.querySelector('.t')!.textContent! })),
-    );
-    let run = 0; // bumps on every tab switch; stale loops exit
-    let visible = true;
-    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(term);
-
-    async function play(i: number, token: number) {
-      const lines = scripts[i];
-      const alive = () => token === run;
-      lines.forEach(({ el }) => (el.hidden = true));
-      for (const { el, text } of lines) {
-        if (!alive()) return;
-        while (!visible) { await wait(300); if (!alive()) return; }
-        const t = el.querySelector<HTMLElement>('.t')!;
-        el.hidden = false;
-        const typed = el.classList.contains('sh') || el.classList.contains('in');
-        if (typed) {
-          t.textContent = '';
-          for (let c = 0; c < text.length; c++) {
-            if (!alive()) return;
-            t.textContent += text[c];
-            await wait(14 + Math.random() * 30);
-          }
-          await wait(380);
-        } else {
-          t.textContent = text;
-          await wait(el.classList.contains('tool') ? 520 : 260);
+    // Only visible, unpaused playback counts toward the 30-second timeline.
+    async function delay(ms: number, token: number) {
+      let remaining = ms;
+      while (remaining > 0) {
+        if (token !== generation) return false;
+        const before = performance.now();
+        await new Promise(resolve => setTimeout(resolve, Math.max(4, Math.min(16, remaining))));
+        if (token !== generation) return false;
+        if (!paused && visible && !document.hidden) {
+          const elapsed = performance.now() - before;
+          remaining -= elapsed;
+          activeTime += elapsed;
         }
       }
-      await wait(3600);
-      if (alive()) show((i + 1) % screens.length);
+      return token === generation;
     }
-
-    function show(i: number) {
-      run++;
-      tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', String(k === i)); });
-      screens.forEach((s, k) => (s.hidden = k !== i));
-      if (!reduced) play(i, run);
+    async function stream(target: HTMLElement, text: string, token: number, duration: number) {
+      target.textContent = '';
+      const start = activeTime;
+      const characters = [...text];
+      for (let i = 0; i < characters.length; i++) {
+        if (!await delay(Math.max(4, start + duration * (i + 1) / characters.length - activeTime), token)) return false;
+        target.textContent += characters[i];
+        if (shell.contains(target)) shell.scrollTop = shell.scrollHeight;
+        else follow();
+      }
+      return token === generation;
     }
-
-    tabs.forEach((t, k) => t.addEventListener('click', () => show(k)));
-    if (!reduced) show(0);
+    function complete() {
+      generation++;
+      running = false;
+      shell.hidden = true;
+      session.hidden = false;
+      original.forEach((text, el) => { el.textContent = text; });
+      steps.forEach(el => {
+        el.hidden = false;
+        const tool = el.querySelector<HTMLElement>('[data-tool]');
+        const result = el.querySelector<HTMLElement>('[data-result]');
+        const state = el.querySelector<HTMLElement>('[data-tool-state]');
+        if (tool) tool.dataset.state = el.dataset.outcome;
+        if (result) result.hidden = false;
+        if (state) state.textContent = el.dataset.outcome === 'error' ? '!' : '✓';
+      });
+      editor.textContent = '';
+      pause.hidden = true;
+      status.textContent = 'Session complete';
+      follow();
+    }
+    async function play() {
+      const token = ++generation;
+      activeTime = 0;
+      paused = false;
+      term.dataset.paused = 'false';
+      running = true;
+      pause.hidden = false;
+      pause.textContent = 'Pause';
+      pause.setAttribute('aria-label', 'Pause Kinex demo');
+      shell.hidden = false;
+      session.hidden = true;
+      original.forEach((text, el) => { el.textContent = text; });
+      steps.forEach(el => {
+        el.hidden = true;
+        const tool = el.querySelector<HTMLElement>('[data-tool]');
+        const result = el.querySelector<HTMLElement>('[data-result]');
+        const state = el.querySelector<HTMLElement>('[data-tool-state]');
+        if (tool) tool.dataset.state = 'pending';
+        if (result) result.hidden = true;
+        if (state) state.textContent = '◌';
+      });
+      lines.forEach(el => { el.hidden = true; });
+      editor.textContent = '';
+      shell.scrollTop = 0;
+      status.textContent = 'Preparing the workspace';
+      const shellDuration = Number(term.dataset.shellDuration);
+      const totalLength = lines.reduce((sum, el) => sum + el.querySelector('[data-text]')!.textContent!.length, 0);
+      for (const line of lines) {
+        line.hidden = false;
+        const target = line.querySelector<HTMLElement>('[data-text]')!;
+        const text = original.get(target)!;
+        if (!await stream(target, text, token, shellDuration * .85 * text.length / totalLength)) return;
+        if (!await delay(60, token)) return;
+      }
+      if (!await delay(Math.max(0, shellDuration - activeTime), token)) return;
+      shell.hidden = true;
+      session.hidden = false;
+      conversation.scrollTop = 0;
+      for (const step of steps) {
+        const start = activeTime;
+        const duration = Number(step.dataset.duration);
+        const kind = step.dataset.kind;
+        if (kind === 'user') {
+          const message = step.querySelector<HTMLElement>('[data-stream]')!;
+          status.textContent = 'Inside Kinex';
+          if (!await stream(editor, original.get(message)!, token, duration * .75)) return;
+          editor.textContent = '';
+          step.hidden = false;
+          follow();
+        } else if (kind === 'agent') {
+          const message = step.querySelector<HTMLElement>('[data-stream]')!;
+          message.textContent = '';
+          step.hidden = false;
+          status.textContent = 'Kinex';
+          if (!await stream(message, original.get(message)!, token, duration * .8)) return;
+        } else {
+          const tool = step.querySelector<HTMLElement>('[data-tool]')!;
+          const detail = step.querySelector<HTMLElement>('[data-detail]')!;
+          const state = step.querySelector<HTMLElement>('[data-tool-state]')!;
+          const result = step.querySelector<HTMLElement>('[data-result]')!;
+          detail.textContent = '';
+          step.hidden = false;
+          follow();
+          status.textContent = `${step.querySelector('b')!.textContent} ${original.get(detail)}`;
+          if (!await stream(detail, original.get(detail)!, token, Math.min(220, duration * .2))) return;
+          if (!await delay(Number(step.dataset.busy), token)) return;
+          const output = step.querySelector<HTMLElement>('[data-stream]');
+          if (output) output.textContent = '';
+          result.hidden = false;
+          if (output && !await stream(output, original.get(output)!, token, duration * .48)) return;
+          follow();
+          if (!await delay(40, token)) return;
+          tool.dataset.state = step.dataset.outcome;
+          state.textContent = step.dataset.outcome === 'error' ? '!' : '✓';
+        }
+        if (!await delay(Math.max(0, duration - (activeTime - start)), token)) return;
+      }
+      complete();
+    }
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      term.dataset.paused = String(paused);
+      pause.textContent = paused ? 'Resume' : 'Pause';
+      pause.setAttribute('aria-label', paused ? 'Resume Kinex demo' : 'Pause Kinex demo');
+    });
+    replay.addEventListener('click', () => {
+      if (motion.matches) { complete(); return; }
+      started = true;
+      void play();
+    });
+    motion.addEventListener('change', () => {
+      if (motion.matches) { complete(); replay.hidden = true; }
+      else { replay.hidden = false; if (!running && !started && visible) { started = true; void play(); } }
+    });
+    complete();
+    replay.hidden = motion.matches;
+    observer.observe(term);
+    new ResizeObserver(() => { if (!running) follow(); }).observe(conversation);
   });
 </script>
 
+
 <style>
-  .term {
-    font-family: var(--font-mono); letter-spacing: var(--tracking);
-    background: var(--term-bg); color: var(--term-ink);
-    border: 1px solid #000; border-radius: 6px; overflow: hidden;
-    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.04) inset;
+  .demo { margin: 0; min-width: 0; }
+  .term { font-family: var(--font-mono); letter-spacing: var(--tracking); background: #17191e; color: #dee0e1; border: 1px solid #30333b; border-radius: 7px; overflow: hidden; font-size: 11px; line-height: 1.5; box-shadow: 0 12px 36px rgb(0 0 0 / 0.12); }
+  .term [hidden] { display: none !important; }
+  .chrome { display: flex; align-items: center; gap: 13px; padding: 0 12px; height: 32px; border-bottom: 1px solid #30333b; background: #202229; }
+  .dots { display: flex; gap: 5px; }
+  .dots i { width: 7px; height: 7px; border-radius: 50%; background: #555761; }
+  .title { font-size: 11px; }
+  .controls { display: flex; gap: 10px; margin-left: auto; }
+  .controls button { font: inherit; color: #b5b7c2; background: none; border: 0; padding: 4px 0; cursor: pointer; }
+  .controls button:hover { color: #fff; }
+  .body { min-height: 314px; }
+  .shell { height: 314px; padding: 14px; overflow-y: auto; }
+  .shell-label { color: #a798d7; margin-bottom: 14px; }
+  .shell-label span { color: #9398a2; margin-left: 12px; }
+  .shell-line { display: flex; gap: 8px; white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 10px; }
+  .prompt { color: #a798d7; flex: 0 0 1ch; }
+  .out { color: #9da5a9; margin-top: 4px; }
+  .session { height: 314px; display: flex; flex-direction: column; }
+  .session-header { display: flex; gap: 8px; padding: 7px 12px; }
+  .session-header b { color: #a798d7; }
+  .session-header span { color: #9da5a9; }
+  .conversation { flex: 1; min-height: 0; padding: 0 12px 6px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #484e52 transparent; }
+  .entry + .entry { margin-top: 5px; }
+  .user-message { background: #213b49; padding: 4px 7px; }
+  .agent-message { line-height: 1.55; padding: 2px 0; }
+  .tool { background: #2b3944; padding: 4px 7px; }
+  .tool[data-state='success'] { background: #254131; }
+  .tool[data-state='error'] { background: #5b282a; }
+  .tool-title { display: flex; gap: 6px; align-items: baseline; }
+  .tool-title > span:first-of-type { min-width: 0; overflow-wrap: anywhere; color: #b3bfc6; }
+  .tool-state { margin-left: auto; color: #9bb6c8; }
+  .tool[data-state='pending'] .tool-state { display: inline-block; animation: spin .7s linear infinite; }
+  .term[data-paused='true'] .tool-state { animation-play-state: paused; }
+  .tool[data-state='success'] .tool-state { color: #82c6a0; }
+  .tool[data-state='error'] .tool-state { color: #ea7f81; }
+  .result { font-size: 10px; margin-top: 2px; overflow-wrap: anywhere; white-space: pre-wrap; color: #b9c6c4; }
+  .code { margin: 3px 0 0; font-size: 10px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; color: #c7d9ce; }
+  .views { display: flex; gap: 8px; margin-top: 4px; }
+  .camera-view { margin: 0; min-width: 0; width: 196px; }
+  .paired .camera-view { width: min(196px, calc(50% - 4px)); }
+  .camera-view img { display: block; width: 100%; height: auto; border-radius: 2px; }
+  .camera-view figcaption { color: #a7b5b0; font-size: 8px; padding-top: 2px; overflow-wrap: anywhere; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .session-bottom { padding: 0 12px 6px; }
+  .editor { min-height: 24px; border-block: 1px solid #9776e5; padding: 2px 0; }
+  .editor > span:first-child, .cursor { color: #a798d7; }
+  .session-footer { display: flex; justify-content: space-between; gap: 8px; color: #9398a2; font-size: 9px; padding-top: 4px; }
+  .playback { display: flex; align-items: center; gap: 7px; height: 24px; padding: 0 12px; border-top: 1px solid #30333b; color: #aeb2bd; font-size: 9px; }
+  [data-status] { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .status-dot { flex: 0 0 5px; height: 5px; background: #68b78d; border-radius: 50%; }
+  .playback-label { margin-left: auto; color: #838995; flex-shrink: 0; }
+  @media (max-width: 600px) {
+    .term { font-size: 10px; }
+    .chrome { gap: 8px; }
+    .conversation { padding-inline: 10px; }
+    .camera-view { width: 180px; }
+    .result, .code { font-size: 9px; }
   }
-  .chrome { display: flex; align-items: center; gap: 14px; padding: 0 12px; height: 36px; border-bottom: 1px solid #26262c; }
-  .dots { display: flex; gap: 6px; }
-  .dots i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a42; }
-  .tabs { display: flex; gap: 2px; overflow-x: auto; }
-  .tab {
-    font: inherit; font-size: 12px; color: var(--term-dim); background: none; border: 0;
-    padding: 4px 10px; border-radius: 3px; cursor: pointer; white-space: nowrap;
-  }
-  .tab:hover { color: var(--term-ink); }
-  .tab.on { color: var(--term-ink); background: #24242b; }
-  .screen {
-    margin: 0; padding: 14px 18px 16px; height: 310px; overflow: hidden;
-    font-size: 12.5px; line-height: 1.6;
-  }
-  .ln { display: block; padding-left: 2.6ch; text-indent: -2.6ch; white-space: pre-wrap; word-break: break-word; }
-  .ln[hidden] { display: none; }
-  .p { display: inline-block; width: 2.6ch; text-indent: 0; }
-  .sh .p { color: #8b8a93; }
-  .in .p, .in .t { color: #b4afff; }
-  .tool .p { color: #e3a54a; }
-  .tool .t { color: #cfcdc6; }
-  .out .t { color: var(--term-dim); }
-  .ok .p, .ok .t { color: #5fd08f; }
-  .agent .p { color: #9b95f5; }
-  .agent .t { color: #e7e5de; font-style: italic; }
-  .cursor { color: #9b95f5; animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-  @media (max-width: 600px) { .screen { height: 360px; font-size: 11.5px; padding: 12px; } }
 </style>

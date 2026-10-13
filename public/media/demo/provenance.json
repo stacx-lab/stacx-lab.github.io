@@ -1,0 +1,200 @@
+{
+  "source_session": "../pi-session-2026-10-10T23-13-44-143Z_01a12818-00ce-7088-b497-477aaddb5de3.html",
+  "source_session_sha256": "aeac910bf7692115f27ac1a803a5576da9293744c0b3e8aaa5b53c9cd9620547",
+  "frames": [
+    {
+      "sequence": 1,
+      "filename": "001_123770de10e8c0d4.png",
+      "session_timestamp": "2026-10-10T23:21:13.804Z",
+      "source_path": "/tmp/roboenv-images-8x7g8z5w/123770de10e8c0d4.png",
+      "device_id": "camera_top",
+      "capture_timestamp_s": 0,
+      "entry_id": "f1adba3e",
+      "entry_index": 36,
+      "content_index": 1,
+      "tool_call_id": "call_28504ef4db944805b3b49dd6e89a1f7b|fc_092a0ef0f43c66ef016acac868e1448191b21eaf6b68786099",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 310233,
+      "sha256": "8378c484e36d77a781f6d05dac418d6a6a5083e68211e406b207e71933546afb",
+      "asset": "session-001_123770de10e8c0d4.png"
+    },
+    {
+      "sequence": 4,
+      "filename": "004_b2a9d5e5140eabe9.png",
+      "session_timestamp": "2026-10-10T23:26:24.648Z",
+      "source_path": "/tmp/roboenv-images-qfbclk1t/b2a9d5e5140eabe9.png",
+      "device_id": "camera_right",
+      "capture_timestamp_s": 14.892000000001643,
+      "entry_id": "93b8635c",
+      "entry_index": 71,
+      "content_index": 1,
+      "tool_call_id": "call_f2804625559847698cc9d1dc4345d7d3|fc_092a0ef0f43c66ef016acac9a0507c81918595eb87f6b69f2f",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 269435,
+      "sha256": "b5c2796faa964198aae5fabb8ac46dd9535b8d57fd79391a2c91c89ce7cad4c6",
+      "asset": "session-004_b2a9d5e5140eabe9.png"
+    },
+    {
+      "sequence": 11,
+      "filename": "011_bc5d553219135b05.png",
+      "session_timestamp": "2026-10-10T23:32:33.235Z",
+      "source_path": "/tmp/roboenv-images-pxo37pxo/bc5d553219135b05.png",
+      "device_id": "camera_left",
+      "capture_timestamp_s": 33.62599999999513,
+      "entry_id": "1a0ffef3",
+      "entry_index": 124,
+      "content_index": 1,
+      "tool_call_id": "call_6509e8f99c0344cb998d60416ff740a7|fc_092a0ef0f43c66ef016acacb0f7b108191a0d52289c6614a8f",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 384398,
+      "sha256": "a59f0e255d74f2f6f92525a93c51889071cc5f07375f3d2ae24d927834e2ab69",
+      "asset": "session-011_bc5d553219135b05.png"
+    },
+    {
+      "sequence": 12,
+      "filename": "012_5c5bccf432830287.png",
+      "session_timestamp": "2026-10-10T23:32:33.241Z",
+      "source_path": "/tmp/roboenv-images-tbj6jay0/5c5bccf432830287.png",
+      "device_id": "camera_top",
+      "capture_timestamp_s": 33.62599999999513,
+      "entry_id": "7fc07f9f",
+      "entry_index": 125,
+      "content_index": 1,
+      "tool_call_id": "call_1ba8d47452194fef9529853ad0c8111f|fc_092a0ef0f43c66ef016acacb10e4848191a3a2e968664b642b",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 294528,
+      "sha256": "d3c968d1861419b5cb54c774f384afcd458399003e61eb1cce9e4429d4239e1c",
+      "asset": "session-012_5c5bccf432830287.png"
+    },
+    {
+      "sequence": 15,
+      "filename": "015_ad6150d8c8e61f86.png",
+      "session_timestamp": "2026-10-10T23:34:53.909Z",
+      "source_path": "/tmp/roboenv-images-qw4qt81w/ad6150d8c8e61f86.png",
+      "device_id": "camera_left",
+      "capture_timestamp_s": 44.09800000000793,
+      "entry_id": "e87cbd7e",
+      "entry_index": 138,
+      "content_index": 1,
+      "tool_call_id": "call_98463d854686466d95a986581b0b0f38|fc_092a0ef0f43c66ef016acacb93616081919c4e54b1944dfded",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 390593,
+      "sha256": "e1793fd625a6a22ddb67bb5e6f231912dc9512e52acb2eb8b26c098c55a1d390",
+      "asset": "session-015_ad6150d8c8e61f86.png"
+    },
+    {
+      "sequence": 16,
+      "filename": "016_8745ae4f0e24305d.png",
+      "session_timestamp": "2026-10-10T23:34:53.915Z",
+      "source_path": "/tmp/roboenv-images-hlmhthwn/8745ae4f0e24305d.png",
+      "device_id": "camera_top",
+      "capture_timestamp_s": 44.09800000000793,
+      "entry_id": "a500afc9",
+      "entry_index": 139,
+      "content_index": 1,
+      "tool_call_id": "call_34d9151da7a84daa91363c700711ad63|fc_092a0ef0f43c66ef016acacb9d8dcc81919fdaa65ddd882764",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 299224,
+      "sha256": "f0485f242389774901f8d25cd279d97ecc22184ba8b5a2daef5d53b35322af96",
+      "asset": "session-016_8745ae4f0e24305d.png"
+    },
+    {
+      "sequence": 3,
+      "filename": "003_c1e0864a6d142372.png",
+      "session_timestamp": "2026-10-10T23:26:24.643Z",
+      "source_path": "/tmp/roboenv-images-gt73x_qx/c1e0864a6d142372.png",
+      "device_id": "camera_top",
+      "capture_timestamp_s": 14.892000000001643,
+      "entry_id": "52f6c246",
+      "entry_index": 70,
+      "content_index": 1,
+      "tool_call_id": "call_bc8e8aa2754241d99ae43fecf24b5364|fc_092a0ef0f43c66ef016acac99ee0488191bf723dde6ab8e129",
+      "tool_name": "read",
+      "mime_type": "image/png",
+      "width": 640,
+      "height": 480,
+      "bytes": 308057,
+      "sha256": "5bb4b3186eda66ac1f35bda05b709b47a1fc1ff1c6eb1764a21a9c39266dd618",
+      "asset": "session-003_c1e0864a6d142372.png"
+    }
+  ],
+  "adaptation": "Thirty-second condensed replay of new5. Authored dialogue, shortened code excerpts and combined motion stages. Device/relative_pose/servo displays summarize the source controller. Tool activity is an indeterminate spinner, not captured telemetry. Omitted connection repairs, retries and intermediate calculations. Contact is visually inspected before release. Final observations are original frames after release, withdrawal and settling. No new robot execution took place.",
+  "evidence": {
+    "joints": 34,
+    "localization": [
+      39,
+      40
+    ],
+    "approach_grasp_lift": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "carry": [
+      67,
+      68
+    ],
+    "viewpoint": [
+      103,
+      104
+    ],
+    "plane": [
+      107,
+      108
+    ],
+    "alignment": [
+      111,
+      112
+    ],
+    "insertion_stop": [
+      117,
+      118,
+      119
+    ],
+    "contact_images": [
+      121,
+      122,
+      124,
+      125
+    ],
+    "release_withdraw": [
+      126,
+      128,
+      130,
+      131,
+      135,
+      136
+    ],
+    "final_images": [
+      138,
+      139
+    ],
+    "depth_check": [
+      143,
+      144
+    ],
+    "completion": 145
+  },
+  "numeric_notes": "Camera depth ~0.929 m for pixel (449,296) reconstructed from the source rounded world point and calibrated camera transform. Displayed approximate camera coordinates/distance are calculated from that depth. Other measurements are rounded recorded values."
+}

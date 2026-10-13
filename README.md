@@ -18,7 +18,7 @@ npm run check      # astro check + build + internal link/anchor check
 src/config.ts                 version, tagline, install cmd, repo, nav, doc groups
 src/content/docs/*.md         docs (one file = one page; index.md = /docs/)
 src/content/blog/*.md         blog posts
-src/data/hero-terminal.json   landing-page terminal sessions
+src/data/hero-terminal.json   landing-page simulator walkthrough
 src/components/               Terminal, ArchDiagram, DemoBanner, Sidebar, Toc, Search…
 src/layouts/                  Base, Doc, Post
 src/styles/                   global.css (tokens, light/dark), prose.css (markdown)
@@ -52,6 +52,22 @@ Create `src/content/blog/<slug>.md` with `title`, `date`, `summary` and `tags`. 
 1. Bump `version` in `src/config.ts` and `package.json`.
 2. Update the docs against the tagged Kinex source, and keep each page's `sources` list accurate.
 3. Add a release post under `src/content/blog/`.
+
+## Hero session demo
+
+`Terminal.astro` replays setup and a 30-second mug-hanging walkthrough in a 372px
+terminal with internal scrolling. Input, assistant replies, tool arguments, code,
+and results appear one character at a time. Tool blocks use gray-blue while
+streaming or executing, green on completion, and red on error. Running tools show only an indeterminate spinner; servo waits are brief.
+Pause/replay, reduced-motion, and no-JavaScript transcript fallbacks are supported.
+
+All seven camera frames come unchanged from one successful session in
+`backup/new5/view-images/`: overhead, right wrist, left wrist, insertion inspection,
+and final verification after release, withdrawal, and a settling wait. Sources,
+checksums, and source entry references are in `public/media/demo/provenance.json`.
+Dialogue and tool displays condense that session; intermediate retries are omitted and
+contact is inspected before release. This is an adapted replay, not a live robot.
+Setup runs in a subshell because `roboenv setup` exports into its current directory.
 
 ## Demo video
 

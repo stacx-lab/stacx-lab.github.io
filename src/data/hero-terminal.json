@@ -1,143 +1,254 @@
 {
-  "_comment": "Scripted sessions for the landing-page terminal. Line kinds: sh ($ shell), in (kinex prompt), tool (tool call), out (output), ok (success), agent (model text). Illustrative, not captured output.",
-  "scenes": [
+  "_comment": "30-second adapted replay from backup/new5. Character-by-character text, indeterminate tool activity, original camera frames. Calls are condensed; source evidence is in public/media/demo/provenance.json.",
+  "shell": [
     {
-      "id": "robot",
-      "label": "Real robot",
-      "lines": [
-        {
-          "kind": "sh",
-          "text": "cd ~/lab/pick-cell && kinex"
-        },
-        {
-          "kind": "in",
-          "text": "/onboarding Set up my arm, gripper and overhead camera to pick objects from the table."
-        },
-        {
-          "kind": "tool",
-          "text": "skill setup-device · reuse profiles: arm, gripper, cam_top"
-        },
-        {
-          "kind": "out",
-          "text": "missing: camera-to-arm transform"
-        },
-        {
-          "kind": "in",
-          "text": "/calibrate camera-to-arm transform for picking"
-        },
-        {
-          "kind": "tool",
-          "text": "calib_sample ×12 → solve → verify"
-        },
-        {
-          "kind": "ok",
-          "text": "reprojection 1.8 px · accepted"
-        },
-        {
-          "kind": "in",
-          "text": "pick up the red cube and place it in the bin"
-        },
-        {
-          "kind": "tool",
-          "text": "locate_object_3d cam_top \"red cube\""
-        },
-        {
-          "kind": "out",
-          "text": "xyz = [0.412, -0.087, 0.031] m"
-        },
-        {
-          "kind": "tool",
-          "text": "servo arm → pregrasp → grasp → bin"
-        },
-        {
-          "kind": "ok",
-          "text": "gripper closed · object in bin"
-        }
-      ]
+      "kind": "sh",
+      "text": "roboenv launch abc/hang-mug-on-mug-rack --detach"
     },
     {
-      "id": "sim",
-      "label": "Simulator",
-      "lines": [
-        {
-          "kind": "sh",
-          "text": "roboenv launch robocasa/pick-place-microwave --port 8123"
-        },
-        {
-          "kind": "out",
-          "text": "Ready"
-        },
-        {
-          "kind": "sh",
-          "text": "roboenv setup robocasa/robocasa-panda-omron && kinex"
-        },
-        {
-          "kind": "in",
-          "text": "/devices"
-        },
-        {
-          "kind": "out",
-          "text": "arm  gripper  base  cam_agentview  cam_wrist  world   [unloaded]"
-        },
-        {
-          "kind": "in",
-          "text": "/load all"
-        },
-        {
-          "kind": "in",
-          "text": "/ping all"
-        },
-        {
-          "kind": "ok",
-          "text": "6/6 devices ready"
-        },
-        {
-          "kind": "in",
-          "text": "Look through the robot's cameras and describe the scene."
-        },
-        {
-          "kind": "tool",
-          "text": "device cam_agentview.capture"
-        },
-        {
-          "kind": "agent",
-          "text": "A kitchen counter: a microwave with its door open, a mug to its left."
-        }
-      ]
+      "kind": "out",
+      "text": "Ready: abc/hang-mug-on-mug-rack\nEndpoint: http://127.0.0.1:8123"
     },
     {
-      "id": "headless",
-      "label": "Headless",
-      "lines": [
-        {
-          "kind": "sh",
-          "text": "kinex run \"/ping arm\""
-        },
-        {
-          "kind": "ok",
-          "text": "arm: connected"
-        },
-        {
-          "kind": "sh",
-          "text": "kinex -p \"Describe the scene\" --model provider/model"
-        },
-        {
-          "kind": "tool",
-          "text": "device cam_top.capture"
-        },
-        {
-          "kind": "agent",
-          "text": "Three blocks on a white table; the red one is closest to the arm."
-        },
-        {
-          "kind": "sh",
-          "text": "kinex --continue"
-        },
-        {
-          "kind": "out",
-          "text": "resumed latest session in ~/lab/pick-cell"
-        }
-      ]
+      "kind": "sh",
+      "text": "mkdir -p workspace"
+    },
+    {
+      "kind": "sh",
+      "text": "(cd workspace && roboenv setup abc/abc-yam)"
+    },
+    {
+      "kind": "out",
+      "text": "Robot: abc/abc-yam\nDestination: workspace/.kinex"
+    },
+    {
+      "kind": "sh",
+      "text": "cd workspace"
+    },
+    {
+      "kind": "sh",
+      "text": "kinex"
     }
-  ]
+  ],
+  "steps": [
+    {
+      "id": "question",
+      "kind": "user",
+      "text": "what's in the scene?",
+      "duration": 900
+    },
+    {
+      "id": "camera",
+      "kind": "tool",
+      "title": "device",
+      "detail": "read camera_top",
+      "result": "RGB-D \u00b7 640 \u00d7 480",
+      "duration": 650
+    },
+    {
+      "id": "image",
+      "kind": "image",
+      "title": "read",
+      "detail": "camera_top",
+      "views": [
+        {
+          "image": "/media/demo/session-001_123770de10e8c0d4.png",
+          "alt": "Overhead observation: three mugs, a wooden rack, and two robot arms.",
+          "camera": "camera_top",
+          "label": "overhead"
+        }
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "answer",
+      "kind": "agent",
+      "text": "Three mugs and a wooden rack. The mint mug is nearest the right arm.",
+      "duration": 1200
+    },
+    {
+      "id": "move-question",
+      "kind": "user",
+      "text": "hang the mint mug on the rack",
+      "duration": 1300
+    },
+    {
+      "id": "joints",
+      "kind": "tool",
+      "title": "device",
+      "detail": "read right_arm",
+      "result": "joints: [0.202, 0.390, 1.118, -0.873, 0.133, 0.426]\nfaults: []",
+      "duration": 850
+    },
+    {
+      "id": "code",
+      "kind": "code",
+      "title": "write",
+      "detail": "mug_position.py",
+      "code": "# Backproject the selected mug pixel from RGB-D.\nu, v = 449, 296\nz = depth[v * width + u] * scale\nxyz = [r * z for r in ray(intr, u, v)]\ndistance = math.sqrt(sum(v * v for v in xyz))",
+      "duration": 1800
+    },
+    {
+      "id": "distance",
+      "kind": "tool",
+      "title": "bash",
+      "detail": "python mug_position.py",
+      "result": "camera xyz \u2248 [0.278, 0.121, 0.929] m\ndistance \u2248 0.977 m",
+      "duration": 650
+    },
+    {
+      "id": "target",
+      "kind": "tool",
+      "title": "relative_pose",
+      "detail": "world \u2192 right_arm",
+      "result": "world \u2192 right_arm \u00b7 approach flange\n[0.1775, 0.0280, 0.2747, 0.7071, 0.7071, 0, 0]",
+      "duration": 850
+    },
+    {
+      "id": "servo",
+      "kind": "tool",
+      "title": "servo",
+      "detail": "right_arm \u00b7 approach + descend",
+      "result": "TCP [0.430, -0.282, 0.805] m \u00b7 error 0.44 mm",
+      "duration": 1050,
+      "busy": 300
+    },
+    {
+      "id": "grasp",
+      "kind": "tool",
+      "title": "device",
+      "detail": "write right_gripper",
+      "result": "close \u00b7 aperture 0.0688 m",
+      "duration": 600,
+      "busy": 200
+    },
+    {
+      "id": "carry",
+      "kind": "tool",
+      "title": "servo",
+      "detail": "right_arm \u00b7 lift + carry",
+      "result": "TCP [0.567, -0.130, 0.984] m \u00b7 grip maintained",
+      "duration": 1000,
+      "busy": 300
+    },
+    {
+      "id": "wrist",
+      "kind": "image",
+      "title": "read",
+      "detail": "camera_top + camera_right",
+      "views": [
+        {
+          "image": "/media/demo/session-003_c1e0864a6d142372.png",
+          "alt": "Overhead observation of the right arm carrying the mint mug toward the rack.",
+          "camera": "camera_top",
+          "label": "overhead"
+        },
+        {
+          "image": "/media/demo/session-004_b2a9d5e5140eabe9.png",
+          "alt": "Right wrist camera: close-up of the mint mug held between the fingers.",
+          "camera": "camera_right",
+          "label": "right wrist"
+        }
+      ],
+      "duration": 1800
+    },
+    {
+      "id": "other-view",
+      "kind": "agent",
+      "text": "The mug blocks the right wrist. I\u2019ll use the left wrist to align the handle.",
+      "duration": 1000
+    },
+    {
+      "id": "handle-pose",
+      "kind": "tool",
+      "title": "relative_pose",
+      "detail": "camera_left \u2192 world",
+      "result": "handle hole [0.5029, -0.0188, 0.9543] m\nplane RMS 0.50 mm",
+      "duration": 950
+    },
+    {
+      "id": "align-servo",
+      "kind": "tool",
+      "title": "servo",
+      "detail": "right_arm \u00b7 align + insert",
+      "result": "speedFraction 0.25 \u00b7 check contact from both views",
+      "duration": 1100,
+      "busy": 350
+    },
+    {
+      "id": "insert-view",
+      "kind": "image",
+      "title": "read",
+      "detail": "camera_left + camera_top",
+      "views": [
+        {
+          "image": "/media/demo/session-011_bc5d553219135b05.png",
+          "alt": "Left wrist view of the peg through the mint mug handle before release.",
+          "camera": "camera_left",
+          "label": "left wrist"
+        },
+        {
+          "image": "/media/demo/session-012_5c5bccf432830287.png",
+          "alt": "Overhead view of the mug at the rack before release.",
+          "camera": "camera_top",
+          "label": "overhead"
+        }
+      ],
+      "duration": 1500
+    },
+    {
+      "id": "release",
+      "kind": "tool",
+      "title": "device",
+      "detail": "write right_gripper",
+      "result": "open \u00b7 release the mug",
+      "duration": 650,
+      "busy": 250
+    },
+    {
+      "id": "withdraw",
+      "kind": "tool",
+      "title": "servo",
+      "detail": "right_arm \u00b7 withdraw",
+      "result": "TCP [0.500, -0.150, 1.030] m \u00b7 gripper clear",
+      "duration": 1000,
+      "busy": 300
+    },
+    {
+      "id": "verify-cameras",
+      "kind": "tool",
+      "title": "devices",
+      "detail": "read camera_left + camera_top",
+      "result": "Settled \u00b7 new wrist + overhead observations",
+      "duration": 650
+    },
+    {
+      "id": "final-view",
+      "kind": "image",
+      "title": "read",
+      "detail": "camera_left + camera_top",
+      "views": [
+        {
+          "image": "/media/demo/session-015_ad6150d8c8e61f86.png",
+          "alt": "Left wrist verification: the mint mug hangs by its handle on the wooden peg, clear of the gripper.",
+          "camera": "camera_left",
+          "label": "left wrist"
+        },
+        {
+          "image": "/media/demo/session-016_8745ae4f0e24305d.png",
+          "alt": "Overhead verification: the mint mug remains on the rack after the right gripper withdraws.",
+          "camera": "camera_top",
+          "label": "overhead"
+        }
+      ],
+      "duration": 1900
+    },
+    {
+      "id": "done",
+      "kind": "agent",
+      "text": "The mug is hanging. Both grippers are clear; it stayed supported after release.",
+      "duration": 1100
+    }
+  ],
+  "shellDuration": 6000
 }

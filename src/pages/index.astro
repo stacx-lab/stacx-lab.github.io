@@ -57,12 +57,12 @@ const paths = [
 <style>
   .hero { border-bottom: 1px solid var(--rule); }
   .hero-in {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 48px;
+    display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 36px;
     align-items: center; padding-block: 64px 72px;
   }
   @media (max-width: 960px) { .hero-in { grid-template-columns: minmax(0, 1fr); padding-block: 48px 56px; gap: 40px; } }
   .pitch { min-width: 0; }
-  h1 { font-size: var(--fs-5); line-height: 1.12; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
+  h1 { font-size: clamp(38px, 4.2vw, 62px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
   .caret { color: var(--accent); animation: blink 1.1s steps(1) infinite; margin-left: 2px; }
   @keyframes blink { 50% { opacity: 0; } }
   .sub { color: var(--ink-2); max-width: 46ch; margin: 0 0 26px; }
