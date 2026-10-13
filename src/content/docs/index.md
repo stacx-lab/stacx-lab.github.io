@@ -4,7 +4,7 @@ description: A robotics harness for coding agents — skills, tools and devices 
 group: Get started
 order: 10
 label: Overview
-sources: ["README.md", "install.sh", "docs/architecture.md", "docs/overview.md"]
+sources: ["README.md", "install.sh", "docs/architecture.md", "docs/overview.md", "packages/core/README.md", "packages/setup/README.md", "src/application.ts"]
 ---
 
 Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev) coding agent. It gives an agent three layers to work with:
@@ -16,6 +16,17 @@ Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev)
 | **Devices** | Typed access to hardware, simulators and model services | `arm`, `wrist_cam`, `world`, `sam3` |
 
 Kinex lets you work with real hardware the way you already work with a coding agent. Describe the task in plain language and the robot carries it out.
+
+## Core and setup
+
+Kinex has two reusable robotics packages:
+
+| Package | What it provides |
+| --- | --- |
+| **`@kinex/core`** | The robotics runtime: devices and drivers, tools and skills for registering and operating devices, motion control, perception and recording. |
+| **`@kinex/setup`** | Task-scoped onboarding and calibration, including ROS 2 setup, built on top of core. |
+
+Core can operate devices independently of setup. The standalone **`kinex`** app combines both packages with the Pi coding agent, which supplies the conversation loop and terminal interface. See [Architecture](/docs/architecture/#packages) for more detail.
 
 ## Install and run
 
