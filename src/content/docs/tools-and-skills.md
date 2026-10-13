@@ -38,7 +38,7 @@ More detail: [Using vision models as tools](/docs/vision/), [Using VLAs as tools
 | Skill | Package | Purpose |
 | --- | --- | --- |
 | `setup-device` | core | Pick a guide, provision a driver, write a profile, verify; also repair |
-| `onboard-ros2` | setup | ROS 2 Jazzy integrations — see [ROS 2 hardware](/docs/onboarding/#ros-2-hardware) |
+| `onboard-ros2` | setup | ROS 2 Jazzy integrations — see [ROS 2 onboarding](/docs/ros2/) |
 | `calibrate-*`, `verify-base-*` | setup | Measurement procedures — see [Calibration](/docs/onboarding/#calibration) |
 
 ## Discovery

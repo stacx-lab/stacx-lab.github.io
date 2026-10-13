@@ -1,0 +1,61 @@
+---
+title: ROS 2 onboarding
+description: Connect your ROS 2 robot to Kinex using the packages you already have.
+group: Get started
+order: 40
+label: ROS 2 onboarding
+sourceRef: e6543950328ee4911f50b4f87189fa341648cab8
+sources: ["packages/setup/README.md", "packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md", "packages/setup/assets/builtin/skill/onboard-ros2/references/bundles.md"]
+---
+
+import RosDiagram from '../../components/RosDiagram.astro';
+import DemoBanner from '../../components/DemoBanner.astro';
+
+Kinex provides adapters for joint trajectories, velocity commands, cameras and IMUs. During onboarding, the agent prepares a driver for your hardware using these adapters and your ROS packages.
+
+## Supported setup
+
+Use **ROS 2 Jazzy on Ubuntu 24.04** with **system Python 3.12**. [Install Kinex](/docs/#install-and-run) before starting, and have your hardware's drivers and documentation available.
+
+## Where ROS 2 fits
+
+ROS 2 connects through Kinex's [device layer](/docs/devices/). Skills and tools use the same typed interfaces as they do for other hardware and simulators.
+
+<RosDiagram />
+
+## ROS 2 demo
+
+<DemoBanner label="ROS 2 demo" description="Robot recording with a synchronized Kinex session." />
+
+## Onboard your ROS 2 robot
+
+Start Kinex in a robot workspace:
+
+```sh
+mkdir -p robot-workspace
+cd robot-workspace
+kinex
+```
+
+Use `/login` to connect a model provider and `/model` to choose a model.
+
+Describe your hardware and task:
+
+```text
+/onboarding Set up my ROS 2 arm and camera for tabletop picking.
+```
+
+Kinex selects the `onboard-ros2` skill to prepare and verify the integration. To add [one device at a time](/docs/onboarding/#one-device-at-a-time), use `/register`.
+
+Supervise hardware checks and be ready to stop the robot.
+
+## How ROS 2 setup works
+
+- **Reuse packages.** Kinex prefers installed ROS packages, then official apt packages. Source builds are used when needed or requested.
+- **Install dependencies.** If installation requires `sudo`, Kinex provides the commands and target host for you to run them on.
+- **Prepare drivers.** Each device uses a versioned driver bundle. A failed rebuild leaves the working version intact.
+- **Verify interfaces.** After `/load`, checks record measurements from the live ROS interfaces. Failed checks remain explicit.
+
+## Calibration and next steps
+
+[Calibrate](/docs/onboarding/#calibration) the camera transforms, tool offsets and joint limits your task needs. Then [load your devices and give Kinex a task](/docs/real-robots/#4-bring-it-up-and-give-a-task).

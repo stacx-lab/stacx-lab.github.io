@@ -1,0 +1,137 @@
+---
+// Match ArchDiagram's layers and flow, expanding the ROS-backed device path.
+// On narrow pages the agent moves above the stack so every layer remains visible.
+const layouts = [
+  { id: 'wide', width: 900, height: 820, x: 320, dy: 0 },
+  { id: 'narrow', width: 580, height: 998, x: 20, dy: 178 },
+];
+---
+<figure class="ros-architecture">
+  <div class="diagram">
+    {layouts.map(({ id, width, height, x, dy }) => (
+    <svg class={`diagram-${id}`} viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`ros-arch-${id}-title ros-arch-${id}-desc`}>
+      <title id={`ros-arch-${id}-title`}>Where ROS 2 fits in Kinex</title>
+      <desc id={`ros-arch-${id}-desc`}>The agent loads skills and calls tools or devices. The onboard-ros2 skill prepares the integration. Tools operate typed devices, whose ROS drivers and adapters connect to existing ROS 2 packages and nodes. ROS 2 connects to robot hardware, returning state and sensor data through the device interface.</desc>
+      <defs>
+        <marker id={`ros-arch-${id}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0L10 5L0 10z" class="arrowhead" />
+        </marker>
+      </defs>
+
+      <rect x={x - 20} y={18 + dy} width="580" height="492" rx="6" class="frame" />
+      <text x={x - 2} y={42 + dy} class="tag">Kinex</text>
+
+      {id === 'wide' ? <g class="agent">
+        <rect x="20" y="166" width="200" height="148" rx="6" />
+        <text x="38" y="196" class="heading">Agent</text>
+        <text x="38" y="226" class="body">Plan · reason</text>
+        <text x="38" y="250" class="body">Pick tool/device</text>
+        <text x="38" y="274" class="body">Read results</text>
+      </g> : <g class="agent">
+        <rect x="20" y="18" width="540" height="92" rx="6" />
+        <text x="40" y="48" class="heading">Agent</text>
+        <text x="40" y="80" class="body">Plan · reason · read results</text>
+      </g>}
+
+      <g class="layer skills">
+        <rect x={x} y={56 + dy} width="540" height="86" rx="5" />
+        <text x={x + 20} y={86 + dy} class="heading">Skills</text>
+        <text x={x + 20} y={110 + dy} class="body">Instructions, procedures</text>
+        <text x={x + 20} y={130 + dy} class="example">onboard-ros2 · calibration · verification</text>
+      </g>
+
+      <g class="layer tools">
+        <rect x={x} y={182 + dy} width="540" height="86" rx="5" />
+        <text x={x + 20} y={212 + dy} class="heading">Tools</text>
+        <text x={x + 20} y={236 + dy} class="body">Executable perception, computation, control</text>
+        <text x={x + 20} y={256 + dy} class="example">locate_object_3d · servo · calib_sample</text>
+      </g>
+
+      <g class="layer devices">
+        <rect x={x} y={316 + dy} width="540" height="174" rx="5" />
+        <text x={x + 20} y={346 + dy} class="heading">Devices</text>
+        <text x={x + 20} y={370 + dy} class="body">Typed interfaces, profiles, drivers</text>
+        <text x={x + 20} y={390 + dy} class="example">arm · camera · mobile base</text>
+        <g class="adapter">
+          <rect x={x + 20} y={408 + dy} width="500" height="62" rx="4" />
+          <text x={x + 36} y={434 + dy} class="adapter-title">ROS 2 driver + adapter</text>
+          <text x={x + 36} y={456 + dy} class="body">Bridge device operations to ROS interfaces</text>
+        </g>
+      </g>
+
+      <g class="ros-stack">
+        <rect x={x} y={556 + dy} width="540" height="104" rx="5" />
+        <text x={x + 20} y={586 + dy} class="heading">ROS 2</text>
+        <text x={x + 20} y={610 + dy} class="body">Existing ROS packages and nodes</text>
+        <text x={x + 20} y={638 + dy} class="example">Joint trajectories · velocity · cameras · IMUs</text>
+      </g>
+
+      <g class="hardware">
+        <rect x={x} y={732 + dy} width="540" height="70" rx="5" />
+        <text x={x + 20} y={760 + dy} class="heading">Robot hardware</text>
+        <text x={x + 20} y={784 + dy} class="body">Arms · mobile bases · cameras · sensors</text>
+      </g>
+
+      <g class="flows" style={`--arrow: url(#ros-arch-${id}-arrow)`}>
+        {id === 'wide' ? <g>
+        <path d="M120 166 V99 H318" class="flow" /><text x="200" y="90" class="label">Load</text>
+        <path d="M220 214 H318" class="flow" /><text x="238" y="206" class="label">Call</text>
+        <path d="M320 240 H222" class="flow feedback" /><text x="238" y="258" class="label">Result</text>
+        <path d="M100 314 V352 H318" class="flow" /><text x="238" y="344" class="label">Call</text>
+        <path d="M320 378 H140 V316" class="flow feedback" /><text x="238" y="396" class="label">Result</text>
+        </g> : <g>
+          <path d="M250 110 V194" class="flow" />
+          <text x="262" y="145" class="label">Load skills</text>
+          <text x="262" y="170" class="label">Call tools/devices</text>
+          <path d="M170 196 V112" class="flow feedback" />
+          <text x="66" y="170" class="label">Results</text>
+        </g>}
+        <path d={`M${x + 200} ${268 + dy} V${314 + dy}`} class="flow" /><text x={x + 210} y={296 + dy} class="label">Calls</text>
+        <path d={`M${x + 380} ${316 + dy} V${270 + dy}`} class="flow feedback" /><text x={x + 390} y={296 + dy} class="label">State</text>
+        <path d={`M${x + 200} ${470 + dy} V${554 + dy}`} class="flow" /><text x={x + 210} y={538 + dy} class="label">Commands</text>
+        <path d={`M${x + 380} ${556 + dy} V${472 + dy}`} class="flow feedback" /><text x={x + 390} y={538 + dy} class="label">State / images</text>
+        <path d={`M${x + 200} ${660 + dy} V${730 + dy}`} class="flow" /><text x={x + 210} y={702 + dy} class="label">Control</text>
+        <path d={`M${x + 380} ${732 + dy} V${662 + dy}`} class="flow feedback" /><text x={x + 390} y={702 + dy} class="label">Feedback</text>
+      </g>
+    </svg>
+    ))}
+  </div>
+  <figcaption>Commands flow to the robot; state and sensor data return through the device interface.</figcaption>
+</figure>
+
+<style>
+  .ros-architecture { container-type: inline-size; margin: 0 0 1.2em; }
+  svg { display: block; width: 100%; height: auto; font-family: var(--font-body); }
+  .diagram-narrow { display: none; }
+  @container (max-width: 600px) {
+    .diagram-wide { display: none; }
+    .diagram-narrow { display: block; }
+    .diagram-narrow .heading { font-size: 24px; }
+    .diagram-narrow .body { font-size: 21px; }
+    .diagram-narrow .example, .diagram-narrow .label { font-size: 16px; }
+    .diagram-narrow .tag { font-size: 16px; }
+    .diagram-narrow .adapter-title { font-size: 22px; }
+  }
+  .frame { fill: none; stroke: var(--rule-2); stroke-dasharray: 4 4; }
+  .tag, .label, .example { font-family: var(--font-mono); }
+  .tag { font-size: 13px; fill: var(--ink-3); }
+  .heading { font-family: var(--font-head); font-size: 20px; font-weight: 600; fill: var(--ink); }
+  .body { font-size: 16px; fill: var(--ink-2); }
+  .example { font-size: 13px; font-style: italic; fill: var(--ink-2); }
+  .label { font-size: 12px; fill: var(--ink-2); }
+  .agent rect { fill: var(--panel); stroke: var(--ink); }
+  .hardware rect { fill: var(--bg-2); stroke: var(--rule-2); }
+  .skills { --layer-color: var(--accent); }
+  .tools { --layer-color: var(--warn); }
+  .devices { --layer-color: var(--ok); }
+  .layer > rect { fill: color-mix(in srgb, var(--layer-color) 7%, var(--panel)); stroke: var(--layer-color); }
+  .layer .heading { fill: var(--layer-color); }
+  .adapter rect { fill: var(--panel); stroke: var(--ok); }
+  .adapter-title { font-family: var(--font-head); font-size: 17px; font-weight: 600; fill: var(--ok); }
+  .ros-stack rect { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 2; }
+  .ros-stack .heading { fill: var(--accent-ink); }
+  .arrowhead { fill: var(--ink-3); }
+  .flow { fill: none; stroke: var(--ink-3); stroke-width: 1.4; stroke-dasharray: 5 5; marker-end: var(--arrow); }
+  .flow.feedback { stroke: var(--accent); opacity: .75; }
+  figcaption { max-width: 560px; margin: 8px auto 0; text-align: center; font-size: var(--fs-1); color: var(--ink-2); }
+</style>

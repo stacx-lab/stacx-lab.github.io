@@ -55,6 +55,7 @@ group: Guides          # Get started | Concepts | Guides | Reference (see src/co
 order: 90              # position inside the group
 label: Recording       # optional sidebar label
 sources: ["docs/commands.md"]   # kinex repo paths backing the page, linked at v<version>
+sourceRef: <commit-or-tag>     # optional: pin sources to another verified revision
 ---
 ```
 

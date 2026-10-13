@@ -1,10 +1,10 @@
 ---
 title: Onboarding & calibration
-description: How Kinex brings up new hardware, including ROS 2 devices, and calibrates what a task needs.
+description: How Kinex brings up new hardware and calibrates what a task needs.
 group: Guides
 order: 20
 label: Onboarding & calibration
-sources: ["packages/setup/README.md", "packages/setup/src/workflows/onboarding.txt", "packages/setup/src/workflows/calibrate.txt", "packages/core/assets/builtin/skill/setup-device/SKILL.md", "packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md", "docs/setup.md"]
+sources: ["packages/setup/README.md", "packages/setup/src/workflows/onboarding.txt", "packages/setup/src/workflows/calibrate.txt", "packages/core/assets/builtin/skill/setup-device/SKILL.md", "docs/setup.md"]
 ---
 
 Getting a new robot ready means two things: describing the hardware so Kinex can talk to it (**onboarding**), and measuring the physical facts a task depends on (**calibration**). Both are guided by the agent, and both are driven by your task: Kinex prepares and measures only what that task needs.
@@ -55,19 +55,7 @@ The agent follows the built-in `setup-device` skill: choose a guide, set up a dr
 
 ### ROS 2 hardware
 
-ROS 2 devices use the same `/onboarding` and `/register` commands; there is no separate ROS command. When a device is ROS-backed, the agent switches to the `onboard-ros2` skill:
-
-```text
-/onboarding Bring up my UR arm and RealSense over ROS 2 for tabletop picking.
-```
-
-- **Supported setup:** ROS 2 Jazzy on Ubuntu 24.04 with the system Python 3.12.
-- **Reuse first.** The agent prefers ROS packages already installed on the machine, then official apt packages, and builds from source only with a clear reason or your say-so.
-- **You stay in control of `sudo`.** When something needs installing, Kinex shows you the exact commands and the host to run them on, then waits. It never asks for your password.
-- **Versioned drivers.** Each ROS driver is built as a fixed, versioned bundle inside the device's folder. A failed rebuild leaves the working version untouched, and the device keeps working even without the setup package installed.
-- **Measured checks.** After `/load`, a check script observes the live ROS interfaces and records what it saw. Failed checks are reported by name; tolerances are never loosened to make them pass.
-
-Kinex ships the adapters for common ROS interfaces (joint trajectories, velocity commands, IMUs, cameras) but no vendor-specific bundles; the agent writes a small one for your hardware.
+ROS 2 setup has its own guide: [ROS 2 onboarding](/docs/ros2/). It covers the supported environment, existing ROS packages, device adapters and verification. ROS 2 devices use the same `/onboarding` and `/register` commands described here.
 
 ## Calibration
 
