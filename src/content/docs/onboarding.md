@@ -53,10 +53,6 @@ To add a single device instead of a whole robot, use `/register`:
 
 The agent follows the built-in `setup-device` skill: choose a guide, set up a driver, write an unloaded profile and verify the interface. `/unregister <device>` unloads a device and, after you confirm, deletes its profile, driver and files.
 
-### ROS 2 hardware
-
-ROS 2 setup has its own guide: [ROS 2 onboarding](/docs/ros2/). It covers the supported environment, existing ROS packages, device adapters and verification. ROS 2 devices use the same `/onboarding` and `/register` commands described here.
-
 ## Calibration
 
 Calibration pins down the physical facts a task depends on but that Kinex can't know in advance: a camera's intrinsics, where a camera sits relative to an arm, the tool-tip offset, joint limits, how two arms relate to each other. Describe what you want calibrated, or leave it blank and the agent picks up the current task:
