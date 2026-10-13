@@ -1,0 +1,83 @@
+---
+// Pagefind search modal. The index exists only in production builds (npm run build).
+import { url } from '../lib/url';
+const bundle = url('/pagefind/');
+---
+<dialog class="search" data-search aria-label="search">
+  <div class="head">
+    <span class="kicker">Search</span>
+    <button type="button" class="close" data-search-close aria-label="close"><kbd>esc</kbd></button>
+  </div>
+  <div id="pagefind" data-bundle={bundle}></div>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('[data-search]')!;
+  const host = document.getElementById('pagefind')!;
+  let loaded = false;
+
+  async function load() {
+    if (loaded) return;
+    loaded = true;
+    const bundle = host.dataset.bundle!;
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = bundle + 'pagefind-ui.css';
+    document.head.append(css);
+    try {
+      await new Promise((ok, fail) => {
+        const s = document.createElement('script');
+        s.src = bundle + 'pagefind-ui.js';
+        s.onload = ok; s.onerror = fail;
+        document.head.append(s);
+      });
+      // @ts-ignore: global from pagefind-ui.js
+      new PagefindUI({ element: '#pagefind', bundlePath: bundle, showImages: false, resetStyles: false, autofocus: true });
+    } catch {
+      host.innerHTML = '<p class="dim">Search index not found. Run <code>npm run build</code> first.</p>';
+    }
+  }
+
+  function open() {
+    load();
+    dlg.showModal();
+    setTimeout(() => dlg.querySelector<HTMLInputElement>('input')?.focus(), 50);
+  }
+
+  document.querySelectorAll('[data-search-open]').forEach((b) => b.addEventListener('click', open));
+  dlg.querySelector('[data-search-close]')?.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  document.addEventListener('keydown', (e) => {
+    const t = e.target as HTMLElement;
+    const typing = t.closest('input, textarea, [contenteditable]');
+    if ((e.key === '/' && !typing) || (e.key === 'k' && (e.metaKey || e.ctrlKey))) {
+      e.preventDefault();
+      if (!dlg.open) open();
+    }
+  });
+</script>
+
+<style>
+  .search {
+    width: min(680px, calc(100vw - 32px)); max-height: min(70vh, 640px);
+    margin: 10vh auto auto; padding: 14px 18px 18px;
+    background: var(--bg); color: var(--ink);
+    border: 1px solid var(--rule-2); border-radius: 6px;
+  }
+  .search::backdrop { background: rgb(10 10 12 / 0.45); }
+  .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .close { background: none; border: 0; cursor: pointer; padding: 0; }
+  #pagefind {
+    --pagefind-ui-font: var(--font-body);
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--ink);
+    --pagefind-ui-background: var(--panel);
+    --pagefind-ui-border: var(--rule-2);
+    --pagefind-ui-tag: var(--bg-2);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 4px;
+    --pagefind-ui-scale: 0.82;
+  }
+  #pagefind :global(input), #pagefind :global(button) { font-family: var(--font-body) !important; }
+  #pagefind :global(mark) { background: var(--accent-bg); color: var(--accent-ink); }
+</style>

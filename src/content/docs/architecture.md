@@ -1,0 +1,49 @@
+---
+title: Architecture
+description: Devices, tools and skills — and how the agent, runtime and host fit together.
+group: Concepts
+order: 10
+sources: ["docs/architecture.md", "docs/overview.md", "src/application.ts"]
+---
+
+## Architecture overview
+
+Kinex connects a coding agent to robots and simulators through three layers.
+
+![Kinex architecture: the agent loads skills and calls tools or devices; tools also operate devices; device drivers connect to hardware, simulators and services.](/img/architecture.svg)
+
+### Devices: typed physical or virtual resources
+
+A device is anything the agent can read from or command: an arm, a camera, a gripper, but also a detection model or the simulator's clock. Each device has a **type**, which fixes its operations and data conventions; a **profile**, which records how to reach it and its specifications; and a **driver**, which talks to the real SDK, simulator or service. Because real hardware and simulators share the same types, the agent works with both the same way. → [Devices](/docs/devices/)
+
+### Tools: executable operations over devices and computation
+
+Tools bundle computation or a sequence of device calls into one named operation, so the agent doesn't have to orchestrate every step itself. For example:
+
+- `locate_object_3d` combines a camera image, a detection or segmentation model and depth to estimate where an object is in 3D.
+- `servo` plans a joint trajectory from the arm's measured state and sends it.
+- `exec` runs a snippet of Python for one-off work.
+
+You can add your own as a `tool.yaml` plus `tool.py`. Python tools never load or unload devices; only the `device` tool and your own commands can. → [Tools & skills](/docs/tools-and-skills/)
+
+### Skills: task procedures the agent loads on demand
+
+A skill is a written procedure, a `SKILL.md` with optional references and scripts, that tells the agent how to approach a kind of task, such as setting up a device or calibrating a camera. The agent loads one when it needs it. Loading a skill only adds instructions to the conversation; it runs nothing and grants no extra permissions. → [Tools & skills](/docs/tools-and-skills/)
+
+## The coding-agent analogy
+
+| Layer | In a coding agent | In Kinex |
+| --- | --- | --- |
+| Devices | Disks, GPUs behind OS/driver interfaces | Cameras, arms, model services behind Kinex drivers |
+| Tools | `bash`, `grep` turn resources into operations | `locate_object_3d`, `servo`, `exec` |
+| Skills | "Reproduce → inspect → fix → test" | "Sample → compute → verify" for calibration |
+
+## Packages
+
+Kinex is split into three packages that ship together at the same version:
+
+- **`@kinex/core`** is the robotics layer: devices and drivers, built-in tools and the runtime Python. It doesn't depend on any agent or UI, so other harnesses can use it too.
+- **`@kinex/setup`** adds onboarding, calibration and ROS 2 setup on top of core.
+- **`kinex`** is the command-line app you run. It combines the two with the Pi agent, which provides the model connection, the conversation loop, sessions and the terminal UI. It also decides what needs your approval.
+
+For the full contracts, see the [design docs](https://github.com/stacx-lab/kinex/blob/main/docs/README.md).

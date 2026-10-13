@@ -1,0 +1,52 @@
+---
+// Placeholder for the demo reel. To ship a video: <DemoBanner src="/media/reel.mp4" poster="/media/reel.jpg" />
+// (files go in public/media/).
+import { url } from '../lib/url';
+interface Props { src?: string; poster?: string; label?: string }
+const { src, poster, label = 'Demo reel' } = Astro.props;
+---
+<figure class="demo">
+  {src ? (
+    <video src={url(src)} poster={poster && url(poster)} autoplay muted loop playsinline controls></video>
+  ) : (
+    <div class="ph" role="img" aria-label="demo video coming soon">
+      <span class="corner tl">┌</span><span class="corner tr">┐</span><span class="corner bl">└</span><span class="corner br">┘</span>
+      <div class="msg">
+        <span class="rec">● REC</span>
+        <span class="big">{label}: coming soon</span>
+        <span class="dim">Real arms · sims · closed-loop runs</span>
+      </div>
+      <span class="meta tl2">cam_top 1920×1080</span><span class="meta br2">00:00:00:00</span>
+    </div>
+  )}
+</figure>
+<style>
+  .demo { margin: 0; }
+  video, .ph { width: 100%; aspect-ratio: 16 / 9;
+  }
+  .ph { aspect-ratio: 21 / 9; min-height: 220px;
+  }
+  video, .ph { display: block; border-radius: 6px; border: 1px solid var(--rule-2); }
+  .ph {
+    position: relative; display: grid; place-items: center; overflow: hidden;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--ink) 4%, transparent) 14px 15px),
+      var(--panel);
+  }
+  .ph::after { /* scanline sweep */
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 10%, transparent), transparent);
+    height: 30%; animation: sweep 5s linear infinite;
+  }
+  @keyframes sweep { from { transform: translateY(-100%); } to { transform: translateY(400%); } }
+  .msg { display: grid; gap: 6px; text-align: center; z-index: 1; padding: 16px; }
+  .big { font-size: clamp(15px, 2.4vw, 22px); font-weight: 600; }
+  .big::before { content: '// '; color: var(--accent); }
+  .rec { font-size: 12px; color: #e5484d; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .25; } }
+  .corner { position: absolute; color: var(--ink-3); font-size: 19px; line-height: 1; }
+  .tl { top: 12px; left: 14px; } .tr { top: 12px; right: 14px; } .bl { bottom: 12px; left: 14px; } .br { bottom: 12px; right: 14px; }
+  .meta { position: absolute; font-size: 11px; color: var(--ink-3); }
+  .tl2 { top: 16px; left: 40px; } .br2 { bottom: 16px; right: 40px; }
+  @media (max-width: 600px) { .meta { display: none; } }
+</style>

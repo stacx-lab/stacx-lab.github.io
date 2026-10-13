@@ -1,0 +1,45 @@
+---
+import { postHref, ymd, tagLabel, type Post } from '../lib/content';
+import { url } from '../lib/url';
+interface Props { posts: Post[] }
+const { posts } = Astro.props;
+const years = [...new Set(posts.map((p) => p.data.date.getUTCFullYear()))];
+---
+{years.map((y) => (
+  <section class="yr">
+    <h2>{y}</h2>
+    <ul>
+      {posts.filter((p) => p.data.date.getUTCFullYear() === y).map((p) => (
+        <li>
+          <time datetime={p.data.date.toISOString()}>{ymd(p.data.date).slice(5)}</time>
+          <div class="body">
+            <a class="t" href={postHref(p)}>{p.data.title}{p.data.draft && <em class="draft"> [Draft]</em>}</a>
+            <span class="s">{p.data.summary}</span>
+          </div>
+          <span class="tg">{p.data.tags.map((t) => <a href={url(`/blog/tags/${t}/`)}>#{tagLabel(t)}</a>)}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+))}
+<style>
+  .yr { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 0 24px; border-top: 1px solid var(--rule); }
+  h2 { font-family: var(--font-mono); font-size: 13px; font-weight: 400; color: var(--ink-3); margin: 0; padding-top: 16px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; padding: 10px 0; }
+  li + li { border-top: 1px dashed var(--rule); }
+  time { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-3); padding-top: 1px; }
+  .body { display: grid; gap: 4px; }
+  .t { font-weight: 700; font-size: 16.5px; }
+  .t:hover { color: var(--accent); }
+  .s { font-size: 12.5px; color: var(--ink-2); }
+  .tg { font-family: var(--font-mono); display: flex; gap: 8px; font-size: 11.5px; }
+  .tg a { color: var(--ink-3); }
+  .tg a:hover { color: var(--accent); }
+  .draft { color: var(--warn); font-style: normal; font-size: 11px; }
+  @media (max-width: 640px) {
+    .yr { grid-template-columns: 1fr; }
+    li { grid-template-columns: 48px minmax(0, 1fr); }
+    .tg { font-family: var(--font-mono); grid-column: 2; }
+  }
+</style>

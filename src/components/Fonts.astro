@@ -1,0 +1,26 @@
+---
+// Self-hosted fonts: Lato (body), Roboto Slab (headings), Commit Mono (code, labels).
+// Critical faces are preloaded so they arrive with the HTML, and `font-display: optional`
+// means a page never swaps fonts mid-render (no flash): if a font isn't ready for
+// first paint, that page keeps the fallback and later pages render from cache.
+import lato400 from '@fontsource/lato/files/lato-latin-400-normal.woff2?url';
+import lato700 from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
+import lato400i from '@fontsource/lato/files/lato-latin-400-italic.woff2?url';
+import slab700 from '@fontsource/roboto-slab/files/roboto-slab-latin-700-normal.woff2?url';
+import mono400 from '@fontsource/commit-mono/files/commit-mono-latin-400-normal.woff2?url';
+import mono700 from '@fontsource/commit-mono/files/commit-mono-latin-700-normal.woff2?url';
+
+const faces = [
+  { family: 'Lato', src: lato400, weight: 400, style: 'normal', preload: true },
+  { family: 'Lato', src: lato700, weight: 700, style: 'normal', preload: true },
+  { family: 'Lato', src: lato400i, weight: 400, style: 'italic', preload: false },
+  { family: 'Roboto Slab', src: slab700, weight: '500 700', style: 'normal', preload: true },
+  { family: 'Commit Mono', src: mono400, weight: 400, style: 'normal', preload: true },
+  { family: 'Commit Mono', src: mono700, weight: 700, style: 'normal', preload: false },
+];
+const css = faces
+  .map((f) => `@font-face{font-family:'${f.family}';font-style:${f.style};font-weight:${f.weight};font-display:optional;src:url(${f.src}) format('woff2');}`)
+  .join('');
+---
+{faces.filter((f) => f.preload).map((f) => <link rel="preload" href={f.src} as="font" type="font/woff2" crossorigin />)}
+<style is:inline set:html={css}></style>

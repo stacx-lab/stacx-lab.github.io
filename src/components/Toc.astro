@@ -1,0 +1,33 @@
+---
+import type { MarkdownHeading } from 'astro';
+interface Props { headings: MarkdownHeading[] }
+const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+{items.length > 1 && (
+  <nav class="toc" aria-label="on this page">
+    <p class="kicker">On this page</p>
+    <ul>
+      {items.map((h) => <li class={`d${h.depth}`}><a href={`#${h.slug}`} data-toc={h.slug}>{h.text}</a></li>)}
+    </ul>
+  </nav>
+)}
+<script>
+  const links = new Map([...document.querySelectorAll<HTMLAnchorElement>('[data-toc]')].map((a) => [a.dataset.toc!, a]));
+  if (links.size) {
+    const obs = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) {
+        links.forEach((a) => a.classList.remove('on'));
+        links.get(e.target.id)?.classList.add('on');
+      }
+    }, { rootMargin: '-60px 0px -70% 0px' });
+    links.forEach((_, id) => { const h = document.getElementById(id); if (h) obs.observe(h); });
+  }
+</script>
+<style>
+  .toc { font-size: 13.5px; }
+  ul { list-style: none; margin: 8px 0 0; padding: 0; border-left: 1px solid var(--rule); }
+  a { display: block; padding: 2px 0 2px 12px; color: var(--ink-3); line-height: 1.45; margin-left: -1px; border-left: 1px solid transparent; }
+  .d3 a { padding-left: 24px; }
+  a:hover { color: var(--ink); }
+  a.on { color: var(--accent-ink); border-left-color: var(--accent); }
+</style>

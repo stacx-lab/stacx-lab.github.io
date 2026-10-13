@@ -1,0 +1,33 @@
+---
+interface Props { cmd: string }
+const { cmd } = Astro.props;
+---
+<div class="cmd" data-copy={cmd}>
+  <span class="ps">$</span><code>{cmd}</code>
+  <button type="button" class="cp" aria-label="copy command">Copy</button>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('.cmd[data-copy]').forEach((el) => {
+    const btn = el.querySelector('button')!;
+    btn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(el.dataset.copy!); btn.textContent = 'Copied'; }
+      catch { btn.textContent = 'Select ↑'; }
+      setTimeout(() => (btn.textContent = 'Copy'), 1500);
+    });
+  });
+</script>
+<style>
+  .cmd {
+    font-family: var(--font-mono); letter-spacing: var(--tracking);
+    display: flex; align-items: center; gap: 10px; max-width: 100%;
+    padding: 8px 8px 8px 14px; border: 1px solid var(--rule-2); border-radius: var(--radius);
+    background: var(--panel); font-size: 12.5px;
+  }
+  .ps { color: var(--accent); user-select: none; }
+  code { overflow-x: auto; white-space: nowrap; flex: 1; scrollbar-width: none; }
+  .cp {
+    font: inherit; font-size: 11px; padding: 4px 8px; cursor: pointer; flex-shrink: 0;
+    color: var(--ink-2); background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
+  }
+  .cp:hover { color: var(--ink); border-color: var(--rule-2); }
+</style>

@@ -1,0 +1,143 @@
+{
+  "_comment": "Scripted sessions for the landing-page terminal. Line kinds: sh ($ shell), in (kinex prompt), tool (tool call), out (output), ok (success), agent (model text). Illustrative, not captured output.",
+  "scenes": [
+    {
+      "id": "robot",
+      "label": "Real robot",
+      "lines": [
+        {
+          "kind": "sh",
+          "text": "cd ~/lab/pick-cell && kinex"
+        },
+        {
+          "kind": "in",
+          "text": "/onboarding Set up my arm, gripper and overhead camera to pick objects from the table."
+        },
+        {
+          "kind": "tool",
+          "text": "skill setup-device · reuse profiles: arm, gripper, cam_top"
+        },
+        {
+          "kind": "out",
+          "text": "missing: camera-to-arm transform"
+        },
+        {
+          "kind": "in",
+          "text": "/calibrate camera-to-arm transform for picking"
+        },
+        {
+          "kind": "tool",
+          "text": "calib_sample ×12 → solve → verify"
+        },
+        {
+          "kind": "ok",
+          "text": "reprojection 1.8 px · accepted"
+        },
+        {
+          "kind": "in",
+          "text": "pick up the red cube and place it in the bin"
+        },
+        {
+          "kind": "tool",
+          "text": "locate_object_3d cam_top \"red cube\""
+        },
+        {
+          "kind": "out",
+          "text": "xyz = [0.412, -0.087, 0.031] m"
+        },
+        {
+          "kind": "tool",
+          "text": "servo arm → pregrasp → grasp → bin"
+        },
+        {
+          "kind": "ok",
+          "text": "gripper closed · object in bin"
+        }
+      ]
+    },
+    {
+      "id": "sim",
+      "label": "Simulator",
+      "lines": [
+        {
+          "kind": "sh",
+          "text": "roboenv launch robocasa/pick-place-microwave --port 8123"
+        },
+        {
+          "kind": "out",
+          "text": "Ready"
+        },
+        {
+          "kind": "sh",
+          "text": "roboenv setup robocasa/robocasa-panda-omron && kinex"
+        },
+        {
+          "kind": "in",
+          "text": "/devices"
+        },
+        {
+          "kind": "out",
+          "text": "arm  gripper  base  cam_agentview  cam_wrist  world   [unloaded]"
+        },
+        {
+          "kind": "in",
+          "text": "/load all"
+        },
+        {
+          "kind": "in",
+          "text": "/ping all"
+        },
+        {
+          "kind": "ok",
+          "text": "6/6 devices ready"
+        },
+        {
+          "kind": "in",
+          "text": "Look through the robot's cameras and describe the scene."
+        },
+        {
+          "kind": "tool",
+          "text": "device cam_agentview.capture"
+        },
+        {
+          "kind": "agent",
+          "text": "A kitchen counter: a microwave with its door open, a mug to its left."
+        }
+      ]
+    },
+    {
+      "id": "headless",
+      "label": "Headless",
+      "lines": [
+        {
+          "kind": "sh",
+          "text": "kinex run \"/ping arm\""
+        },
+        {
+          "kind": "ok",
+          "text": "arm: connected"
+        },
+        {
+          "kind": "sh",
+          "text": "kinex -p \"Describe the scene\" --model provider/model"
+        },
+        {
+          "kind": "tool",
+          "text": "device cam_top.capture"
+        },
+        {
+          "kind": "agent",
+          "text": "Three blocks on a white table; the red one is closest to the arm."
+        },
+        {
+          "kind": "sh",
+          "text": "kinex --continue"
+        },
+        {
+          "kind": "out",
+          "text": "resumed latest session in ~/lab/pick-cell"
+        }
+      ]
+    }
+  ]
+}

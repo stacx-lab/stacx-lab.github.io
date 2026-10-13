@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Search from '../components/Search.astro';
+import Fonts from '../components/Fonts.astro';
+import { site } from '../config';
+import { url } from '../lib/url';
+
+interface Props { title?: string; description?: string; bodyClass?: string; footer?: boolean }
+const { title, description = site.description, bodyClass = '', footer = true } = Astro.props;
+const fullTitle = title ? `${title} · Kinex` : `Kinex · ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Fonts />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/img/kinex-logo-day.svg')} />
+    <link rel="alternate" type="application/rss+xml" title="Kinex Blog" href={url('/rss.xml')} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#f7f6f2" />
+    <script is:inline>
+      (() => {
+        let t = null;
+        try { t = localStorage.getItem('theme'); } catch {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="sr-only" href="#main">Skip to content</a>
+    <Nav />
+    <slot />
+    {footer && <Footer />}
+    <Search />
+  </body>
+</html>

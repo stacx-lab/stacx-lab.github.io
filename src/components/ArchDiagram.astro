@@ -1,0 +1,121 @@
+---
+// Animated version of kinex/assets/architecture.svg. Hover a definition to light up its layer.
+import { url } from '../lib/url';
+const layers = [
+  { id: 'skills', name: 'Skills', what: 'Instructions, procedures', eg: 'setup-device · calibration · verification', href: '/docs/tools-and-skills/' },
+  { id: 'tools', name: 'Tools', what: 'Executable perception, computation, control', eg: 'locate_object_3d · servo · calib_sample', href: '/docs/tools-and-skills/' },
+  { id: 'devices', name: 'Devices', what: 'Typed interfaces, profiles, drivers', eg: 'arm · camera · detector · world', href: '/docs/devices/' },
+];
+---
+<div class="arch">
+  <svg viewBox="0 0 900 560" role="img" aria-labelledby="arch-t arch-d">
+    <title id="arch-t">Kinex architecture</title>
+    <desc id="arch-d">The agent loads skills, calls tools and calls devices. Tools operate devices. Device drivers talk to hardware, simulators and model services.</desc>
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0 0L10 5L0 10z" class="ahead" />
+      </marker>
+    </defs>
+
+    <rect x="300" y="18" width="580" height="404" rx="6" class="frame" />
+    <text x="318" y="42" class="tag">Kinex</text>
+
+    <g class="agent">
+      <rect x="20" y="166" width="200" height="148" rx="6" />
+      <text x="38" y="196" class="h">Agent</text>
+      <text x="38" y="226" class="b">Plan · reason</text>
+      <text x="38" y="250" class="b">Pick tool/device</text>
+      <text x="38" y="274" class="b">Read results</text>
+    </g>
+
+    {layers.map((l, i) => {
+      const y = [56, 182, 316][i];
+      return (
+        <g class={`layer l-${l.id}`}>
+          <rect x="320" y={y} width="540" height="86" rx="5" />
+          <text x="340" y={y + 30} class="h">{l.name}</text>
+          <text x="340" y={y + 54} class="b">{l.what}</text>
+          <text x="340" y={y + 74} class="e">{l.eg}</text>
+        </g>
+      );
+    })}
+
+    <g class="env">
+      <rect x="320" y="474" width="540" height="70" rx="5" />
+      <text x="340" y="502" class="h">Environment</text>
+      <text x="340" y="526" class="b">Hardware · simulators · model endpoints</text>
+    </g>
+
+    <g class="flows">
+      <path d="M120 166 V99 H318" class="f" /><text x="200" y="90" class="lbl">Load</text>
+      <path d="M220 214 H318" class="f" /><text x="238" y="206" class="lbl">Call</text>
+      <path d="M320 240 H222" class="f r" /><text x="238" y="258" class="lbl">Result</text>
+      <path d="M100 314 V352 H318" class="f" /><text x="238" y="344" class="lbl">Call</text>
+      <path d="M320 378 H140 V316" class="f r" /><text x="238" y="396" class="lbl">Result</text>
+      <path d="M520 268 V314" class="f" /><text x="530" y="296" class="lbl">Ops</text>
+      <path d="M700 316 V270" class="f r" /><text x="710" y="296" class="lbl">Obs/state</text>
+      <path d="M520 402 V472" class="f" /><text x="530" y="442" class="lbl">Driver req</text>
+      <path d="M700 474 V404" class="f r" /><text x="710" y="442" class="lbl">Feedback</text>
+    </g>
+  </svg>
+
+  <ul class="defs">
+    {layers.map((l, i) => (
+      <li class={`d-${l.id}`}>
+        <a href={url(l.href)}>
+          <span class="n">0{i + 1}</span>
+          <span class="nm">{l.name}</span>
+          <span class="w">{l.what}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  /* The definitions column is sized and placed to match the Agent box (y 166–314 of the 900×560 viewBox). */
+  .arch { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: start;
+          --svg-w: calc(100cqw - 340px); }
+  @media (max-width: 900px) { .arch { grid-template-columns: 1fr; gap: 20px; } .defs { margin-top: 0; height: auto; } .defs li { flex: none; } }
+  svg { width: 100%; height: auto; display: block; font-family: var(--font-body); }
+
+  .frame { fill: none; stroke: var(--rule-2); stroke-dasharray: 4 4; }
+  .tag, .lbl, .e { font-family: var(--font-mono); }
+  .h { font-family: var(--font-head); }
+  .tag { font-size: 12px; fill: var(--ink-3); }
+  .h { font-size: 17px; font-weight: 600; fill: var(--ink); }
+  .b { font-size: 13px; fill: var(--ink-2); }
+  .e { font-size: 11.5px; fill: var(--ink-3); font-style: italic; }
+  .lbl { font-size: 11px; fill: var(--ink-3); }
+
+  .agent rect { fill: var(--panel); stroke: var(--ink); }
+  .env rect { fill: var(--bg-2); stroke: var(--rule-2); }
+  .layer rect { stroke-width: 1; transition: fill .2s, stroke-width .2s; }
+  .l-skills { --c: var(--accent); }
+  .l-tools { --c: var(--warn); }
+  .l-devices { --c: var(--ok); }
+  .layer rect { fill: color-mix(in srgb, var(--c) 7%, var(--panel)); stroke: var(--c); }
+  .layer .h { fill: var(--c); }
+
+  .ahead { fill: var(--ink-3); }
+  .f {
+    fill: none; stroke: var(--ink-3); stroke-width: 1.4; marker-end: url(#ah);
+    stroke-dasharray: 5 5; animation: flow 1.2s linear infinite;
+  }
+  .f.r { stroke: var(--accent); opacity: .75; }
+  @keyframes flow { to { stroke-dashoffset: -20; } }
+
+  .arch:has(.d-skills:hover) .l-skills rect,
+  .arch:has(.d-tools:hover) .l-tools rect,
+  .arch:has(.d-devices:hover) .l-devices rect { fill: color-mix(in srgb, var(--c) 20%, var(--panel)); stroke-width: 2.5; }
+
+  .defs { list-style: none; padding: 0; border-top: 1px solid var(--rule); display: flex; flex-direction: column;
+          margin: calc(var(--svg-w) * 166 / 900) 0 0; height: calc(var(--svg-w) * 148 / 900); }
+  .defs li { flex: 1; display: flex; border-bottom: 1px solid var(--rule); }
+  .defs a { flex: 1; display: grid; grid-template-columns: 30px 1fr; gap: 0 8px; align-content: center; padding: 0 4px; }
+  .n { font-size: 11px; color: var(--ink-3); padding-top: 3px; }
+  .nm { font-weight: 600; line-height: 1.3; }
+  .w { grid-column: 2; font-size: 12.5px; line-height: 1.35; color: var(--ink-2); }
+  .defs a:hover .nm { color: var(--accent); }
+  .defs a:hover .nm::after { content: ' →'; }
+</style>

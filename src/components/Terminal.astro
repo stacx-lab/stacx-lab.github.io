@@ -1,0 +1,116 @@
+---
+// Tabbed, self-typing terminal. Content lives in src/data/hero-terminal.json.
+// Server-renders the final transcript (readable without JS / with reduced motion);
+// the script replays it line by line.
+import data from '../data/hero-terminal.json';
+
+const prefix: Record<string, string> = { sh: '$', in: '›', tool: '•', ok: '✓', out: ' ', agent: '»' };
+---
+<div class="term" data-term>
+  <div class="chrome">
+    <span class="dots"><i></i><i></i><i></i></span>
+    <div class="tabs" role="tablist">
+      {data.scenes.map((s, i) => (
+        <button type="button" role="tab" class:list={['tab', { on: i === 0 }]} aria-selected={i === 0 ? 'true' : 'false'} data-tab={i}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+  {data.scenes.map((s, i) => (
+    <div class="screen" data-scene={i} hidden={i !== 0} role="log" aria-label={`${s.label} session`}>
+      {s.lines.map((l) => (
+        <span class:list={['ln', l.kind]}><span class="p">{prefix[l.kind] ?? ' '}</span><span class="t">{l.text}</span></span>
+      ))}
+      <span class="cursor" aria-hidden="true">▍</span>
+    </div>
+  ))}
+</div>
+
+<script>
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-term]').forEach((term) => {
+    const tabs = [...term.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const screens = [...term.querySelectorAll<HTMLElement>('[data-scene]')];
+    const scripts = screens.map((s) =>
+      [...s.querySelectorAll<HTMLElement>('.ln')].map((ln) => ({ el: ln, text: ln.querySelector('.t')!.textContent! })),
+    );
+    let run = 0; // bumps on every tab switch; stale loops exit
+    let visible = true;
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(term);
+
+    async function play(i: number, token: number) {
+      const lines = scripts[i];
+      const alive = () => token === run;
+      lines.forEach(({ el }) => (el.hidden = true));
+      for (const { el, text } of lines) {
+        if (!alive()) return;
+        while (!visible) { await wait(300); if (!alive()) return; }
+        const t = el.querySelector<HTMLElement>('.t')!;
+        el.hidden = false;
+        const typed = el.classList.contains('sh') || el.classList.contains('in');
+        if (typed) {
+          t.textContent = '';
+          for (let c = 0; c < text.length; c++) {
+            if (!alive()) return;
+            t.textContent += text[c];
+            await wait(14 + Math.random() * 30);
+          }
+          await wait(380);
+        } else {
+          t.textContent = text;
+          await wait(el.classList.contains('tool') ? 520 : 260);
+        }
+      }
+      await wait(3600);
+      if (alive()) show((i + 1) % screens.length);
+    }
+
+    function show(i: number) {
+      run++;
+      tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', String(k === i)); });
+      screens.forEach((s, k) => (s.hidden = k !== i));
+      if (!reduced) play(i, run);
+    }
+
+    tabs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+    if (!reduced) show(0);
+  });
+</script>
+
+<style>
+  .term {
+    font-family: var(--font-mono); letter-spacing: var(--tracking);
+    background: var(--term-bg); color: var(--term-ink);
+    border: 1px solid #000; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.04) inset;
+  }
+  .chrome { display: flex; align-items: center; gap: 14px; padding: 0 12px; height: 36px; border-bottom: 1px solid #26262c; }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a42; }
+  .tabs { display: flex; gap: 2px; overflow-x: auto; }
+  .tab {
+    font: inherit; font-size: 12px; color: var(--term-dim); background: none; border: 0;
+    padding: 4px 10px; border-radius: 3px; cursor: pointer; white-space: nowrap;
+  }
+  .tab:hover { color: var(--term-ink); }
+  .tab.on { color: var(--term-ink); background: #24242b; }
+  .screen {
+    margin: 0; padding: 14px 18px 16px; height: 310px; overflow: hidden;
+    font-size: 12.5px; line-height: 1.6;
+  }
+  .ln { display: block; padding-left: 2.6ch; text-indent: -2.6ch; white-space: pre-wrap; word-break: break-word; }
+  .ln[hidden] { display: none; }
+  .p { display: inline-block; width: 2.6ch; text-indent: 0; }
+  .sh .p { color: #8b8a93; }
+  .in .p, .in .t { color: #b4afff; }
+  .tool .p { color: #e3a54a; }
+  .tool .t { color: #cfcdc6; }
+  .out .t { color: var(--term-dim); }
+  .ok .p, .ok .t { color: #5fd08f; }
+  .agent .p { color: #9b95f5; }
+  .agent .t { color: #e7e5de; font-style: italic; }
+  .cursor { color: #9b95f5; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (max-width: 600px) { .screen { height: 360px; font-size: 11.5px; padding: 12px; } }
+</style>
