@@ -7,7 +7,8 @@ label: ROS 2 onboarding
 ---
 
 import RosDiagram from '../../components/RosDiagram.astro';
-import DemoBanner from '../../components/DemoBanner.astro';
+import { url as assetUrl } from '../../lib/url';
+import walkthroughVideo from '../../../gallery/.masters/ros2-instructional.mp4?url';
 
 ## Supported setup
 
@@ -34,4 +35,16 @@ Continue with [calibration](/docs/onboarding/#calibration) for the measurements 
 
 ## ROS 2 demo
 
-<DemoBanner label="ROS 2 demo" />
+<figure>
+  <video
+    controls playsInline preload="none"
+    width="2560" height="1440" style="max-width: none"
+    src={walkthroughVideo}
+    poster={assetUrl('/media/gallery/ros2-instructional/ros2-instructional.poster.jpg')}
+    aria-label="Kinex ROS 2 instructional walkthrough"
+  />
+  <figcaption style="max-width: none">
+    ROS 2 Jazzy on Ubuntu 24.04 · 13:08.{' '}
+    <a href={walkthroughVideo} target="_blank" rel="noopener">Open full size ↗</a>
+  </figcaption>
+</figure>
