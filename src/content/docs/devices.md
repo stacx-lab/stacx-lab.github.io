@@ -6,6 +6,8 @@ order: 20
 sources: ["docs/devices.md", "docs/commands.md", "packages/core/README.md", "packages/core/src/commands.ts"]
 ---
 
+Kinex treats a robot as a collection of independent devices rather than one monolithic interface: a mobile base, arms, grippers and cameras. The agent coordinates them through tools and code for each task, adapting the workflow to the capabilities available. For example, if a camera is missing, it can use another viewpoint where one is available.
+
 A device is anything the agent can read from or command: a piece of hardware, part of a simulator, or a service such as a detection model. Every device has three parts:
 
 - a **type**, which defines its operations and data conventions;
