@@ -1,8 +1,9 @@
 """Clock-map invariants; no robot, recordings, browser, or encoder required."""
 import copy
 import unittest
-from PIL import ImageFont
-from render_video import compile_events, compile_retime, scene_clock, SANS, BOLD, MONO, MONO_BOLD
+from PIL import Image, ImageDraw, ImageFont
+from unittest.mock import patch
+from render_video import Renderer, LEFT, compile_events, compile_retime, scene_clock, SANS, BOLD, MONO, MONO_BOLD
 from session_source import run_metadata
 
 
@@ -70,6 +71,56 @@ class RetimeTests(unittest.TestCase):
             self.assertEqual(scene_clock(event, 4), (end, 0.))
         event['typing_fraction'] = .8
         with self.assertRaises(ValueError): compile_retime(event)
+
+    def status_renderer(self):
+        event = dict(entry=0, start=0., duration=4., sim_start=120., sim_end=360.,
+                     status_caption='Turning a layer', retime=dict(typing_s=.5, result_hold_s=.5,
+                     segments=[dict(end_source_s='end', speed=80., reason='Motion')]))
+        compile_retime(event)
+        renderer = Renderer.__new__(Renderer)
+        renderer.events, renderer.edit = [event], dict(duration=4.)
+        return renderer
+
+    def test_status_uses_source_time_and_freezes_during_holds(self):
+        renderer = self.status_renderer()
+        self.assertEqual(renderer.status(0)[1], '00:00:00 / 00:04:00')
+        self.assertEqual(renderer.status(.4)[1], renderer.status(0)[1])
+        self.assertEqual(renderer.status(2)[1], '00:02:00 / 00:04:00')
+        self.assertEqual(renderer.status(3.75)[1], '00:04:00 / 00:04:00')
+        renderer.events[0]['autonomy'] = 'Human intervention'
+        self.assertEqual(renderer.status(2)[0], 'Human intervention')
+
+    def test_status_activity_can_change_without_terminal_event_change(self):
+        renderer = self.status_renderer()
+        renderer.edit['status_overlay'] = dict(activity=[
+            dict(start_source_s=120., end_source_s=200., text='Inspecting the grasp'),
+            dict(start_source_s=200., end_source_s=360., text='Turning a layer')])
+        self.assertEqual(renderer.status(1)[2], 'Inspecting the grasp')
+        self.assertEqual(renderer.status(2)[2], 'Turning a layer')
+        renderer.edit['status_overlay']['activity'].pop()
+        with self.assertRaisesRegex(ValueError, 'short status_caption'):
+            renderer.status(2)
+
+    def test_rendered_chrome_has_one_model_and_only_source_clock(self):
+        source, edit = self.source_and_edit()
+        source['recording'] = dict(clock='real')
+        edit.update(title='Task', subtitle='Demo', robot_label='YAM', environment='Real world')
+        events = compile_events(source, edit)
+        for event in events:
+            event.update(status_caption='Inspecting the scene', run_metadata=dict(model='gpt-6-astra', effort='medium'))
+        renderer = Renderer(source, edit, events)
+        labels = []
+        original = ImageDraw.ImageDraw.text
+        def record_text(draw, xy, text, *args, **kwargs):
+            labels.append(text)
+            return original(draw, xy, text, *args, **kwargs)
+        with patch.object(ImageDraw.ImageDraw, 'text', record_text):
+            renderer.frame(1.5, Image.new('RGB', LEFT[2:]))
+        model_labels = [text for text in labels if 'astra' in text.lower()]
+        self.assertEqual(model_labels, ['YAM × GPT-6-Astra · medium · Real world'])
+        clock_labels = [text for text in labels if ' / ' in text]
+        self.assertEqual(clock_labels, [renderer.status(1.5)[1]])
+        self.assertFalse(any('Model:' in text or 'Effort:' in text for text in labels))
 
     def test_exact_bundled_font_families(self):
         for path, family in [(SANS, 'Lato'), (BOLD, 'Lato'), (MONO, 'CommitMono'), (MONO_BOLD, 'CommitMono')]:

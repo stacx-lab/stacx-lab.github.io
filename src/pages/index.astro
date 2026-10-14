@@ -2,8 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Terminal from '../components/Terminal.astro';
 import ArchDiagram from '../components/ArchDiagram.astro';
+import DeviceDiagram from '../components/DeviceDiagram.astro';
 import CopyCmd from '../components/CopyCmd.astro';
 import VideoGallery from '../components/VideoGallery.astro';
+import Contributors from '../components/Contributors.astro';
+import Wordmark from '../components/Wordmark.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 const paths = [
@@ -17,17 +20,19 @@ const paths = [
     <section class="hero grid-bg">
       <div class="wrap hero-in">
         <div class="pitch">
-          <h1>One Agent for Any Robot.</h1>
+          <h1>One Agent for Many Robot.</h1>
           <p class="sub">
-            Tell Kinex about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
-            and learns from every run, in <b>simulation</b> or on <b>real hardware</b>, including <b>ROS 2</b>
+            Tell <Wordmark /> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
+            and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>.
           </p>
-          <CopyCmd cmd={site.install} />
           <p class="platform-note">Install on macOS and Ubuntu.</p>
+          <CopyCmd cmd={site.install} />
+          <p class="install-note">Prefer to use Pi, Codex, or Claude Code? <a href="https://github.com/stacx-lab/kinex-plugins">Explore kinex-plugins →</a></p>
           <div class="cta">
             <a class="btn primary" href={url('/docs/')}>Get started →</a>
             <a class="btn" href="#gallery">Watch the demos ↓</a>
           </div>
+          <p class="pi-note">Kinex is built on <a href="https://pi.dev">Pi</a>.</p>
         </div>
         <Terminal />
       </div>
@@ -35,14 +40,26 @@ const paths = [
 
     <VideoGallery />
 
-    <section class="wrap sec">
+    <section class="wrap sec architecture" id="architecture" aria-labelledby="architecture-heading">
       <p class="kicker">02 · Architecture</p>
-      <h2>Three layers. One loop.</h2>
-      <ArchDiagram />
+      <div class="architecture-part">
+        <h2 id="architecture-heading">Three layers of abstraction for acting in the real world.</h2>
+        <p class="section-copy">An agent needs a way to turn a goal into physical action. Kinex separates that work into three layers: <strong>skills</strong> describe how to approach a task, <strong>tools</strong> carry out perception, computation, and control, and <strong>devices</strong> expose the robot’s capabilities through typed interfaces. Results flow back to the agent so it can decide what to do next.</p>
+        <ArchDiagram />
+      </div>
+      <div class="architecture-part">
+        <h2>A system of devices rather than a monolithic robot</h2>
+        <p class="section-copy">Kinex exposes a robot as independent devices: a mobile base, torso, arms, grippers, and cameras. The agent writes and runs tools and code to coordinate these devices for each task. This makes workflows more flexible and helps them generalize across robot configurations. If a camera is missing, for example, the agent can inspect the remaining devices, use another viewpoint where available, and revise its workflow to fit the capabilities it actually has.</p>
+        <DeviceDiagram />
+      </div>
+    </section>
+
+    <section class="wrap sec benchmark" id="benchmark-results" aria-labelledby="benchmark-heading">
+      <h2 class="kicker" id="benchmark-heading">03 · Benchmark results</h2>
     </section>
 
     <section class="wrap sec">
-      <p class="kicker">03 · Where to start</p>
+      <p class="kicker">04 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>
@@ -54,26 +71,39 @@ const paths = [
         ))}
       </div>
     </section>
+    <Contributors />
   </main>
 </Base>
 
 <style>
   .hero { border-bottom: 1px solid var(--rule); }
   .hero-in {
-    display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.25fr); gap: 40px;
-    max-width: 1320px;
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px;
+    max-width: 1180px;
     align-items: center; padding-block: 64px 72px;
   }
   @media (max-width: 960px) { .hero-in { grid-template-columns: minmax(0, 1fr); padding-block: 48px 56px; gap: 40px; } }
-  .pitch { min-width: 0; }
-  h1 { font-size: clamp(38px, 3.8vw, 56px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
-  .sub { color: var(--ink-2); max-width: 46ch; margin: 0 0 26px; }
+  .pitch { min-width: 0; container-type: inline-size; }
+  h1 { font-size: clamp(20px, 7.2cqi, 42px); white-space: nowrap; line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
+  .sub { color: var(--ink-2); margin: 0 0 26px; }
   .sub b { color: var(--ink); font-weight: 600; }
-  .platform-note { margin: 8px 0 0; font-size: var(--fs-1); color: var(--ink-2); }
+  .platform-note { margin: 0 0 8px; font-size: var(--fs-1); color: var(--ink-2); }
+  .install-note, .pi-note { margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); }
+  .pi-note { margin-top: 18px; }
+  .install-note a, .pi-note a { text-decoration: underline; text-underline-offset: 3px; }
+  .install-note a:hover, .pi-note a:hover { color: var(--accent); }
   .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
   .sec { padding-top: 72px; }
+  main > .sec { border-top: 1px solid var(--rule); margin-top: 72px; }
   .sec h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 24px; }
+  .benchmark { min-height: 200px; }
+  .benchmark h2.kicker { font-size: var(--fs-0); letter-spacing: var(--tracking); font-weight: 400; margin: 0; }
+  .architecture h2 { margin-bottom: 16px; }
+  @media (min-width: 960px) { #architecture-heading { white-space: nowrap; } }
+  .section-copy { color: var(--ink-2); margin: 0 0 32px; line-height: 1.75; }
+  .section-copy strong { color: var(--ink); font-weight: 600; }
+  .architecture-part + .architecture-part { margin-top: 56px; }
 
   .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; border: 1px solid var(--rule); border-radius: 6px; }
   @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }

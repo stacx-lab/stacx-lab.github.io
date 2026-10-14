@@ -1,0 +1,3919 @@
+{
+  "title": "Collecting litter",
+  "subtitle": "Go2 + D1 × GPT-6-Astra · medium · Real world",
+  "robot_label": "Go2 + D1",
+  "environment": "Real world",
+  "bundle": "session/multi-trash-session-2026-10-11-201429Z",
+  "recording": "DJI_20261011161453_0013_D.MP4",
+  "clock": {
+    "session_utc_at_offset_zero": "2026-10-11T20:14:53Z",
+    "camera_minus_session_s": -2.2,
+    "fps": 29.97002997002997,
+    "frames": 69172,
+    "method": "Constant offset from motion onset vs. logged command time at six anchors (walk 90.25/115.96 s, crouch 140.90/186.76/522.36/1420.32 s after 20:14:53); onsets lead commands by 2.12–2.26 s with no drift. Camera clock = session UTC − 20:14:55.2. SDK latency is unknown, so this is a bound to ~0.2 s.",
+    "anchors": [
+      [
+        90.25,
+        88.0
+      ],
+      [
+        115.96,
+        113.7
+      ],
+      [
+        140.9,
+        138.6
+      ],
+      [
+        186.76,
+        184.6
+      ],
+      [
+        522.36,
+        520.2
+      ],
+      [
+        1420.32,
+        1418.2
+      ]
+    ],
+    "camera_start_utc": "2026-10-11T20:14:55.200Z",
+    "uncertainty_s": 0.2,
+    "last_frame_s": 2308.0057
+  },
+  "from_start": true,
+  "continuous_source": true,
+  "end_source_s": 2155.6,
+  "device_map": {
+    "description": "Go2 + D1 silhouette from the supplied go2_d1.py URDF/profile dimensions; fixed illustrative pose, not live kinematics."
+  },
+  "status_overlay": {
+    "activity": [
+      {
+        "start_source_s": 0,
+        "end_source_s": 47.4779999256134,
+        "text": "Inspecting the scene",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 47.4779999256134,
+        "end_source_s": 51.7779999256134,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 51.7779999256134,
+        "end_source_s": 87.54999995231628,
+        "text": "Inspecting the scene",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 87.54999995231628,
+        "end_source_s": 90.84999995231628,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 90.84999995231628,
+        "end_source_s": 113.25799989700317,
+        "text": "Inspecting the scene",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 113.25799989700317,
+        "end_source_s": 116.55799989700317,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 116.55799989700317,
+        "end_source_s": 138.20499992370605,
+        "text": "Inspecting the scene",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 138.20499992370605,
+        "end_source_s": 142.50499992370607,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 142.50499992370607,
+        "end_source_s": 150,
+        "text": "Inspecting the scene",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 150,
+        "end_source_s": 164.385999917984,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 164.385999917984,
+        "end_source_s": 168.68599991798402,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 168.68599991798402,
+        "end_source_s": 175.15899991989136,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 175.15899991989136,
+        "end_source_s": 177.85899991989137,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 177.85899991989137,
+        "end_source_s": 184.05799984931946,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 184.05799984931946,
+        "end_source_s": 188.35799984931947,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 188.35799984931947,
+        "end_source_s": 199.4800000190735,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 199.4800000190735,
+        "end_source_s": 207.51599984169007,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 207.51599984169007,
+        "end_source_s": 220.58200001716614,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 220.58200001716614,
+        "end_source_s": 232.425,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 232.425,
+        "end_source_s": 281.6659998893738,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 281.6659998893738,
+        "end_source_s": 301.22400002479554,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 301.22400002479554,
+        "end_source_s": 306,
+        "text": "Locating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 306,
+        "end_source_s": 310.999,
+        "text": "Paper moved by a broom",
+        "autonomy": "Human disturbance"
+      },
+      {
+        "start_source_s": 310.999,
+        "end_source_s": 311,
+        "text": "Paper moved by a broom",
+        "autonomy": "Human disturbance"
+      },
+      {
+        "start_source_s": 311,
+        "end_source_s": 350,
+        "text": "Planning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 350,
+        "end_source_s": 352.6329998970032,
+        "text": "Attempting the first grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 352.6329998970032,
+        "end_source_s": 356.9949999332428,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 356.9949999332428,
+        "end_source_s": 366.75999999046326,
+        "text": "Attempting the first grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 366.75999999046326,
+        "end_source_s": 369.05999999046327,
+        "text": "Grasping the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 369.05999999046327,
+        "end_source_s": 383,
+        "text": "Attempting the first grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 383,
+        "end_source_s": 392.26199984550476,
+        "text": "Recovering arm motion",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 392.26199984550476,
+        "end_source_s": 394.5619998455048,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 394.5619998455048,
+        "end_source_s": 406.896999835968,
+        "text": "Recovering arm motion",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 406.896999835968,
+        "end_source_s": 409.19699983596803,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 409.19699983596803,
+        "end_source_s": 418.53399991989136,
+        "text": "Recovering arm motion",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 418.53399991989136,
+        "end_source_s": 424.781999874115,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 424.781999874115,
+        "end_source_s": 450,
+        "text": "Recovering arm motion",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 450,
+        "end_source_s": 463.13499999046326,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 463.13499999046326,
+        "end_source_s": 478.06399993896486,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 478.06399993896486,
+        "end_source_s": 497.43099999427795,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 497.43099999427795,
+        "end_source_s": 501.73099999427797,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 501.73099999427797,
+        "end_source_s": 510.6489999294281,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 510.6489999294281,
+        "end_source_s": 512.948999929428,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 512.948999929428,
+        "end_source_s": 519.6619999408722,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 519.6619999408722,
+        "end_source_s": 523.9619999408721,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 523.9619999408721,
+        "end_source_s": 537.4559998512268,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 537.4559998512268,
+        "end_source_s": 543.129999923706,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 543.129999923706,
+        "end_source_s": 640,
+        "text": "Relocating the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 640,
+        "end_source_s": 654.787999868393,
+        "text": "Repositioning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 654.787999868393,
+        "end_source_s": 671.9809999942779,
+        "text": "Adjusting the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 671.9809999942779,
+        "end_source_s": 700.5299999713898,
+        "text": "Repositioning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 700.5299999713898,
+        "end_source_s": 706.5300000190734,
+        "text": "Adjusting the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 706.5300000190734,
+        "end_source_s": 723.2530000209808,
+        "text": "Repositioning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 723.2530000209808,
+        "end_source_s": 725.5530000209808,
+        "text": "Grasping the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 725.5530000209808,
+        "end_source_s": 739.0339999198914,
+        "text": "Repositioning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 739.0339999198914,
+        "end_source_s": 743.7789998531341,
+        "text": "Lifting the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 743.7789998531341,
+        "end_source_s": 750,
+        "text": "Repositioning the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 750,
+        "end_source_s": 761.8510000705719,
+        "text": "Checking the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 761.8510000705719,
+        "end_source_s": 778.9579999923706,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 778.9579999923706,
+        "end_source_s": 787.3099999427795,
+        "text": "Checking the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 787.3099999427795,
+        "end_source_s": 795.5139999866485,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 795.5139999866485,
+        "end_source_s": 800,
+        "text": "Checking the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 800,
+        "end_source_s": 817.0329999923706,
+        "text": "Planning the route",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 817.0329999923706,
+        "end_source_s": 821.3329999923706,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 821.3329999923706,
+        "end_source_s": 869.664999961853,
+        "text": "Planning the route",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 869.664999961853,
+        "end_source_s": 873.964999961853,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 873.964999961853,
+        "end_source_s": 893.2300000190735,
+        "text": "Planning the route",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 893.2300000190735,
+        "end_source_s": 897.0300000190734,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 897.0300000190734,
+        "end_source_s": 984.9119999408722,
+        "text": "Planning the route",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 984.9119999408722,
+        "end_source_s": 988.7119999408721,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 988.7119999408721,
+        "end_source_s": 1000,
+        "text": "Planning the route",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1000,
+        "end_source_s": 1056.3309998512268,
+        "text": "Locating the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1056.3309998512268,
+        "end_source_s": 1067.7919998645782,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1067.7919998645782,
+        "end_source_s": 1134.6579999923706,
+        "text": "Locating the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1134.6579999923706,
+        "end_source_s": 1144.1619999885559,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1144.1619999885559,
+        "end_source_s": 1161.5820000171661,
+        "text": "Locating the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1161.5820000171661,
+        "end_source_s": 1163.882000017166,
+        "text": "Releasing into the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1163.882000017166,
+        "end_source_s": 1165,
+        "text": "Locating the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1165,
+        "end_source_s": 1191.5659999847412,
+        "text": "Verifying the first deposit",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1191.5659999847412,
+        "end_source_s": 1200,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1200,
+        "end_source_s": 1209.6529999256134,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1209.6529999256134,
+        "end_source_s": 1219.4409999847412,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1219.4409999847412,
+        "end_source_s": 1222.7409999847412,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1222.7409999847412,
+        "end_source_s": 1240.3810000419617,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1240.3810000419617,
+        "end_source_s": 1245.6810000419616,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1245.6810000419616,
+        "end_source_s": 1284.9229998588562,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1284.9229998588562,
+        "end_source_s": 1290.2229998588562,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1290.2229998588562,
+        "end_source_s": 1318.0699999332428,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1318.0699999332428,
+        "end_source_s": 1322.3699999332428,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1322.3699999332428,
+        "end_source_s": 1359.154000043869,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1359.154000043869,
+        "end_source_s": 1362.454000043869,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1362.454000043869,
+        "end_source_s": 1396.3429999351501,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1396.3429999351501,
+        "end_source_s": 1400.64299993515,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1400.64299993515,
+        "end_source_s": 1417.6169998645782,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1417.6169998645782,
+        "end_source_s": 1421.9169998645782,
+        "text": "Repositioning the base",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1421.9169998645782,
+        "end_source_s": 1439.526999950409,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1439.526999950409,
+        "end_source_s": 1453.7619998931884,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1453.7619998931884,
+        "end_source_s": 1483.792000055313,
+        "text": "Searching for more litter",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1483.792000055313,
+        "end_source_s": 1487,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1487,
+        "end_source_s": 1487.6659999370574,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1487.6659999370574,
+        "end_source_s": 1517,
+        "text": "Checking the wrist",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1517,
+        "end_source_s": 1535.292000055313,
+        "text": "Stopping for inspection",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1535.292000055313,
+        "end_source_s": 1538.988999891281,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1538.988999891281,
+        "end_source_s": 1552.7,
+        "text": "Stopping for inspection",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1552.7,
+        "end_source_s": 1574.23,
+        "text": "Paused for inspection",
+        "autonomy": "Operator check"
+      },
+      {
+        "start_source_s": 1574.23,
+        "end_source_s": 1600,
+        "text": "Resuming after the check",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1600,
+        "end_source_s": 1636.2969999313354,
+        "text": "Locating the second piece",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1636.2969999313354,
+        "end_source_s": 1651.7340000152587,
+        "text": "Adjusting the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1651.7340000152587,
+        "end_source_s": 1693.9989998340607,
+        "text": "Locating the second piece",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1693.9989998340607,
+        "end_source_s": 1702.3479998588562,
+        "text": "Adjusting the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1702.3479998588562,
+        "end_source_s": 1719.9389998912811,
+        "text": "Locating the second piece",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1719.9389998912811,
+        "end_source_s": 1722.238999891281,
+        "text": "Grasping the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1722.238999891281,
+        "end_source_s": 1725,
+        "text": "Locating the second piece",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1725,
+        "end_source_s": 1770.8650000095367,
+        "text": "Checking the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1770.8650000095367,
+        "end_source_s": 1777.8260000228881,
+        "text": "Lifting the paper",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1777.8260000228881,
+        "end_source_s": 1800,
+        "text": "Checking the grasp",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1800,
+        "end_source_s": 1808.4240000247955,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1808.4240000247955,
+        "end_source_s": 1823.9129999160766,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1823.9129999160766,
+        "end_source_s": 1836.0579998493195,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1836.0579998493195,
+        "end_source_s": 1840.3579998493194,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1840.3579998493194,
+        "end_source_s": 1857.5859999656677,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1857.5859999656677,
+        "end_source_s": 1861.3859999656677,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1861.3859999656677,
+        "end_source_s": 1884.2070000171661,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1884.2070000171661,
+        "end_source_s": 1889.507000017166,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1889.507000017166,
+        "end_source_s": 1920.2289998531342,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1920.2289998531342,
+        "end_source_s": 1924.528999853134,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1924.528999853134,
+        "end_source_s": 1972.5920000076294,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1972.5920000076294,
+        "end_source_s": 1976.8920000076293,
+        "text": "Walking toward the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1976.8920000076293,
+        "end_source_s": 1997.6219999790192,
+        "text": "Planning the return",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 1997.6219999790192,
+        "end_source_s": 2000,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2000,
+        "end_source_s": 2009.7119999408721,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2009.7119999408721,
+        "end_source_s": 2021.5969998836517,
+        "text": "Aligning with the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2021.5969998836517,
+        "end_source_s": 2033.145999956131,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2033.145999956131,
+        "end_source_s": 2100.138999938965,
+        "text": "Aligning with the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2100.138999938965,
+        "end_source_s": 2109.885000038147,
+        "text": "Positioning the arm",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2109.885000038147,
+        "end_source_s": 2128.6399998664856,
+        "text": "Aligning with the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2128.6399998664856,
+        "end_source_s": 2130.939999866486,
+        "text": "Releasing into the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2130.939999866486,
+        "end_source_s": 2132,
+        "text": "Aligning with the bin",
+        "autonomy": "Autonomous"
+      },
+      {
+        "start_source_s": 2132,
+        "end_source_s": 2155.6,
+        "text": "Verifying the second deposit",
+        "autonomy": "Autonomous"
+      }
+    ],
+    "elapsed_time": {
+      "format": "HH:MM:SS / HH:MM:SS",
+      "clock": "Original recording, retained through second deposit verification",
+      "total_source_s": 2155.6
+    }
+  },
+  "events": [
+    {
+      "entry": 4,
+      "kind": "user"
+    },
+    {
+      "entry": 16
+    },
+    {
+      "entry": 18,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d435 · head camera"
+    },
+    {
+      "entry": 24,
+      "code_field": "command",
+      "code_excerpt": "PYTHONPATH=/opt/kinex/packages/core/assets/python /work/.kinex/python/.venv/bin/python3 /work/.kinex/trash_localize.py /work/.kinex/devices/d435/out/depth-ad5e611b8180dafd.pgm d435 241 258 245 260"
+    },
+    {
+      "entry": 44
+    },
+    {
+      "entry": 66
+    },
+    {
+      "entry": 74,
+      "code_field": "command",
+      "code_excerpt": "PYTHONPATH=/opt/kinex/packages/core/assets/python /work/.kinex/python/.venv/bin/python3 /work/.kinex/trash_localize.py /work/.kinex/devices/d405/out/depth-3e15324edd565edd.pgm d405 493 506 215 230"
+    },
+    {
+      "entry": 106
+    },
+    {
+      "entry": 114,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 126
+    },
+    {
+      "entry": 136
+    },
+    {
+      "entry": 152
+    },
+    {
+      "entry": 158
+    },
+    {
+      "entry": 160,
+      "result_text": "arm: stopped (hold; affects arm)"
+    },
+    {
+      "entry": 164
+    },
+    {
+      "entry": 182,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 190
+    },
+    {
+      "entry": 238
+    },
+    {
+      "entry": 250
+    },
+    {
+      "entry": 254,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 266
+    },
+    {
+      "entry": 272
+    },
+    {
+      "entry": 276,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 278,
+      "kind": "assistant"
+    },
+    {
+      "entry": 302
+    },
+    {
+      "entry": 328,
+      "code_field": "command",
+      "code_excerpt": "PYTHONPATH=/opt/kinex/packages/core/assets/python /work/.kinex/python/.venv/bin/python3 /work/.kinex/trash_localize.py /work/.kinex/devices/d405/out/depth-ba2e518a4437723d.pgm d405 215 229 171 185"
+    },
+    {
+      "entry": 334,
+      "code_field": "command",
+      "code_excerpt": "PYTHONPATH=/opt/kinex/packages/core/assets/python /work/.kinex/python/.venv/bin/python3 /work/.kinex/trash_localize.py /work/.kinex/devices/d405/out/depth-ba2e518a4437723d.pgm d405 205 305 140 340"
+    },
+    {
+      "entry": 352
+    },
+    {
+      "entry": 358
+    },
+    {
+      "entry": 364,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 366,
+      "kind": "assistant"
+    },
+    {
+      "entry": 402,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d435 · head camera"
+    },
+    {
+      "entry": 432,
+      "code_field": "command",
+      "code_excerpt": "PYTHONPATH=/opt/kinex/packages/core/assets/python /work/.kinex/python/.venv/bin/python3 /work/.kinex/trash_localize.py /work/.kinex/devices/d405/out/depth-94ebd3afd0bfa7fc.pgm d405 445 462 383 400"
+    },
+    {
+      "entry": 434
+    },
+    {
+      "entry": 442,
+      "result_text": "arm: stopped (hold; affects arm)"
+    },
+    {
+      "entry": 446,
+      "kind": "assistant"
+    },
+    {
+      "entry": 453,
+      "kind": "user"
+    },
+    {
+      "entry": 468
+    },
+    {
+      "entry": 484
+    },
+    {
+      "entry": 490
+    },
+    {
+      "entry": 494,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    },
+    {
+      "entry": 530
+    },
+    {
+      "entry": 560
+    },
+    {
+      "entry": 566,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "d405 · wrist camera"
+    }
+  ],
+  "retime": [
+    {
+      "end_source_s": 0,
+      "hold_s": 1.5,
+      "reason": "Original task"
+    },
+    {
+      "end_source_s": 0.35,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 12.982000017166138,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 13.332000017166138,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 13.332000017166138,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 13.682000017166137,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 47.1279999256134,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 47.4779999256134,
+      "speed": 120,
+      "end_speed": 63.90909090909091,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 47.827999925613405,
+      "speed": 63.90909090909091,
+      "end_speed": 7.818181818181812,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 51.4279999256134,
+      "speed": 7.818181818181812,
+      "end_speed": 7.818181818181812,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 51.7779999256134,
+      "speed": 7.818181818181812,
+      "end_speed": 63.90909090909091,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 52.1279999256134,
+      "speed": 63.90909090909091,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 87.19999995231629,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 87.54999995231628,
+      "speed": 120,
+      "end_speed": 63.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 87.89999995231628,
+      "speed": 63.0,
+      "end_speed": 5.999999999999995,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 90.49999995231629,
+      "speed": 5.999999999999995,
+      "end_speed": 5.999999999999995,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 90.84999995231628,
+      "speed": 5.999999999999995,
+      "end_speed": 63.0,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 91.19999995231628,
+      "speed": 63.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 112.90799989700318,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 113.25799989700317,
+      "speed": 120,
+      "end_speed": 63.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 113.60799989700317,
+      "speed": 63.0,
+      "end_speed": 5.999999999999995,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 116.20799989700318,
+      "speed": 5.999999999999995,
+      "end_speed": 5.999999999999995,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 116.55799989700317,
+      "speed": 5.999999999999995,
+      "end_speed": 63.0,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 116.90799989700317,
+      "speed": 63.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 137.85499992370606,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 138.20499992370605,
+      "speed": 120,
+      "end_speed": 63.90909090909092,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 138.55499992370605,
+      "speed": 63.90909090909092,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 142.15499992370607,
+      "speed": 7.818181818181838,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 142.50499992370607,
+      "speed": 7.818181818181838,
+      "end_speed": 63.90909090909092,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 142.85499992370606,
+      "speed": 63.90909090909092,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 164.03599991798401,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 164.385999917984,
+      "speed": 120,
+      "end_speed": 63.90909090909092,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 164.735999917984,
+      "speed": 63.90909090909092,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 168.33599991798403,
+      "speed": 7.818181818181838,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 168.68599991798402,
+      "speed": 7.818181818181838,
+      "end_speed": 63.90909090909092,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 169.03599991798401,
+      "speed": 63.90909090909092,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 174.80899991989136,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 175.15899991989136,
+      "speed": 120,
+      "end_speed": 62.45454545454547,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 175.50899991989135,
+      "speed": 62.45454545454547,
+      "end_speed": 4.909090909090939,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 177.50899991989138,
+      "speed": 4.909090909090939,
+      "end_speed": 4.909090909090939,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 177.85899991989137,
+      "speed": 4.909090909090939,
+      "end_speed": 62.45454545454547,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 178.20899991989137,
+      "speed": 62.45454545454547,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 183.70799984931946,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 184.05799984931946,
+      "speed": 120,
+      "end_speed": 63.90909090909092,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 184.40799984931945,
+      "speed": 63.90909090909092,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 188.00799984931948,
+      "speed": 7.818181818181838,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 188.35799984931947,
+      "speed": 7.818181818181838,
+      "end_speed": 63.90909090909092,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 188.70799984931946,
+      "speed": 63.90909090909092,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 199.1300000190735,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 199.4800000190735,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 199.83000001907348,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 207.16599984169008,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 207.51599984169007,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 207.86599984169007,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 220.23200001716614,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 220.58200001716614,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 220.93200001716613,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 232.07500000000002,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 232.425,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 232.775,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 245.35700001716614,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 245.70700001716614,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 245.70700001716614,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 246.05700001716613,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 281.31599988937376,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 281.6659998893738,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 282.0159998893738,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 300.8740000247955,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 301.22400002479554,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 301.57400002479557,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 305.65,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 306,
+      "speed": 120,
+      "end_speed": 60.5,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 306.35,
+      "speed": 60.5,
+      "end_speed": 1,
+      "reason": "Paper moved by a broom"
+    },
+    {
+      "end_source_s": 310.65,
+      "speed": 1,
+      "end_speed": 1,
+      "reason": "Paper moved by a broom"
+    },
+    {
+      "end_source_s": 311,
+      "speed": 1,
+      "end_speed": 60.5,
+      "reason": "Paper moved by a broom"
+    },
+    {
+      "end_source_s": 311.35,
+      "speed": 60.5,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 352.28299989700315,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 352.6329998970032,
+      "speed": 120,
+      "end_speed": 63.965454578399665,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 352.9829998970032,
+      "speed": 63.965454578399665,
+      "end_speed": 7.930909156799337,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 356.6449999332428,
+      "speed": 7.930909156799337,
+      "end_speed": 7.930909156799337,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 356.9949999332428,
+      "speed": 7.930909156799337,
+      "end_speed": 63.965454578399665,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 357.34499993324283,
+      "speed": 63.965454578399665,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 366.40999999046323,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 366.75999999046326,
+      "speed": 120,
+      "end_speed": 60.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 367.1099999904633,
+      "speed": 60.75,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 368.70999999046325,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 369.05999999046327,
+      "speed": 1.5,
+      "end_speed": 60.75,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 369.4099999904633,
+      "speed": 60.75,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 378.6200000286102,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 378.97000002861023,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 378.97000002861023,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 379.32000002861025,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 391.91199984550474,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 392.26199984550476,
+      "speed": 120,
+      "end_speed": 62.0909090909091,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 392.6119998455048,
+      "speed": 62.0909090909091,
+      "end_speed": 4.181818181818202,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 394.21199984550475,
+      "speed": 4.181818181818202,
+      "end_speed": 4.181818181818202,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 394.5619998455048,
+      "speed": 4.181818181818202,
+      "end_speed": 62.0909090909091,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 394.9119998455048,
+      "speed": 62.0909090909091,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 406.546999835968,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 406.896999835968,
+      "speed": 120,
+      "end_speed": 62.0909090909091,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 407.24699983596804,
+      "speed": 62.0909090909091,
+      "end_speed": 4.181818181818202,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 408.846999835968,
+      "speed": 4.181818181818202,
+      "end_speed": 4.181818181818202,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 409.19699983596803,
+      "speed": 4.181818181818202,
+      "end_speed": 62.0909090909091,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 409.54699983596805,
+      "speed": 62.0909090909091,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 418.18399991989133,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 418.53399991989136,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 418.8839999198914,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 424.431999874115,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 424.781999874115,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 425.131999874115,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 428.8479999542236,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 429.19799995422363,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 429.19799995422363,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 429.54799995422366,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 462.78499999046323,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 463.13499999046326,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 463.4849999904633,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 477.71399993896483,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 478.06399993896486,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 478.4139999389649,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 497.08099999427793,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 497.43099999427795,
+      "speed": 120,
+      "end_speed": 63.90909090909092,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 497.780999994278,
+      "speed": 63.90909090909092,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 501.38099999427794,
+      "speed": 7.818181818181838,
+      "end_speed": 7.818181818181838,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 501.73099999427797,
+      "speed": 7.818181818181838,
+      "end_speed": 63.90909090909092,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 502.080999994278,
+      "speed": 63.90909090909092,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 510.2989999294281,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 510.6489999294281,
+      "speed": 120,
+      "end_speed": 62.09090909090905,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 510.9989999294281,
+      "speed": 62.09090909090905,
+      "end_speed": 4.181818181818099,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 512.598999929428,
+      "speed": 4.181818181818099,
+      "end_speed": 4.181818181818099,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 512.948999929428,
+      "speed": 4.181818181818099,
+      "end_speed": 62.09090909090905,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 513.2989999294281,
+      "speed": 62.09090909090905,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 519.3119999408722,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 519.6619999408722,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 520.0119999408722,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 523.6119999408721,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 523.9619999408721,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 524.3119999408722,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 537.1059998512268,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 537.4559998512268,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 537.8059998512268,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 542.779999923706,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 543.129999923706,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 543.479999923706,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 654.4379998683929,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 654.787999868393,
+      "speed": 120,
+      "end_speed": 62.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 655.137999868393,
+      "speed": 62.0,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 671.6309999942779,
+      "speed": 4,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 671.9809999942779,
+      "speed": 4,
+      "end_speed": 62.0,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 672.3309999942779,
+      "speed": 62.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 679.3319999217987,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 679.6819999217987,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 679.6819999217987,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 680.0319999217987,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 700.1799999713897,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 700.5299999713898,
+      "speed": 120,
+      "end_speed": 62.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 700.8799999713898,
+      "speed": 62.0,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 706.1800000190734,
+      "speed": 4,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 706.5300000190734,
+      "speed": 4,
+      "end_speed": 62.0,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 706.8800000190735,
+      "speed": 62.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 722.9030000209808,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 723.2530000209808,
+      "speed": 120,
+      "end_speed": 60.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 723.6030000209809,
+      "speed": 60.75,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 725.2030000209808,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 725.5530000209808,
+      "speed": 1.5,
+      "end_speed": 60.75,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 725.9030000209808,
+      "speed": 60.75,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 738.6839999198913,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 739.0339999198914,
+      "speed": 120,
+      "end_speed": 61.25,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 739.3839999198914,
+      "speed": 61.25,
+      "end_speed": 2.5,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 743.4289998531341,
+      "speed": 2.5,
+      "end_speed": 2.5,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 743.7789998531341,
+      "speed": 2.5,
+      "end_speed": 61.25,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 744.1289998531341,
+      "speed": 61.25,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 752.3309999942779,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 752.680999994278,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 752.680999994278,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 753.030999994278,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 761.5010000705719,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 761.8510000705719,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 762.2010000705719,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 778.6079999923705,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 778.9579999923706,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 779.3079999923706,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 786.9599999427795,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 787.3099999427795,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 787.6599999427796,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 795.1639999866485,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 795.5139999866485,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 795.8639999866485,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 816.6829999923706,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 817.0329999923706,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 817.3829999923706,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 820.9829999923705,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 821.3329999923706,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 821.6829999923706,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 869.314999961853,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 869.664999961853,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 870.014999961853,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 873.614999961853,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 873.964999961853,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 874.314999961853,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 892.8800000190735,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 893.2300000190735,
+      "speed": 120,
+      "end_speed": 63.45454545454541,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 893.5800000190735,
+      "speed": 63.45454545454541,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 896.6800000190734,
+      "speed": 6.909090909090826,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 897.0300000190734,
+      "speed": 6.909090909090826,
+      "end_speed": 63.45454545454541,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 897.3800000190735,
+      "speed": 63.45454545454541,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 984.5619999408722,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 984.9119999408722,
+      "speed": 120,
+      "end_speed": 63.45454545454541,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 985.2619999408722,
+      "speed": 63.45454545454541,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 988.3619999408721,
+      "speed": 6.909090909090826,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 988.7119999408721,
+      "speed": 6.909090909090826,
+      "end_speed": 63.45454545454541,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 989.0619999408722,
+      "speed": 63.45454545454541,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1055.980999851227,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1056.3309998512268,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1056.6809998512267,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1067.4419998645783,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1067.7919998645782,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1068.141999864578,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1134.3079999923707,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1134.6579999923706,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1135.0079999923705,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1143.811999988556,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1144.1619999885559,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1144.5119999885558,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1161.2320000171662,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1161.5820000171661,
+      "speed": 120,
+      "end_speed": 60.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1161.932000017166,
+      "speed": 60.75,
+      "end_speed": 1.5,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 1163.5320000171662,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 1163.882000017166,
+      "speed": 1.5,
+      "end_speed": 60.75,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 1164.232000017166,
+      "speed": 60.75,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1179.8730000495912,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1180.223000049591,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1180.223000049591,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 1180.573000049591,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1191.2159999847413,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1191.5659999847412,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1191.9159999847411,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1209.3029999256134,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1209.6529999256134,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1210.0029999256133,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1219.0909999847413,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1219.4409999847412,
+      "speed": 120,
+      "end_speed": 62.99999999999996,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1219.7909999847411,
+      "speed": 62.99999999999996,
+      "end_speed": 5.9999999999999165,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1222.3909999847413,
+      "speed": 5.9999999999999165,
+      "end_speed": 5.9999999999999165,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1222.7409999847412,
+      "speed": 5.9999999999999165,
+      "end_speed": 62.99999999999996,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1223.090999984741,
+      "speed": 62.99999999999996,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1240.0310000419618,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1240.3810000419617,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1240.7310000419616,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1245.3310000419617,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1245.6810000419616,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1246.0310000419615,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1284.5729998588563,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1284.9229998588562,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1285.272999858856,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1289.8729998588562,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1290.2229998588562,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1290.572999858856,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1317.719999933243,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1318.0699999332428,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1318.4199999332427,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1322.0199999332428,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1322.3699999332428,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1322.7199999332427,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1358.804000043869,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1359.154000043869,
+      "speed": 120,
+      "end_speed": 62.99999999999996,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1359.504000043869,
+      "speed": 62.99999999999996,
+      "end_speed": 5.9999999999999165,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1362.104000043869,
+      "speed": 5.9999999999999165,
+      "end_speed": 5.9999999999999165,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1362.454000043869,
+      "speed": 5.9999999999999165,
+      "end_speed": 62.99999999999996,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1362.8040000438689,
+      "speed": 62.99999999999996,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1395.9929999351502,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1396.3429999351501,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1396.69299993515,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1400.2929999351502,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1400.64299993515,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1400.99299993515,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1417.2669998645783,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1417.6169998645782,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1417.9669998645782,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1421.5669998645783,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1421.9169998645782,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Repositioning the base"
+    },
+    {
+      "end_source_s": 1422.266999864578,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1439.176999950409,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1439.526999950409,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1439.8769999504088,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1453.4119998931885,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1453.7619998931884,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1454.1119998931883,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1483.4420000553132,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1483.792000055313,
+      "speed": 120,
+      "end_speed": 63.52181807431303,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1484.142000055313,
+      "speed": 63.52181807431303,
+      "end_speed": 7.043636148626071,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1487.3159999370575,
+      "speed": 7.043636148626071,
+      "end_speed": 7.043636148626071,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1487.6659999370574,
+      "speed": 7.043636148626071,
+      "end_speed": 63.52181807431303,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1488.0159999370574,
+      "speed": 63.52181807431303,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1517.6379999160768,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1517.9879999160767,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1517.9879999160767,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 1518.3379999160766,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1534.9420000553132,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1535.292000055313,
+      "speed": 120,
+      "end_speed": 63.36090894178906,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1535.642000055313,
+      "speed": 63.36090894178906,
+      "end_speed": 6.72181788357813,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1538.6389998912812,
+      "speed": 6.72181788357813,
+      "end_speed": 6.72181788357813,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1538.988999891281,
+      "speed": 6.72181788357813,
+      "end_speed": 63.36090894178906,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1539.338999891281,
+      "speed": 63.36090894178906,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1573.8800000190736,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1574.2300000190735,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1574.2300000190735,
+      "hold_s": 1.5,
+      "reason": "Operator confirmation"
+    },
+    {
+      "end_source_s": 1574.5800000190734,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1635.9469999313355,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1636.2969999313354,
+      "speed": 120,
+      "end_speed": 62.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1636.6469999313354,
+      "speed": 62.0,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1651.3840000152588,
+      "speed": 4,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1651.7340000152587,
+      "speed": 4,
+      "end_speed": 62.0,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1652.0840000152587,
+      "speed": 62.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1693.6489998340608,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1693.9989998340607,
+      "speed": 120,
+      "end_speed": 62.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1694.3489998340606,
+      "speed": 62.0,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1701.9979998588562,
+      "speed": 4,
+      "end_speed": 4,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1702.3479998588562,
+      "speed": 4,
+      "end_speed": 62.0,
+      "reason": "Adjusting the grasp"
+    },
+    {
+      "end_source_s": 1702.697999858856,
+      "speed": 62.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1719.5889998912812,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1719.9389998912811,
+      "speed": 120,
+      "end_speed": 60.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1720.288999891281,
+      "speed": 60.75,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 1721.8889998912812,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 1722.238999891281,
+      "speed": 1.5,
+      "end_speed": 60.75,
+      "reason": "Grasping the paper"
+    },
+    {
+      "end_source_s": 1722.588999891281,
+      "speed": 60.75,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1770.5150000095368,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1770.8650000095367,
+      "speed": 120,
+      "end_speed": 61.25,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1771.2150000095367,
+      "speed": 61.25,
+      "end_speed": 2.5,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 1777.4760000228882,
+      "speed": 2.5,
+      "end_speed": 2.5,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 1777.8260000228881,
+      "speed": 2.5,
+      "end_speed": 61.25,
+      "reason": "Lifting the paper"
+    },
+    {
+      "end_source_s": 1778.176000022888,
+      "speed": 61.25,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1794.7009998798371,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1795.050999879837,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1795.050999879837,
+      "hold_s": 0.65,
+      "reason": "Inspect camera or recovery result"
+    },
+    {
+      "end_source_s": 1795.400999879837,
+      "speed": 0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1808.0740000247956,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1808.4240000247955,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1808.7740000247954,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1823.5629999160767,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1823.9129999160766,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 1824.2629999160765,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1835.7079998493195,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1836.0579998493195,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1836.4079998493194,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1840.0079998493195,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1840.3579998493194,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1840.7079998493193,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1857.2359999656678,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1857.5859999656677,
+      "speed": 120,
+      "end_speed": 63.45454545454541,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1857.9359999656676,
+      "speed": 63.45454545454541,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1861.0359999656678,
+      "speed": 6.909090909090826,
+      "end_speed": 6.909090909090826,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1861.3859999656677,
+      "speed": 6.909090909090826,
+      "end_speed": 63.45454545454541,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1861.7359999656676,
+      "speed": 63.45454545454541,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1883.8570000171662,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1884.2070000171661,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1884.557000017166,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1889.1570000171662,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1889.507000017166,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1889.857000017166,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1919.8789998531342,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1920.2289998531342,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1920.578999853134,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1924.1789998531342,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1924.528999853134,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1924.878999853134,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1972.2420000076295,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1972.5920000076294,
+      "speed": 120,
+      "end_speed": 63.909090909090864,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1972.9420000076293,
+      "speed": 63.909090909090864,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1976.5420000076294,
+      "speed": 7.818181818181735,
+      "end_speed": 7.818181818181735,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1976.8920000076293,
+      "speed": 7.818181818181735,
+      "end_speed": 63.909090909090864,
+      "reason": "Walking toward the bin"
+    },
+    {
+      "end_source_s": 1977.2420000076293,
+      "speed": 63.909090909090864,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1997.2719999790193,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1997.6219999790192,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1997.971999979019,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2009.3619999408722,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2009.7119999408721,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2010.061999940872,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2021.2469998836518,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2021.5969998836517,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2021.9469998836516,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2032.795999956131,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2033.145999956131,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2033.4959999561308,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2099.788999938965,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2100.138999938965,
+      "speed": 120,
+      "end_speed": 64.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2100.4889999389648,
+      "speed": 64.0,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2109.5350000381472,
+      "speed": 8,
+      "end_speed": 8,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2109.885000038147,
+      "speed": 8,
+      "end_speed": 64.0,
+      "reason": "Positioning the arm"
+    },
+    {
+      "end_source_s": 2110.235000038147,
+      "speed": 64.0,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2128.2899998664857,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2128.6399998664856,
+      "speed": 120,
+      "end_speed": 60.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2128.9899998664855,
+      "speed": 60.75,
+      "end_speed": 1.5,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 2130.589999866486,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 2130.939999866486,
+      "speed": 1.5,
+      "end_speed": 60.75,
+      "reason": "Releasing into the bin"
+    },
+    {
+      "end_source_s": 2131.2899998664857,
+      "speed": 60.75,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2155.25,
+      "speed": 120,
+      "end_speed": 120,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2155.6,
+      "speed": 120,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2155.6,
+      "hold_s": 2.299720837974573,
+      "reason": "Final verification"
+    }
+  ],
+  "duration": 89,
+  "source_review": {
+    "critical_moments": [
+      {
+        "start_source_s": 47.4779999256134,
+        "end_source_s": 51.7779999256134,
+        "speed": 7.818181818181812,
+        "entry": 30,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 87.54999995231628,
+        "end_source_s": 90.84999995231628,
+        "speed": 5.999999999999995,
+        "entry": 44,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 113.25799989700317,
+        "end_source_s": 116.55799989700317,
+        "speed": 5.999999999999995,
+        "entry": 54,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 138.20499992370605,
+        "end_source_s": 142.50499992370607,
+        "speed": 7.818181818181838,
+        "entry": 66,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 164.385999917984,
+        "end_source_s": 168.68599991798402,
+        "speed": 7.818181818181838,
+        "entry": 78,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 175.15899991989136,
+        "end_source_s": 177.85899991989137,
+        "speed": 4.909090909090939,
+        "entry": 84,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 184.05799984931946,
+        "end_source_s": 188.35799984931947,
+        "speed": 7.818181818181838,
+        "entry": 90,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 199.4800000190735,
+        "end_source_s": 207.51599984169007,
+        "speed": 8,
+        "entry": 98,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 220.58200001716614,
+        "end_source_s": 232.425,
+        "speed": 8,
+        "entry": 106,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 281.6659998893738,
+        "end_source_s": 301.22400002479554,
+        "speed": 8,
+        "entry": 126,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 306,
+        "end_source_s": 311,
+        "speed": 1,
+        "entry": null,
+        "text": "Paper moved by a broom",
+        "autonomy": "Human disturbance"
+      },
+      {
+        "start_source_s": 352.6329998970032,
+        "end_source_s": 356.9949999332428,
+        "speed": 7.930909156799337,
+        "entry": 146,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 366.75999999046326,
+        "end_source_s": 369.05999999046327,
+        "speed": 1.5,
+        "entry": 152,
+        "text": "Grasping the paper"
+      },
+      {
+        "start_source_s": 392.26199984550476,
+        "end_source_s": 394.5619998455048,
+        "speed": 4.181818181818202,
+        "entry": 164,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 406.896999835968,
+        "end_source_s": 409.19699983596803,
+        "speed": 4.181818181818202,
+        "entry": 172,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 418.53399991989136,
+        "end_source_s": 424.781999874115,
+        "speed": 8,
+        "entry": 178,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 463.13499999046326,
+        "end_source_s": 478.06399993896486,
+        "speed": 8,
+        "entry": 190,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 497.43099999427795,
+        "end_source_s": 501.73099999427797,
+        "speed": 7.818181818181838,
+        "entry": 198,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 510.6489999294281,
+        "end_source_s": 512.948999929428,
+        "speed": 4.181818181818099,
+        "entry": 204,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 519.6619999408722,
+        "end_source_s": 523.9619999408721,
+        "speed": 7.818181818181735,
+        "entry": 210,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 537.4559998512268,
+        "end_source_s": 543.129999923706,
+        "speed": 8,
+        "entry": 218,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 654.787999868393,
+        "end_source_s": 671.9809999942779,
+        "speed": 4,
+        "entry": 250,
+        "text": "Adjusting the grasp"
+      },
+      {
+        "start_source_s": 700.5299999713898,
+        "end_source_s": 706.5300000190734,
+        "speed": 4,
+        "entry": 260,
+        "text": "Adjusting the grasp"
+      },
+      {
+        "start_source_s": 723.2530000209808,
+        "end_source_s": 725.5530000209808,
+        "speed": 1.5,
+        "entry": 266,
+        "text": "Grasping the paper"
+      },
+      {
+        "start_source_s": 739.0339999198914,
+        "end_source_s": 743.7789998531341,
+        "speed": 2.5,
+        "entry": 272,
+        "text": "Lifting the paper"
+      },
+      {
+        "start_source_s": 761.8510000705719,
+        "end_source_s": 778.9579999923706,
+        "speed": 8,
+        "entry": 278,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 787.3099999427795,
+        "end_source_s": 795.5139999866485,
+        "speed": 8,
+        "entry": 282,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 817.0329999923706,
+        "end_source_s": 821.3329999923706,
+        "speed": 7.818181818181735,
+        "entry": 288,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 869.664999961853,
+        "end_source_s": 873.964999961853,
+        "speed": 7.818181818181735,
+        "entry": 302,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 893.2300000190735,
+        "end_source_s": 897.0300000190734,
+        "speed": 6.909090909090826,
+        "entry": 310,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 984.9119999408722,
+        "end_source_s": 988.7119999408721,
+        "speed": 6.909090909090826,
+        "entry": 320,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1056.3309998512268,
+        "end_source_s": 1067.7919998645782,
+        "speed": 8,
+        "entry": 336,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1134.6579999923706,
+        "end_source_s": 1144.1619999885559,
+        "speed": 8,
+        "entry": 352,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1161.5820000171661,
+        "end_source_s": 1163.882000017166,
+        "speed": 1.5,
+        "entry": 358,
+        "text": "Releasing into the bin"
+      },
+      {
+        "start_source_s": 1191.5659999847412,
+        "end_source_s": 1209.6529999256134,
+        "speed": 8,
+        "entry": 366,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1219.4409999847412,
+        "end_source_s": 1222.7409999847412,
+        "speed": 5.9999999999999165,
+        "entry": 370,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1240.3810000419617,
+        "end_source_s": 1245.6810000419616,
+        "speed": 8,
+        "entry": 376,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1284.9229998588562,
+        "end_source_s": 1290.2229998588562,
+        "speed": 8,
+        "entry": 388,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1318.0699999332428,
+        "end_source_s": 1322.3699999332428,
+        "speed": 7.818181818181735,
+        "entry": 396,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1359.154000043869,
+        "end_source_s": 1362.454000043869,
+        "speed": 5.9999999999999165,
+        "entry": 406,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1396.3429999351501,
+        "end_source_s": 1400.64299993515,
+        "speed": 7.818181818181735,
+        "entry": 414,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1417.6169998645782,
+        "end_source_s": 1421.9169998645782,
+        "speed": 7.818181818181735,
+        "entry": 420,
+        "text": "Repositioning the base"
+      },
+      {
+        "start_source_s": 1439.526999950409,
+        "end_source_s": 1453.7619998931884,
+        "speed": 8,
+        "entry": 426,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1483.792000055313,
+        "end_source_s": 1487.6659999370574,
+        "speed": 7.043636148626071,
+        "entry": 434,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1535.292000055313,
+        "end_source_s": 1538.988999891281,
+        "speed": 6.72181788357813,
+        "entry": 446,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1636.2969999313354,
+        "end_source_s": 1651.7340000152587,
+        "speed": 4,
+        "entry": 468,
+        "text": "Adjusting the grasp"
+      },
+      {
+        "start_source_s": 1693.9989998340607,
+        "end_source_s": 1702.3479998588562,
+        "speed": 4,
+        "entry": 478,
+        "text": "Adjusting the grasp"
+      },
+      {
+        "start_source_s": 1719.9389998912811,
+        "end_source_s": 1722.238999891281,
+        "speed": 1.5,
+        "entry": 484,
+        "text": "Grasping the paper"
+      },
+      {
+        "start_source_s": 1770.8650000095367,
+        "end_source_s": 1777.8260000228881,
+        "speed": 2.5,
+        "entry": 490,
+        "text": "Lifting the paper"
+      },
+      {
+        "start_source_s": 1808.4240000247955,
+        "end_source_s": 1823.9129999160766,
+        "speed": 8,
+        "entry": 496,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 1836.0579998493195,
+        "end_source_s": 1840.3579998493194,
+        "speed": 7.818181818181735,
+        "entry": 500,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1857.5859999656677,
+        "end_source_s": 1861.3859999656677,
+        "speed": 6.909090909090826,
+        "entry": 506,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1884.2070000171661,
+        "end_source_s": 1889.507000017166,
+        "speed": 8,
+        "entry": 512,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1920.2289998531342,
+        "end_source_s": 1924.528999853134,
+        "speed": 7.818181818181735,
+        "entry": 520,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1972.5920000076294,
+        "end_source_s": 1976.8920000076293,
+        "speed": 7.818181818181735,
+        "entry": 530,
+        "text": "Walking toward the bin"
+      },
+      {
+        "start_source_s": 1997.6219999790192,
+        "end_source_s": 2009.7119999408721,
+        "speed": 8,
+        "entry": 536,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 2021.5969998836517,
+        "end_source_s": 2033.145999956131,
+        "speed": 8,
+        "entry": 540,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 2100.138999938965,
+        "end_source_s": 2109.885000038147,
+        "speed": 8,
+        "entry": 554,
+        "text": "Positioning the arm"
+      },
+      {
+        "start_source_s": 2128.6399998664856,
+        "end_source_s": 2130.939999866486,
+        "speed": 1.5,
+        "entry": 560,
+        "text": "Releasing into the bin"
+      }
+    ],
+    "disturbances": [
+      {
+        "source_s": [
+          307.0,
+          310.5
+        ],
+        "kind": "human intervention",
+        "description": "A person sweeps the brown paper away with a red broom, from in front of the gripper to beside the robot body. Found by tracking the paper and red pixels in the footage; not in the session log. The wrist frame read at source ~305.8 s shows the earlier position, and the next grasp (source ~367 s) closes on empty floor."
+      }
+    ],
+    "endpoint": "Second paper visibly released; final wrist-camera result confirms deposit. Ends before retraction/searching. Two pieces collected, not all trash cleared.",
+    "framing": "Entire original 16:9 recording letterboxed without crop or zoom.",
+    "motion_method": "Every successful servo/device-write interval protected, including omitted calls; asynchronous writes extended by commanded duration plus 0.8s. Reviewed source motion and human disturbance."
+  },
+  "poster_time": 1.8169333330617354,
+  "review_times": [
+    0,
+    1.8169333330617354,
+    6.900070571411095,
+    10.404846598952219,
+    13.476196980477576,
+    15.476196980477576,
+    18.05586199518997,
+    22.562576792533733,
+    27.823672175170163,
+    34.62290691971334,
+    36.20777549169741,
+    48.956056080916255,
+    60.959722376327996,
+    61.86998900115017,
+    68.12394706648918,
+    70.51777538407845,
+    72.25378550223256,
+    86.08632818424876,
+    86.70027916202542,
+    88.8
+  ]
+}

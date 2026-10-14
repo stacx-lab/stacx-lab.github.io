@@ -1,16 +1,16 @@
 ---
 import { site } from '../config';
 import { url } from '../lib/url';
-import Logo from './Logo.astro';
+import Wordmark from './Wordmark.astro';
 ---
 <header class="topbar">
   <nav class="wrap bar" aria-label="main">
     <a class="brand" href={url('/')} aria-label="Kinex home">
-      <Logo size={20} />
-      <span class="word">Kinex</span>
+      <Wordmark size={20} />
       <span class="ver">v{site.version}</span>
     </a>
     <div class="links">
+      <a class="link" href={url('/docs/')}>Docs</a>
       <a class="link" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>
     </div>
     <div class="tools">
@@ -42,7 +42,6 @@ import Logo from './Logo.astro';
   }
   .bar { height: 100%; display: flex; align-items: center; gap: 28px; }
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .word { font-family: var(--font-head); font-size: 17px; }
   .ver { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--ink-3); border: 1px solid var(--rule); padding: 0 5px; border-radius: 3px; }
   .links { display: flex; gap: 22px; font-size: 14.5px; }
   .link { color: var(--ink-2); }

@@ -1,0 +1,23 @@
+{
+  "timeline": "Continuous from source frame zero through solved blue-face-up presentation; every speed boundary, ramp derivative and inverse checked.",
+  "terminal": "No selected tool result or camera image precedes its mapped source result timestamp.",
+  "status": "Every frame displays Autonomous, real elapsed / retained source total in HH:MM:SS, and a short action. Displayed seconds match the recording clock; no speed multiplier appears.",
+  "files": [
+    {
+      "file": "gallery/.masters/abc-yam-cube.mp4",
+      "first_pts_s": 0.0,
+      "frames": 2250
+    },
+    {
+      "file": "public/media/gallery/abc-yam-cube/abc-yam-cube.mp4",
+      "first_pts_s": 0.0,
+      "frames": 2250
+    },
+    {
+      "file": "public/media/gallery/abc-yam-cube/abc-yam-cube.webm",
+      "first_pts_s": 0.0,
+      "frames": 2250
+    }
+  ],
+  "webm_timestamp_tolerance_s": 0.0011
+}

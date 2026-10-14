@@ -14,7 +14,7 @@ npm run check      # astro check + build + internal link/anchor check
 
 ## Repository and workspace
 
-This standalone repository lives at `harness/kinex-doc/` and uses
+This standalone repository uses
 `git@github.com:stacx-lab/stacx-lab.github.io.git` as its remote. Run website and
 video-production commands from this directory. It contains the website, the
 video-generation skill, and the gallery production files; the retired
@@ -23,7 +23,7 @@ video-generation skill, and the gallery production files; the retired
 Only Astro's `public/` assets and generated pages are published. The video
 masters, edit timelines, provenance, and skill stay outside `public/`. Masters
 use Git LFS; generated local delivery copies and review images are ignored. Original robot/session input bundles live separately in
-`../backup/new*`; these are needed to re-render recordings, not to build or serve
+`../sources/` (and `../backup/new*` for the older simulation recordings); these are needed to re-render recordings, not to build or serve
 the website.
 
 ## Layout
@@ -32,7 +32,7 @@ the website.
 src/config.ts                 version, tagline, install cmd, repo, nav, doc groups
 src/content/docs/*.md         docs (one file = one page; index.md = /docs/)
 src/data/hero-terminal.json   landing-page simulator walkthrough
-src/components/               Terminal, ArchDiagram, DemoBanner, Sidebar, Toc, Search…
+src/components/               Terminal, ArchDiagram, DeviceDiagram, Wordmark, Contributors, Sidebar, Toc, Search…
 src/layouts/                  Base, Doc
 src/styles/                   global.css (tokens, light/dark), prose.css (markdown)
 public/media/                 published camera observations and delivery videos
@@ -85,23 +85,46 @@ Setup runs in a subshell because `roboenv setup` exports into its current direct
 
 ## Homepage video gallery
 
-`src/components/VideoGallery.astro` sits below the hero. The two entries are defined
+`src/components/VideoGallery.astro` sits below the hero. The gallery entries are defined
 in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
 
-- `real-hang-mug`: the original 60-second demo, compressed without changing its
-  duration, frame order, or existing speed changes.
-- `yam-hang-mug`: the 30-second recording/session replay, also compressed.
+- `abc-yam-cube`: a 75-second real-world dual-YAM cube solve, with a synchronized
+  session replay, device map, and camera observations. Source: `../sources/abc-yam-cube`.
+- `go2-trash-clean`: an 89-second real-world Go2 + D1 litter collection task,
+  immediately after the cube. Shows coordinated locomotion/manipulation and
+  grasp recovery after a broom moves the paper. Includes the operator inspection
+  pause and ends at the second verified deposit; does not claim all trash was cleared.
+  Source: `../sources/go2-trash-clean`. Rebuild with
+  `python3 gallery/go2-trash-clean/build.py --preview`, then without `--preview`.
+  `make_edit.py` regenerates the editable map. After the master render finishes,
+  run `python3 gallery/go2-trash-clean/deliver.py` to stage, encode, and validate
+  delivery copies, then `python3 gallery/go2-trash-clean/verify.py` for timeline
+  and full-decode checks. Requires Pillow and FFmpeg.
+- `real-hang-mug`: a 60-second real-world YAM red-cup session in the third slot.
+  Preserves the failed first hang, recovery and replanning, and the right arm's
+  active camera positioning to verify peg support. A fixed crop removes 15% of
+  the original left edge and 10% of the right edge, retaining full height and
+  scaling uniformly to focus on the work area. Source:
+  `../sources/abc-yam-hang-mug-real`. Superseded renders and review caches are
+  removed; the current master, edit timeline, and provenance are retained.
+  Rebuild with `python3 gallery/real-hang-mug/make_edit.py`, then
+  `python3 gallery/real-hang-mug/build.py --preview` and without `--preview`.
+  After rendering finishes, run `deliver.py` and `verify.py` in that same folder.
+  Requires Pillow and FFmpeg; the clock anchors and uncertainty are in `edit.json`.
+- `yam-hang-mug`: the 45-second simulation recording/session replay, also compressed.
 
 Delivery MP4s retain 1080p/30 FPS (x264 slow, CRF 28, faststart); WebM fallbacks
 use VP9 good, cpu-used 3, CRF 38. Archival MP4s live in this repository's
 `gallery/.masters/` through Git LFS, outside the published site. Each clip has an opening poster.
 
-The gallery rotates a three-dimensional ring, with the active video centered and
-neighbors facing outward at −45°/+45°. A fixed edge mask fades the sides; card
-changes animate rotation rather than opacity. Arrows, slide selectors, side-card
-clicks, touch swipes, and arrow/Home/End keys on the track work. Reduced-motion
-preferences disable the rotation transition.
-Compact card footers identify model, effort, and Real world / Simulator. Both
+The gallery rotates a vertical three-dimensional ring in the left two-thirds of
+the layout, with neighboring videos tilted above and below the active video. A
+fixed edge mask fades the top and bottom; card changes animate rotation. The
+right third shows the selected task title, model, effort, Real world / Simulator,
+and highlights. On narrow screens, the notes sit below the videos. Up/down
+buttons, slide selectors, neighboring previews, vertical touch swipes, and
+Up/Down/Home/End keys on the track work. Reduced-motion preferences disable
+the transitions. The cube run records medium effort. Both mug
 clips show high effort: the real clip's original footer says high, and all 178
 assistant entries in new7 report high after a pre-task change from medium.
 
@@ -149,3 +172,32 @@ then copy reviewed delivery files into `public/media/gallery/<id>/`. The local
 repository needs that directory so `/kinex/` serves the homepage and `/kinex`
 redirects to it. Documentation lives at `/kinex/docs/`. Local builds use the same
 origin and base path; override them with `SITE_URL` and `BASE_PATH` for other hosts.
+
+### Cube video reproduction
+
+`gallery/abc-yam-cube/build.py` adapts the external DJI recording and JSONL export
+for the current skill renderer. With Pillow and FFmpeg installed, run:
+
+```sh
+python3 gallery/abc-yam-cube/build.py --preview
+python3 gallery/abc-yam-cube/build.py
+```
+
+The editable `gallery/abc-yam-cube/edit.json` records the 75-second timeline,
+reviewed camera-clock offset, source-specific device geometry, and public event
+selections. Source time remains continuous from frame zero through the solved
+blue-face-up presentation; later table placement is omitted. Every successful
+physical command receives a protected motion window (at most 20×, with key turns
+and final presentation at 5×). Stationary planning uses smooth speed ramps, and
+the final solved view holds for 2.2 seconds. At the user’s request, a status line
+below the recording shows `Autonomous`, real recording elapsed / total time
+(`HH:MM:SS / HH:MM:SS`), and a brief current action. The total is 01:02:22,
+ending at the retained solved presentation; acceleration multipliers and the
+bottom-right export timer are omitted. Model and effort appear only in the
+video title subtitle. Labels are grounded in the reviewed physical commands
+and public task phases in `status_overlay`.
+The adapter verifies embedded-image hashes against their original tool results,
+keeps hidden thinking out of the replay, and never executes source-session code.
+Generated frames and source-image links stay in an ignored `.cache` directory.
+The archival render goes to `gallery/.masters/abc-yam-cube.mp4`; delivery files
+are encoded separately under `public/media/gallery/abc-yam-cube/`.

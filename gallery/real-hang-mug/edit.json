@@ -1,0 +1,4387 @@
+{
+  "title": "Hang a red cup",
+  "subtitle": "YAM × GPT-6-Astra · high · Real world",
+  "robot_label": "YAM",
+  "environment": "Real world",
+  "recording": "DJI_20261010163853_0005_D.MP4",
+  "clock": {
+    "camera_start_utc": "2026-10-10T20:38:55.200Z",
+    "metadata_creation_utc": "2026-10-10T20:38:53.000Z",
+    "camera_start_minus_metadata_s": 2.2,
+    "fps": 29.97002997002997,
+    "frames": 64283,
+    "last_frame_s": 2144.8760666666667,
+    "uncertainty_s": 0.8,
+    "method": "Constant offset from three gripper-action anchors across 30 minutes; compared original camera frames with logged submission and requested action duration. Opening/late arm trajectories checked for consistency; slow servo ramps and settling make their visible onset less precise. No drift resolvable at this precision. Original entry ISO timestamps are used, not assistant generation-start fields.",
+    "anchors": [
+      {
+        "entry": 85,
+        "command_after_metadata_s": 182.35,
+        "command_duration_s": 2,
+        "observed_action_source_s": [
+          180,
+          182.5
+        ],
+        "description": "First gripper closure around the cup"
+      },
+      {
+        "entry": 252,
+        "command_after_metadata_s": 846.84,
+        "command_duration_s": 1.5,
+        "observed_action_source_s": [
+          844.5,
+          846.2
+        ],
+        "description": "Release opens the jaws; cup drops at 845.3–845.9 s"
+      },
+      {
+        "entry": 477,
+        "command_after_metadata_s": 1985.82,
+        "command_duration_s": 1.5,
+        "observed_action_source_s": [
+          1983.5,
+          1985.3
+        ],
+        "description": "Final release transfers the cup to the peg; cup settles visibly at 1984–1985 s"
+      }
+    ]
+  },
+  "from_start": true,
+  "continuous_source": true,
+  "device_map": {
+    "description": "Two YAM arms on a bench; arm_1 is the right observation arm, arm_2 manipulates the red cup. Flange cameras and overhead camera match the session profiles. Static illustration, not live kinematics.",
+    "geometry_evidence": {
+      "files": [],
+      "arm_mounts_m": [
+        [
+          0,
+          -0.6096,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "main_link_lengths_m": [
+        0.264,
+        0.25224
+      ],
+      "wrist_camera_mount_m": [
+        -7.66e-08,
+        -0.070435,
+        0.077006
+      ],
+      "overhead_camera_mount_m": [
+        -0.166495,
+        -0.3048,
+        0.954321
+      ],
+      "session_result_entries": [
+        13,
+        14,
+        15,
+        19,
+        20,
+        21,
+        22,
+        46
+      ],
+      "note": "Same station geometry verified in the recorded read results: arm_1 can_right at y=-0.6096, arm_2 can_left at origin, matching wrist/overhead camera mounts and YAM URDF. Recorded files are evidence only and are never executed."
+    },
+    "highlight_note": "Exact device IDs from selected original tool arguments. Cameras embedded in cube_capture helper results are indicated in the observation cards.",
+    "shapes": [
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            220,
+            213
+          ],
+          [
+            490,
+            213
+          ],
+          [
+            510,
+            236
+          ],
+          [
+            200,
+            236
+          ]
+        ],
+        "device": "world"
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            215,
+            236
+          ],
+          [
+            215,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            495,
+            236
+          ],
+          [
+            495,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            270,
+            228
+          ],
+          [
+            270,
+            210
+          ],
+          [
+            250,
+            140
+          ],
+          [
+            310,
+            174
+          ],
+          [
+            310,
+            186
+          ]
+        ],
+        "device": "arm_1",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            270,
+            210
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            250,
+            140
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            310,
+            174
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            298,
+            213
+          ],
+          [
+            298,
+            186
+          ],
+          [
+            322,
+            186
+          ],
+          [
+            322,
+            213
+          ]
+        ],
+        "device": "gripper_1",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            294,
+            148
+          ],
+          [
+            314,
+            148
+          ],
+          [
+            314,
+            163
+          ],
+          [
+            294,
+            163
+          ]
+        ],
+        "device": "camera_261122276271"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            304,
+            155
+          ]
+        ],
+        "device": "camera_261122276271",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            440,
+            228
+          ],
+          [
+            440,
+            210
+          ],
+          [
+            460,
+            140
+          ],
+          [
+            400,
+            174
+          ],
+          [
+            400,
+            186
+          ]
+        ],
+        "device": "arm_2",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            440,
+            210
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            460,
+            140
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            400,
+            174
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            412,
+            213
+          ],
+          [
+            412,
+            186
+          ],
+          [
+            388,
+            186
+          ],
+          [
+            388,
+            213
+          ]
+        ],
+        "device": "gripper_2",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            416,
+            148
+          ],
+          [
+            396,
+            148
+          ],
+          [
+            396,
+            163
+          ],
+          [
+            416,
+            163
+          ]
+        ],
+        "device": "camera_261922276652"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            406,
+            155
+          ]
+        ],
+        "device": "camera_261922276652",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            355,
+            58
+          ],
+          [
+            335,
+            92
+          ],
+          [
+            375,
+            92
+          ],
+          [
+            355,
+            58
+          ]
+        ],
+        "device": "camera_261122276272",
+        "width": 1
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            340,
+            40
+          ],
+          [
+            370,
+            40
+          ],
+          [
+            370,
+            58
+          ],
+          [
+            340,
+            58
+          ]
+        ],
+        "device": "camera_261122276272"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            355,
+            49
+          ]
+        ],
+        "device": "camera_261122276272",
+        "radius": 4
+      }
+    ],
+    "devices": [
+      {
+        "id": "arm_1",
+        "label": [
+          16,
+          133
+        ],
+        "anchor": [
+          250,
+          160
+        ]
+      },
+      {
+        "id": "gripper_1",
+        "label": [
+          16,
+          178
+        ],
+        "anchor": [
+          310,
+          200
+        ]
+      },
+      {
+        "id": "camera_261122276271",
+        "label": [
+          16,
+          72
+        ],
+        "anchor": [
+          304,
+          155
+        ]
+      },
+      {
+        "id": "arm_2",
+        "label": [
+          490,
+          133
+        ],
+        "anchor": [
+          460,
+          160
+        ]
+      },
+      {
+        "id": "gripper_2",
+        "label": [
+          490,
+          178
+        ],
+        "anchor": [
+          400,
+          200
+        ]
+      },
+      {
+        "id": "camera_261922276652",
+        "label": [
+          490,
+          72
+        ],
+        "anchor": [
+          406,
+          155
+        ]
+      },
+      {
+        "id": "camera_261122276272",
+        "label": [
+          255,
+          0
+        ],
+        "anchor": [
+          355,
+          40
+        ]
+      },
+      {
+        "id": "world",
+        "label": [
+          16,
+          224
+        ],
+        "anchor": [
+          215,
+          236
+        ]
+      }
+    ]
+  },
+  "opening_context_note": "The original task is displayed from output/source frame zero as opening context. Its recorded submission is source 4.181 s; all physical calls, results and observations retain their actual mapped timestamps. No pre-recording motion is invented.",
+  "recording_crop": {
+    "source_dimensions": [
+      1920,
+      1080
+    ],
+    "xywh": [
+      288,
+      0,
+      1440,
+      1080
+    ],
+    "description": "Static crop removes 15% from the left and 10% from the right, retaining full height; uniform scaling to the recording panel, without stretching. Requested to reduce empty margins and passing people at the left edge."
+  },
+  "end_source_s": 2061.8559999465942,
+  "events": [
+    {
+      "entry": 6,
+      "kind": "user"
+    },
+    {
+      "entry": 18,
+      "call": 4,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261122276272",
+        "camera_261922276652"
+      ]
+    },
+    {
+      "entry": 24,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Overhead · camera_261122276272"
+    },
+    {
+      "entry": 28,
+      "kind": "assistant"
+    },
+    {
+      "entry": 51,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 55,
+      "call": 0,
+      "active_devices": [
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Left wrist · camera_261922276652"
+    },
+    {
+      "entry": 85,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 91,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 95,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Overhead · camera_261122276272"
+    },
+    {
+      "entry": 109,
+      "call": 0,
+      "active_devices": [
+        "arm_1"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 113,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 185,
+      "call": 0,
+      "active_devices": [
+        "arm_1"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 189,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 215,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_text": "arm_2: stopped (hold; affects arm_2)"
+    },
+    {
+      "entry": 221,
+      "call": 0,
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Recorded close-up · right wrist"
+    },
+    {
+      "entry": 240,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 252,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 258,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 260,
+      "call": 0,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2"
+      ],
+      "result_text": "arm_1: stopped (hold; affects arm_1)"
+    },
+    {
+      "entry": 262,
+      "kind": "assistant"
+    },
+    {
+      "entry": 269,
+      "kind": "assistant",
+      "text": "I’ll recover the mug and use a deeper, verified insertion before releasing again."
+    },
+    {
+      "entry": 273,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 295,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 307,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 313,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 317,
+      "call": 0,
+      "active_devices": [
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Left wrist · camera_261922276652"
+    },
+    {
+      "entry": 326,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 330,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 351,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 373,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 387,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 401,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 403,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_text": "arm_2: stopped (hold; affects arm_2)"
+    },
+    {
+      "entry": 405,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 413,
+      "kind": "assistant",
+      "text": "I’ve regrasped it and will check the handle from a more direct angle before trying again."
+    },
+    {
+      "entry": 417,
+      "call": 0,
+      "active_devices": [
+        "arm_1"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 421,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 428,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 432,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 444,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 454,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 458,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 468,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 474,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 477,
+      "call": 0,
+      "active_devices": [
+        "gripper_2"
+      ]
+    },
+    {
+      "entry": 483,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 487,
+      "call": 0,
+      "active_devices": [
+        "arm_2"
+      ],
+      "result_fields": [
+        "duration_s",
+        "actions_submitted"
+      ]
+    },
+    {
+      "entry": 491,
+      "call": 0,
+      "active_devices": [
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "path"
+      ],
+      "image_label": "Right wrist · camera_261122276271"
+    },
+    {
+      "entry": 494,
+      "kind": "assistant",
+      "text": "The mug is now hanging from the peg and has stayed in place after the gripper withdrew."
+    }
+  ],
+  "status_overlay": {
+    "autonomy": "Autonomous",
+    "activity": [
+      {
+        "start_source_s": 0,
+        "end_source_s": 20,
+        "text": "Reading the task"
+      },
+      {
+        "start_source_s": 20,
+        "end_source_s": 80,
+        "text": "Inspecting the scene"
+      },
+      {
+        "start_source_s": 80,
+        "end_source_s": 82.88699984550476,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 82.88699984550476,
+        "end_source_s": 106.96900005340576,
+        "text": "Approaching the cup"
+      },
+      {
+        "start_source_s": 106.96900005340576,
+        "end_source_s": 126.31399989128113,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 126.31399989128113,
+        "end_source_s": 132.76399989128112,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 132.76399989128112,
+        "end_source_s": 139.10800004005432,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 139.10800004005432,
+        "end_source_s": 144.9330000400543,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 144.9330000400543,
+        "end_source_s": 165.19599986076355,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 165.19599986076355,
+        "end_source_s": 170.46499986648558,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 170.46499986648558,
+        "end_source_s": 179.1449999809265,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 179.1449999809265,
+        "end_source_s": 183.3449999809265,
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 183.3449999809265,
+        "end_source_s": 192.5920000076294,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 192.5920000076294,
+        "end_source_s": 198.31800003051757,
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 198.31800003051757,
+        "end_source_s": 200,
+        "text": "Planning the grasp"
+      },
+      {
+        "start_source_s": 200,
+        "end_source_s": 208.17599987983704,
+        "text": "Checking the grasp"
+      },
+      {
+        "start_source_s": 208.17599987983704,
+        "end_source_s": 219.56599993705748,
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 219.56599993705748,
+        "end_source_s": 250,
+        "text": "Checking the grasp"
+      },
+      {
+        "start_source_s": 250,
+        "end_source_s": 255.17599987983704,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 255.17599987983704,
+        "end_source_s": 284.16199989318847,
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 284.16199989318847,
+        "end_source_s": 301.8380000591278,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 301.8380000591278,
+        "end_source_s": 315.80899996757506,
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 315.80899996757506,
+        "end_source_s": 382.91799998283386,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 382.91799998283386,
+        "end_source_s": 389.2149998664856,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 389.2149998664856,
+        "end_source_s": 399.7149999141693,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 399.7149999141693,
+        "end_source_s": 407.3139998435974,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 407.3139998435974,
+        "end_source_s": 465.9229998588562,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 465.9229998588562,
+        "end_source_s": 471.90300006866454,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 471.90300006866454,
+        "end_source_s": 521.9400000572205,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 521.9400000572205,
+        "end_source_s": 530.0309998512269,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 530.0309998512269,
+        "end_source_s": 565.970999956131,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 565.970999956131,
+        "end_source_s": 598.4349998950959,
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 598.4349998950959,
+        "end_source_s": 600,
+        "text": "Inspecting hook alignment"
+      },
+      {
+        "start_source_s": 600,
+        "end_source_s": 633.5599999427795,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 633.5599999427795,
+        "end_source_s": 638.210999917984,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 638.210999917984,
+        "end_source_s": 678.2289998531342,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 678.2289998531342,
+        "end_source_s": 682.7529999732972,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 682.7529999732972,
+        "end_source_s": 700.8550000190735,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 700.8550000190735,
+        "end_source_s": 705.4599999904633,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 705.4599999904633,
+        "end_source_s": 752.8680000305176,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 752.8680000305176,
+        "end_source_s": 758.0550000190735,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 758.0550000190735,
+        "end_source_s": 770.5320000648499,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 770.5320000648499,
+        "end_source_s": 777.0959999084473,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 777.0959999084473,
+        "end_source_s": 799.8669998645782,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 799.8669998645782,
+        "end_source_s": 805.9699999809266,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 805.9699999809266,
+        "end_source_s": 825.4340000152588,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 825.4340000152588,
+        "end_source_s": 831.4730000019074,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 831.4730000019074,
+        "end_source_s": 843.6399998664856,
+        "text": "Checking handle clearance"
+      },
+      {
+        "start_source_s": 843.6399998664856,
+        "end_source_s": 844,
+        "text": "First release — cup slips"
+      },
+      {
+        "start_source_s": 844,
+        "end_source_s": 847.3,
+        "text": "First release — cup slips"
+      },
+      {
+        "start_source_s": 847.3,
+        "end_source_s": 847.3399998664856,
+        "text": "First release — cup slips"
+      },
+      {
+        "start_source_s": 847.3399998664856,
+        "end_source_s": 902.9319999217987,
+        "text": "Inspecting the failed attempt"
+      },
+      {
+        "start_source_s": 902.9319999217987,
+        "end_source_s": 904,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 904,
+        "end_source_s": 911.6140000343323,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 911.6140000343323,
+        "end_source_s": 913.6399998664856,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 913.6399998664856,
+        "end_source_s": 916.8399998664856,
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 916.8399998664856,
+        "end_source_s": 917.9969999790192,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 917.9969999790192,
+        "end_source_s": 933.0780000209809,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 933.0780000209809,
+        "end_source_s": 979.1729998588562,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 979.1729998588562,
+        "end_source_s": 1015.2909998416901,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1015.2909998416901,
+        "end_source_s": 1072.2419998645782,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 1072.2419998645782,
+        "end_source_s": 1078.6670000076294,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1078.6670000076294,
+        "end_source_s": 1106.6280000209808,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 1106.6280000209808,
+        "end_source_s": 1113.8929998397828,
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1113.8929998397828,
+        "end_source_s": 1128.875,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 1128.875,
+        "end_source_s": 1133.075,
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 1133.075,
+        "end_source_s": 1146.9400000572205,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 1146.9400000572205,
+        "end_source_s": 1156.1879999160767,
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 1156.1879999160767,
+        "end_source_s": 1158,
+        "text": "Replanning after the fall"
+      },
+      {
+        "start_source_s": 1158,
+        "end_source_s": 1175.7269999980927,
+        "text": "Checking the recovered cup"
+      },
+      {
+        "start_source_s": 1175.7269999980927,
+        "end_source_s": 1189.6229998588562,
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 1189.6229998588562,
+        "end_source_s": 1205.4769999980927,
+        "text": "Checking the recovered cup"
+      },
+      {
+        "start_source_s": 1205.4769999980927,
+        "end_source_s": 1247.3280000209809,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1247.3280000209809,
+        "end_source_s": 1255,
+        "text": "Checking the recovered cup"
+      },
+      {
+        "start_source_s": 1255,
+        "end_source_s": 1291.3829998970032,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1291.3829998970032,
+        "end_source_s": 1311.5829998970032,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1311.5829998970032,
+        "end_source_s": 1347.0599999427795,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1347.0599999427795,
+        "end_source_s": 1356.8729998588562,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1356.8729998588562,
+        "end_source_s": 1386.4900000095367,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1386.4900000095367,
+        "end_source_s": 1392.3429998874665,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1392.3429998874665,
+        "end_source_s": 1406.2409999370575,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1406.2409999370575,
+        "end_source_s": 1412.4469999790192,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1412.4469999790192,
+        "end_source_s": 1438.3389999866486,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1438.3389999866486,
+        "end_source_s": 1446.0869998455048,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1446.0869998455048,
+        "end_source_s": 1465.3429999351501,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1465.3429999351501,
+        "end_source_s": 1473.7090000629426,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1473.7090000629426,
+        "end_source_s": 1490,
+        "text": "Planning a deeper insertion"
+      },
+      {
+        "start_source_s": 1490,
+        "end_source_s": 1512.7130000591278,
+        "text": "Checking peg support"
+      },
+      {
+        "start_source_s": 1512.7130000591278,
+        "end_source_s": 1517.7620000362397,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1517.7620000362397,
+        "end_source_s": 1535.138000011444,
+        "text": "Checking peg support"
+      },
+      {
+        "start_source_s": 1535.138000011444,
+        "end_source_s": 1538.8380000114441,
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1538.8380000114441,
+        "end_source_s": 1556.8840000629425,
+        "text": "Checking peg support"
+      },
+      {
+        "start_source_s": 1556.8840000629425,
+        "end_source_s": 1560.5840000629426,
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1560.5840000629426,
+        "end_source_s": 1588,
+        "text": "Checking peg support"
+      },
+      {
+        "start_source_s": 1588,
+        "end_source_s": 1594.0409998893738,
+        "text": "Regrasping after the slip"
+      },
+      {
+        "start_source_s": 1594.0409998893738,
+        "end_source_s": 1597.2409998893738,
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 1597.2409998893738,
+        "end_source_s": 1649.175999879837,
+        "text": "Regrasping after the slip"
+      },
+      {
+        "start_source_s": 1649.175999879837,
+        "end_source_s": 1650,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1650,
+        "end_source_s": 1662.0810000419617,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1662.0810000419617,
+        "end_source_s": 1666.4219999313354,
+        "text": "Planning a clearer view"
+      },
+      {
+        "start_source_s": 1666.4219999313354,
+        "end_source_s": 1670.6219999313355,
+        "text": "Closing the camera gripper"
+      },
+      {
+        "start_source_s": 1670.6219999313355,
+        "end_source_s": 1672.3050000667572,
+        "text": "Planning a clearer view"
+      },
+      {
+        "start_source_s": 1672.3050000667572,
+        "end_source_s": 1706.6630000591279,
+        "text": "Getting a direct handle view"
+      },
+      {
+        "start_source_s": 1706.6630000591279,
+        "end_source_s": 1707,
+        "text": "Planning a clearer view"
+      },
+      {
+        "start_source_s": 1707,
+        "end_source_s": 1747.029000043869,
+        "text": "Checking the handle opening"
+      },
+      {
+        "start_source_s": 1747.029000043869,
+        "end_source_s": 1757.341000032425,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1757.341000032425,
+        "end_source_s": 1796.6549999713898,
+        "text": "Checking the handle opening"
+      },
+      {
+        "start_source_s": 1796.6549999713898,
+        "end_source_s": 1800,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1800,
+        "end_source_s": 1804.173000049591,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1804.173000049591,
+        "end_source_s": 1835.2039999961853,
+        "text": "Refining hook alignment"
+      },
+      {
+        "start_source_s": 1835.2039999961853,
+        "end_source_s": 1844.0099999427796,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1844.0099999427796,
+        "end_source_s": 1860.1900000572205,
+        "text": "Refining hook alignment"
+      },
+      {
+        "start_source_s": 1860.1900000572205,
+        "end_source_s": 1866.8419999599457,
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1866.8419999599457,
+        "end_source_s": 1894.8999998569489,
+        "text": "Refining hook alignment"
+      },
+      {
+        "start_source_s": 1894.8999998569489,
+        "end_source_s": 1903.6619998931885,
+        "text": "Threading the handle deeper"
+      },
+      {
+        "start_source_s": 1903.6619998931885,
+        "end_source_s": 1955,
+        "text": "Refining hook alignment"
+      },
+      {
+        "start_source_s": 1955,
+        "end_source_s": 1955.3489999771118,
+        "text": "Checking the load transfer"
+      },
+      {
+        "start_source_s": 1955.3489999771118,
+        "end_source_s": 1959.0489999771119,
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1959.0489999771119,
+        "end_source_s": 1982.619999885559,
+        "text": "Checking the load transfer"
+      },
+      {
+        "start_source_s": 1982.619999885559,
+        "end_source_s": 1986,
+        "text": "Releasing onto the peg"
+      },
+      {
+        "start_source_s": 1986,
+        "end_source_s": 1986.3199998855591,
+        "text": "Releasing onto the peg"
+      },
+      {
+        "start_source_s": 1986.3199998855591,
+        "end_source_s": 2024.888000011444,
+        "text": "Checking the hanging cup"
+      },
+      {
+        "start_source_s": 2024.888000011444,
+        "end_source_s": 2036.0980000019074,
+        "text": "Withdrawing to verify"
+      },
+      {
+        "start_source_s": 2036.0980000019074,
+        "end_source_s": 2037,
+        "text": "Checking the hanging cup"
+      },
+      {
+        "start_source_s": 2037,
+        "end_source_s": 2061.8559999465942,
+        "text": "Verifying after withdrawal"
+      }
+    ],
+    "hold_labels": {
+      "Original task": "Original task",
+      "Verified hanging cup": "Cup hanging — verified",
+      "Initial observation": "Initial observation",
+      "First attempt failed": "First attempt failed",
+      "Replan after the fall": "Replan after the fall",
+      "Choose a clearer view": "Choose a clearer view",
+      "Initial camera view": "Initial camera view",
+      "Cup grasped": "Cup grasped",
+      "Inspect the fallen cup": "Inspect the fallen cup",
+      "Cup recovered": "Cup recovered",
+      "Peg not bearing the weight": "Peg not bearing the weight",
+      "Direct view of the handle": "Direct view of the handle",
+      "Verify the release": "Verify the release",
+      "Verify after withdrawal": "Verify after withdrawal"
+    },
+    "elapsed_time": {
+      "format": "HH:MM:SS / HH:MM:SS",
+      "clock": "Original camera recording, retained through success report before arm homing",
+      "total_source_s": 2061.8559999465942
+    }
+  },
+  "retime": [
+    {
+      "end_source_s": 0,
+      "hold_s": 1.0,
+      "reason": "Original task"
+    },
+    {
+      "end_source_s": 0.3,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 23.50900001525879,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 23.80900001525879,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 23.80900001525879,
+      "hold_s": 0.5,
+      "reason": "Initial camera view"
+    },
+    {
+      "end_source_s": 24.10900001525879,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 28.499999952316283,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 28.799999952316284,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 28.799999952316284,
+      "hold_s": 0.5,
+      "reason": "Initial observation"
+    },
+    {
+      "end_source_s": 29.099999952316285,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 82.58699984550476,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 82.88699984550476,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 83.18699984550476,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Approaching the cup"
+    },
+    {
+      "end_source_s": 106.66900005340577,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Approaching the cup"
+    },
+    {
+      "end_source_s": 106.96900005340576,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Approaching the cup"
+    },
+    {
+      "end_source_s": 107.26900005340576,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 126.01399989128113,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 126.31399989128113,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 126.61399989128113,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 132.4639998912811,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 132.76399989128112,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 133.06399989128113,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 138.8080000400543,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 139.10800004005432,
+      "speed": 350,
+      "end_speed": 186.20192307692307,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 139.40800004005433,
+      "speed": 186.20192307692307,
+      "end_speed": 22.40384615384611,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 144.6330000400543,
+      "speed": 22.40384615384611,
+      "end_speed": 22.40384615384611,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 144.9330000400543,
+      "speed": 22.40384615384611,
+      "end_speed": 186.20192307692307,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 145.23300004005432,
+      "speed": 186.20192307692307,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 164.89599986076354,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 165.19599986076355,
+      "speed": 350,
+      "end_speed": 185.13269231869623,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 165.49599986076356,
+      "speed": 185.13269231869623,
+      "end_speed": 20.26538463739244,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 170.16499986648557,
+      "speed": 20.26538463739244,
+      "end_speed": 20.26538463739244,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 170.46499986648558,
+      "speed": 20.26538463739244,
+      "end_speed": 185.13269231869623,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 170.7649998664856,
+      "speed": 185.13269231869623,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 178.8449999809265,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 179.1449999809265,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 179.44499998092653,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 183.0449999809265,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 183.3449999809265,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 183.6449999809265,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 192.29200000762938,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 192.5920000076294,
+      "speed": 350,
+      "end_speed": 179.7941690107139,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 192.8920000076294,
+      "speed": 179.7941690107139,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 198.01800003051756,
+      "speed": 9.588338021427793,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 198.31800003051757,
+      "speed": 9.588338021427793,
+      "end_speed": 179.7941690107139,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 198.61800003051758,
+      "speed": 179.7941690107139,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 203.3029999256134,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 203.6029999256134,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 203.6029999256134,
+      "hold_s": 0.3,
+      "reason": "Cup grasped"
+    },
+    {
+      "end_source_s": 203.90299992561341,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 207.87599987983702,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 208.17599987983704,
+      "speed": 350,
+      "end_speed": 179.7941690107139,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 208.47599987983705,
+      "speed": 179.7941690107139,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 219.26599993705747,
+      "speed": 9.588338021427793,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 219.56599993705748,
+      "speed": 9.588338021427793,
+      "end_speed": 179.7941690107139,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 219.8659999370575,
+      "speed": 179.7941690107139,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 254.87599987983702,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 255.17599987983704,
+      "speed": 350,
+      "end_speed": 182.67067041714225,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 255.47599987983705,
+      "speed": 182.67067041714225,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 283.86199989318845,
+      "speed": 15.341340834284468,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 284.16199989318847,
+      "speed": 15.341340834284468,
+      "end_speed": 182.67067041714225,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 284.4619998931885,
+      "speed": 182.67067041714225,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 301.5380000591278,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 301.8380000591278,
+      "speed": 350,
+      "end_speed": 182.67067041714225,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 302.1380000591278,
+      "speed": 182.67067041714225,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 315.50899996757505,
+      "speed": 15.341340834284468,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 315.80899996757506,
+      "speed": 15.341340834284468,
+      "end_speed": 182.67067041714225,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 316.1089999675751,
+      "speed": 182.67067041714225,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 382.61799998283385,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 382.91799998283386,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 383.2179999828339,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 388.9149998664856,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 389.2149998664856,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 389.5149998664856,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 399.4149999141693,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 399.7149999141693,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 400.0149999141693,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 407.0139998435974,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 407.3139998435974,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 407.6139998435974,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 465.6229998588562,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 465.9229998588562,
+      "speed": 350,
+      "end_speed": 186.50000040347757,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 466.2229998588562,
+      "speed": 186.50000040347757,
+      "end_speed": 23.000000806955146,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 471.6030000686645,
+      "speed": 23.000000806955146,
+      "end_speed": 23.000000806955146,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 471.90300006866454,
+      "speed": 23.000000806955146,
+      "end_speed": 186.50000040347757,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 472.20300006866455,
+      "speed": 186.50000040347757,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 521.6400000572205,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 521.9400000572205,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 522.2400000572204,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 529.7309998512269,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 530.0309998512269,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 530.3309998512268,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 565.670999956131,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 565.970999956131,
+      "speed": 350,
+      "end_speed": 182.67067041714225,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 566.2709999561309,
+      "speed": 182.67067041714225,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 598.1349998950959,
+      "speed": 15.341340834284468,
+      "end_speed": 15.341340834284468,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 598.4349998950959,
+      "speed": 15.341340834284468,
+      "end_speed": 182.67067041714225,
+      "reason": "Positioning the right camera"
+    },
+    {
+      "end_source_s": 598.7349998950958,
+      "speed": 182.67067041714225,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 633.2599999427796,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 633.5599999427795,
+      "speed": 350,
+      "end_speed": 183.94423072154714,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 633.8599999427795,
+      "speed": 183.94423072154714,
+      "end_speed": 17.888461443094283,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 637.9109999179841,
+      "speed": 17.888461443094283,
+      "end_speed": 17.888461443094283,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 638.210999917984,
+      "speed": 17.888461443094283,
+      "end_speed": 183.94423072154714,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 638.510999917984,
+      "speed": 183.94423072154714,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 677.9289998531342,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 678.2289998531342,
+      "speed": 350,
+      "end_speed": 183.7000002310827,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 678.5289998531341,
+      "speed": 183.7000002310827,
+      "end_speed": 17.40000046216542,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 682.4529999732972,
+      "speed": 17.40000046216542,
+      "end_speed": 17.40000046216542,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 682.7529999732972,
+      "speed": 17.40000046216542,
+      "end_speed": 183.7000002310827,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 683.0529999732971,
+      "speed": 183.7000002310827,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 700.5550000190735,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 700.8550000190735,
+      "speed": 350,
+      "end_speed": 183.85576917574966,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 701.1550000190734,
+      "speed": 183.85576917574966,
+      "end_speed": 17.711538351499293,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 705.1599999904633,
+      "speed": 17.711538351499293,
+      "end_speed": 17.711538351499293,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 705.4599999904633,
+      "speed": 17.711538351499293,
+      "end_speed": 183.85576917574966,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 705.7599999904633,
+      "speed": 183.85576917574966,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 752.5680000305176,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 752.8680000305176,
+      "speed": 350,
+      "end_speed": 184.9749999779922,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 753.1680000305175,
+      "speed": 184.9749999779922,
+      "end_speed": 19.94999995598444,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 757.7550000190736,
+      "speed": 19.94999995598444,
+      "end_speed": 19.94999995598444,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 758.0550000190735,
+      "speed": 19.94999995598444,
+      "end_speed": 184.9749999779922,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 758.3550000190735,
+      "speed": 184.9749999779922,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 770.2320000648499,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 770.5320000648499,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 770.8320000648498,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 776.7959999084474,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 777.0959999084473,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 777.3959999084473,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 799.5669998645783,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 799.8669998645782,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 800.1669998645782,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 805.6699999809266,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 805.9699999809266,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 806.2699999809265,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 825.1340000152588,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 825.4340000152588,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 825.7340000152587,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 831.1730000019074,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 831.4730000019074,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 831.7730000019073,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 843.3399998664856,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 843.6399998664856,
+      "speed": 350,
+      "end_speed": 175.5,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 843.7599999109904,
+      "speed": 175.5,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 843.8799999554952,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 844,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 844.3,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.0,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.3,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.3133332888285,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.3266665776571,
+      "speed": 1.0,
+      "end_speed": 1.0,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.3399998664856,
+      "speed": 1.0,
+      "end_speed": 175.5,
+      "reason": "First release — cup slips"
+    },
+    {
+      "end_source_s": 847.6399998664856,
+      "speed": 175.5,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 858.9920000553132,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 859.2920000553131,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 859.2920000553131,
+      "hold_s": 0.6,
+      "reason": "Inspect the fallen cup"
+    },
+    {
+      "end_source_s": 859.5920000553131,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 870.5199999332428,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 870.8199999332428,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 870.8199999332428,
+      "hold_s": 1.0,
+      "reason": "First attempt failed"
+    },
+    {
+      "end_source_s": 871.1199999332428,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 902.6319999217988,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 902.9319999217987,
+      "speed": 350,
+      "end_speed": 183.62950421928502,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 903.2319999217987,
+      "speed": 183.62950421928502,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 903.6319999217988,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 903.9319999217987,
+      "speed": 17.259008438570028,
+      "end_speed": 0,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 903.9319999217987,
+      "hold_s": 0.9,
+      "reason": "Replan after the fall"
+    },
+    {
+      "end_source_s": 904.2319999217987,
+      "speed": 0,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 911.3140000343324,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 911.6140000343323,
+      "speed": 17.259008438570028,
+      "end_speed": 183.62950421928502,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 911.9140000343323,
+      "speed": 183.62950421928502,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 913.3399998664856,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 913.6399998664856,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 913.9399998664856,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 916.5399998664857,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 916.8399998664856,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 917.1399998664856,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 917.6969999790192,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 917.9969999790192,
+      "speed": 350,
+      "end_speed": 183.62950421928502,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 918.2969999790191,
+      "speed": 183.62950421928502,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 932.7780000209809,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 933.0780000209809,
+      "speed": 17.259008438570028,
+      "end_speed": 183.62950421928502,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 933.3780000209808,
+      "speed": 183.62950421928502,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 978.8729998588562,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 979.1729998588562,
+      "speed": 350,
+      "end_speed": 183.62950421928502,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 979.4729998588562,
+      "speed": 183.62950421928502,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1014.9909998416902,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1015.2909998416901,
+      "speed": 17.259008438570028,
+      "end_speed": 183.62950421928502,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1015.5909998416901,
+      "speed": 183.62950421928502,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1071.9419998645783,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1072.2419998645782,
+      "speed": 350,
+      "end_speed": 183.62950421928502,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1072.5419998645782,
+      "speed": 183.62950421928502,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1078.3670000076295,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1078.6670000076294,
+      "speed": 17.259008438570028,
+      "end_speed": 183.62950421928502,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1078.9670000076294,
+      "speed": 183.62950421928502,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1106.3280000209809,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1106.6280000209808,
+      "speed": 350,
+      "end_speed": 183.62950421928502,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1106.9280000209808,
+      "speed": 183.62950421928502,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1113.5929998397828,
+      "speed": 17.259008438570028,
+      "end_speed": 17.259008438570028,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1113.8929998397828,
+      "speed": 17.259008438570028,
+      "end_speed": 183.62950421928502,
+      "reason": "Replanning the grasp"
+    },
+    {
+      "end_source_s": 1114.1929998397827,
+      "speed": 183.62950421928502,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1128.575,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1128.875,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1129.175,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1132.775,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1133.075,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1133.375,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1146.6400000572205,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1146.9400000572205,
+      "speed": 350,
+      "end_speed": 179.7941690107139,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1147.2400000572204,
+      "speed": 179.7941690107139,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1155.8879999160768,
+      "speed": 9.588338021427793,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1156.1879999160767,
+      "speed": 9.588338021427793,
+      "end_speed": 179.7941690107139,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1156.4879999160767,
+      "speed": 179.7941690107139,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1163.5680000305176,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1163.8680000305176,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1163.8680000305176,
+      "hold_s": 0.4,
+      "reason": "Cup recovered"
+    },
+    {
+      "end_source_s": 1164.1680000305175,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1175.4269999980927,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1175.7269999980927,
+      "speed": 350,
+      "end_speed": 179.7941690107139,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1176.0269999980926,
+      "speed": 179.7941690107139,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1189.3229998588563,
+      "speed": 9.588338021427793,
+      "end_speed": 9.588338021427793,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1189.6229998588562,
+      "speed": 9.588338021427793,
+      "end_speed": 179.7941690107139,
+      "reason": "Lifting the cup"
+    },
+    {
+      "end_source_s": 1189.9229998588562,
+      "speed": 179.7941690107139,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1205.1769999980927,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1205.4769999980927,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1205.7769999980926,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1247.028000020981,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1247.3280000209809,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1247.6280000209808,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1291.0829998970032,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1291.3829998970032,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1291.6829998970031,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1311.2829998970033,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1311.5829998970032,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1311.8829998970032,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1346.7599999427796,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1347.0599999427795,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1347.3599999427795,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1356.5729998588563,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1356.8729998588562,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1357.1729998588562,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1386.1900000095368,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1386.4900000095367,
+      "speed": 350,
+      "end_speed": 186.25576899601873,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1386.7900000095367,
+      "speed": 186.25576899601873,
+      "end_speed": 22.511537992037432,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1392.0429998874665,
+      "speed": 22.511537992037432,
+      "end_speed": 22.511537992037432,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1392.3429998874665,
+      "speed": 22.511537992037432,
+      "end_speed": 186.25576899601873,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1392.6429998874664,
+      "speed": 186.25576899601873,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1405.9409999370575,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1406.2409999370575,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1406.5409999370574,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1412.1469999790193,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1412.4469999790192,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1412.7469999790192,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1438.0389999866486,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1438.3389999866486,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1438.6389999866485,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1445.7869998455049,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1446.0869998455048,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1446.3869998455048,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1465.0429999351502,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1465.3429999351501,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1465.64299993515,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1473.4090000629426,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1473.7090000629426,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1474.0090000629425,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1512.4130000591279,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1512.7130000591278,
+      "speed": 350,
+      "end_speed": 184.70961534059973,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1513.0130000591278,
+      "speed": 184.70961534059973,
+      "end_speed": 19.41923068119947,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1517.4620000362397,
+      "speed": 19.41923068119947,
+      "end_speed": 19.41923068119947,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1517.7620000362397,
+      "speed": 19.41923068119947,
+      "end_speed": 184.70961534059973,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1518.0620000362396,
+      "speed": 184.70961534059973,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1534.8380000114441,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1535.138000011444,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1535.438000011444,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1538.5380000114442,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1538.8380000114441,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1539.138000011444,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1556.5840000629426,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1556.8840000629425,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1557.1840000629425,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1560.2840000629426,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1560.5840000629426,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1560.8840000629425,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1576.82299990654,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1577.12299990654,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1577.12299990654,
+      "hold_s": 0.5,
+      "reason": "Peg not bearing the weight"
+    },
+    {
+      "end_source_s": 1577.4229999065399,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1593.7409998893738,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1594.0409998893738,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1594.3409998893737,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1596.9409998893739,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1597.2409998893738,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Grasping the cup"
+    },
+    {
+      "end_source_s": 1597.5409998893738,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1648.875999879837,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1649.175999879837,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1649.475999879837,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1649.875999879837,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1650.175999879837,
+      "speed": 23.012011251426703,
+      "end_speed": 0,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1650.175999879837,
+      "hold_s": 1.0,
+      "reason": "Choose a clearer view"
+    },
+    {
+      "end_source_s": 1650.475999879837,
+      "speed": 0,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1661.7810000419618,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1662.0810000419617,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1662.3810000419617,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1666.1219999313355,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1666.4219999313354,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1666.7219999313354,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Closing the camera gripper"
+    },
+    {
+      "end_source_s": 1670.3219999313355,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Closing the camera gripper"
+    },
+    {
+      "end_source_s": 1670.6219999313355,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Closing the camera gripper"
+    },
+    {
+      "end_source_s": 1670.9219999313354,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1672.0050000667572,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1672.3050000667572,
+      "speed": 350,
+      "end_speed": 179.0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1672.6050000667572,
+      "speed": 179.0,
+      "end_speed": 8.0,
+      "reason": "Getting a direct handle view"
+    },
+    {
+      "end_source_s": 1706.363000059128,
+      "speed": 8.0,
+      "end_speed": 8.0,
+      "reason": "Getting a direct handle view"
+    },
+    {
+      "end_source_s": 1706.6630000591279,
+      "speed": 8.0,
+      "end_speed": 179.0,
+      "reason": "Getting a direct handle view"
+    },
+    {
+      "end_source_s": 1706.9630000591278,
+      "speed": 179.0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1716.1930000305176,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1716.4930000305176,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1716.4930000305176,
+      "hold_s": 0.8,
+      "reason": "Direct view of the handle"
+    },
+    {
+      "end_source_s": 1716.7930000305175,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1746.729000043869,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1747.029000043869,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1747.329000043869,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1757.041000032425,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1757.341000032425,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1757.641000032425,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1796.3549999713898,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1796.6549999713898,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1796.9549999713897,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1803.8730000495912,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1804.173000049591,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1804.473000049591,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1834.9039999961853,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1835.2039999961853,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1835.5039999961853,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1843.7099999427796,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1844.0099999427796,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1844.3099999427795,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1859.8900000572205,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1860.1900000572205,
+      "speed": 350,
+      "end_speed": 186.50600562571336,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1860.4900000572204,
+      "speed": 186.50600562571336,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1866.5419999599458,
+      "speed": 23.012011251426703,
+      "end_speed": 23.012011251426703,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1866.8419999599457,
+      "speed": 23.012011251426703,
+      "end_speed": 186.50600562571336,
+      "reason": "Aligning the cup"
+    },
+    {
+      "end_source_s": 1867.1419999599457,
+      "speed": 186.50600562571336,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1894.599999856949,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1894.8999998569489,
+      "speed": 350,
+      "end_speed": 177.87650140642833,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1895.1999998569488,
+      "speed": 177.87650140642833,
+      "end_speed": 5.753002812856676,
+      "reason": "Threading the handle deeper"
+    },
+    {
+      "end_source_s": 1903.3619998931886,
+      "speed": 5.753002812856676,
+      "end_speed": 5.753002812856676,
+      "reason": "Threading the handle deeper"
+    },
+    {
+      "end_source_s": 1903.6619998931885,
+      "speed": 5.753002812856676,
+      "end_speed": 177.87650140642833,
+      "reason": "Threading the handle deeper"
+    },
+    {
+      "end_source_s": 1903.9619998931885,
+      "speed": 177.87650140642833,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1955.0489999771119,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1955.3489999771118,
+      "speed": 350,
+      "end_speed": 176.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1955.6489999771118,
+      "speed": 176.75,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1958.748999977112,
+      "speed": 3.5,
+      "end_speed": 3.5,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1959.0489999771119,
+      "speed": 3.5,
+      "end_speed": 176.75,
+      "reason": "Testing load transfer"
+    },
+    {
+      "end_source_s": 1959.3489999771118,
+      "speed": 176.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1982.3199998855591,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1982.619999885559,
+      "speed": 350,
+      "end_speed": 175.75,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1982.919999885559,
+      "speed": 175.75,
+      "end_speed": 1.5,
+      "reason": "Releasing onto the peg"
+    },
+    {
+      "end_source_s": 1986.0199998855592,
+      "speed": 1.5,
+      "end_speed": 1.5,
+      "reason": "Releasing onto the peg"
+    },
+    {
+      "end_source_s": 1986.3199998855591,
+      "speed": 1.5,
+      "end_speed": 175.75,
+      "reason": "Releasing onto the peg"
+    },
+    {
+      "end_source_s": 1986.619999885559,
+      "speed": 175.75,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2003.5610000610352,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2003.8610000610352,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2003.8610000610352,
+      "hold_s": 0.5,
+      "reason": "Verify the release"
+    },
+    {
+      "end_source_s": 2004.161000061035,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2024.5880000114441,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2024.888000011444,
+      "speed": 350,
+      "end_speed": 177.5,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2025.188000011444,
+      "speed": 177.5,
+      "end_speed": 5.0,
+      "reason": "Withdrawing to verify"
+    },
+    {
+      "end_source_s": 2035.7980000019074,
+      "speed": 5.0,
+      "end_speed": 5.0,
+      "reason": "Withdrawing to verify"
+    },
+    {
+      "end_source_s": 2036.0980000019074,
+      "speed": 5.0,
+      "end_speed": 177.5,
+      "reason": "Withdrawing to verify"
+    },
+    {
+      "end_source_s": 2036.3980000019073,
+      "speed": 177.5,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2046.7179998874665,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2047.0179998874664,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2047.0179998874664,
+      "hold_s": 0.8,
+      "reason": "Verify after withdrawal"
+    },
+    {
+      "end_source_s": 2047.3179998874664,
+      "speed": 0,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2061.555999946594,
+      "speed": 350,
+      "end_speed": 350,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2061.8559999465942,
+      "speed": 350,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 2061.8559999465942,
+      "hold_s": 2.2,
+      "reason": "Verified hanging cup"
+    }
+  ],
+  "duration": 60,
+  "source_review": {
+    "critical_moments": [
+      {
+        "start_source_s": 82.88699984550476,
+        "end_source_s": 106.96900005340576,
+        "speed": 12,
+        "entry": 51,
+        "device": "arm_2",
+        "text": "Approaching the cup"
+      },
+      {
+        "start_source_s": 126.31399989128113,
+        "end_source_s": 132.76399989128112,
+        "speed": 12,
+        "entry": 62,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 139.10800004005432,
+        "end_source_s": 144.9330000400543,
+        "speed": 12,
+        "entry": 68,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 165.19599986076355,
+        "end_source_s": 170.46499986648558,
+        "speed": 11.70888890160452,
+        "entry": 79,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 179.1449999809265,
+        "end_source_s": 183.3449999809265,
+        "speed": 2,
+        "entry": 85,
+        "device": "gripper_2",
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 192.5920000076294,
+        "end_source_s": 198.31800003051757,
+        "speed": 5,
+        "entry": 91,
+        "device": "arm_2",
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 208.17599987983704,
+        "end_source_s": 219.56599993705748,
+        "speed": 5,
+        "entry": 98,
+        "device": "arm_2",
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 255.17599987983704,
+        "end_source_s": 284.16199989318847,
+        "speed": 8,
+        "entry": 109,
+        "device": "arm_1",
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 301.8380000591278,
+        "end_source_s": 315.80899996757506,
+        "speed": 8,
+        "entry": 118,
+        "device": "arm_1",
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 382.91799998283386,
+        "end_source_s": 389.2149998664856,
+        "speed": 12,
+        "entry": 134,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 399.7149999141693,
+        "end_source_s": 407.3139998435974,
+        "speed": 12,
+        "entry": 141,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 465.9229998588562,
+        "end_source_s": 471.90300006866454,
+        "speed": 12,
+        "entry": 159,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 521.9400000572205,
+        "end_source_s": 530.0309998512269,
+        "speed": 12,
+        "entry": 174,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 565.970999956131,
+        "end_source_s": 598.4349998950959,
+        "speed": 8,
+        "entry": 185,
+        "device": "arm_1",
+        "text": "Positioning the right camera"
+      },
+      {
+        "start_source_s": 633.5599999427795,
+        "end_source_s": 638.210999917984,
+        "speed": 10.335555500454474,
+        "entry": 195,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 678.2289998531342,
+        "end_source_s": 682.7529999732972,
+        "speed": 10.053333600362242,
+        "entry": 203,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 700.8550000190735,
+        "end_source_s": 705.4599999904633,
+        "speed": 10.233333269755146,
+        "entry": 209,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 752.8680000305176,
+        "end_source_s": 758.0550000190735,
+        "speed": 11.526666641235453,
+        "entry": 226,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 770.5320000648499,
+        "end_source_s": 777.0959999084473,
+        "speed": 12,
+        "entry": 232,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 799.8669998645782,
+        "end_source_s": 805.9699999809266,
+        "speed": 12,
+        "entry": 240,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 825.4340000152588,
+        "end_source_s": 831.4730000019074,
+        "speed": 12,
+        "entry": 246,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 843.6399998664856,
+        "end_source_s": 847.3399998664856,
+        "speed": 1,
+        "entry": 252,
+        "device": "gripper_2",
+        "text": "First release — cup slips"
+      },
+      {
+        "start_source_s": 844,
+        "end_source_s": 847.3,
+        "speed": 1,
+        "entry": 252,
+        "device": "gripper_2",
+        "text": "First release — cup slips"
+      },
+      {
+        "start_source_s": 902.9319999217987,
+        "end_source_s": 911.6140000343323,
+        "speed": 9,
+        "entry": 269,
+        "device": "arm_2",
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 913.6399998664856,
+        "end_source_s": 916.8399998664856,
+        "speed": 2,
+        "entry": 271,
+        "device": "gripper_2",
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 917.9969999790192,
+        "end_source_s": 933.0780000209809,
+        "speed": 9,
+        "entry": 273,
+        "device": "arm_2",
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 979.1729998588562,
+        "end_source_s": 1015.2909998416901,
+        "speed": 9,
+        "entry": 285,
+        "device": "arm_2",
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1072.2419998645782,
+        "end_source_s": 1078.6670000076294,
+        "speed": 9,
+        "entry": 295,
+        "device": "arm_2",
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1106.6280000209808,
+        "end_source_s": 1113.8929998397828,
+        "speed": 9,
+        "entry": 301,
+        "device": "arm_2",
+        "text": "Replanning the grasp"
+      },
+      {
+        "start_source_s": 1128.875,
+        "end_source_s": 1133.075,
+        "speed": 2,
+        "entry": 307,
+        "device": "gripper_2",
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 1146.9400000572205,
+        "end_source_s": 1156.1879999160767,
+        "speed": 5,
+        "entry": 313,
+        "device": "arm_2",
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 1175.7269999980927,
+        "end_source_s": 1189.6229998588562,
+        "speed": 5,
+        "entry": 320,
+        "device": "arm_2",
+        "text": "Lifting the cup"
+      },
+      {
+        "start_source_s": 1205.4769999980927,
+        "end_source_s": 1247.3280000209809,
+        "speed": 12,
+        "entry": 326,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1291.3829998970032,
+        "end_source_s": 1311.5829998970032,
+        "speed": 12,
+        "entry": 335,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1347.0599999427795,
+        "end_source_s": 1356.8729998588562,
+        "speed": 12,
+        "entry": 343,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1386.4900000095367,
+        "end_source_s": 1392.3429998874665,
+        "speed": 12,
+        "entry": 351,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1406.2409999370575,
+        "end_source_s": 1412.4469999790192,
+        "speed": 12,
+        "entry": 357,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1438.3389999866486,
+        "end_source_s": 1446.0869998455048,
+        "speed": 12,
+        "entry": 363,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1465.3429999351501,
+        "end_source_s": 1473.7090000629426,
+        "speed": 12,
+        "entry": 369,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1512.7130000591278,
+        "end_source_s": 1517.7620000362397,
+        "speed": 11.21999994913747,
+        "entry": 381,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1535.138000011444,
+        "end_source_s": 1538.8380000114441,
+        "speed": 2,
+        "entry": 387,
+        "device": "gripper_2",
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1556.8840000629425,
+        "end_source_s": 1560.5840000629426,
+        "speed": 2,
+        "entry": 395,
+        "device": "gripper_2",
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1594.0409998893738,
+        "end_source_s": 1597.2409998893738,
+        "speed": 2,
+        "entry": 405,
+        "device": "gripper_2",
+        "text": "Grasping the cup"
+      },
+      {
+        "start_source_s": 1649.175999879837,
+        "end_source_s": 1662.0810000419617,
+        "speed": 12,
+        "entry": 413,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1666.4219999313354,
+        "end_source_s": 1670.6219999313355,
+        "speed": 2,
+        "entry": 415,
+        "device": "gripper_1",
+        "text": "Closing the camera gripper"
+      },
+      {
+        "start_source_s": 1672.3050000667572,
+        "end_source_s": 1706.6630000591279,
+        "speed": 6,
+        "entry": 417,
+        "device": "arm_1",
+        "text": "Getting a direct handle view"
+      },
+      {
+        "start_source_s": 1747.029000043869,
+        "end_source_s": 1757.341000032425,
+        "speed": 12,
+        "entry": 428,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1796.6549999713898,
+        "end_source_s": 1804.173000049591,
+        "speed": 12,
+        "entry": 436,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1835.2039999961853,
+        "end_source_s": 1844.0099999427796,
+        "speed": 12,
+        "entry": 444,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1860.1900000572205,
+        "end_source_s": 1866.8419999599457,
+        "speed": 12,
+        "entry": 450,
+        "device": "arm_2",
+        "text": "Aligning the cup"
+      },
+      {
+        "start_source_s": 1894.8999998569489,
+        "end_source_s": 1903.6619998931885,
+        "speed": 3,
+        "entry": 458,
+        "device": "arm_2",
+        "text": "Threading the handle deeper"
+      },
+      {
+        "start_source_s": 1955.3489999771118,
+        "end_source_s": 1959.0489999771119,
+        "speed": 2,
+        "entry": 468,
+        "device": "gripper_2",
+        "text": "Testing load transfer"
+      },
+      {
+        "start_source_s": 1982.619999885559,
+        "end_source_s": 1986.3199998855591,
+        "speed": 1.25,
+        "entry": 477,
+        "device": "gripper_2",
+        "text": "Releasing onto the peg"
+      },
+      {
+        "start_source_s": 2024.888000011444,
+        "end_source_s": 2036.0980000019074,
+        "speed": 3,
+        "entry": 487,
+        "device": "arm_2",
+        "text": "Withdrawing to verify"
+      }
+    ],
+    "emphasis": [
+      "Error recovery: initial release fails, cup is recovered and the insertion replanned; an additional unsupported release is detected before the final successful hang.",
+      "Active sensing: right arm supplies wrist-camera views; after the unsuccessful load transfer, entry 413 requests a more direct angle and entry 417 moves the right arm, followed by the confirming view at entry 421."
+    ],
+    "endpoint": "Cup remains hanging after arm_2 withdraws; right-wrist observation and public success report retained. Later arm homing omitted.",
+    "framing": "Static horizontal crop: source x=288..1728, full height 1080; 4:3 framing uniformly scaled to the recording panel. Robot arms, cup, rack and all task motions retained.",
+    "motion_method": "All successful servo and nested device-write actions protected; asynchronous writes cover requested duration. Camera-clock guard: 1.0 s before and 1.2 s after. First fall and final release reviewed at half-/one-second resolution.",
+    "reviewed_files": [
+      "overview.jpg",
+      "clock-anchors.jpg",
+      "clock-wide.jpg",
+      "clock-fine.jpg",
+      "grip-anchors.jpg"
+    ]
+  },
+  "poster_time": 1.3697399997199762,
+  "review_times": [
+    0,
+    0.8,
+    1.3697399997199762,
+    2.714115687959294,
+    5.1799188101655655,
+    9.060359408747074,
+    13.956193571645178,
+    16.990171224666547,
+    17.990171224666547,
+    18.990171224666547,
+    21.488258537933934,
+    22.677934807322778,
+    28.337100887652955,
+    30.223176186804533,
+    39.20653545003294,
+    40.143155111839334,
+    44.914453949758496,
+    47.794563157202646,
+    53.16578738735691,
+    54.16578738735691,
+    56.560666316356816,
+    57.75955428586688,
+    59.8
+  ]
+}

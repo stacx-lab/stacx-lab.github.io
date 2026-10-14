@@ -12,11 +12,11 @@ A motion event starts at its latest measured source time and ends at the result'
 
 Errors may lack a time. Inspect the next device observation. The optional `end_clock_entry` explicitly chooses that measured endpoint; intervening stop calls can use the same `start_clock_entry`/`end_clock_entry` so time does not run backwards. Record this inference, and only use an observation that bounds the same motion. Never stretch one error over unrelated later movements. When several consecutive calls share only one later measurement, `following_calls` can display their original arguments and results together as an ordered sequence. Give each selection its `entry`, optional `call`, and a verbatim `result_text`, and anchor the sequence with `end_clock_entry`. Individual call boundaries remain unknown; preserve that fact in provenance.
 
-For this gallery, begin with the first user task at the first recorded frame and retain continuous source time through completion. Set `from_start: true` and `continuous_source: true`; the compiler rejects a late start or a gap. Camera images enter the terminal after their corresponding `read` result. If the raw source itself contains a discontinuity, disclose it rather than disguising it with invented frames.
+For this gallery, begin with the first user task at the first recorded frame and retain continuous source time through the reviewed task-completion endpoint. Later cleanup may be excluded; document the retained endpoint and use it as the displayed total. Set `from_start: true` and `continuous_source: true`; the compiler rejects a late start or a gap. Camera images enter the terminal after their corresponding `read` result. If the raw source itself contains a discontinuity, disclose it rather than disguising it with invented frames.
 
 ## Variable speed
 
-Use variable speed to cover the **entire recording from zero**, including earlier attempts, in the 30-second gallery budget. Preserve slower grasp closure, peg contact, and release; accelerate repeated exploration more strongly when the recording is long. The `yam-hang-mug` example retains the initial task, joint state, and first camera image, covering roughly 228 source seconds from `../backup/new7`.
+Use variable speed to cover the **retained recording from zero through completion**, including earlier attempts, within the requested time budget. About a minute is a starting point for this gallery; allow task complexity and readable movement to inform the edit. Preserve slower grasp closure, peg contact, and release; accelerate repeated exploration more strongly when the recording is long. The `yam-hang-mug` example retains the initial task, joint state, and first camera image, covering roughly 228 source seconds from `../backup/new7`.
 
 Check continuity at every event boundary as well as inside each speed segment. Shortened text excerpts do not require skipping recording time. For fast sequences with missing per-call clocks, group the original calls under the next measured observation; do not invent boundaries or make a failed attempt look successful. Set a `poster_time` during the opening scene observation so the gallery does not visually open on the finished task.
 
@@ -27,7 +27,7 @@ output_duration = (source_end - source_start) / speed
 whole_event_duration = typing_s + sum(output_duration) + result_hold_s
 ```
 
-The compiled monotonic map drives the footage lookup, displayed scene clock, speed indicator, and tool result timing. Execution remains gray-blue until the entire motion map finishes. Tool results and read images only appear at the corresponding result boundary. The reconstructed text streams during `typing_s`; source footage holds there. Record a held frame as held, not “1×”, and never record a cut with a finite speed; these values live in provenance, not under the video.
+The compiled monotonic map drives the footage lookup, displayed elapsed-time clock and tool-result timing. Playback multipliers are not displayed. Execution remains gray-blue until the entire motion map finishes. Tool results and read images only appear at the corresponding result boundary. The reconstructed text streams during `typing_s`; source footage holds there. Record a held frame as zero speed in provenance, and never record a cut with a finite speed. On screen, simply freeze the elapsed clock during a hold; do not display a speed or hold label.
 
 The map is continuous in position within an event. Segments have constant speed by default. For a gradual speed transition, supply nonnegative `start_speed` and `end_speed` with `speed` equal to their positive arithmetic mean. Speed then varies linearly over output time, and the scene clock integrates that speed exactly. Match adjacent endpoint speeds and use zero next to held frames to avoid abrupt starts and stops. The compiled provenance identifies these segments as `linear_speed`; `speed` is the mean, while `scene_clock()` returns the instantaneous speed. This does not synthesize optical-flow frames or recover original per-token timing. For a 10 FPS source, slow motion repeats available frames; inspect it rather than assuming 30 FPS export creates extra detail.
 
@@ -37,8 +37,9 @@ Top-level properties:
 
 | Property | Meaning |
 | --- | --- |
-| `title`, `subtitle` | Editorial title above the footage |
-| `session_label` | Small label beneath the terminal |
+| `title`, `subtitle` | Short task title and single metadata subtitle above the footage |
+| `robot_label` | Recorded platform name, e.g. `YAM`; builds the subtitle from each event’s recorded model/effort plus environment |
+| `status_overlay` | Optional autonomy label and source-interval activity labels; see presentation schema below |
 | `recording` | Recording filename within the input bundle |
 | `duration` | Required output duration in seconds; sum of event durations |
 | `review_times` | Sorted output times for the review contact sheet |
@@ -47,7 +48,7 @@ Top-level properties:
 | `continuous_source` | Reject omitted source intervals between events |
 | `poster_time` | Output time for the poster; use an opening observation (default 0) |
 
-Each event needs `entry` (zero-based export entry index), positive `duration`, `chapter`, and `caption`. Captions are editorial and can summarize the action; they are not fabricated assistant messages.
+Each event needs `entry` (zero-based export entry index), positive `duration`, and a short `status_caption` (or `chapter` fallback) for the footer. `caption` may retain a longer editorial explanation in the edit. These descriptions are not fabricated assistant messages.
 
 Tool events are the default. Optional selectors:
 
@@ -81,7 +82,37 @@ Example `retime` for a release beginning at source time `113.424 s` and ending a
 
 For public message events, use `kind: "user"` or `kind: "assistant"`; `text` can select a verbatim substring. The renderer verifies it belongs to the source message. Otherwise the complete public text is used. Images are looked up automatically from the chosen tool result, verified against their SHA-256, and scaled for display without altering the originals.
 
-`gallery/yam-hang-mug/edit.json` starts at source time zero. Its current revision follows the user's exact 45-second budget, retaining gradual speed transitions and slow critical moments. Ordinary travel reaches about 22.2×; the instantaneous playback multiplier appears beside the bottom-right time counter (`show_playback_speed: true`). The lower-left footer is blank. It retains the first task and observation, measured geometry, earlier attempts, grasping, release, withdrawal, and final camera evidence. Memo editing is omitted from the presentation, but intervening recording time is retained. Do not reuse source-specific entry indices for another session.
+`gallery/yam-hang-mug/edit.json` is the measured-clock simulator example. Its 45-second timeline retains initial observation, geometry, earlier attempts, grasping, release, withdrawal, and final evidence. Its existing exported media predates the current visual defaults: do not copy the old speed counter or blank lower-left footer. The bundled renderer now uses the compact status line and omits export counters and duplicate metadata; legacy `show_playback_speed` is no longer displayed. Never copy source-specific entry indices into another session.
+
+## Presentation schema
+
+```json
+{
+  "title": "Solving a 2x2 cube",
+  "robot_label": "YAM",
+  "subtitle": "YAM × GPT-6-Astra · medium · Real world",
+  "environment": "Real world",
+  "status_overlay": {
+    "autonomy": "Autonomous",
+    "activity": [
+      {"start_source_s": 0, "end_source_s": 12, "text": "Reading the task"},
+      {"start_source_s": 12, "end_source_s": 30, "text": "Inspecting the scene"}
+    ]
+  }
+}
+```
+
+These intervals illustrate the schema, not reusable timestamps. Cover the actual retained source range with reviewed labels. In the generic renderer, `status_caption` on the current event is used if no interval list is supplied, with `chapter` as a fallback. An event-level `autonomy` can label a human-assisted stage. An external adapter can override `Renderer.status(t)` for a global source map and hold-specific descriptions; the shared `draw_status()` handles typography and width validation.
+
+The default status line is `Autonomous | HH:MM:SS / HH:MM:SS | short action`. `elapsed_label()` floors source seconds and formats hours explicitly. The generic renderer subtracts the first event’s source origin and uses the last retained event endpoint as total. The external cube adapter uses its normalized recording clock and `end_source_s`. Do not substitute output seconds or the duration of discarded cleanup. Source time must agree with the footage on every frame and remain frozen during editorial holds.
+
+With `robot_label`, the renderer builds the subtitle from the active event’s recorded metadata, updating it if model/effort changes. Otherwise the authored `subtitle` is used; ensure it contains the evidence-derived robot/model/effort. The model appears nowhere else in the video chrome. Source messages and provenance remain intact. There is no bottom-right output clock or playback multiplier.
+
+## Long-run pacing example
+
+The final `abc-yam-cube` edit covers source 0–3742.28 seconds in 75 output seconds. It protects 58 successful physical-command windows, including 0.9-second alignment guards, rather than slowing only four layer turns. In this edit, other motions run at no more than 20× with at least 0.4 output seconds each, key quarter turns and final presentation at 5×, and initial lift/verification slower. Stationary planning absorbs the strongest compression. Linear speed ramps join movement and holds continuously.
+
+Those numbers are an accepted example, not defaults for a different robot or task. Inspect actual movement at presentation size. Stop on the clearly solved blue-face-up presentation and hold for 2.2 output seconds; the later table placement moves the cube out of view and is excluded. The final clock reads `01:02:22 / 01:02:22`.
 
 ## External real-world recordings
 
@@ -90,6 +121,18 @@ Use the same layout and evidence rules, with the actual camera recording on the 
 The bundled adapter specifically expects a roboenv recording manifest, frame map, and extracted pi-image manifest. It is **not** an automatic synchronizer for an arbitrary external MP4. For different inputs, add a small source adapter or produce an explicit frame map in the same schema from validated clock anchors. If device times are epoch timestamps, normalize them and the external camera times to the same origin before applying the mapper. Do not feed wall-clock seconds directly to a simulation mapping, and do not infer synchronization solely from equal video/session durations.
 
 Preserve the original input bundle and store any derived mapping separately. For different aspect ratios, the renderer letterboxes the footage rather than stretching or cropping away robot motion. Do not use wrist footage as a spectator view without identifying that viewpoint.
+
+### Cube JSONL/camera adapter
+
+`gallery/abc-yam-cube/build.py` handles the external DJI MP4 plus original `session.jsonl` and `image-inventory.json`. It shares the bundled renderer’s fonts, device map, session cards, and status-line drawing. Its top-level `retime` is a **global** map, unlike the simulator’s event-local plans:
+
+- `end_source_s`: reviewed retained end, distinct from `clock.last_frame_s` (the full recording’s last frame).
+- `retime[]`: `end_source_s` plus either `hold_s`, or `speed` and optional `end_speed`. Here `speed` is the **starting** speed. Segment duration is `2 * source_delta / (speed + end_speed)`. In event-local simulator plans, `speed` remains the **mean**, with explicit `start_speed` and `end_speed`; do not interchange the schemas.
+- `clock`: alignment origin, original FPS/frame count, anchors and uncertainty. Use original entry ISO timestamps for call submission/result completion; assistant `message.timestamp` may instead mark generation start.
+- `status_overlay.activity`: source-time action intervals, independent of which terminal calls are selected. `hold_labels` maps explicit hold reasons to short summaries. `elapsed_time` documents the displayed total and source domain.
+- `source_review.critical_moments`: reviewed physical windows and pacing decisions. Initial/ending source samples alone cannot find all movements or human interventions.
+
+The adapter extracts exact original frames into an ignored cache before composing. Change layout or captions without decoding the entire long source again. Preserve image-to-result hashes, update provenance on rerender, and finish the master before launching delivery encoders. Do not execute the source workspace’s scripts.
 
 ## Font installation
 

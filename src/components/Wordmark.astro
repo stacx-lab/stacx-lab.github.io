@@ -1,0 +1,17 @@
+---
+import { url } from '../lib/url';
+interface Props { size?: number }
+const { size = 16 } = Astro.props;
+---
+<span class="wordmark" style={`font-size: ${size}px`}>
+  <img class="day" src={url('/img/kinex-logo-text-day.svg')} alt="Kinex" width="814" height="191" />
+  <img class="night" src={url('/img/kinex-logo-text-night.svg')} alt="Kinex" width="814" height="191" />
+</span>
+<style>
+  /* Trim the source SVG's trailing blank space without scaling the artwork. */
+  .wordmark { display: inline-block; flex-shrink: 0; width: 3.94em; height: 1em; overflow: hidden; vertical-align: -0.12em; }
+  img { display: block; width: 4.265em; max-width: none; height: 1em; }
+  .night { display: none; }
+  :global(:root[data-theme='dark']) .day { display: none; }
+  :global(:root[data-theme='dark']) .night { display: block; }
+</style>

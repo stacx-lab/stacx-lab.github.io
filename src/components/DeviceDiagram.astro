@@ -1,0 +1,309 @@
+---
+const devices = [
+  { id: 'head-camera', name: 'Head camera', type: 'rgbd', detail: 'Color and depth observations provide the measurements used to estimate a target position.' },
+  { id: 'left-camera', name: 'Left wrist camera', type: 'rgb', detail: 'A close view from the left wrist provides another viewpoint for inspection and verification.' },
+  { id: 'right-camera', name: 'Right wrist camera', type: 'rgb', detail: 'A close view from the right wrist moves with the arm, helping verify the approach and grasp.' },
+  { id: 'base', name: 'Mobile base', type: 'velocity', detail: 'Moves the platform. Tools coordinate base commands with manipulation and read back its state.' },
+  { id: 'torso', name: 'Torso', type: 'joint', detail: 'Positions the upper body to bring the arms into reach, with joint state available as feedback.' },
+  { id: 'left-arm', name: 'Left arm', type: 'joint', detail: 'An independently controlled arm that can manipulate an object or reposition a wrist camera.' },
+  { id: 'right-arm', name: 'Right arm', type: 'joint', detail: 'Receives the motion command in this example and moves its end effector toward the target.' },
+  { id: 'left-gripper', name: 'Left gripper', type: 'gripper', detail: 'Opens and closes independently of the left arm so tools can compose different grasping workflows.' },
+  { id: 'right-gripper', name: 'Right gripper', type: 'gripper', detail: 'Closes after the right arm reaches the target. Device results and observations return to the agent.' },
+];
+// Coordinates are illustrative, not a calibrated robot model.
+const feedback = [
+  ['head-camera', 516, 108], ['left-camera', 579, 231], ['right-camera', 406, 219],
+  ['base', 596, 330], ['torso', 545, 198], ['left-arm', 590, 205],
+  ['right-arm', 425, 181], ['left-gripper', 573, 264], ['right-gripper', 412, 250],
+] as const;
+---
+<figure class="device-diagram" data-device-diagram aria-label="A continuous camera-to-grasp control loop">
+  <div class="diagram-top">
+    <span class="diagram-label">One coordinated grasp</span>
+    <div class="legend"><span class="command-key">Control</span><span class="feedback-key">Observations &amp; feedback</span></div>
+    <div class="playback-controls" data-flow-controls hidden>
+      <button type="button" data-flow-pause>Pause</button>
+      <button type="button" data-flow-replay aria-label="Replay the control loop">↻ Replay</button>
+    </div>
+  </div>
+  <div class="diagram-body">
+    <div class="flow-view">
+      <svg viewBox="0 0 660 430" role="img" aria-labelledby="device-flow-title device-flow-description">
+        <title id="device-flow-title">Camera observations become coordinated robot actions</title>
+        <desc id="device-flow-description">Cameras send observations to the agent, which computes a target position and uses Kinex tools and code to send an arm motion command. The arm reaches the object and the gripper closes. Images, state, and execution results from the devices return to the agent. The animation illustrates one continuous control loop.</desc>
+        <defs>
+          <marker id="device-feedback-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L8 4L0 8z" class="feedback-arrow" /></marker>
+          <marker id="device-command-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L8 4L0 8z" class="command-arrow" /></marker>
+        </defs>
+        <g class="flow-lines">
+          <path data-flow-path="observe" d="M516 98V54Q516 42 504 42H124Q112 42 112 54V167" class="flow-path observation-path" />
+          <text x="298" y="32" text-anchor="middle" class="flow-label">Images + depth</text>
+          <path data-flow-path="motion" d="M214 208H300Q318 208 318 190V162H461" class="flow-path command-path" />
+          <text x="314" y="151" class="flow-label">Motion command</text>
+          <path data-flow-path="grasp" d="M214 250H310Q326 250 326 266V286H398Q412 286 412 272V260" class="flow-path command-path" />
+          <text x="286" y="304" class="flow-label">Grasp command</text>
+          <path d="M596 330H618Q630 330 630 342V378Q630 390 618 390H124Q112 390 112 378V285" class="flow-path return-path" />
+          <text x="344" y="412" text-anchor="middle" class="flow-label">Images · measured state · execution results</text>
+          {feedback.map(([id, x, y]) => <path data-flow-path={`return-${id}`} d={`M${x} ${y}H618Q630 ${y} 630 ${y + 12}V378Q630 390 618 390H124Q112 390 112 378V285`} class="feedback-branch" />)}
+        </g>
+        <g class="agent-node">
+          <rect x="24" y="168" width="190" height="118" rx="7" class="agent-box" />
+          <text x="42" y="195" class="agent-title">Agent</text>
+          <text x="42" y="218" class="agent-activity" data-agent-activity>Reads camera observations</text>
+          <path d="M24 239H214" class="agent-divider" />
+          <text x="42" y="259" class="kinex-label">Kinex</text>
+          <text x="42" y="276" class="agent-subtitle">Writes &amp; runs tools / code</text>
+          <circle cx="193" cy="191" r="3" class="agent-indicator" />
+        </g>
+        <g transform="translate(300 0) scale(.77)">
+          <ellipse cx="280" cy="459" rx="143" ry="15" class="ground" />
+          <g class="part actuator" data-robot-device="base">
+            <rect x="176" y="379" width="24" height="64" rx="9" class="wheel" />
+            <rect x="360" y="379" width="24" height="64" rx="9" class="wheel" />
+            <rect x="190" y="375" width="180" height="67" rx="18" class="shell" />
+            <path d="M210 388H350 M213 431H347" class="detail" />
+            <circle cx="221" cy="407" r="4" class="indicator" /><circle cx="339" cy="407" r="4" class="indicator" />
+            <text x="280" y="415" text-anchor="middle" class="part-label">Base</text>
+          </g>
+          <g class="part actuator" data-robot-device="torso">
+            <path d="M254 330V376H306V330" class="shell" />
+            <rect x="242" y="177" width="76" height="159" rx="15" class="shell" />
+            <path d="M258 193V239 M302 193V239 M257 281H303 M257 291H303 M257 301H303" class="detail" />
+            <text x="280" y="262" text-anchor="middle" class="part-label">Torso</text>
+            <path d="M280 177V154" class="joint-link" />
+          </g>
+          {['right', 'left'].map((side, i) => (
+            <g class="part actuator" data-robot-device={`${side}-arm`}>
+              <g transform={i ? 'translate(560 0) scale(-1 1)' : undefined}>
+                <path d="M242 211H211L183 266L205 313" class="arm-edge" data-moving-arm={!i ? '' : undefined} />
+                <path d="M242 211H211L183 266L205 313" class="arm-fill" data-moving-arm={!i ? '' : undefined} />
+                <circle cx="211" cy="211" r="15" class="joint" />
+                <circle cx="183" cy="266" r="13" class="joint" data-moving-elbow={!i ? '' : undefined} />
+                <circle cx="205" cy="313" r="10" class="joint" data-moving-wrist={!i ? '' : undefined} />
+                <circle cx="211" cy="211" r="5" class="joint-center" />
+                <circle cx="183" cy="266" r="4" class="joint-center" data-moving-elbow={!i ? '' : undefined} />
+              </g>
+            </g>
+          ))}
+          <rect x="137" y="333" width="16" height="20" rx="3" class="target-object" />
+          <path d="M129 334V325H138 M152 325H161V334 M161 352V361H152 M138 361H129V352" class="target-reticle" />
+          {['right', 'left'].map((side, i) => (
+            <g class="part actuator" data-robot-device={`${side}-gripper`}>
+              <g transform={i ? 'translate(560 0) scale(-1 1)' : undefined} data-moving-gripper={!i ? '' : undefined}>
+                <rect x="191" y="323" width="28" height="19" rx="4" class="shell" />
+                <path d="M194 342L189 350V358L194 361" class="finger" data-moving-finger={!i ? 'left' : undefined} />
+                <path d="M216 342L221 350V358L216 361" class="finger" data-moving-finger={!i ? 'right' : undefined} />
+              </g>
+            </g>
+          ))}
+          {[
+            { id: 'head-camera', x: 280, y: 140 },
+            { id: 'right-camera', x: 198, y: 300 },
+            { id: 'left-camera', x: 362, y: 300 },
+          ].map(camera => (
+            <g class:list={['part', 'sensor', { 'is-selected': camera.id === 'head-camera' }]} data-robot-device={camera.id}>
+              <g data-moving-camera={camera.id === 'right-camera' ? '' : undefined}>
+                <rect x={camera.x - 24} y={camera.y - 13} width="48" height="26" rx="7" class="shell" />
+                <circle cx={camera.x} cy={camera.y} r="8" class="lens" /><circle cx={camera.x} cy={camera.y} r="3" class="lens-center" />
+              </g>
+            </g>
+          ))}
+        </g>
+        <g class="packets" aria-hidden="true">
+          <circle r="4" data-flow-packet="observe" class="feedback-packet" />
+          <circle r="4" data-flow-packet="motion" class="command-packet" />
+          <circle r="4" data-flow-packet="grasp" class="command-packet" />
+          {feedback.map(([id]) => <circle r="3" data-flow-packet={`return-${id}`} class="feedback-packet" />)}
+        </g>
+      </svg>
+      <p class="flow-summary" data-flow-summary>Camera observations → target position → arm motion → grasp → feedback</p>
+    </div>
+    <aside class="device-bank" aria-label="Robot devices">
+      <div class="bank-title">Devices <span>9 interfaces</span></div>
+      <div class="device-list">
+        {devices.map((device, i) => (
+          <button type="button" class:list={['device-chip', { 'is-selected': i === 0 }]} data-device-select={device.id} data-device-detail={device.detail} aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="device-inspection">
+            <span>{device.name}</span><small>{device.type}</small>
+          </button>
+        ))}
+      </div>
+      <p class="device-inspection" id="device-inspection" aria-live="polite"><strong data-device-name>{devices[0].name}.</strong> <span data-device-description>{devices[0].detail}</span></p>
+    </aside>
+  </div>
+  <figcaption>Illustrative robot and control loop. Each device has its own type, profile, and driver; tools coordinate them into a workflow.</figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-device-diagram]').forEach(diagram => {
+    const deviceButtons = [...diagram.querySelectorAll<HTMLButtonElement>('[data-device-select]')];
+    const parts = [...diagram.querySelectorAll<SVGGElement>('[data-robot-device]')];
+    const pause = diagram.querySelector<HTMLButtonElement>('[data-flow-pause]')!;
+    const replay = diagram.querySelector<HTMLButtonElement>('[data-flow-replay]')!;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const activity = diagram.querySelector<SVGTextElement>('[data-agent-activity]')!;
+    const summary = diagram.querySelector<HTMLElement>('[data-flow-summary]')!;
+    const movingArm = [...diagram.querySelectorAll<SVGPathElement>('[data-moving-arm]')];
+    const elbows = [...diagram.querySelectorAll<SVGCircleElement>('[data-moving-elbow]')];
+    const wrist = diagram.querySelector<SVGCircleElement>('[data-moving-wrist]')!;
+    const gripper = diagram.querySelector<SVGGElement>('[data-moving-gripper]')!;
+    const camera = diagram.querySelector<SVGGElement>('[data-moving-camera]')!;
+    const leftFinger = diagram.querySelector<SVGPathElement>('[data-moving-finger="left"]')!;
+    const rightFinger = diagram.querySelector<SVGPathElement>('[data-moving-finger="right"]')!;
+    const packets = [...diagram.querySelectorAll<SVGCircleElement>('[data-flow-packet]')].map(dot => {
+      const key = dot.dataset.flowPacket!;
+      const path = diagram.querySelector<SVGPathElement>(`[data-flow-path="${key}"]`)!;
+      return { key, dot, path, length: path.getTotalLength() };
+    });
+    const feedbackIds = deviceButtons.map(button => button.dataset.deviceSelect!);
+    let elapsed = 0, paused = false, visible = false, frame = 0, lastTime = 0, lastAction = '';
+    const clamp = (n: number) => Math.max(0, Math.min(1, n));
+    const ease = (n: number) => { const x = clamp(n); return x * x * (3 - 2 * x); };
+    const setPoint = (node: SVGCircleElement, x: number, y: number) => { node.setAttribute('cx', String(x)); node.setAttribute('cy', String(y)); };
+    const draw = (seconds: number) => {
+      const t = seconds % 14;
+      const reach = t < 11.8 ? ease((t - 4.7) / 2.2) : 1 - ease((t - 11.8) / 1.8);
+      const grip = t < 11.8 ? ease((t - 7.5) / 1) : 1 - ease((t - 11.8) / .7);
+      const ex = 183 - 20 * reach, ey = 266 - 30 * reach, wx = 205 - 60 * reach, wy = 313 - 15 * reach;
+      movingArm.forEach(path => path.setAttribute('d', `M242 211H211L${ex} ${ey}L${wx} ${wy}`));
+      elbows.forEach(node => setPoint(node, ex, ey)); setPoint(wrist, wx, wy);
+      const transform = `translate(${-60 * reach} ${-15 * reach})`;
+      gripper.setAttribute('transform', transform); camera.setAttribute('transform', transform);
+      const l = 189 + 8 * grip, r = 221 - 8 * grip;
+      leftFinger.setAttribute('d', `M194 342L${l} 350V358L${l + 5} 361`);
+      rightFinger.setAttribute('d', `M216 342L${r} 350V358L${r - 5} 361`);
+      const action = t < 2 ? 'observe' : t < 3.5 ? 'compute' : t < 7 ? 'move' : t < 8.6 ? 'grasp' : t < 11.8 ? 'feedback' : 'reset';
+      if (action !== lastAction) {
+        lastAction = action; diagram.dataset.flow = action;
+        const labels: Record<string, [string, string]> = {
+          observe: ['Reads camera observations', 'Cameras send images and depth to the agent.'],
+          compute: ['Computes target position', 'The agent estimates the target position and plans the approach.'],
+          move: ['Runs arm motion code', 'Kinex tools send the motion command; the arm moves toward the target.'],
+          grasp: ['Commands the grasp', 'The gripper closes after the arm reaches the target.'],
+          feedback: ['Checks device feedback', 'Images, measured state, and execution results return to the agent.'],
+          reset: ['Ready for the next action', 'The agent uses the feedback to decide what to do next.'],
+        };
+        activity.textContent = labels[action][0]; summary.textContent = labels[action][1];
+        const active = action === 'observe' ? ['head-camera', 'left-camera', 'right-camera'] : action === 'move' ? ['right-arm'] : action === 'grasp' ? ['right-gripper'] : action === 'feedback' ? feedbackIds : [];
+        parts.forEach(part => part.classList.toggle('is-flowing', active.includes(part.dataset.robotDevice!)));
+        deviceButtons.forEach(button => button.classList.toggle('is-flowing', active.includes(button.dataset.deviceSelect!)));
+      }
+      packets.forEach(({ key, dot, path, length }, index) => {
+        let progress = -1;
+        if (key === 'observe') progress = (t - .2) / 1.5;
+        else if (key === 'motion') progress = (t - 3.5) / 1.1;
+        else if (key === 'grasp') progress = (t - 7) / .5;
+        else progress = (t - 8.65 - (index - 3) * .1) / 1.7;
+        const shown = progress >= 0 && progress <= 1 && !motion.matches;
+        dot.style.opacity = shown ? '1' : '0';
+        if (shown) { const point = path.getPointAtLength(progress * length); setPoint(dot, point.x, point.y); }
+      });
+    };
+    const tick = (now: number) => {
+      if (lastTime) elapsed += Math.min((now - lastTime) / 1000, .1);
+      lastTime = now; draw(elapsed); frame = requestAnimationFrame(tick);
+    };
+    const updatePlayback = () => {
+      cancelAnimationFrame(frame); lastTime = 0;
+      const running = !paused && visible && !document.hidden && !motion.matches;
+      diagram.dataset.running = String(running); pause.textContent = paused ? 'Play' : 'Pause';
+      diagram.querySelector<HTMLElement>('[data-flow-controls]')!.hidden = motion.matches;
+      if (running) frame = requestAnimationFrame(tick);
+    };
+    pause.addEventListener('click', () => { paused = !paused; updatePlayback(); });
+    replay.addEventListener('click', () => { elapsed = 0; paused = false; draw(0); updatePlayback(); });
+    deviceButtons.forEach(button => button.addEventListener('click', () => {
+      deviceButtons.forEach(other => { other.classList.toggle('is-selected', other === button); other.setAttribute('aria-pressed', String(other === button)); });
+      parts.forEach(part => part.classList.toggle('is-selected', part.dataset.robotDevice === button.dataset.deviceSelect));
+      diagram.querySelector<HTMLElement>('[data-device-name]')!.textContent = button.querySelector('span')!.textContent + '.';
+      diagram.querySelector<HTMLElement>('[data-device-description]')!.textContent = button.dataset.deviceDetail!;
+      paused = true; updatePlayback();
+    }));
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; updatePlayback(); }, { threshold: .15 }).observe(diagram);
+    document.addEventListener('visibilitychange', updatePlayback);
+    motion.addEventListener('change', () => { elapsed = 0; draw(0); updatePlayback(); });
+    draw(0); updatePlayback();
+  });
+</script>
+
+<style>
+  .device-diagram { --signal: var(--accent); max-width: 860px; margin: 0 auto; border: 1px solid var(--rule); border-radius: 7px; background: var(--panel); overflow: hidden; }
+  .device-diagram[data-flow='observe'], .device-diagram[data-flow='feedback'] { --signal: var(--ok); }
+  [hidden] { display: none !important; }
+  .diagram-top { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 18px; border-bottom: 1px solid var(--rule); }
+  .diagram-label { color: var(--ink-2); font: 11px var(--font-mono); }
+  .legend { display: flex; gap: 14px; margin-left: auto; font-size: 10px; }
+  .legend span::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; margin-right: 5px; background: currentColor; }
+  .command-key { color: var(--accent-ink); } .feedback-key { color: var(--ok); }
+  .playback-controls { display: flex; gap: 6px; }
+  .playback-controls button { border: 1px solid var(--rule); border-radius: 4px; padding: 3px 7px; background: var(--bg); color: var(--ink-2); font: 11px var(--font-body); cursor: pointer; }
+  .diagram-body { display: grid; grid-template-columns: minmax(0, 1fr) 190px; align-items: center; }
+  .flow-view { min-width: 0; padding: 8px 8px 12px; }
+  svg { display: block; width: 100%; height: auto; }
+  .flow-path, .feedback-branch { fill: none; stroke-width: 1.3; stroke: var(--rule-2); }
+  .observation-path, .return-path { marker-end: url(#device-feedback-arrow); }
+  .command-path { marker-end: url(#device-command-arrow); }
+  .feedback-arrow { fill: var(--ok); } .command-arrow { fill: var(--accent); }
+  .feedback-branch { opacity: 0; stroke: var(--ok); stroke-dasharray: 3 5; }
+  [data-flow='observe'] .observation-path, [data-flow='feedback'] .return-path { stroke: var(--ok); }
+  [data-flow='move'] [data-flow-path='motion'], [data-flow='grasp'] [data-flow-path='grasp'] { stroke: var(--accent); }
+  [data-flow='feedback'] .feedback-branch { opacity: .3; }
+  .flow-label { font: 11px var(--font-body); fill: var(--ink-3); }
+  .agent-box { fill: var(--bg); stroke: var(--rule-2); stroke-width: 1.4; }
+  .agent-title { font: 600 20px var(--font-head); fill: var(--ink); }
+  .agent-activity { font: 12px var(--font-body); fill: var(--ink-2); }
+  .agent-divider { stroke: var(--rule); }
+  .kinex-label { font: 600 12px var(--font-body); fill: var(--accent-ink); }
+  .agent-subtitle { font: 10px var(--font-mono); fill: var(--ink-3); }
+  .agent-indicator { fill: var(--signal); }
+  [data-flow='compute'] .agent-box { stroke: var(--accent); }
+  [data-flow='feedback'] .agent-box { stroke: var(--ok); }
+  .ground { fill: var(--bg-2); }
+  .part { --part-color: var(--ink-3); }
+  .shell, .joint { fill: var(--bg-2); stroke: var(--part-color); stroke-width: 1.5; }
+  .wheel { fill: var(--ink-2); }
+  .detail { fill: none; stroke: var(--rule-2); stroke-width: 2; }
+  .indicator, .joint-center { fill: var(--part-color); }
+  .arm-edge { fill: none; stroke: var(--part-color); stroke-width: 29; stroke-linejoin: round; stroke-linecap: round; }
+  .arm-fill { fill: none; stroke: var(--bg-2); stroke-width: 25; stroke-linejoin: round; stroke-linecap: round; }
+  .joint-link, .finger { fill: none; stroke: var(--part-color); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .part-label { font: 600 12px var(--font-body); fill: var(--ink-2); }
+  .lens { fill: var(--panel); stroke: var(--part-color); stroke-width: 2; }
+  .lens-center { fill: var(--part-color); }
+  .part.is-selected { --part-color: var(--accent); }
+  .part.is-flowing { --part-color: var(--signal); }
+  .part.is-selected .shell { stroke-width: 2.5; }
+  .target-object { fill: color-mix(in srgb, var(--warn) 20%, var(--panel)); stroke: var(--warn); stroke-width: 1.5; }
+  .target-reticle { fill: none; stroke: var(--ok); stroke-width: 1.5; opacity: 0; }
+  [data-flow='compute'] .target-reticle { opacity: 1; }
+  .packets circle { opacity: 0; }
+  .feedback-packet { fill: var(--ok); } .command-packet { fill: var(--accent); }
+  .flow-summary { margin: 0 12px; min-height: 3em; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+  .device-bank { align-self: stretch; border-left: 1px solid var(--rule); padding: 14px 12px 12px; }
+  .bank-title { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px; font-size: 15px; font-weight: 600; }
+  .bank-title span { color: var(--ink-3); font-size: 10px; font-weight: 400; }
+  .device-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .device-chip { display: flex; align-items: center; justify-content: space-between; gap: 6px; text-align: left; min-width: 0; border: 1px solid var(--rule); border-radius: 4px; padding: 6px; background: var(--bg); color: var(--ink-2); cursor: pointer; font: 11px/1.35 var(--font-body); }
+  .device-chip small { flex-shrink: 0; color: var(--ink-3); font: 9px var(--font-mono); }
+  .device-chip:hover, .device-chip.is-selected { border-color: var(--accent); }
+  .device-chip.is-flowing { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 6%, var(--panel)); }
+  .device-inspection { font-size: 11px; line-height: 1.6; color: var(--ink-2); margin: 14px 0 0; }
+  .device-inspection strong { color: var(--ink); font-weight: 600; }
+  figcaption { padding: 10px 18px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 760px) {
+    .diagram-body { grid-template-columns: minmax(0, 1fr); }
+    .device-bank { border-left: 0; border-top: 1px solid var(--rule); padding: 14px 16px; }
+    .device-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .device-inspection { min-height: 3.2em; }
+  }
+  @media (max-width: 480px) {
+    .diagram-top { gap: 10px; padding: 12px; }
+    .diagram-label { flex-basis: 100%; }
+    .legend { margin-left: 0; gap: 10px; font-size: 9px; }
+    .playback-controls { margin-left: auto; }
+    .flow-view { padding: 8px 2px 12px; }
+    .flow-summary { font-size: 11px; }
+    .device-bank { padding: 12px; }
+    figcaption { padding-inline: 12px; }
+  }
+</style>

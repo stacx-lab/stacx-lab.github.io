@@ -7,32 +7,192 @@
   ],
   "clips": [
     {
+      "id": "abc-yam-cube",
+      "source": "gallery/.masters/abc-yam-cube.mp4",
+      "source_sha256": "9ec41fbda1da34d6d8a88e890d369b33834673187b076986fd4af9cfad70268a",
+      "source_bytes": 21947466,
+      "mp4_sha256": "04446cb065eb32810944d3e8eb99a9f4352e7f4a6decef9f5c2a7652312f80e5",
+      "duration_s": 75,
+      "fps": 30,
+      "frame_count": 2250,
+      "width": 1920,
+      "height": 1080,
+      "playback_rate": 1,
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "environment": "Real world",
+      "metadata_source": "Original session.jsonl model_change entries and all assistant thinkingLevel fields; gallery/abc-yam-cube/abc-yam-cube.provenance.json.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
+      "files": {
+        "mp4": {
+          "bytes": 7430358,
+          "sha256": "04446cb065eb32810944d3e8eb99a9f4352e7f4a6decef9f5c2a7652312f80e5"
+        },
+        "webm": {
+          "bytes": 8881367,
+          "sha256": "267f1da31b4f1773aa891148b35d2abb47c861fed0fb62ce10385ce105cc5168"
+        },
+        "poster.jpg": {
+          "bytes": 434537,
+          "sha256": "2ae144756f5485eba36085942c003ae24b4920893764a3c1bc92942520c7643d"
+        }
+      },
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "3",
+          "-b:v",
+          "0",
+          "-crf",
+          "38",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/abc-yam-cube/abc-yam-cube.provenance.json"
+    },
+    {
+      "id": "go2-trash-clean",
+      "source": "gallery/.masters/go2-trash-clean.mp4",
+      "source_sha256": "31961f393eff23d1a955d015be468e86c395be5d029fe001df3f31d072551f0d",
+      "source_bytes": 14631255,
+      "mp4_sha256": "66fed74f7a3f54d9f950f86bace1204544e90767d2635a8765749f6efe56cf2e",
+      "duration_s": 89,
+      "fps": 30,
+      "frame_count": 2670,
+      "width": 1920,
+      "height": 1080,
+      "playback_rate": 1,
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "environment": "Real world",
+      "robot": "Go2 + D1",
+      "metadata_source": "Original model_change/thinking_level_change entries, reconciled with assistant message model fields.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
+      "files": {
+        "mp4": {
+          "bytes": 4997697,
+          "sha256": "66fed74f7a3f54d9f950f86bace1204544e90767d2635a8765749f6efe56cf2e"
+        },
+        "webm": {
+          "bytes": 6142162,
+          "sha256": "38e53536e6c028d83b38602d34c20220567e35a6977dee6d31d2c215c1f795a4"
+        },
+        "poster.jpg": {
+          "bytes": 328948,
+          "sha256": "e26627f003edc834680134b079e694f1846ad658f235cf826906d4ebae3070d4"
+        }
+      },
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "3",
+          "-b:v",
+          "0",
+          "-crf",
+          "38",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/go2-trash-clean/go2-trash-clean.provenance.json"
+    },
+    {
       "id": "real-hang-mug",
       "source": "gallery/.masters/real-hang-mug.mp4",
-      "mp4_sha256": "8fe0576f4da90af4e90b2b1ab9e3d21ca7600bc2cd69d0432cd2f6448b870e16",
+      "source_sha256": "47ee07043177ac972bc2633a046835f2d5f49c4fcdc7ec27540823910806ed3a",
+      "source_bytes": 16843324,
+      "mp4_sha256": "c011f41b361767e171426c772bf1a67600396371a921323089bd2fcaf2fbdea0",
       "duration_s": 60,
       "fps": 30,
+      "frame_count": 1800,
+      "width": 1920,
+      "height": 1080,
       "playback_rate": 1,
       "model": "gpt-6-astra",
       "effort": "high",
-      "metadata_source": "Visible model/effort in the original session footer.",
-      "source_sha256": "b3c4eba3cbf71cc624e7d925a890837ba148974003e9d4a09d16c28581b2ef8e",
-      "source_bytes": 28991428,
+      "environment": "Real world",
+      "robot": "YAM",
+      "metadata_source": "Original model_change/thinking_level_change entries, reconciled with assistant message model fields.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
       "files": {
         "mp4": {
-          "bytes": 7964451,
-          "sha256": "8fe0576f4da90af4e90b2b1ab9e3d21ca7600bc2cd69d0432cd2f6448b870e16"
+          "bytes": 5322677,
+          "sha256": "c011f41b361767e171426c772bf1a67600396371a921323089bd2fcaf2fbdea0"
         },
         "webm": {
-          "bytes": 8674287,
-          "sha256": "319fab29cd0f75822f7be9f9919c261793d5b784cf26f8e01dbfedef0033896e"
+          "bytes": 5878352,
+          "sha256": "8471f1e52737322a4fb869b96008bf2c40a85e33bc9bfaf894bf2bcbcd348c90"
+        },
+        "poster.jpg": {
+          "bytes": 472343,
+          "sha256": "5fbd92ec8d654457eac0f7ccfdad4da35e26bdff3a9a3bf24faddfc6590a60c8"
         }
       },
-      "environment": "Real world",
-      "width": 1920,
-      "height": 1080,
-      "source_first_pts_s": 0.066667,
-      "delivery_first_pts_s": 0
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "3",
+          "-b:v",
+          "0",
+          "-crf",
+          "38",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/real-hang-mug/real-hang-mug.provenance.json"
     },
     {
       "id": "yam-hang-mug",

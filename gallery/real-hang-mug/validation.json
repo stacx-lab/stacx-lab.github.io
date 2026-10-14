@@ -1,0 +1,26 @@
+{
+  "timeline": "Continuous source from frame zero through verified hanging cup; ramp continuity and inverse checked.",
+  "evidence": "No selected result or camera observation precedes its recorded result timestamp; all images hash verified.",
+  "status": "All frame labels match recording elapsed/retained total, fit the left column, and distinguish recovery, right-camera positioning, and final verification.",
+  "files": [
+    {
+      "file": "gallery/.masters/real-hang-mug.mp4",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/real-hang-mug/real-hang-mug.mp4",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/real-hang-mug/real-hang-mug.webm",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    }
+  ],
+  "webm_timestamp_tolerance_s": 0.0011
+}

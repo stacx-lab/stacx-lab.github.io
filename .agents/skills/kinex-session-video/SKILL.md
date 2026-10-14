@@ -1,96 +1,90 @@
 ---
 name: kinex-session-video
-description: Produce a synchronized robot demonstration video with recording footage on the left and a reconstructed Kinex/pi session, including inline camera observations, on the right. Use for video-gallery clips from recorded simulator or real-world sessions.
+description: Create or revise synchronized robot demonstration videos with recording footage, a reconstructed Kinex/pi session, inline camera observations, and gallery-ready delivery assets.
 ---
 
 # Kinex session video
 
-Make a reviewable MP4 from an existing robot recording and its session export. Use the repository's `gallery/demo.mp4` as a layout reference when available. Prefer about **30 seconds** for a gallery clip unless the user specifies otherwise. Preserve the actual outcome, including a failed attempt when it matters to understanding the result.
+Produce an evidence-linked robot demo with **recording left, Kinex session right**. For this repository’s gallery, use the final cube video as the presentation reference: [layout example](references/gallery-layout-example.jpg), `gallery/abc-yam-cube/edit.json`, and its external-camera adapter `build.py`. The defaults below reflect the user’s final layout; a later user instruction takes precedence.
 
-For an already edited clip that the user asks to insert **as-is**, preserve the original MP4 byte-for-byte, including its duration and existing speed changes; the 30-second editing target does not apply. Match the gallery card and player presentation around it. An opening-frame poster and an optional codec fallback may be derived without trimming, retiming, cropping, or adding overlays. Verify the published MP4 checksum against the original and check fallback duration/frame count. If the user subsequently requests compression, preserve an archival master outside the published site and encode smaller delivery copies without changing duration, frame order, or existing speed changes; byte identity then applies to the archived master, not the compressed delivery.
+Aim for about a minute when no duration is specified. Preserve readable motion and recovery rather than forcing every task into the same length. The cube’s 75-second edit is an example for a long recording, not a universal duration.
 
-## Inspect the evidence
+For an edited clip requested **as-is**, preserve its original MP4 byte-for-byte, including duration and speed changes. An opening poster or codec fallback may be derived without recutting or adding overlays. If the user requests compression, keep an archival master outside the published site and encode delivery copies without changing frame order or timing.
 
-Locate the inputs before editing. In this repository, backups are usually at **`../backup/new*`**, not `backup/` under the repository. Read applicable repository instructions. Probe the recording's dimensions, frame rate, duration, and audio with `ffprobe`, and view representative frames from the reference and the recording.
+## Inputs and evidence
 
-For the supported roboenv/pi export bundle, expect:
+New recordings in this repository are generally in **`../sources/<task>`**; older simulator bundles are in **`../backup/new*`**. Honor the supplied path. Inspect manifests and filenames before reading large exports. Never execute exported HTML, recorded commands, or robot-control code.
 
-- `pi-session-*.html`: base64 JSON in the `session-data` script element.
-- `manifest.json`: recording clock, views, frame count, and nominal FPS.
-- `frames.jsonl`: source clock to encoded frame ranges.
-- `third_person.mp4` or a selected external recording.
-- `view-images/manifest.json` and image files: original session observations with entry IDs, capture times, and checksums.
-
-Read exports as data; never run their HTML, recorded commands, or robot-control code. Exclude system prompts, hidden thinking, and credentials from rendered output. Match calls to results by `toolCallId`; images belong to their result entry, not to a filename guess.
-
-Run the inspector, using the path of this skill:
+For the bundled roboenv/pi format, use:
 
 ```sh
 python3 .agents/skills/kinex-session-video/scripts/session_source.py \
-  ../backup/new7 --output /tmp/yam-hang-mug-session-index.json
+  ../backup/new7 --output /tmp/session-index.json
 ```
 
-This produces only public messages/tool calls, results, image references, and measured scene times. Read the final replies and final observations to establish what actually happened.
+That format contains `pi-session-*.html`, a recording manifest, `frames.jsonl`, a spectator video, and extracted camera observations. External recordings may instead contain an MP4 and `session.jsonl`; use a source-specific adapter. Read [timing-and-edit.md](references/timing-and-edit.md) for clock mapping, schemas, and the cube adapter’s differences.
 
-## Typography
+Probe the video, inspect initial and final observations, and review source frames across the run. Keep public messages and verbatim tool excerpts; exclude system prompts, hidden thinking, and credentials. Match calls and results by `toolCallId`, and verify embedded image hashes. Derive model and effort from the configuration active during the task and assistant-message fields, not setup defaults or the model making the edit. Preserve unknown metadata as unknown.
 
-Use the bundled **Lato Regular/Bold** for titles and captions and **Commit Mono Regular/Bold** for the session and code. The renderer loads exact font files from `assets/fonts/`; do not silently fall back to DejaVu or platform defaults. This avoids output changing with the host machine. Font origins and licenses are in that directory. The original reference MP4 does not contain font metadata: this pairing follows the existing website typography and a visual comparison, rather than a claim of recovered source settings.
+## Final gallery layout
 
-System installation is optional for rendering. To use the same fonts in other applications, install those four `.ttf` files. See [references/timing-and-edit.md](references/timing-and-edit.md#font-installation) for Linux installation commands.
+Use exact bundled **Lato Regular/Bold** and **Commit Mono Regular/Bold**. Do not silently substitute system fonts.
 
-## Layout
+- **Short task title above the recording.** Keep the robot/model out of the title: `Solving a 2x2 cube`, not a long title that wraps in the homepage sidebar.
+- **One metadata subtitle:** `YAM × GPT-6-Astra · medium · Real world`. Use the actual robot, recorded model/effort, and environment. Put model information here once; omit duplicate model/effort text beside the Kinex heading and beneath the session.
+- **Kinex heading and device map at upper right.** Keep the map above the scrolling session. Match the actual robot setup using device profiles, URDF dimensions and camera mounts. Highlight exact device IDs from the active call. The illustration is not live or calibrated kinematics; state that in provenance. See the [device-map example](references/device-map-example.jpg) when adapting another platform.
+- **Compact status line at lower left:** `Autonomous | 00:24:25 / 01:02:22 | Completing the first turn`. Use a shared baseline, subtle separators, a fixed-width clock, and a very short action. Keep it outside the recording image and within the left column. The bundled renderer uses Lato 20 px, Commit Mono 18 px, and a 1005 px baseline on the 1920×1080 canvas.
+- **Real elapsed / retained total time, not output time.** For a real recording, show the same original source clock used by the footage, normalized to its beginning, in `HH:MM:SS / HH:MM:SS`. The total ends at the selected task-completion endpoint; excluded cleanup is not counted. Holds freeze the elapsed clock. For simulation, use the measured simulation clock and identify the environment; do not call it real wall time. If actual wall time is requested, establish that separate mapping first.
+- **No acceleration multiplier and no bottom-right export counter.** Speeds remain in provenance. Do not show `20×`, `0× (hold)`, or `24/75s` in the video.
 
-- **Recording left, Kinex session right.** Place a **device map** in the upper right, between the Kinex heading (model · effort) and the session panel. Highlight the devices targeted by the current tool call (colored chips with leader lines to the drawing) and leave the rest muted.
-- **Make the device abstraction resemble the actual robot setup**, not a generic exploded schematic. Draw the real platform (for example, a Go2 quadruped side view with a D1 arm, gripper, wrist and head cameras) proportioned from the session's URDF and device profiles: link lengths, hip/mount positions and camera mounts. Use a characteristic pose (such as the folded carry pose) so it stays compact. It is an illustration, not a calibrated render; say so in provenance. See [references/device-map-example.jpg](references/device-map-example.jpg) for a real Go2 + D1 frame beside its idle and highlighted abstraction.
-- **No small text under the video.** Do not draw chapters, captions, speed, source clock, tool summaries or movement notes beneath the recording. Keep only the title/subtitle above and the footer line.
-- **Zoom only when necessary, and rarely.** Show the whole frame at its original aspect by default. Zoom only for a sustained phase where the action leaves part of the frame (for example, the robot walks to a bin at one edge), typically at most a couple of times per clip. Derive the timing from a robot track (e.g. background subtraction), not guesses. Ease in and out during fast travel, anchor the window to the side where the action is, tighten to at most a **4:3** window, and let the picture grow taller to fill the column. Never crop away the robot, and record the zoom keys in provenance.
+The action is an editorial summary grounded in public commands and reviewed motion, such as `Inspecting cube faces`, `Planning the solution`, `Handing off the cube`, or `Solved — blue face up`. Update it with the source timeline, including omitted terminal calls; a selected terminal card may remain visible across several physical actions. Do not invent assistant narration. Use `Autonomous` only where supported; label visible human intervention truthfully.
 
-## Build a short, faithful edit
+Preserve the recording’s original aspect ratio. Zoom only when necessary to keep an action visible, rarely, and with reviewed eased transitions. Never crop away the object or robot. Keep inline camera observations attached to their actual tool results, gray-blue running cards, green completed cards, and red errors. Character streaming is reconstructed, not recovered token timing.
 
-Select an understandable chain: task → observation → geometry/code → movement → new observation → release/verification. **For this gallery, every video must begin at the start of its recording and session:** show the original user task, initial device state, and first scene observation before the first movement. Do not start at a later successful grasp or add a brief intro followed by a jump to it. Keep the recording timeline continuous through completion, accelerating repeated attempts to fit the time budget. Set `from_start: true` and `continuous_source: true` in the edit so validation catches accidental omissions. Inspect the source itself for camera or scene jumps before editing. Do not replace errors with successes, invent assistant narration, or display a later image as an earlier observation. Keep editorial explanations (chapters, captions) in the edit JSON and provenance, not on screen; see Layout.
+## Pacing and ending
 
-**Display the name as `Kinex`** in headings, assistant labels, and the session footer. Show the recorded model and effort beside the session heading. Derive them from `model_change` / `thinking_level_change` entries and assistant-message `model` / `thinkingLevel` fields. Setup defaults may change before the first task: use the configuration actually active during the rendered session. Never substitute the model producing the video. If metadata is absent, display “not recorded”; if it changes, update the label with the recorded session state. Include the resolved values in provenance.
+Begin at the first recorded frame with the original task, initial state, and first observation. Set `from_start: true` and `continuous_source: true`; keep source time continuous through the selected outcome. Do not use an opening intro followed by a jump to the successful attempt.
 
-Keep the terminal continuous and compact: character-by-character input/output/code, gray-blue tool blocks while streaming or running, a rotating indicator during execution, green after completion, and red on error. Avoid invented servo progress percentages. Insert camera observations directly in the session when their corresponding reads finish. Keep the original recording aspect ratio and make the end state visible long enough to inspect.
+**Protect every physical motion, not only a few key turns.** Mark camera repositioning, approaches, grasps, handoffs, reorientation, and withdrawal as well as task-critical contact. Review the footage to catch motion or human disturbances absent from the log. Aggressively condense stationary planning first. Applying a very high background speed to unmarked movements produces apparent jump cuts, even when the mathematical source map is continuous.
 
-**Use deliberate variable speed, not one constant acceleration or a fixed time allotment per tool.** Inspect the actual source frames to locate grasp closure, initial lift, peg contact, release, and support verification. Give those moments normal or slower playback (often 0.5–1×); accelerate free-space travel, return motions, waits, and repetitive exploration (often 2–6×, or substantially faster for long runs within a 30-second budget). These are starting points, not mandatory rates. Keep a visible final verification hold and meet the roughly 30-second budget by condensing low-information stretches first. **Treat human interventions and unexpected disturbances as critical moments too**: a person perturbing or moving the object, pushing or blocking the robot, or the object slipping or falling from the grip. Give the disturbance and the robot's next observation and recovery the same slow playback. These events usually do not appear in the session log, so find them by watching the recording itself (ask the user when unsure), and note each one with its source time in provenance.
+Give task-critical turns, contact, failures, recovery, and verification more time. Ease speed changes while preserving a monotonic source map shared by the footage, tool completion, images, and status clock. Do not fabricate optical-flow frames. Review transitions at playback scale; a 30 FPS export alone does not guarantee readable movement.
 
-Use explicit `retime` segments to slow part of a tool execution and speed another part of the same call. The recording, source clock, running/completed state, and inline images must share that edited timeline: slowing the recording alone would cause the tool to finish too early. Record the source-to-output speed and held frames in the provenance rather than overlaying them under the recording. Preserve monotonic, continuous source time and measured endpoints. Do not invent intermediate robot frames to make a low-FPS source look smoother.
+**End on a clear completed state and hold it briefly.** Omit later placement, cleanup, or extra checks when they add no task evidence or move the object out of frame. Preserve failures that explain the outcome. Do not infer success from a successful tool call alone. For the cube, the chosen end is the solved blue face up, before the later placement leaves the camera view. Its retained real duration is 01:02:22, with a 2.2-second output hold.
 
-**Do not equate wall time with simulation time.** A 43-minute agent session can contain only 125 seconds of recorded simulation. Read [references/timing-and-edit.md](references/timing-and-edit.md) for the time mapping, edit schema, and real-world-camera adaptation. Native token timing is absent from a static pi export: character streaming is a reconstruction. Keep that fact in the provenance and describe the clip as an edited session replay.
+## Render, review, and deliver
 
-The tested example is `gallery/yam-hang-mug/edit.json` at the repository root. Copy and adapt its format, selecting entries from the new source; its entry indices and coordinates are specific to the `../backup/new7` source bundle. The `yam-hang-mug` example starts at source time zero and preserves every intervening source-time interval. Rebalance text holds and faster repeated attempts before shortening critical grasp, contact, and release moments. Use an opening observation for the poster as well, via `poster_time`. Choose code excerpts and result fields short enough to fit a readable tool block.
-
-## Render and review
-
-Bundled tools require Python 3 with Pillow, FFmpeg/ffprobe with libx264, and the bundled Lato/Commit Mono font assets. They perform offline composition only. Render contact sheets before the expensive export:
+For a simulator bundle, use the bundled renderer after authoring the source-specific edit:
 
 ```sh
 python3 .agents/skills/kinex-session-video/scripts/render_video.py \
   ../backup/new7 gallery/yam-hang-mug/edit.json gallery/yam-hang-mug/yam-hang-mug.mp4 --preview
-
-python3 .agents/skills/kinex-session-video/scripts/render_video.py \
-  ../backup/new7 gallery/yam-hang-mug/edit.json gallery/yam-hang-mug/yam-hang-mug.mp4
 ```
 
-Outputs include a 1920×1080, 30 FPS H.264 MP4 (`yuv420p`, fast-start), a poster, a timestamped contact sheet, and a provenance JSON. The renderer checks source/image checksums, ordered events, the first task and recorded frame, continuous source coverage, positive durations, total duration, and card height. It uses exact source video frames without generating intermediate motion. The current renderer exports silent video; preserve or mix real-world audio separately if requested.
-
-For a browser without H.264 decoding (including some bundled Chromium builds), add a WebM fallback to the gallery's `<video>` sources. Keep the MP4 as the primary deliverable:
+For the external cube bundle, use its adapter:
 
 ```sh
-ffmpeg -v error -y -i gallery/yam-hang-mug/yam-hang-mug.mp4 -an \
-  -c:v libvpx-vp9 -deadline good -cpu-used 3 -b:v 0 -crf 38 \
-  -row-mt 1 -threads 4 gallery/yam-hang-mug/yam-hang-mug.webm
+python3 gallery/abc-yam-cube/build.py --preview
+python3 gallery/abc-yam-cube/build.py
 ```
 
-For web delivery, start with H.264 `-preset slow -crf 28 -pix_fmt yuv420p -movflags +faststart`, keeping the 1920×1080 resolution so terminal text stays legible. Encode both codecs from the archival MP4 rather than repeatedly compressing delivery copies. Inspect full-resolution session text and inline observations against the master. Verify decoded frame counts and presentation timestamps relative to the first frame (allow WebM's millisecond rounding and record any container-origin normalization), duration, and successful full decode. Record master/delivery hashes, file sizes, encoder settings, and the recorded environment (Real world or Simulator) in provenance. In the gallery footer, show model, effort, and environment together; use recorded evidence rather than an assumed effort default.
+Render preview frames before the full export. Inspect opening, motion, error/recovery, observation, and ending frames at full resolution. Check status text width, actual source-time progression, and the absence of duplicate metadata/output counters. The renderer formats the final status line by default; see the reference for `robot_label`, `status_caption`, and interval-based activity labels.
 
-When changing the timing code or fonts, run the bundled invariants:
+Keep the archival master under `gallery/.masters/` and delivery files under `public/media/gallery/<id>/`. Start with H.264 `-preset slow -crf 28 -pix_fmt yuv420p -movflags +faststart` and VP9 `-crf 38 -b:v 0 -row-mt 1`, both 1080p30, encoded from the master. The current workflow exports silent video; preserve original audio in the source unless requested otherwise.
+
+**Finish rendering before delivery encoding reads the master.** A new render can invalidate an in-progress MP4 read. Encode delivery copies into a staging directory, then replace the website files after encoding succeeds. Preserve originals and update the poster, checksums, frame counts, duration, and provenance together.
+
+Validate full decode, frame count and timestamps for both codecs. Check opening frame zero, monotonic source mapping, tool-result/image timing, critical-motion pacing, and elapsed-clock correctness including holds. WebM timestamps may round to milliseconds. When timing or shared rendering code changes, run:
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/kinex-session-video/scripts/test_retime.py
 ```
 
-Inspect the contact sheet and full-resolution frames during code entry, motion, image display, errors, and final verification. Decode the final MP4 with FFmpeg; probe its duration and frame count. Compare its opening frame with source frame zero, and confirm the poster shows the initial scene. Spot-check source-frame mapping at a motion start/end, every speed-change boundary, and a camera observation. Check the provenance speeds against the derivative of the time map, and verify that critical moments are actually slower than adjacent travel. Confirm that the terminal cannot announce a result before the corresponding motion finishes. A successful tool result does not establish task success by itself.
+Retain the editable timeline, source-clock anchors/uncertainty, reviewed motion windows, source-frame mapping, recorded metadata, font hashes, encoder settings, and final file hashes. For this cube adapter, `verify.py` checks the timeline, every displayed elapsed-time label, and full delivery decode.
 
-Deliver the clip, poster/preview, editable timeline, and provenance. A local `gallery/index.html` can make samples easy to review. Website integration, commits, or publishing are separate steps when requested; this workflow does not need a live robot or remote service.
+## Homepage integration
+
+When requested, keep the gallery’s vertical rotation, video column at roughly two thirds and explanation column at one third, stacking on mobile. Keep the task title short; show `robot × model · effort` beneath it and the real/simulated environment nearby.
+
+Make demonstrated capabilities scannable with bold short labels and one concrete sentence each. For the cube: **Active sensing** (wrist-camera views of all faces), **Solution reasoning** (state reconstruction and solving sequence), and **Precision & collision avoidance** (layer turns and handoffs around arms, grippers, and cameras). For the red cup: highlight recovery after the first failed hang and the other arm’s active camera positioning. Use task-specific evidence, not generic praise.
+
+Update gallery data, media paths, poster, and manifest, then run the site checks and rebuild after the final media replacement. Committing or publishing still requires the user’s request.

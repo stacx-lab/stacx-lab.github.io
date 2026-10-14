@@ -23,8 +23,16 @@ SANS = FONT_DIR / 'Lato-Regular.ttf'
 BOLD = FONT_DIR / 'Lato-Bold.ttf'
 
 
+def elapsed_label(elapsed, total):
+    """Format retained source time, never the accelerated export duration."""
+    def clock(seconds):
+        seconds = max(0, math.floor(seconds + 1e-7))
+        return f'{seconds//3600:02}:{seconds//60%60:02}:{seconds%60:02}'
+    return f'{clock(elapsed)} / {clock(total)}'
+
+
 def compile_retime(event):
-    """Create one monotonic clock map shared by video, tool state and speed label."""
+    """Create one monotonic clock map shared by video, tool state and elapsed-time display."""
     duration = event['duration']
     plan = event.get('retime')
     if plan:
@@ -236,6 +244,9 @@ class Renderer:
         self.small = ImageFont.truetype(SANS, 17)
         self.title = ImageFont.truetype(SANS, 42)
         self.heading = ImageFont.truetype(BOLD, 26)
+        self.status_bold = ImageFont.truetype(BOLD, 20)
+        self.status_mono = ImageFont.truetype(MONO, 18)
+        self.status_text = ImageFont.truetype(SANS, 20)
         self.complete_cards = {}
         self.images = {}
         for event in events:
@@ -363,6 +374,36 @@ class Renderer:
         sim, _ = scene_clock(event, progress * event['duration'])
         return index, event, progress, sim
 
+    def status(self, t):
+        _, event, _, source_time = self.state(t)
+        origin, end = self.events[0]['sim_start'], self.events[-1]['sim_end']
+        spec = self.edit.get('status_overlay', {})
+        action = event.get('status_caption') or event.get('chapter')
+        if spec.get('activity'):
+            action = next((item['text'] for item in spec['activity']
+                           if item['start_source_s'] <= source_time <= item['end_source_s']), None)
+        if not action:
+            raise ValueError('Each visible source interval needs a short status_caption, chapter, or activity label')
+        return (event.get('autonomy', spec.get('autonomy', 'Autonomous')),
+                elapsed_label(source_time-origin, end-origin), action)
+
+    def draw_status(self, frame, t):
+        draw = ImageDraw.Draw(frame)
+        autonomy, elapsed, action = self.status(t)
+        x, baseline = 40, 1005
+        parts = [(autonomy, self.status_bold, '#444d43'),
+                 (elapsed, self.status_mono, '#737b70'),
+                 (action, self.status_text, '#737b70')]
+        for i, (text, font, color) in enumerate(parts):
+            if i:
+                x += 16
+                draw.text((x, baseline), '|', font=self.status_text, fill='#b5baaf', anchor='ls')
+                x += draw.textlength('|', font=self.status_text) + 16
+            draw.text((x, baseline), text, font=font, fill=color, anchor='ls')
+            x += draw.textlength(text, font=font)
+        if x > LEFT[0] + LEFT[2]:
+            raise ValueError('Status line exceeds the recording column; shorten the action description')
+
     def frame(self, t, recording):
         index, event, progress, sim = self.state(t)
         out = self.background.copy()
@@ -372,7 +413,12 @@ class Renderer:
         metadata = event['run_metadata']
         model = metadata['model'] or 'not recorded'
         effort = metadata['effort'] or 'not recorded'
-        d.text((RIGHT_X + 115, 42), f'Model: {model} · Effort: {effort}', font=self.small, fill=MUTED)
+        if self.edit.get('robot_label'):
+            environment = 'Simulator' if self.source['recording']['clock'] == 'simulation' else self.edit.get('environment', 'not recorded')
+            display_model = {'gpt-6-astra': 'GPT-6-Astra'}.get(model, model)
+            subtitle = f"{self.edit['robot_label']} × {display_model} · {effort} · {environment}"
+            d.rectangle((40, 80, 1140, 120), fill=BG)
+            d.text((42, 86), subtitle, font=self.body_font, fill=MUTED)
         cards = [self.card(e) for e in self.events[max(0, index - 5):index]]
         cards.append(self.card(event, progress, t))
         content_h = sum(card.height for card in cards)
@@ -386,14 +432,7 @@ class Renderer:
         d.line((RIGHT_X, 982, RIGHT_X + RIGHT_W, 982), fill='#a3b0c7', width=2)
         d.text((RIGHT_X + 7, 991), '›', font=self.body_font, fill=INK)
         d.text((RIGHT_X + 31, 996), 'Kinex session', font=self.small, fill=MUTED)
-        environment = 'Simulator' if self.source['recording']['clock'] == 'simulation' else self.edit.get('environment', 'not recorded')
-        d.text((RIGHT_X, 1024), f'{model} · {effort} effort · {environment}', font=self.small, fill=MUTED)
-        clock = f'{t:04.1f} / {self.edit["duration"]:.0f} s'
-        if self.edit.get('show_playback_speed'):
-            _, speed = scene_clock(event, progress * event['duration'])
-            speed_label = (f'{speed:.1f}×' if speed >= .1 else f'{speed:.2f}×') if speed > 1e-6 else 'Frame held'
-            clock = f'{speed_label}  ·  {clock}'
-        d.text((1880 - d.textlength(clock, font=self.small), 1053), clock, font=self.small, fill=MUTED)
+        self.draw_status(out, t)
         return out
 
 
@@ -498,6 +537,7 @@ def main():
                              'No source code was executed and no robot or simulator was controlled.'], events=events)
     provenance['device_map'] = edit.get('device_map')
     provenance['source_review'] = edit.get('source_review')
+    provenance['presentation'] = dict(metadata='Once in the title subtitle', status='Autonomy | retained source elapsed / total | short action', export_clock=False, speed_multiplier=False, robot_label=edit.get('robot_label'), status_overlay=edit.get('status_overlay'))
     provenance['environment'] = 'Simulator' if source['recording']['clock'] == 'simulation' else edit.get('environment', 'not recorded')
     args.output.with_suffix('.provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2))
     print(f'Validated {len(events)} events; duration {edit["duration"]}s', flush=True)

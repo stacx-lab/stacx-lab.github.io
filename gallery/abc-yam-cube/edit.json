@@ -1,0 +1,3347 @@
+{
+  "title": "Solving a 2x2 cube",
+  "subtitle": "YAM × GPT-6-Astra · medium · Real world",
+  "environment": "Real world",
+  "recording": "DJI_20261014130747_0018_D.MP4",
+  "duration": 75,
+  "from_start": true,
+  "continuous_source": true,
+  "poster_time": 1.3003460755728173,
+  "clock": {
+    "camera_start_utc": "2026-10-14T17:07:50.700Z",
+    "metadata_creation_utc": "2026-10-14T17:07:47.000Z",
+    "camera_minus_metadata_s": -3.7,
+    "fps": 29.97002997002997,
+    "frames": 125304,
+    "last_frame_s": 4180.943433333333,
+    "uncertainty_s": 0.7,
+    "method": "Constant offset checked against opening arm motion, first turn, and final quarter turn in original camera frames. No meaningful drift visible at this precision. Entry ISO timestamps mark completed assistant submission/tool result; message.timestamp on assistant entries instead marks generation start and is not used.",
+    "anchors": [
+      {
+        "entry": 63,
+        "logged_start_after_metadata_s": 124.941,
+        "observed_motion_onset_s": [
+          121,
+          122
+        ]
+      },
+      {
+        "entry": 228,
+        "logged_start_after_metadata_s": 1454.171,
+        "observed_motion_interval_s": [
+          1450,
+          1465
+        ]
+      },
+      {
+        "entry": 438,
+        "logged_start_after_metadata_s": 3613.194,
+        "observed_motion_interval_s": [
+          3609,
+          3624
+        ]
+      }
+    ]
+  },
+  "retime": [
+    {
+      "end_source_s": 0,
+      "hold_s": 1.2,
+      "reason": "Read original task"
+    },
+    {
+      "end_source_s": 23.84466354926539,
+      "speed": 0,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 95.64921138803052,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 120.34099993705749,
+      "speed": 476.8932709853078,
+      "end_speed": 16.942499995231657,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 127.11799993515015,
+      "speed": 16.942499995231657,
+      "end_speed": 16.942499995231657,
+      "reason": "inspect cube up close"
+    },
+    {
+      "end_source_s": 151.14206239879132,
+      "speed": 16.942499995231657,
+      "end_speed": 463.5387492775916,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 175.3189998626709,
+      "speed": 463.5387492775916,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 185.5989998817444,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "move to overhead observation"
+    },
+    {
+      "end_source_s": 210.44366343100978,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 225.66896138707685,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 249.9659999370575,
+      "speed": 476.8932709853078,
+      "end_speed": 9.047500014305143,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 253.58499994277955,
+      "speed": 9.047500014305143,
+      "end_speed": 9.047500014305143,
+      "reason": "align open jaws above cube"
+    },
+    {
+      "end_source_s": 258.81956239044666,
+      "speed": 9.047500014305143,
+      "end_speed": 95.64374893903754,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 264.2729998588562,
+      "speed": 95.64374893903754,
+      "end_speed": 13.425000429153329,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 269.64300003051756,
+      "speed": 13.425000429153329,
+      "end_speed": 13.425000429153329,
+      "reason": "insert and narrow cube grasp"
+    },
+    {
+      "end_source_s": 273.73312497735026,
+      "speed": 13.425000429153329,
+      "end_speed": 68.3774985075002,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 277.30199990272524,
+      "speed": 68.3774985075002,
+      "end_speed": 3,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 281.78100004196165,
+      "speed": 3,
+      "end_speed": 3,
+      "reason": "secure cube and verify small lift"
+    },
+    {
+      "end_source_s": 305.77566359122704,
+      "speed": 3,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 338.33533637444066,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 363.1799999237061,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 374.775,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "present held cube to opposing camera"
+    },
+    {
+      "end_source_s": 399.6196635492654,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 421.58258641878655,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 446.4129999637604,
+      "speed": 476.8932709853078,
+      "end_speed": 19.714999914169198,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 454.2989999294281,
+      "speed": 19.714999914169198,
+      "end_speed": 19.714999914169198,
+      "reason": "tilt cube for hidden-face inspection"
+    },
+    {
+      "end_source_s": 457.8233748853207,
+      "speed": 19.714999914169198,
+      "end_speed": 50.77249920368246,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 461.3619998455048,
+      "speed": 50.77249920368246,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 481.2339998722076,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "reveal bottom face"
+    },
+    {
+      "end_source_s": 506.07866342147304,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 538.4173363916068,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 563.2619999408722,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 575.1109999656677,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "inspect first side"
+    },
+    {
+      "end_source_s": 599.9556635149331,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 621.7033364049582,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 646.5479999542237,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 657.5889998912811,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "approach for close face inspection"
+    },
+    {
+      "end_source_s": 682.1729999780655,
+      "speed": 20,
+      "end_speed": 471.6800017356877,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 706.7570000648499,
+      "speed": 471.6800017356877,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 728.2159999847412,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "inspect remaining side stickers"
+    },
+    {
+      "end_source_s": 753.0606635340066,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 830.4453365079551,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 855.2900000572205,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 864.2940000534057,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "view back-face stickers from the side"
+    },
+    {
+      "end_source_s": 873.4730000019074,
+      "speed": 20,
+      "end_speed": 163.57999897003197,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 881.6519999504089,
+      "speed": 163.57999897003197,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 881.6519999504089,
+      "hold_s": 0.6,
+      "reason": "Computed four-turn solution"
+    },
+    {
+      "end_source_s": 890.7389999675751,
+      "speed": 0,
+      "end_speed": 181.74000034332266,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 899.8259999847412,
+      "speed": 181.74000034332266,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 899.8259999847412,
+      "hold_s": 0.7,
+      "reason": "Original solution explanation"
+    },
+    {
+      "end_source_s": 923.6706635340066,
+      "speed": 0,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 965.5733364335684,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 989.4179999828339,
+      "speed": 476.8932709853078,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 989.4179999828339,
+      "hold_s": 0.3,
+      "reason": "Rejected clearance check"
+    },
+    {
+      "end_source_s": 1009.0495000034571,
+      "speed": 0,
+      "end_speed": 392.630000412463,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1029.3960000038146,
+      "speed": 392.630000412463,
+      "end_speed": 14.29999959468887,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1035.1159998416902,
+      "speed": 14.29999959468887,
+      "end_speed": 14.29999959468887,
+      "reason": "clear observing arm from presentation path"
+    },
+    {
+      "end_source_s": 1038.6814998716115,
+      "speed": 14.29999959468887,
+      "end_speed": 57.01000100374017,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1042.5319999217986,
+      "speed": 57.01000100374017,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1062.8240000247956,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "orient cube for first turn"
+    },
+    {
+      "end_source_s": 1071.893499970436,
+      "speed": 20,
+      "end_speed": 161.38999891280946,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1080.9629999160766,
+      "speed": 161.38999891280946,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1095.0159999370576,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "approach support-grasp inspection point"
+    },
+    {
+      "end_source_s": 1116.0591248840094,
+      "speed": 20,
+      "end_speed": 400.8624989390353,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1137.06599984169,
+      "speed": 400.8624989390353,
+      "end_speed": 19.275000214577176,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1144.7759999275208,
+      "speed": 19.275000214577176,
+      "end_speed": 19.275000214577176,
+      "reason": "insert receiver fingers around support layer"
+    },
+    {
+      "end_source_s": 1148.3064374625683,
+      "speed": 19.275000214577176,
+      "end_speed": 51.33375048637163,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1151.3039999961852,
+      "speed": 51.33375048637163,
+      "end_speed": 8.617500185966946,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1154.751000070572,
+      "speed": 8.617500185966946,
+      "end_speed": 8.617500185966946,
+      "reason": "secure supporting layer"
+    },
+    {
+      "end_source_s": 1179.0265386291358,
+      "speed": 8.617500185966946,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1194.450461368957,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 1218.6699999332427,
+      "speed": 476.8932709853078,
+      "end_speed": 7.497500300407864,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1221.6690000534059,
+      "speed": 7.497500300407864,
+      "end_speed": 7.497500300407864,
+      "reason": "transfer support to opposing gripper"
+    },
+    {
+      "end_source_s": 1226.0688125491142,
+      "speed": 7.497500300407864,
+      "end_speed": 80.49874961375963,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1230.6590000152587,
+      "speed": 80.49874961375963,
+      "end_speed": 11.304999709129788,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1235.1809998989106,
+      "speed": 11.304999709129788,
+      "end_speed": 11.304999709129788,
+      "reason": "withdraw old holder and verify support"
+    },
+    {
+      "end_source_s": 1259.5909134336325,
+      "speed": 11.304999709129788,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1276.307336496511,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 1301.1520000457763,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1328.0670000553132,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "route turning gripper around cube"
+    },
+    {
+      "end_source_s": 1352.2423750579358,
+      "speed": 20,
+      "end_speed": 463.50750005245004,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1376.1620000362395,
+      "speed": 463.50750005245004,
+      "end_speed": 14.884999513626553,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1382.1159998416902,
+      "speed": 14.884999513626553,
+      "end_speed": 14.884999513626553,
+      "reason": "insert turning gripper around R layer"
+    },
+    {
+      "end_source_s": 1397.071374848485,
+      "speed": 14.884999513626553,
+      "end_speed": 284.2225006222702,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1411.719999885559,
+      "speed": 284.2225006222702,
+      "end_speed": 8.750000119209744,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1415.219999933243,
+      "speed": 8.750000119209744,
+      "end_speed": 8.750000119209744,
+      "reason": "secure isolated turning layer"
+    },
+    {
+      "end_source_s": 1422.889312505722,
+      "speed": 8.750000119209744,
+      "end_speed": 144.6362513303734,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1431.017000055313,
+      "speed": 144.6362513303734,
+      "end_speed": 17.917499661446072,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1438.1839999198914,
+      "speed": 17.917499661446072,
+      "end_speed": 17.917499661446072,
+      "reason": "test first layer turn slowly"
+    },
+    {
+      "end_source_s": 1444.2004374295473,
+      "speed": 17.917499661446072,
+      "end_speed": 102.41125053167139,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1449.570999956131,
+      "speed": 102.41125053167139,
+      "end_speed": 5,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1465.6599999904633,
+      "speed": 5,
+      "end_speed": 5,
+      "reason": "complete first quarter turn"
+    },
+    {
+      "end_source_s": 1465.9099999904633,
+      "speed": 5,
+      "end_speed": 0,
+      "reason": "Ease to rest after complete first quarter turn"
+    },
+    {
+      "end_source_s": 1465.9099999904633,
+      "hold_s": 0.3,
+      "reason": "Verify completed layer turn"
+    },
+    {
+      "end_source_s": 1489.7546635397287,
+      "speed": 0,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1522.2673364690927,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 1546.8269999980926,
+      "speed": 476.8932709853078,
+      "end_speed": 14.29999959468887,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1552.546999835968,
+      "speed": 14.29999959468887,
+      "end_speed": 14.29999959468887,
+      "reason": "release first turn and inspect alignment"
+    },
+    {
+      "end_source_s": 1572.8204999297857,
+      "speed": 14.29999959468887,
+      "end_speed": 391.17000228166376,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1593.379000043869,
+      "speed": 391.17000228166376,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1624.028000020981,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "present next turn axis with the supporting arm"
+    },
+    {
+      "end_source_s": 1648.8726635702462,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1801.3413364164023,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 1826.1859999656676,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1843.9169999599458,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "approach below holder camera"
+    },
+    {
+      "end_source_s": 1868.6719999313354,
+      "speed": 20,
+      "end_speed": 475.0999994277936,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1893.4269999027251,
+      "speed": 475.0999994277936,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1902.7929998874665,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "insert U-face receiving grasp"
+    },
+    {
+      "end_source_s": 1907.4670623958111,
+      "speed": 20,
+      "end_speed": 73.48125016689096,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1911.5979999065398,
+      "speed": 73.48125016689096,
+      "end_speed": 9.13750004768417,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1915.2529999256135,
+      "speed": 9.13750004768417,
+      "end_speed": 9.13750004768417,
+      "reason": "secure U-face support transfer"
+    },
+    {
+      "end_source_s": 1929.6274998784065,
+      "speed": 9.13750004768417,
+      "end_speed": 278.35249900817644,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1944.1579998493194,
+      "speed": 278.35249900817644,
+      "end_speed": 12.25750041008041,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 1949.0610000133515,
+      "speed": 12.25750041008041,
+      "end_speed": 12.25750041008041,
+      "reason": "transfer support to U-layer gripper"
+    },
+    {
+      "end_source_s": 1973.518538583121,
+      "speed": 12.25750041008041,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 1983.1123363248496,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2007.956999874115,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2037.4190000534059,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "reposition holder to opposing D layer"
+    },
+    {
+      "end_source_s": 2062.2636636026714,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2062.9913365117695,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2087.836000061035,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2098.299999856949,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "insert D support layer grasp"
+    },
+    {
+      "end_source_s": 2104.839499917626,
+      "speed": 20,
+      "end_speed": 110.79000121354852,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2110.836999988556,
+      "speed": 110.79000121354852,
+      "end_speed": 9.160000205040433,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2114.501000070572,
+      "speed": 9.160000205040433,
+      "end_speed": 9.160000205040433,
+      "reason": "secure D layer before the U turn"
+    },
+    {
+      "end_source_s": 2138.8036636300894,
+      "speed": 9.160000205040433,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2145.356711547771,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2169.9280000686645,
+      "speed": 476.8932709853078,
+      "end_speed": 14.532499432564236,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2175.74099984169,
+      "speed": 14.532499432564236,
+      "end_speed": 14.532499432564236,
+      "reason": "test U prime layer motion"
+    },
+    {
+      "end_source_s": 2182.6748124390842,
+      "speed": 14.532499432564236,
+      "end_speed": 124.14375251531396,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2189.1320000648498,
+      "speed": 124.14375251531396,
+      "end_speed": 5,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2205.30299987793,
+      "speed": 5,
+      "end_speed": 5,
+      "reason": "complete U prime turn"
+    },
+    {
+      "end_source_s": 2205.55299987793,
+      "speed": 5,
+      "end_speed": 0,
+      "reason": "Ease to rest after complete U prime turn"
+    },
+    {
+      "end_source_s": 2205.55299987793,
+      "hold_s": 0.3,
+      "reason": "Verify completed layer turn"
+    },
+    {
+      "end_source_s": 2229.3976634271953,
+      "speed": 0,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2292.074336361089,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2315.9189999103546,
+      "speed": 476.8932709853078,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2315.9189999103546,
+      "hold_s": 0.6,
+      "reason": "Equivalent solution avoids wrist limits"
+    },
+    {
+      "end_source_s": 2320.2209998846056,
+      "speed": 0,
+      "end_speed": 86.03999948501496,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2325.522999858856,
+      "speed": 86.03999948501496,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2333.939999961853,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "release and verify second turn"
+    },
+    {
+      "end_source_s": 2347.525999903679,
+      "speed": 20,
+      "end_speed": 251.71999883651551,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2361.1119998455047,
+      "speed": 251.71999883651551,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2391.498999977112,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "present B axis for the two-turn finish"
+    },
+    {
+      "end_source_s": 2405.3289999961853,
+      "speed": 20,
+      "end_speed": 256.6000003814679,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2419.1590000152587,
+      "speed": 256.6000003814679,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2431.261999988556,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "inspect B face for receiving grasp"
+    },
+    {
+      "end_source_s": 2456.1066635378215,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2470.2713364831593,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2495.116000032425,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2503.437999868393,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "insert B receiving fingers"
+    },
+    {
+      "end_source_s": 2508.134124857187,
+      "speed": 20,
+      "end_speed": 73.92249977588449,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2512.2859998703,
+      "speed": 73.92249977588449,
+      "end_speed": 9.115000486374356,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2515.93200006485,
+      "speed": 9.115000486374356,
+      "end_speed": 9.115000486374356,
+      "reason": "secure B layer for support transfer"
+    },
+    {
+      "end_source_s": 2530.7931250184774,
+      "speed": 9.115000486374356,
+      "end_speed": 288.10749858617555,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2546.19299993515,
+      "speed": 288.10749858617555,
+      "end_speed": 19.88999974727676,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2554.1489998340608,
+      "speed": 19.88999974727676,
+      "end_speed": 19.88999974727676,
+      "reason": "transfer support to B gripper"
+    },
+    {
+      "end_source_s": 2578.98816337069,
+      "speed": 19.88999974727676,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2595.05233638207,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2619.8969999313354,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2643.0029999256135,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "reach F support inspection with lateral clearance"
+    },
+    {
+      "end_source_s": 2667.847663474879,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2685.7203363649037,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2710.564999914169,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2722.8240000247956,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "secure opposing F support"
+    },
+    {
+      "end_source_s": 2737.9694999456406,
+      "speed": 20,
+      "end_speed": 282.9099984168988,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2753.1149998664855,
+      "speed": 282.9099984168988,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2761.485999965668,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "test B layer rotation"
+    },
+    {
+      "end_source_s": 2766.2269999980927,
+      "speed": 20,
+      "end_speed": 74.82000064849672,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2770.2180000305175,
+      "speed": 74.82000064849672,
+      "end_speed": 5,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2789.11599984169,
+      "speed": 5,
+      "end_speed": 5,
+      "reason": "complete B quarter turn"
+    },
+    {
+      "end_source_s": 2789.36599984169,
+      "speed": 5,
+      "end_speed": 0,
+      "reason": "Ease to rest after complete B quarter turn"
+    },
+    {
+      "end_source_s": 2789.36599984169,
+      "hold_s": 0.3,
+      "reason": "Verify completed layer turn"
+    },
+    {
+      "end_source_s": 2809.991999940872,
+      "speed": 0,
+      "end_speed": 412.52000198364385,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2830.6180000400545,
+      "speed": 412.52000198364385,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2830.6180000400545,
+      "hold_s": 0.7,
+      "reason": "Changed finish explanation"
+    },
+    {
+      "end_source_s": 2838.078437526822,
+      "speed": 0,
+      "end_speed": 149.20874973535206,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2846.2710000038146,
+      "speed": 149.20874973535206,
+      "end_speed": 14.64249980449722,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2852.1279999256135,
+      "speed": 14.64249980449722,
+      "end_speed": 14.64249980449722,
+      "reason": "release third turn and verify alignment"
+    },
+    {
+      "end_source_s": 2864.677062484622,
+      "speed": 14.64249980449722,
+      "end_speed": 236.33875137567316,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2877.4940000534057,
+      "speed": 236.33875137567316,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2905.6119998931886,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "present the final turning axis"
+    },
+    {
+      "end_source_s": 2930.456663442454,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 2950.4193364850667,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 2975.264000034332,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 2987.65,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "use a setback final inspection pose"
+    },
+    {
+      "end_source_s": 3012.4946635492656,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3120.581336425939,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 3145.4259999752044,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3162.3800000190736,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "change receiver roll to clear holder camera"
+    },
+    {
+      "end_source_s": 3187.224663568339,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3189.6513363591816,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 3214.495999908447,
+      "speed": 476.8932709853078,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3226.953999900818,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "approach shallow support precontact"
+    },
+    {
+      "end_source_s": 3251.7986634500835,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3257.6843364946035,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 3281.529000043869,
+      "speed": 476.8932709853078,
+      "end_speed": 0,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3281.529000043869,
+      "hold_s": 0.3,
+      "reason": "Support-path rejection before recovery"
+    },
+    {
+      "end_source_s": 3304.742999985814,
+      "speed": 0,
+      "end_speed": 464.2799988389004,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3328.6469999313354,
+      "speed": 464.2799988389004,
+      "end_speed": 13.800000071526028,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3334.1669999599458,
+      "speed": 13.800000071526028,
+      "end_speed": 13.800000071526028,
+      "reason": "close the offset D support grip"
+    },
+    {
+      "end_source_s": 3353.978812456131,
+      "speed": 13.800000071526028,
+      "end_speed": 382.4362498521782,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3373.8539999485015,
+      "speed": 382.4362498521782,
+      "end_speed": 15.067499995232083,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3379.8809999465943,
+      "speed": 15.067499995232083,
+      "end_speed": 15.067499995232083,
+      "reason": "transfer cube support to D"
+    },
+    {
+      "end_source_s": 3395.986687394977,
+      "speed": 15.067499995232083,
+      "end_speed": 307.0462489724139,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3412.3389998435973,
+      "speed": 307.0462489724139,
+      "end_speed": 20,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3440.291000032425,
+      "speed": 20,
+      "end_speed": 20,
+      "reason": "lift clear before routing to the opposing U face"
+    },
+    {
+      "end_source_s": 3465.1356635816906,
+      "speed": 20,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3534.7742114774373,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 3559.422000026703,
+      "speed": 476.8932709853078,
+      "end_speed": 16.062500000000455,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3565.847000026703,
+      "speed": 16.062500000000455,
+      "end_speed": 16.062500000000455,
+      "reason": "close final U layer grasp"
+    },
+    {
+      "end_source_s": 3580.291499942541,
+      "speed": 16.062500000000455,
+      "end_speed": 272.82749831676256,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3594.8749998569488,
+      "speed": 272.82749831676256,
+      "end_speed": 18.842499971390225,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3602.411999845505,
+      "speed": 18.842499971390225,
+      "end_speed": 18.842499971390225,
+      "reason": "start the final U-prime layer turn"
+    },
+    {
+      "end_source_s": 3605.8490624010565,
+      "speed": 18.842499971390225,
+      "end_speed": 49.89875113963876,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3608.5939999580382,
+      "speed": 49.89875113963876,
+      "end_speed": 5,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3624.758999967575,
+      "speed": 5,
+      "end_speed": 5,
+      "reason": "complete the final quarter-turn"
+    },
+    {
+      "end_source_s": 3625.008999967575,
+      "speed": 5,
+      "end_speed": 0,
+      "reason": "Ease to rest after complete the final quarter-turn"
+    },
+    {
+      "end_source_s": 3625.008999967575,
+      "hold_s": 0.3,
+      "reason": "Verify completed layer turn"
+    },
+    {
+      "end_source_s": 3648.8536635168407,
+      "speed": 0,
+      "end_speed": 476.8932709853078,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3670.18233635346,
+      "speed": 476.8932709853078,
+      "end_speed": 476.8932709853078,
+      "reason": "Compress stationary planning; preserve continuous source time"
+    },
+    {
+      "end_source_s": 3694.176999902725,
+      "speed": 476.8932709853078,
+      "end_speed": 3,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3699.217999839783,
+      "speed": 3,
+      "end_speed": 3,
+      "reason": "release the final turn for visual verification"
+    },
+    {
+      "end_source_s": 3712.926999878883,
+      "speed": 3,
+      "end_speed": 271.1800007820111,
+      "reason": "Ease into accelerated stationary planning"
+    },
+    {
+      "end_source_s": 3726.735999917984,
+      "speed": 271.1800007820111,
+      "end_speed": 5,
+      "reason": "Ease down before physical motion or evidence"
+    },
+    {
+      "end_source_s": 3742.0299998760224,
+      "speed": 5,
+      "end_speed": 5,
+      "reason": "present the remaining faces without turning layers"
+    },
+    {
+      "end_source_s": 3742.2799998760224,
+      "speed": 5,
+      "end_speed": 0,
+      "reason": "Ease to rest after present the remaining faces without turning layers"
+    },
+    {
+      "end_source_s": 3742.2799998760224,
+      "hold_s": 2.2,
+      "reason": "Solved cube, blue face up; stop before lowering it out of view"
+    }
+  ],
+  "events": [
+    {
+      "entry": 5,
+      "kind": "user",
+      "text": "there is a cube on the the table, solve the cube. proceed until the task is solved, save all the images to the file system you read from the camera. prioritize task efficiency, avoid unnecessary checks and preflights. the cube is definitely solvable, you should work hard to gather information and solve the cube.",
+      "active_devices": []
+    },
+    {
+      "entry": 29,
+      "active_devices": [
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "label"
+      ],
+      "image_label": "Initial scene"
+    },
+    {
+      "entry": 37,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "label",
+        "state_devices"
+      ],
+      "image_label": "Wrist camera · initial state"
+    },
+    {
+      "entry": 63,
+      "active_devices": [
+        "arm_2",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 94,
+      "active_devices": [
+        "arm_2",
+        "gripper_2",
+        "camera_261922276652",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "image_label": "Wrist camera · result observation",
+      "images": [
+        1
+      ]
+    },
+    {
+      "entry": 108,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 118,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 150,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_2",
+        "camera_261122276271"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 170,
+      "active_devices": [],
+      "arg_fields": [
+        "operation",
+        "state"
+      ],
+      "result_fields": [
+        "moves"
+      ]
+    },
+    {
+      "entry": 172,
+      "kind": "assistant",
+      "text": "The sticker state is resolved, and the solver found a four-turn solution: `R U' F R'`. I’m now arranging the grasps to execute those turns.",
+      "active_devices": []
+    },
+    {
+      "entry": 178,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 182,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_2",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 202,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 228,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652",
+        "camera_261122276272"
+      ],
+      "code_field": "python",
+      "code_excerpt": "for seg in p['segments'][1:]:\n call('servo',device='arm_2',joints=seg['joints'],speedFraction=.18)",
+      "image_label": "Wrist camera · result observation",
+      "images": [
+        0
+      ]
+    },
+    {
+      "entry": 240,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 306,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652",
+        "camera_261122276272"
+      ],
+      "code_field": "python",
+      "code_excerpt": "for seg in p['segments'][1:]:\n call('servo',device='arm_2',joints=seg['joints'],speedFraction=.17)",
+      "image_label": "Wrist camera · result observation",
+      "images": [
+        1
+      ]
+    },
+    {
+      "entry": 314,
+      "active_devices": [],
+      "arg_fields": [
+        "operation",
+        "moves"
+      ],
+      "result_fields": [
+        "uniform_six_faces"
+      ]
+    },
+    {
+      "entry": 320,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 366,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652"
+      ],
+      "code_field": "python",
+      "code_excerpt": "for seg in p['segments'][1:]:\n call('servo',device='arm_2',joints=seg['joints'],speedFraction=.18)",
+      "image_label": "Wrist camera · result observation"
+    },
+    {
+      "entry": 370,
+      "kind": "assistant",
+      "text": "Three turns are verified. One turn remains; I’ve switched to the equivalent `B D'` finish to avoid a wrist-limit problem.",
+      "active_devices": []
+    },
+    {
+      "entry": 378,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 380,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 408,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 412,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 416,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261922276652",
+        "camera_261122276272"
+      ],
+      "arg_fields": [
+        "description"
+      ]
+    },
+    {
+      "entry": 438,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652"
+      ],
+      "code_field": "python",
+      "code_excerpt": "for seg in p['segments'][1:]:\n call('servo',device='arm_1',joints=seg['joints'],speedFraction=.17)",
+      "image_label": "Wrist camera · result observation"
+    },
+    {
+      "entry": 440,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "image_label": "Wrist camera · result observation"
+    },
+    {
+      "entry": 442,
+      "active_devices": [
+        "arm_1",
+        "arm_2",
+        "gripper_1",
+        "gripper_2",
+        "camera_261122276271",
+        "camera_261922276652"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "image_label": "Wrist camera · result observation"
+    }
+  ],
+  "device_map": {
+    "description": "Two YAM arms mounted 0.6096 m apart on a bench, two flange-mounted RGB-D cameras and a fixed overhead camera. Static illustrative pose, not calibrated/live kinematics.",
+    "geometry_evidence": {
+      "files": [
+        "workspace/.kinex/devices/arm_1/profile.yaml",
+        "workspace/.kinex/devices/arm_2/profile.yaml",
+        "workspace/.kinex/devices/camera_261922276652/profile.yaml",
+        "workspace/.kinex/devices/camera_261122276271/profile.yaml",
+        "workspace/.kinex/devices/camera_261122276272/profile.yaml",
+        "workspace/.kinex/calib/gripper-model-geometry/yam.urdf"
+      ],
+      "arm_mounts_m": [
+        [
+          0,
+          -0.6096,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "main_link_lengths_m": [
+        0.264,
+        0.25224
+      ],
+      "wrist_camera_mount_m": [
+        -7.66e-08,
+        -0.070435,
+        0.077006
+      ],
+      "overhead_camera_mount_m": [
+        -0.166495,
+        -0.3048,
+        0.954321
+      ]
+    },
+    "highlight_note": "Exact device IDs from selected original tool arguments. Cameras embedded in cube_capture helper results are indicated in the observation cards.",
+    "shapes": [
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            220,
+            213
+          ],
+          [
+            490,
+            213
+          ],
+          [
+            510,
+            236
+          ],
+          [
+            200,
+            236
+          ]
+        ],
+        "device": "world"
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            215,
+            236
+          ],
+          [
+            215,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            495,
+            236
+          ],
+          [
+            495,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            270,
+            228
+          ],
+          [
+            270,
+            210
+          ],
+          [
+            250,
+            140
+          ],
+          [
+            310,
+            174
+          ],
+          [
+            310,
+            186
+          ]
+        ],
+        "device": "arm_1",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            270,
+            210
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            250,
+            140
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            310,
+            174
+          ]
+        ],
+        "device": "arm_1",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            298,
+            213
+          ],
+          [
+            298,
+            186
+          ],
+          [
+            322,
+            186
+          ],
+          [
+            322,
+            213
+          ]
+        ],
+        "device": "gripper_1",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            294,
+            148
+          ],
+          [
+            314,
+            148
+          ],
+          [
+            314,
+            163
+          ],
+          [
+            294,
+            163
+          ]
+        ],
+        "device": "camera_261122276271"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            304,
+            155
+          ]
+        ],
+        "device": "camera_261122276271",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            440,
+            228
+          ],
+          [
+            440,
+            210
+          ],
+          [
+            460,
+            140
+          ],
+          [
+            400,
+            174
+          ],
+          [
+            400,
+            186
+          ]
+        ],
+        "device": "arm_2",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            440,
+            210
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            460,
+            140
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            400,
+            174
+          ]
+        ],
+        "device": "arm_2",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            412,
+            213
+          ],
+          [
+            412,
+            186
+          ],
+          [
+            388,
+            186
+          ],
+          [
+            388,
+            213
+          ]
+        ],
+        "device": "gripper_2",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            416,
+            148
+          ],
+          [
+            396,
+            148
+          ],
+          [
+            396,
+            163
+          ],
+          [
+            416,
+            163
+          ]
+        ],
+        "device": "camera_261922276652"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            406,
+            155
+          ]
+        ],
+        "device": "camera_261922276652",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            355,
+            58
+          ],
+          [
+            335,
+            92
+          ],
+          [
+            375,
+            92
+          ],
+          [
+            355,
+            58
+          ]
+        ],
+        "device": "camera_261122276272",
+        "width": 1
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            340,
+            40
+          ],
+          [
+            370,
+            40
+          ],
+          [
+            370,
+            58
+          ],
+          [
+            340,
+            58
+          ]
+        ],
+        "device": "camera_261122276272"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            355,
+            49
+          ]
+        ],
+        "device": "camera_261122276272",
+        "radius": 4
+      }
+    ],
+    "devices": [
+      {
+        "id": "arm_1",
+        "label": [
+          16,
+          133
+        ],
+        "anchor": [
+          250,
+          160
+        ]
+      },
+      {
+        "id": "gripper_1",
+        "label": [
+          16,
+          178
+        ],
+        "anchor": [
+          310,
+          200
+        ]
+      },
+      {
+        "id": "camera_261122276271",
+        "label": [
+          16,
+          72
+        ],
+        "anchor": [
+          304,
+          155
+        ]
+      },
+      {
+        "id": "arm_2",
+        "label": [
+          490,
+          133
+        ],
+        "anchor": [
+          460,
+          160
+        ]
+      },
+      {
+        "id": "gripper_2",
+        "label": [
+          490,
+          178
+        ],
+        "anchor": [
+          400,
+          200
+        ]
+      },
+      {
+        "id": "camera_261922276652",
+        "label": [
+          490,
+          72
+        ],
+        "anchor": [
+          406,
+          155
+        ]
+      },
+      {
+        "id": "camera_261122276272",
+        "label": [
+          255,
+          0
+        ],
+        "anchor": [
+          355,
+          40
+        ]
+      },
+      {
+        "id": "world",
+        "label": [
+          16,
+          224
+        ],
+        "anchor": [
+          215,
+          236
+        ]
+      }
+    ]
+  },
+  "source_review": {
+    "continuous_source": true,
+    "source_interval_s": [
+      0,
+      3742.2799998760224
+    ],
+    "zoom_keys": [],
+    "camera_motion": "Fixed external camera; end on the solved cube with blue face up, before the later lowering and placement.",
+    "human_interventions": "No intervention visible in reviewed samples. Later operator confirmation is outside this edit.",
+    "critical_moments": [
+      {
+        "source_interval_s": [
+          120.34099993705749,
+          127.11799993515015
+        ],
+        "speed": 16.942499995231657,
+        "description": "inspect cube up close"
+      },
+      {
+        "source_interval_s": [
+          175.3189998626709,
+          185.5989998817444
+        ],
+        "speed": 20,
+        "description": "move to overhead observation"
+      },
+      {
+        "source_interval_s": [
+          249.9659999370575,
+          253.58499994277955
+        ],
+        "speed": 9.047500014305143,
+        "description": "align open jaws above cube"
+      },
+      {
+        "source_interval_s": [
+          264.2729998588562,
+          269.64300003051756
+        ],
+        "speed": 13.425000429153329,
+        "description": "insert and narrow cube grasp"
+      },
+      {
+        "source_interval_s": [
+          277.30199990272524,
+          281.78100004196165
+        ],
+        "speed": 3,
+        "description": "secure cube and verify small lift"
+      },
+      {
+        "source_interval_s": [
+          363.1799999237061,
+          374.775
+        ],
+        "speed": 20,
+        "description": "present held cube to opposing camera"
+      },
+      {
+        "source_interval_s": [
+          446.4129999637604,
+          454.2989999294281
+        ],
+        "speed": 19.714999914169198,
+        "description": "tilt cube for hidden-face inspection"
+      },
+      {
+        "source_interval_s": [
+          461.3619998455048,
+          481.2339998722076
+        ],
+        "speed": 20,
+        "description": "reveal bottom face"
+      },
+      {
+        "source_interval_s": [
+          563.2619999408722,
+          575.1109999656677
+        ],
+        "speed": 20,
+        "description": "inspect first side"
+      },
+      {
+        "source_interval_s": [
+          646.5479999542237,
+          657.5889998912811
+        ],
+        "speed": 20,
+        "description": "approach for close face inspection"
+      },
+      {
+        "source_interval_s": [
+          706.7570000648499,
+          728.2159999847412
+        ],
+        "speed": 20,
+        "description": "inspect remaining side stickers"
+      },
+      {
+        "source_interval_s": [
+          855.2900000572205,
+          864.2940000534057
+        ],
+        "speed": 20,
+        "description": "view back-face stickers from the side"
+      },
+      {
+        "source_interval_s": [
+          1029.3960000038146,
+          1035.1159998416902
+        ],
+        "speed": 14.29999959468887,
+        "description": "clear observing arm from presentation path"
+      },
+      {
+        "source_interval_s": [
+          1042.5319999217986,
+          1062.8240000247956
+        ],
+        "speed": 20,
+        "description": "orient cube for first turn"
+      },
+      {
+        "source_interval_s": [
+          1080.9629999160766,
+          1095.0159999370576
+        ],
+        "speed": 20,
+        "description": "approach support-grasp inspection point"
+      },
+      {
+        "source_interval_s": [
+          1137.06599984169,
+          1144.7759999275208
+        ],
+        "speed": 19.275000214577176,
+        "description": "insert receiver fingers around support layer"
+      },
+      {
+        "source_interval_s": [
+          1151.3039999961852,
+          1154.751000070572
+        ],
+        "speed": 8.617500185966946,
+        "description": "secure supporting layer"
+      },
+      {
+        "source_interval_s": [
+          1218.6699999332427,
+          1221.6690000534059
+        ],
+        "speed": 7.497500300407864,
+        "description": "transfer support to opposing gripper"
+      },
+      {
+        "source_interval_s": [
+          1230.6590000152587,
+          1235.1809998989106
+        ],
+        "speed": 11.304999709129788,
+        "description": "withdraw old holder and verify support"
+      },
+      {
+        "source_interval_s": [
+          1301.1520000457763,
+          1328.0670000553132
+        ],
+        "speed": 20,
+        "description": "route turning gripper around cube"
+      },
+      {
+        "source_interval_s": [
+          1376.1620000362395,
+          1382.1159998416902
+        ],
+        "speed": 14.884999513626553,
+        "description": "insert turning gripper around R layer"
+      },
+      {
+        "source_interval_s": [
+          1411.719999885559,
+          1415.219999933243
+        ],
+        "speed": 8.750000119209744,
+        "description": "secure isolated turning layer"
+      },
+      {
+        "source_interval_s": [
+          1431.017000055313,
+          1438.1839999198914
+        ],
+        "speed": 17.917499661446072,
+        "description": "test first layer turn slowly"
+      },
+      {
+        "source_interval_s": [
+          1449.570999956131,
+          1465.9099999904633
+        ],
+        "speed": 5,
+        "description": "complete first quarter turn"
+      },
+      {
+        "source_interval_s": [
+          1546.8269999980926,
+          1552.546999835968
+        ],
+        "speed": 14.29999959468887,
+        "description": "release first turn and inspect alignment"
+      },
+      {
+        "source_interval_s": [
+          1593.379000043869,
+          1624.028000020981
+        ],
+        "speed": 20,
+        "description": "present next turn axis with the supporting arm"
+      },
+      {
+        "source_interval_s": [
+          1826.1859999656676,
+          1843.9169999599458
+        ],
+        "speed": 20,
+        "description": "approach below holder camera"
+      },
+      {
+        "source_interval_s": [
+          1893.4269999027251,
+          1902.7929998874665
+        ],
+        "speed": 20,
+        "description": "insert U-face receiving grasp"
+      },
+      {
+        "source_interval_s": [
+          1911.5979999065398,
+          1915.2529999256135
+        ],
+        "speed": 9.13750004768417,
+        "description": "secure U-face support transfer"
+      },
+      {
+        "source_interval_s": [
+          1944.1579998493194,
+          1949.0610000133515
+        ],
+        "speed": 12.25750041008041,
+        "description": "transfer support to U-layer gripper"
+      },
+      {
+        "source_interval_s": [
+          2007.956999874115,
+          2037.4190000534059
+        ],
+        "speed": 20,
+        "description": "reposition holder to opposing D layer"
+      },
+      {
+        "source_interval_s": [
+          2087.836000061035,
+          2098.299999856949
+        ],
+        "speed": 20,
+        "description": "insert D support layer grasp"
+      },
+      {
+        "source_interval_s": [
+          2110.836999988556,
+          2114.501000070572
+        ],
+        "speed": 9.160000205040433,
+        "description": "secure D layer before the U turn"
+      },
+      {
+        "source_interval_s": [
+          2169.9280000686645,
+          2175.74099984169
+        ],
+        "speed": 14.532499432564236,
+        "description": "test U prime layer motion"
+      },
+      {
+        "source_interval_s": [
+          2189.1320000648498,
+          2205.55299987793
+        ],
+        "speed": 5,
+        "description": "complete U prime turn"
+      },
+      {
+        "source_interval_s": [
+          2325.522999858856,
+          2333.939999961853
+        ],
+        "speed": 20,
+        "description": "release and verify second turn"
+      },
+      {
+        "source_interval_s": [
+          2361.1119998455047,
+          2391.498999977112
+        ],
+        "speed": 20,
+        "description": "present B axis for the two-turn finish"
+      },
+      {
+        "source_interval_s": [
+          2419.1590000152587,
+          2431.261999988556
+        ],
+        "speed": 20,
+        "description": "inspect B face for receiving grasp"
+      },
+      {
+        "source_interval_s": [
+          2495.116000032425,
+          2503.437999868393
+        ],
+        "speed": 20,
+        "description": "insert B receiving fingers"
+      },
+      {
+        "source_interval_s": [
+          2512.2859998703,
+          2515.93200006485
+        ],
+        "speed": 9.115000486374356,
+        "description": "secure B layer for support transfer"
+      },
+      {
+        "source_interval_s": [
+          2546.19299993515,
+          2554.1489998340608
+        ],
+        "speed": 19.88999974727676,
+        "description": "transfer support to B gripper"
+      },
+      {
+        "source_interval_s": [
+          2619.8969999313354,
+          2643.0029999256135
+        ],
+        "speed": 20,
+        "description": "reach F support inspection with lateral clearance"
+      },
+      {
+        "source_interval_s": [
+          2710.564999914169,
+          2722.8240000247956
+        ],
+        "speed": 20,
+        "description": "secure opposing F support"
+      },
+      {
+        "source_interval_s": [
+          2753.1149998664855,
+          2761.485999965668
+        ],
+        "speed": 20,
+        "description": "test B layer rotation"
+      },
+      {
+        "source_interval_s": [
+          2770.2180000305175,
+          2789.36599984169
+        ],
+        "speed": 5,
+        "description": "complete B quarter turn"
+      },
+      {
+        "source_interval_s": [
+          2846.2710000038146,
+          2852.1279999256135
+        ],
+        "speed": 14.64249980449722,
+        "description": "release third turn and verify alignment"
+      },
+      {
+        "source_interval_s": [
+          2877.4940000534057,
+          2905.6119998931886
+        ],
+        "speed": 20,
+        "description": "present the final turning axis"
+      },
+      {
+        "source_interval_s": [
+          2975.264000034332,
+          2987.65
+        ],
+        "speed": 20,
+        "description": "use a setback final inspection pose"
+      },
+      {
+        "source_interval_s": [
+          3145.4259999752044,
+          3162.3800000190736
+        ],
+        "speed": 20,
+        "description": "change receiver roll to clear holder camera"
+      },
+      {
+        "source_interval_s": [
+          3214.495999908447,
+          3226.953999900818
+        ],
+        "speed": 20,
+        "description": "approach shallow support precontact"
+      },
+      {
+        "source_interval_s": [
+          3328.6469999313354,
+          3334.1669999599458
+        ],
+        "speed": 13.800000071526028,
+        "description": "close the offset D support grip"
+      },
+      {
+        "source_interval_s": [
+          3373.8539999485015,
+          3379.8809999465943
+        ],
+        "speed": 15.067499995232083,
+        "description": "transfer cube support to D"
+      },
+      {
+        "source_interval_s": [
+          3412.3389998435973,
+          3440.291000032425
+        ],
+        "speed": 20,
+        "description": "lift clear before routing to the opposing U face"
+      },
+      {
+        "source_interval_s": [
+          3559.422000026703,
+          3565.847000026703
+        ],
+        "speed": 16.062500000000455,
+        "description": "close final U layer grasp"
+      },
+      {
+        "source_interval_s": [
+          3594.8749998569488,
+          3602.411999845505
+        ],
+        "speed": 18.842499971390225,
+        "description": "start the final U-prime layer turn"
+      },
+      {
+        "source_interval_s": [
+          3608.5939999580382,
+          3625.008999967575
+        ],
+        "speed": 5,
+        "description": "complete the final quarter-turn"
+      },
+      {
+        "source_interval_s": [
+          3694.176999902725,
+          3699.217999839783
+        ],
+        "speed": 3,
+        "description": "release the final turn for visual verification"
+      },
+      {
+        "source_interval_s": [
+          3726.735999917984,
+          3742.2799998760224
+        ],
+        "speed": 5,
+        "description": "present the remaining faces without turning layers"
+      }
+    ],
+    "outcome": "Final layer turn produces uniform faces; whole-cube presentation shows the blue face up. Stop here at user request.",
+    "pacing": "All successful physical command windows include 0.9 s guards and run at no more than 20x, with at least 0.4 s per motion; key quarter turns and final presentation run at 5x. Stationary intervals use continuous linear speed ramps. Final result holds for 2.2 s."
+  },
+  "review_times": [
+    0,
+    0.8,
+    5.289493387259291,
+    12.520504365748154,
+    14.158370306052326,
+    26.22656557920117,
+    39.367638158538554,
+    53.50557763011379,
+    67.08614249015496,
+    72.86999999999999,
+    74.5
+  ],
+  "end_source_s": 3742.2799998760224,
+  "status_overlay": {
+    "autonomy": "Autonomous",
+    "placement": "Under the recording, lower left; explicitly requested by user.",
+    "activity": [
+      {
+        "start_source_s": 0,
+        "end_source_s": 19.463,
+        "text": "Reading the task"
+      },
+      {
+        "start_source_s": 19.463,
+        "end_source_s": 120.34099993705749,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 120.34099993705749,
+        "end_source_s": 127.11799993515015,
+        "text": "Inspecting the cube"
+      },
+      {
+        "start_source_s": 127.11799993515015,
+        "end_source_s": 175.3189998626709,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 175.3189998626709,
+        "end_source_s": 185.5989998817444,
+        "text": "Moving the wrist camera"
+      },
+      {
+        "start_source_s": 185.5989998817444,
+        "end_source_s": 249.9659999370575,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 249.9659999370575,
+        "end_source_s": 253.58499994277955,
+        "text": "Aligning the grasp"
+      },
+      {
+        "start_source_s": 253.58499994277955,
+        "end_source_s": 264.2729998588562,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 264.2729998588562,
+        "end_source_s": 269.64300003051756,
+        "text": "Grasping the cube"
+      },
+      {
+        "start_source_s": 269.64300003051756,
+        "end_source_s": 277.30199990272524,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 277.30199990272524,
+        "end_source_s": 281.78100004196165,
+        "text": "Lifting the cube"
+      },
+      {
+        "start_source_s": 281.78100004196165,
+        "end_source_s": 363.1799999237061,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 363.1799999237061,
+        "end_source_s": 374.775,
+        "text": "Inspecting another face"
+      },
+      {
+        "start_source_s": 374.775,
+        "end_source_s": 446.4129999637604,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 446.4129999637604,
+        "end_source_s": 454.2989999294281,
+        "text": "Tilting the cube"
+      },
+      {
+        "start_source_s": 454.2989999294281,
+        "end_source_s": 461.3619998455048,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 461.3619998455048,
+        "end_source_s": 481.2339998722076,
+        "text": "Viewing the bottom face"
+      },
+      {
+        "start_source_s": 481.2339998722076,
+        "end_source_s": 563.2619999408722,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 563.2619999408722,
+        "end_source_s": 575.1109999656677,
+        "text": "Inspecting side stickers"
+      },
+      {
+        "start_source_s": 575.1109999656677,
+        "end_source_s": 646.5479999542237,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 646.5479999542237,
+        "end_source_s": 657.5889998912811,
+        "text": "Moving the wrist camera"
+      },
+      {
+        "start_source_s": 657.5889998912811,
+        "end_source_s": 706.7570000648499,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 706.7570000648499,
+        "end_source_s": 728.2159999847412,
+        "text": "Inspecting remaining faces"
+      },
+      {
+        "start_source_s": 728.2159999847412,
+        "end_source_s": 855.2900000572205,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 855.2900000572205,
+        "end_source_s": 864.2940000534057,
+        "text": "Viewing the back face"
+      },
+      {
+        "start_source_s": 864.2940000534057,
+        "end_source_s": 881.652,
+        "text": "Planning the next viewpoint"
+      },
+      {
+        "start_source_s": 881.652,
+        "end_source_s": 989.418,
+        "text": "Planning the solution"
+      },
+      {
+        "start_source_s": 989.418,
+        "end_source_s": 1029.3960000038146,
+        "text": "Replanning for clearance"
+      },
+      {
+        "start_source_s": 1029.3960000038146,
+        "end_source_s": 1035.1159998416902,
+        "text": "Clearing the arm path"
+      },
+      {
+        "start_source_s": 1035.1159998416902,
+        "end_source_s": 1042.5319999217986,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1042.5319999217986,
+        "end_source_s": 1062.8240000247956,
+        "text": "Aligning the turn axis"
+      },
+      {
+        "start_source_s": 1062.8240000247956,
+        "end_source_s": 1080.9629999160766,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1080.9629999160766,
+        "end_source_s": 1095.0159999370576,
+        "text": "Positioning the support hand"
+      },
+      {
+        "start_source_s": 1095.0159999370576,
+        "end_source_s": 1137.06599984169,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1137.06599984169,
+        "end_source_s": 1144.7759999275208,
+        "text": "Inserting support fingers"
+      },
+      {
+        "start_source_s": 1144.7759999275208,
+        "end_source_s": 1151.3039999961852,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1151.3039999961852,
+        "end_source_s": 1154.751000070572,
+        "text": "Securing the support grip"
+      },
+      {
+        "start_source_s": 1154.751000070572,
+        "end_source_s": 1218.6699999332427,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1218.6699999332427,
+        "end_source_s": 1221.6690000534059,
+        "text": "Handing off the cube"
+      },
+      {
+        "start_source_s": 1221.6690000534059,
+        "end_source_s": 1230.6590000152587,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1230.6590000152587,
+        "end_source_s": 1235.1809998989106,
+        "text": "Withdrawing the gripper"
+      },
+      {
+        "start_source_s": 1235.1809998989106,
+        "end_source_s": 1301.1520000457763,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1301.1520000457763,
+        "end_source_s": 1328.0670000553132,
+        "text": "Routing the turning hand"
+      },
+      {
+        "start_source_s": 1328.0670000553132,
+        "end_source_s": 1376.1620000362395,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1376.1620000362395,
+        "end_source_s": 1382.1159998416902,
+        "text": "Grasping the turning layer"
+      },
+      {
+        "start_source_s": 1382.1159998416902,
+        "end_source_s": 1411.719999885559,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1411.719999885559,
+        "end_source_s": 1415.219999933243,
+        "text": "Securing the turning grip"
+      },
+      {
+        "start_source_s": 1415.219999933243,
+        "end_source_s": 1431.017000055313,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1431.017000055313,
+        "end_source_s": 1438.1839999198914,
+        "text": "Testing a layer turn"
+      },
+      {
+        "start_source_s": 1438.1839999198914,
+        "end_source_s": 1449.570999956131,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1449.570999956131,
+        "end_source_s": 1465.9099999904633,
+        "text": "Completing the first turn"
+      },
+      {
+        "start_source_s": 1465.9099999904633,
+        "end_source_s": 1546.8269999980926,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1546.8269999980926,
+        "end_source_s": 1552.546999835968,
+        "text": "Checking layer alignment"
+      },
+      {
+        "start_source_s": 1552.546999835968,
+        "end_source_s": 1593.379000043869,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1593.379000043869,
+        "end_source_s": 1624.028000020981,
+        "text": "Aligning the next axis"
+      },
+      {
+        "start_source_s": 1624.028000020981,
+        "end_source_s": 1826.1859999656676,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1826.1859999656676,
+        "end_source_s": 1843.9169999599458,
+        "text": "Positioning the receiver"
+      },
+      {
+        "start_source_s": 1843.9169999599458,
+        "end_source_s": 1893.4269999027251,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1893.4269999027251,
+        "end_source_s": 1902.7929998874665,
+        "text": "Inserting receiving fingers"
+      },
+      {
+        "start_source_s": 1902.7929998874665,
+        "end_source_s": 1911.5979999065398,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1911.5979999065398,
+        "end_source_s": 1915.2529999256135,
+        "text": "Securing the receiving grip"
+      },
+      {
+        "start_source_s": 1915.2529999256135,
+        "end_source_s": 1944.1579998493194,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 1944.1579998493194,
+        "end_source_s": 1949.0610000133515,
+        "text": "Handing off the cube"
+      },
+      {
+        "start_source_s": 1949.0610000133515,
+        "end_source_s": 2007.956999874115,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2007.956999874115,
+        "end_source_s": 2037.4190000534059,
+        "text": "Positioning the support hand"
+      },
+      {
+        "start_source_s": 2037.4190000534059,
+        "end_source_s": 2087.836000061035,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2087.836000061035,
+        "end_source_s": 2098.299999856949,
+        "text": "Grasping the support layer"
+      },
+      {
+        "start_source_s": 2098.299999856949,
+        "end_source_s": 2110.836999988556,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2110.836999988556,
+        "end_source_s": 2114.501000070572,
+        "text": "Securing the support grip"
+      },
+      {
+        "start_source_s": 2114.501000070572,
+        "end_source_s": 2169.9280000686645,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2169.9280000686645,
+        "end_source_s": 2175.74099984169,
+        "text": "Testing a layer turn"
+      },
+      {
+        "start_source_s": 2175.74099984169,
+        "end_source_s": 2189.1320000648498,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2189.1320000648498,
+        "end_source_s": 2205.55299987793,
+        "text": "Completing the second turn"
+      },
+      {
+        "start_source_s": 2205.55299987793,
+        "end_source_s": 2315.919,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2315.919,
+        "end_source_s": 2325.522999858856,
+        "text": "Replanning the solution"
+      },
+      {
+        "start_source_s": 2325.522999858856,
+        "end_source_s": 2333.939999961853,
+        "text": "Checking layer alignment"
+      },
+      {
+        "start_source_s": 2333.939999961853,
+        "end_source_s": 2361.1119998455047,
+        "text": "Replanning the solution"
+      },
+      {
+        "start_source_s": 2361.1119998455047,
+        "end_source_s": 2391.498999977112,
+        "text": "Aligning the next axis"
+      },
+      {
+        "start_source_s": 2391.498999977112,
+        "end_source_s": 2419.1590000152587,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2419.1590000152587,
+        "end_source_s": 2431.261999988556,
+        "text": "Inspecting the grasp"
+      },
+      {
+        "start_source_s": 2431.261999988556,
+        "end_source_s": 2495.116000032425,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2495.116000032425,
+        "end_source_s": 2503.437999868393,
+        "text": "Inserting receiving fingers"
+      },
+      {
+        "start_source_s": 2503.437999868393,
+        "end_source_s": 2512.2859998703,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2512.2859998703,
+        "end_source_s": 2515.93200006485,
+        "text": "Securing the receiving grip"
+      },
+      {
+        "start_source_s": 2515.93200006485,
+        "end_source_s": 2546.19299993515,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2546.19299993515,
+        "end_source_s": 2554.1489998340608,
+        "text": "Handing off the cube"
+      },
+      {
+        "start_source_s": 2554.1489998340608,
+        "end_source_s": 2619.8969999313354,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2619.8969999313354,
+        "end_source_s": 2643.0029999256135,
+        "text": "Routing around the camera"
+      },
+      {
+        "start_source_s": 2643.0029999256135,
+        "end_source_s": 2710.564999914169,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2710.564999914169,
+        "end_source_s": 2722.8240000247956,
+        "text": "Securing the support grip"
+      },
+      {
+        "start_source_s": 2722.8240000247956,
+        "end_source_s": 2753.1149998664855,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2753.1149998664855,
+        "end_source_s": 2761.485999965668,
+        "text": "Testing a layer turn"
+      },
+      {
+        "start_source_s": 2761.485999965668,
+        "end_source_s": 2770.2180000305175,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2770.2180000305175,
+        "end_source_s": 2789.36599984169,
+        "text": "Completing the third turn"
+      },
+      {
+        "start_source_s": 2789.36599984169,
+        "end_source_s": 2830.608,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2830.608,
+        "end_source_s": 2846.2710000038146,
+        "text": "Planning the final turns"
+      },
+      {
+        "start_source_s": 2846.2710000038146,
+        "end_source_s": 2852.1279999256135,
+        "text": "Checking layer alignment"
+      },
+      {
+        "start_source_s": 2852.1279999256135,
+        "end_source_s": 2877.4940000534057,
+        "text": "Planning the final turns"
+      },
+      {
+        "start_source_s": 2877.4940000534057,
+        "end_source_s": 2905.6119998931886,
+        "text": "Aligning the final axis"
+      },
+      {
+        "start_source_s": 2905.6119998931886,
+        "end_source_s": 2975.264000034332,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 2975.264000034332,
+        "end_source_s": 2987.65,
+        "text": "Adjusting the approach"
+      },
+      {
+        "start_source_s": 2987.65,
+        "end_source_s": 3145.4259999752044,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3145.4259999752044,
+        "end_source_s": 3162.3800000190736,
+        "text": "Clearing the wrist camera"
+      },
+      {
+        "start_source_s": 3162.3800000190736,
+        "end_source_s": 3214.495999908447,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3214.495999908447,
+        "end_source_s": 3226.953999900818,
+        "text": "Approaching the support layer"
+      },
+      {
+        "start_source_s": 3226.953999900818,
+        "end_source_s": 3281.529,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3281.529,
+        "end_source_s": 3328.6469999313354,
+        "text": "Adjusting grasp clearance"
+      },
+      {
+        "start_source_s": 3328.6469999313354,
+        "end_source_s": 3334.1669999599458,
+        "text": "Securing the offset grasp"
+      },
+      {
+        "start_source_s": 3334.1669999599458,
+        "end_source_s": 3373.8539999485015,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3373.8539999485015,
+        "end_source_s": 3379.8809999465943,
+        "text": "Handing off the cube"
+      },
+      {
+        "start_source_s": 3379.8809999465943,
+        "end_source_s": 3412.3389998435973,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3412.3389998435973,
+        "end_source_s": 3440.291000032425,
+        "text": "Routing the turning hand"
+      },
+      {
+        "start_source_s": 3440.291000032425,
+        "end_source_s": 3559.422000026703,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3559.422000026703,
+        "end_source_s": 3565.847000026703,
+        "text": "Securing the final grasp"
+      },
+      {
+        "start_source_s": 3565.847000026703,
+        "end_source_s": 3594.8749998569488,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3594.8749998569488,
+        "end_source_s": 3602.411999845505,
+        "text": "Testing the final turn"
+      },
+      {
+        "start_source_s": 3602.411999845505,
+        "end_source_s": 3608.5939999580382,
+        "text": "Planning the next move"
+      },
+      {
+        "start_source_s": 3608.5939999580382,
+        "end_source_s": 3625.008999967575,
+        "text": "Completing the final turn"
+      },
+      {
+        "start_source_s": 3625.008999967575,
+        "end_source_s": 3726.735999917984,
+        "text": "Checking the solved cube"
+      },
+      {
+        "start_source_s": 3726.735999917984,
+        "end_source_s": 3742.2799998760224,
+        "text": "Showing the solved cube"
+      }
+    ],
+    "hold_labels": {
+      "Read original task": "Reading the task",
+      "Computed four-turn solution": "Planning the solution",
+      "Original solution explanation": "Planning the solution",
+      "Rejected clearance check": "Replanning for clearance",
+      "Equivalent solution avoids wrist limits": "Replanning the solution",
+      "Changed finish explanation": "Planning the final turns",
+      "Support-path rejection before recovery": "Adjusting grasp clearance",
+      "Verify completed layer turn": "Checking layer alignment",
+      "Solved cube, blue face up; stop before lowering it out of view": "Solved — blue face up"
+    },
+    "elapsed_time": {
+      "format": "HH:MM:SS / HH:MM:SS",
+      "clock": "Original recording time, using the same continuous source map as the footage; not the 75-second export clock.",
+      "total_source_s": 3742.2799998760224,
+      "total_definition": "Retained recording from frame zero through the solved blue-face-up presentation; later placement footage is excluded."
+    }
+  },
+  "compact_metadata": true
+}

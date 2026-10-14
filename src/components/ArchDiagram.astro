@@ -75,11 +75,10 @@ const layers = [
 </div>
 
 <style>
-  /* The definitions column is sized and placed to match the Agent box (y 166–314 of the 900×560 viewBox). */
-  .arch { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: start;
-          --svg-w: calc(100cqw - 340px); }
-  @media (max-width: 900px) { .arch { grid-template-columns: 1fr; gap: 20px; } .defs { margin-top: 0; height: auto; } .defs li { flex: none; } }
-  svg { width: 100%; height: auto; display: block; font-family: var(--font-body); }
+  /* Share the SVG's grid area: definitions sit in its unused lower-left space,
+     below the Agent and its return paths (past y=420 in the 900×560 viewBox). */
+  .arch { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 70%); align-items: start; max-width: 860px; margin: 0 auto; }
+  svg { grid-area: 1 / 1 / 2 / 3; width: 100%; height: auto; display: block; font-family: var(--font-body); }
   .arch.diagram-only { display: block; overflow-x: auto; }
   .diagram-only svg { min-width: 600px; }
 
@@ -113,13 +112,18 @@ const layers = [
   .arch:has(.d-tools:hover) .l-tools rect,
   .arch:has(.d-devices:hover) .l-devices rect { fill: color-mix(in srgb, var(--c) 20%, var(--panel)); stroke-width: 2.5; }
 
-  .defs { list-style: none; padding: 0; border-top: 1px solid var(--rule); display: flex; flex-direction: column;
-          margin: calc(var(--svg-w) * 166 / 900) 0 0; height: calc(var(--svg-w) * 148 / 900); }
-  .defs li { flex: 1; display: flex; border-bottom: 1px solid var(--rule); }
-  .defs a { flex: 1; display: grid; grid-template-columns: 30px 1fr; gap: 0 8px; align-content: center; padding: 0 4px; }
+  .defs { grid-area: 1 / 1 / 2 / 2; list-style: none; padding: 0; border-top: 1px solid var(--rule); display: flex; flex-direction: column;
+          margin: calc(100cqw * 420 / 900) 8px 0 calc(100cqw * 20 / 900); }
+  .defs li { display: flex; border-bottom: 1px solid var(--rule); }
+  .defs a { flex: 1; display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 0 6px; align-content: center; padding: 6px 0; }
   .n { font-size: 11px; color: var(--ink-3); padding-top: 3px; }
   .nm { font-weight: 600; line-height: 1.3; }
   .w { grid-column: 2; font-size: 12.5px; line-height: 1.35; color: var(--ink-2); }
   .defs a:hover .nm { color: var(--accent); }
   .defs a:hover .nm::after { content: ' →'; }
+  @media (max-width: 600px) {
+    .arch:not(.diagram-only) { grid-template-columns: minmax(0, 1fr); }
+    .arch:not(.diagram-only) svg { grid-area: 1 / 1; }
+    .defs { grid-area: 2 / 1; margin: 16px 0 0; }
+  }
 </style>

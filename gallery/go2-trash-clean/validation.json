@@ -1,0 +1,26 @@
+{
+  "timeline": "Continuous source from frame zero through second deposit verification; ramp continuity and inverse checked.",
+  "evidence": "No selected result or camera observation precedes its recorded result timestamp; all images hash verified.",
+  "status": "All frame labels match recording elapsed/retained total, fit the left column, and label disturbance/operator check.",
+  "files": [
+    {
+      "file": "gallery/.masters/go2-trash-clean.mp4",
+      "frames": 2670,
+      "duration_s": 89,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/go2-trash-clean/go2-trash-clean.mp4",
+      "frames": 2670,
+      "duration_s": 89,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/go2-trash-clean/go2-trash-clean.webm",
+      "frames": 2670,
+      "duration_s": 89,
+      "first_pts_s": 0
+    }
+  ],
+  "webm_timestamp_tolerance_s": 0.0011
+}
