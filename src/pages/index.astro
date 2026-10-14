@@ -20,9 +20,9 @@ const paths = [
     <section class="hero grid-bg">
       <div class="wrap hero-in">
         <div class="pitch">
-          <h1>One Agent for Many Robot.</h1>
+          <h1>One Agent for Many Robots.</h1>
           <p class="sub">
-            Tell <Wordmark /> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
+            Tell <a class="self-link" href={url('/')} aria-label="Kinex home"><Wordmark /></a> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
             and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>.
           </p>
           <p class="platform-note">Install on macOS and Ubuntu.</p>
@@ -43,13 +43,13 @@ const paths = [
     <section class="wrap sec architecture" id="architecture" aria-labelledby="architecture-heading">
       <p class="kicker">02 · Architecture</p>
       <div class="architecture-part">
-        <h2 id="architecture-heading">Three layers of abstraction for acting in the real world.</h2>
+        <h2 id="architecture-heading">Three layers of abstraction for acting with arbitrary robots.</h2>
         <p class="section-copy">An agent needs a way to turn a goal into physical action. Kinex separates that work into three layers: <strong>skills</strong> describe how to approach a task, <strong>tools</strong> carry out perception, computation, and control, and <strong>devices</strong> expose the robot’s capabilities through typed interfaces. Results flow back to the agent so it can decide what to do next.</p>
         <ArchDiagram />
       </div>
       <div class="architecture-part">
         <h2>A system of devices rather than a monolithic robot</h2>
-        <p class="section-copy">Kinex exposes a robot as independent devices: a mobile base, torso, arms, grippers, and cameras. The agent writes and runs tools and code to coordinate these devices for each task. This makes workflows more flexible and helps them generalize across robot configurations. If a camera is missing, for example, the agent can inspect the remaining devices, use another viewpoint where available, and revise its workflow to fit the capabilities it actually has.</p>
+        <p class="section-copy">Kinex exposes a robot as independent devices: a mobile base, torso, arms, grippers, and cameras. The agent writes and runs tools and code to coordinate these devices for each task. This makes workflows more flexible, lets each task compose the robot it needs, and helps them generalize across robot configurations. If a camera is missing, for example, the agent can inspect the remaining devices, use another viewpoint where available, and revise its workflow to fit the capabilities it actually has.</p>
         <DeviceDiagram />
       </div>
     </section>
@@ -120,4 +120,6 @@ const paths = [
   .card:hover { background: var(--bg); }
   .card:hover .go { color: var(--accent); transform: translateX(4px); }
 
+  .self-link { border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+  .self-link:hover { border-bottom-color: var(--accent); }
 </style>
