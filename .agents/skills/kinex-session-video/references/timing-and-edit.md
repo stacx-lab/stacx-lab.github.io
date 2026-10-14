@@ -27,7 +27,7 @@ output_duration = (source_end - source_start) / speed
 whole_event_duration = typing_s + sum(output_duration) + result_hold_s
 ```
 
-The compiled monotonic map drives the footage lookup, displayed scene clock, speed indicator, and tool result timing. Execution remains gray-blue until the entire motion map finishes. Tool results and read images only appear at the corresponding result boundary. The reconstructed text streams during `typing_s`; source footage holds there. A held frame is labeled “Frame held”, not “1×”. Never label a cut with a finite speed.
+The compiled monotonic map drives the footage lookup, displayed scene clock, speed indicator, and tool result timing. Execution remains gray-blue until the entire motion map finishes. Tool results and read images only appear at the corresponding result boundary. The reconstructed text streams during `typing_s`; source footage holds there. Record a held frame as held, not “1×”, and never record a cut with a finite speed; these values live in provenance, not under the video.
 
 The map is continuous in position within an event and piecewise constant in speed. It does not synthesize optical-flow frames or recover original per-token timing. For a 10 FPS source, slow motion repeats available frames; inspect it rather than assuming 30 FPS export creates extra detail.
 
