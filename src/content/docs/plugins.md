@@ -35,7 +35,7 @@ kinex install ./my-pi-package -l                    # from a local folder, for t
 kinex update npm:pi-web-search                      # update a single package
 ```
 
-Packages install for your user by default; add `-l` to install for the current project only. **Restart Kinex** after installing, updating or removing a package so the change takes effect. See Pi's [package documentation](https://github.com/earendil-works/pi/blob/v1.1.0/packages/coding-agent/docs/packages.md) to write your own.
+Packages install for your user by default; add `-l` to install for the current project only. **Restart Kinex** after installing, updating or removing a package so the change takes effect. See Pi's [package documentation](https://github.com/earendil-works/pi/blob/v1.2.0/packages/coding-agent/docs/packages.md) to write your own.
 
 ## Using Kinex from other harnesses
 
@@ -47,7 +47,7 @@ If you'd rather keep working in your usual coding agent, the [kinex-plugins](htt
 | **OpenCode** | An OpenCode plugin, with a server part for the model's tools and a TUI part for slash commands. |
 | **Codex** | A local MCP server that Codex connects to, plus a small CLI for direct commands. |
 
-All three share the same robotics core, so devices, tools, skills, onboarding and calibration behave just as they do in Kinex. Plugin releases are versioned separately from Kinex.
+All three use the shared robotics core. Plugin releases are versioned separately and consume explicit packed core/setup snapshots; updating standalone Kinex does not update a plugin's snapshot. Check the plugin's bundled version before relying on newly added tools or runtime behavior.
 
 ### Installing a plugin
 

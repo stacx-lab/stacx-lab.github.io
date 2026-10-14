@@ -83,6 +83,12 @@ To restart a device, run `/unload arm` and then `/load arm` (or use `all`). If a
 
 `/stop` skips the approval prompt and also cancels the agent's current response. What stopping means depends on the device, and each driver declares its own stop behavior. For example, an arm drops its queued motion, a mobile base comes to a halt, and a gripper keeps holding whatever it has grasped rather than opening.
 
+## Reading devices and camera images
+
+`device` calls one device; `devices` calls several concurrently and returns results in input order. Batch entries use `deviceID`, `action` and `args`. Each result has its own `ok` status and data or error; the batch is neither atomic nor a simultaneous sample. Successful camera images survive a partial failure. The agent-facing batch is marked as an error only when every call fails.
+
+Direct camera calls through `device` or `devices` attach RGB images automatically. Inside Python, camera reads default to NumPy arrays for computation and do not display images to the agent. Request `output="file"`, then return selected paths with `finish(result, file=[...])`. Keep camera names and acquisition timestamps with the images; returning several together does not synchronize their clocks. See [Returning camera observations](/docs/custom-tools/#returning-camera-observations).
+
 ## Spatial and temporal relationships
 
 ### Space: frames and extrinsics
@@ -121,4 +127,4 @@ Simulators run in one of two modes:
 - **Realtime:** the simulation keeps running on its own, including while the agent is thinking.
 - **Stepped:** simulated time only moves forward during `world.wait`. Reads never advance it, and a host `sleep` doesn't either.
 
-So in a stepped simulator, commanding a motion and then reading the result isn't enough on its own: call `world.wait` in between to let the motion happen. Tools like `servo` and `closed_loop` wait on the world clock for you.
+So in a stepped simulator, commanding a motion and then reading the result isn't enough on its own: call `world.wait` in between to let the motion happen. Blocking `servo` already waits its planned duration on a loaded world clock, so do not wait that duration twice. It does not verify arrival. With `block=False`, or asynchronous device writes and `run_policy`, scripts must wait explicitly and then check fresh feedback.

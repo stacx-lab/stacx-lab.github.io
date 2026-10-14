@@ -52,6 +52,11 @@ kinex run "/devices"
 | --- | --- |
 | `uv` not found | Install [uv](https://docs.astral.sh/uv/). It's only needed to create the workspace's Python environment. |
 | A package is missing | Run `uv add --project .kinex/python <package>`. Kinex doesn't install new dependencies on its own. |
+| `closed_loop` or `settled` not found | These built-ins were removed. Replace their stage mappings and state with a bounded [Python feedback loop](/docs/custom-tools/#feedback-control). |
+| Custom tool or skill is missing | Move custom content to `.kinex/tools/` or `.kinex/skills/` (or the corresponding global directories). Singular custom directories are no longer searched. |
+| Camera paths appear but no images | Python reads do not attach images. Request `output="file"` and return the paths with `finish(result, file=[...])`. |
+| Script finishes but motion continues | Successful execution does not stop submitted motion. Use `stop_owned()` in `finally` when exiting must stop it, or `/stop` manually. |
+| Batch returns an error for one device | Inspect every `devices()` entry's `ok` field. Other calls may have succeeded; a partial batch error does not raise automatically in Python. |
 | ROS driver fails to import | ROS drivers use the system Python 3.12, not `.kinex/python` |
 
 ## Reporting an issue

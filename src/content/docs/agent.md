@@ -7,9 +7,9 @@ label: Working with the agent
 sources: ["README.md", "docs/agent-integration.md", "src/application.ts", "src/auth.ts", "src/arguments.ts", "src/sessions.ts", "src/settings.ts", "src/export.ts", "src/resume-hint.ts", "src/integration/interaction.ts", "src/integration/extension.ts"]
 ---
 
-Kinex is built on the [Pi](https://pi.dev) coding agent (`@earendil-works/pi-coding-agent`, bundled at version 1.1.0, so there's nothing extra to install). Pi provides the agent itself: the model connection, the conversation loop, the terminal UI, sessions, compaction and the everyday coding tools (`read`, `write`, `edit`, `bash`, `grep`, `find`, `ls`). Kinex adds the robotics on top: devices, robotics tools and skills, permissions and recording.
+Kinex is built on the [Pi](https://pi.dev) coding agent (`@earendil-works/pi-coding-agent`, bundled at version 1.2.0, so there's nothing extra to install). Pi provides the agent itself: the model connection, the conversation loop, the terminal UI, sessions, compaction and the everyday coding tools (`read`, `write`, `edit`, `bash`, `grep`, `find`, `ls`). Kinex adds the robotics on top: devices, robotics tools and skills, permissions and recording.
 
-Apart from approvals and devices, everything on this page works the way it does in Pi. If you've used Pi or a similar coding agent before, it will feel familiar. For more detail, see [Pi's documentation](https://github.com/earendil-works/pi/tree/v1.1.0/packages/coding-agent/docs).
+Apart from approvals and devices, everything on this page works the way it does in Pi. If you've used Pi or a similar coding agent before, it will feel familiar. For more detail, see [Pi's documentation](https://github.com/earendil-works/pi/tree/v1.2.0/packages/coding-agent/docs).
 
 ## Choosing a model
 
@@ -46,7 +46,7 @@ To use a model you host yourself, add it to `~/.config/kinex/agent/models.json`:
 }
 ```
 
-Start the model server, then choose `local/your-model-name` with `/model`. See Pi's [custom provider docs](https://github.com/earendil-works/pi/blob/v1.1.0/packages/coding-agent/docs/models.md) for all options.
+Start the model server, then choose `local/your-model-name` with `/model`. See Pi's [custom provider docs](https://github.com/earendil-works/pi/blob/v1.2.0/packages/coding-agent/docs/models.md) for all options.
 
 ### Where credentials are kept
 
@@ -121,7 +121,7 @@ Long conversations eventually fill the model's context window. Compaction summar
 /compact keep the calibration results in detail   # tell it what to preserve
 ```
 
-Kinex makes sure compaction doesn't lose track of the robot. Before every request it gives the agent a fresh picture of the workspace: loaded devices, how to use them, and the Python environment. That picture is rebuilt in full after compaction. Old observations in the history are still just history, though. When the current state matters, the agent should read the device again.
+Kinex makes sure compaction doesn't lose track of the robot. Before every request it gives the agent a fresh picture of the workspace: loaded devices, how to use them, and the Python environment. That picture is rebuilt in full after compaction. The robotics guidance asks the agent to avoid unnecessary tool calls and motion, account for intended contact, and check the full path for unintended collisions. Command acceptance or arrival alone does not establish task success. Old observations in the history are still just history, though. When the current state matters, the agent should read the device again.
 
 The footer shows how long you've been actively working in the session, not counting idle time.
 

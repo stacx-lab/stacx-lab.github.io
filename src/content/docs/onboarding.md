@@ -71,6 +71,14 @@ A calibration follows the same loop every time:
 
 When something physical changes, such as a camera being remounted, ask the agent to reassess and it will redo the affected calibration.
 
+### Sampling and evidence
+
+Calibration samples and solver results belong to an attempt under `.kinex/calib/`. When calling `calib_sample` for a camera, pass `args: {output: "file"}` so it archives image files; RGB-D sampling copies both color and depth before recording the sample.
+
+Blocking `servo` waits its planned duration, but check fresh measured feedback before sampling. The sampler's settling checks require declared measured velocities and distinct device timestamps. They do not advance simulated time: arrange any additional `world.wait` before sampling. A settling timeout after a read saves `settled: false`; cancellation saves no sample. These calibration checks remain available even though the general-purpose `settled` tool was removed.
+
+Unregistering a device removes its device directory and legacy calibration files named `*-<device>.json`. Attempt directories and setup plans remain as evidence.
+
 ### Bundled calibration skills
 
 | Skill | What it determines |

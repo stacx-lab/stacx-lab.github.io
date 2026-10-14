@@ -15,21 +15,21 @@ Tools execute; skills instruct. Both complement the host's coding tools (`read`,
 | `device` | Call one device: read, write, run inference, or `load`/`unload` it |
 | `devices` | Call several devices at once; each call reports its own result or error |
 | `device_stop` | Stop one device or all loaded actuators; never needs approval |
-| `exec` | Run Python source or a script file with access to the devices |
+| `exec` | Run Python source or a script file with device access, feedback control and selected image results |
 | `record` | Start and stop recordings; available only with `--enable-recording` |
 | `skill` | Load a skill's instructions into the conversation |
 | `profile_write` | Validate and save workspace and device facts, including calibration requests |
 | `relative_pose` | Express a frame or pose relative to another frame |
 | `locate_object_3d` | Combine a camera, a detection model and depth to find an object's 3D position |
-| `settled` | Check from measured joints that an arm has arrived and stopped moving |
 | `servo` | Plan and send a joint trajectory to joint or pose targets; waits on the world clock by default (`block: false` returns immediately) |
 | `run_policy` | Run a policy model once and send its actions to the devices |
-| `closed_loop` | Repeat perceive → process → control → `world.wait` until a condition is met |
 | `setup_plan` | Read and update the task's setup plan and record each step's outcome (`@kinex/setup`) |
 | `calib_sample` | Capture one measured sample for a calibration (`@kinex/setup`) |
 | `calib_compute` | Run a calibration solver and propose the resulting profile changes (`@kinex/setup`) |
 | `question` | Ask you a structured question (standalone Kinex only) |
 | `kinex_skill` | Load a skill from any Kinex package (standalone Kinex only) |
+
+Use bounded Python scripts in `exec` to combine control, fresh feedback and camera observations. The former `closed_loop` and `settled` built-ins have been removed; put their loop state and task-specific stopping checks in Python. See [Feedback control](/docs/custom-tools/#feedback-control).
 
 More detail: [Using vision models as tools](/docs/vision/), [Using VLAs as tools](/docs/vla/).
 
@@ -51,6 +51,8 @@ Kinex looks for tools and skills in a `.kinex/` folder, searching these places i
 4. the tools and skills built into Kinex.
 
 When two places define the same name, the first one found wins. A project can therefore override a global or built-in Python tool or skill by defining one with the same name.
+
+Custom discovery uses the plural `tools/` and `skills/` directories, including in global config. Move older custom content out of singular `tool/` and `skill/` directories. Packaged `assets/builtin/tool/` and `assets/builtin/skill/` paths are unchanged.
 
 ### Tools
 

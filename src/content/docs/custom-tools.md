@@ -17,7 +17,7 @@ The agent can write these for you: ask it to "turn that into a tool" or "write a
 
 ## Running Python
 
-The agent runs Python through the `exec` tool. It can pass a snippet of source code or the path of a script in your workspace, and the code has the same access to your devices as the agent itself. There's no special structure to follow; it's ordinary Python.
+The agent runs Python through the `exec` tool. Supply exactly one of `python` (source) or `file` (a script path). No manifest, `main()` function or `kind` is needed. Optional `description` gives the invocation a short display label, such as `inspect arm state`.
 
 A snippet that reads the arm and a camera together:
 
@@ -34,13 +34,16 @@ Or an existing script, with arguments:
 {"file": "scripts/inspect.py", "argv": ["--samples", "10"], "args": {"device": "arm"}}
 ```
 
-The agent sees what the script prints (up to the last 16 KB), plus an optional structured result. A script can attach an image for the agent to look at with `kinex.finish(result, file="snapshot.png")`. Scripts time out after 120 seconds unless given a longer `timeout_s`.
+Each invocation runs in a fresh process from the runtime's working directory. `args` is available through `kinex.args()`; `argv` supplies `sys.argv[1:]`. Files support script-local imports and `__name__ == "__main__"`. Optional `interpreter` selects another Python executable.
+
+The result contains `exit_code`, bounded combined stdout/stderr in `output` (up to the last 16 KB), and `result` (normally `null`). `finish(value)` supplies a structured result; it can also attach one or more images. Scripts time out after 120 wall-clock seconds unless given a different `timeout_s`; composed tools also enforce their own timeouts within the remaining time.
 
 A few things to know:
 
 - **One approval covers the script.** You approve `exec` once, and that covers every device call the script makes.
 - **Scripts can't load or unload devices** or start recordings; those stay with you and the agent.
-- **Stopping is safe.** If a script fails, times out or is cancelled, Kinex stops any motion it started. A script that finishes normally can leave motion running, for example `servo` with `block=False`; use `/stop` or `closed_loop` when it needs to end.
+- **Choose when motion stops.** On failure, timeout or cancellation, Kinex attempts to stop motion still owned by the script. Cleanup failures are logged while the original error is returned. Successful scripts can leave motion running; call `stop_owned()` when the exit condition requires a stop, or use `/stop` yourself.
+- **Inspect batch errors.** `devices()` returns per-entry results. An entry with `ok: false` does not raise an exception by itself; check it before continuing control.
 
 ### The `kinex` library
 
@@ -48,13 +51,14 @@ Scripts and tools use the `kinex` Python library to talk to the runtime:
 
 | Function | Does |
 | --- | --- |
-| `device(name, action="read", args=None)` | Call one device. Camera reads return NumPy arrays. |
+| `device(deviceID, action="read", args=None)` | Call one device. Camera reads return NumPy arrays. |
 | `devices(calls)` | Call several devices at once |
-| `call(tool, **args)` | Call another tool, such as `servo` or `locate_object_3d` |
+| `call(tool, **args)` | Compose a Python tool or `device`/`devices` using keyword arguments; host shell and file tools are outside this API |
 | `profile(name)` | Read a device's profile, including its calibration |
 | `robot()` | Read the workspace description |
 | `args()` | The arguments passed to the script or tool |
-| `finish(result, file=None)` | Return a result, optionally with an image |
+| `finish(result, file=None)` | Return JSON, optionally with one image path or an ordered list of paths |
+| `stop_owned()` | Stop motion still owned by this invocation and surface cleanup errors |
 | `fail(message)` | Stop with an error the agent will see |
 
 ```python
@@ -64,11 +68,71 @@ state = device("arm")
 call("servo", device="arm", joints=[0, -0.5, 0, 1.2, 0, 0.8, 0], block=False)
 ```
 
-A failed call raises `kinex.RPCError`, which carries a `code` and `details`.
+Pass tool parameters as keywords: `call("servo", **params)`, not `call("servo", params)`. In contrast, `device("world", "wait", {"duration_s": 0.1})` takes an argument dictionary. A failed call raises `kinex.RPCError`, which carries a `code` and `details`.
+
+### Returning camera observations
+
+Python camera reads default to arrays and do not attach images automatically. For an agent decision that needs visual input, request files and return them explicitly:
+
+```python
+from kinex import device, finish
+
+observations = []
+images = []
+for camera in ["head_camera", "wrist_camera"]:
+    frame = device(camera, args={"output": "file"})
+    observations.append({"deviceID": camera, "timestamp": frame["timestamp"]})
+    images.append(frame["file"])
+finish({"observations": observations}, file=images)
+```
+
+`file` accepts one path or an ordered list. When attaching files, the result must be a JSON object (or omitted); Kinex includes the paths in its `file` field. Printing paths or returning base64 text does not attach images. Camera names and timestamps identify the separate observations.
+
+### Feedback control
+
+Use bounded Python loops in `exec` for control, measured feedback and task-specific stopping checks. The `closed_loop` and `settled` built-ins are no longer provided. For an arm with bounded revolute joints, the following script takes target `joints` and a positive `tolerance_rad` through exec's `args`:
+
+```python
+from kinex import args, call, device, finish, stop_owned
+
+params = args()
+try:
+    initial = device("arm")
+    if initial["faults"]:
+        raise RuntimeError(str(initial["faults"]))
+    previous_stamp = initial["timestamp"]
+    motion = call("servo", device="arm", joints=params["joints"])
+    # Blocking servo already waited the planned duration. Check fresh feedback.
+    for _ in range(20):
+        feedback = device("arm")
+        if feedback["faults"]:
+            raise RuntimeError(str(feedback["faults"]))
+        if feedback["timestamp"] < previous_stamp:
+            raise RuntimeError("device clock moved backwards")
+        fresh = feedback["timestamp"] > previous_stamp
+        previous_stamp = feedback["timestamp"]
+        error = max(abs(q - goal) for q, goal in
+                    zip(feedback["positions"], motion["joints"], strict=True))
+        if fresh and error <= params["tolerance_rad"]:
+            break
+        device("world", "wait", {"duration_s": 0.1})
+    else:
+        raise TimeoutError("joint target not confirmed")
+finally:
+    stop_owned()
+
+frame = device("wrist_camera", args={"output": "file"})
+finish({"feedback": device("arm"), "camera": "wrist_camera",
+        "timestamp": frame["timestamp"]}, file=frame["file"])
+```
+
+Adapt the names, units and tolerances to the workspace. Continuous joints need angular error modulo a full turn. Position agreement alone does not establish stability, grasp success or task completion; check the feedback the task needs. Missing feedback and faults must stop the loop.
+
+For replanning during motion, use `block=False` and explicit world waits between observations. Blocking `servo` already waits its planned duration on a loaded world clock; waiting that duration again is unnecessary. When further motion depends on visual interpretation, return selected images to the agent before continuing. `stop_owned()` checks ownership before stopping, subject to the driver's declared physical stop scope.
 
 ### The Python environment
 
-By default, scripts, tools and drivers run in one shared Python environment per workspace, in `.kinex/python/`. A driver or tool can use its own interpreter when it needs isolated dependencies, as model devices often do. Kinex creates it with [uv](https://docs.astral.sh/uv/) the first time it's needed, and never touches your own Python projects. To add a package:
+By default, scripts, tools and drivers run in one shared Python ≥ 3.11 environment per workspace, in `.kinex/python/`. A driver or tool can use its own interpreter when it needs isolated dependencies, as model devices often do. Kinex creates it with [uv](https://docs.astral.sh/uv/) the first time it's needed, and never touches your own Python projects. To add a package:
 
 ```sh
 uv add --project .kinex/python opencv-python-headless

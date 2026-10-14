@@ -1,10 +1,10 @@
 ---
 title: Using VLAs as tools
-description: Register a vision-language-action model as a device, run it with run_policy, and close the loop with closed_loop.
+description: Register a vision-language-action model as a device, run it with run_policy, and control bounded observation/action cycles with Python exec.
 group: Guides
 order: 40
 label: Using VLAs as tools
-sources: ["packages/core/README.md", "docs/tools-and-skills.md", "packages/core/assets/builtin/tool/run-policy/tool.yaml", "packages/core/assets/builtin/tool/closed-loop/tool.yaml", "packages/core/assets/builtin/device/templates/model/DEVICE.md", "packages/core/assets/builtin/skill/setup-device/SKILL.md"]
+sources: ["packages/core/README.md", "docs/tools-and-skills.md", "packages/core/assets/builtin/tool/run-policy/tool.yaml", "packages/core/assets/builtin/device/templates/model/DEVICE.md", "packages/core/assets/builtin/skill/setup-device/SKILL.md"]
 ---
 
 A vision-language-action model (VLA) takes camera images and a task description and predicts the robot's next moves. In Kinex, a VLA is not the agent; it's a tool the agent uses. The agent decides when to run the policy, on which devices, for how long, and when to stop.
@@ -13,7 +13,7 @@ This takes three pieces:
 
 1. **The VLA becomes a device.** It's registered like a camera or an arm, as a `model` device with an `infer` operation.
 2. **`run_policy` runs it once.** It sends one observation to the model and passes the predicted actions to the robot.
-3. **`closed_loop` repeats it.** It keeps observing, running the policy and waiting until the task is done.
+3. **Python `exec` coordinates the cycle.** It gathers fresh observations, runs bounded policy chunks, checks feedback and returns images for the agent to assess.
 
 This page uses [StarVLA](https://github.com/starVLA/starVLA) on a RoboTwin dual-arm robot as the example.
 
@@ -84,55 +84,56 @@ Each prediction is a chunk of 50 actions. Each action holds 14 numbers: six join
 
 `run_policy` returns as soon as the actions are sent, reporting how many went out and for how long. It doesn't wait for the motion to finish; that's the loop's job.
 
-## 3. Close the loop with `closed_loop`
+## 3. Observe, act and inspect with `exec`
 
-One policy call moves the robot for a moment. To finish a task, you observe, predict, act and repeat. `closed_loop` runs that cycle for you:
-
-```text
-perceive → process → control → wait → until
-   ↑                                    │
-   └──────────── not done ──────────────┘
-```
-
-| Stage | Role | For a VLA |
-| --- | --- | --- |
-| `perceive` | Gather fresh observations | Save the three camera images |
-| `process` | Turn observations into the next command's arguments | Pass the images on as the policy's `observation` |
-| `control` | Act | `run_policy` on the next chunk |
-| *wait* | Let the world advance by `wait_s` | Let the submitted actions play out |
-| `until` | Decide whether to stop | Check whether the task is done |
-
-`until` is also checked once before the first round.
-
-Each stage is either a tool or a short piece of Python. Here is the loop for the example, as the agent would run it from an `exec` script:
+Use Python variables and a bounded loop to gather observations and run policy chunks. This example runs at most three chunks, then stops owned motion and returns all three camera views for the agent's next decision:
 
 ```python
-from kinex import call
+from kinex import call, device, finish, stop_owned
 
-call("closed_loop", world="world", wait_s=1.0, max_rounds=30,
-    perceive={"python": """
-from kinex import device
-def main():
-    cams = {"head_image": "head_camera", "left_image": "left_camera", "right_image": "right_camera"}
-    return {k: device(cam, args={"output": "file"})["file"] for k, cam in cams.items()}
-"""},
-    process={"python": "lambda observation: {'observation': observation}"},
-    control={"tool": "run_policy", "args": {
-        "model": "starvla", "task": "place the bottle in the basket",
-        "command": [{"device": "left_arm"}, {"device": "left_gripper"},
-                    {"device": "right_arm"}, {"device": "right_gripper"}],
-        "action_hz": 25, "max_actions": 25}})
+cameras = {"head_image": "head_camera", "left_image": "left_camera",
+           "right_image": "right_camera"}
+actuators = ["left_arm", "left_gripper", "right_arm", "right_gripper"]
+commands = [{"device": name} for name in actuators]
+chunks = []
+try:
+    for _ in range(3):
+        for name in actuators:
+            state = device(name)
+            if state["faults"]:
+                raise RuntimeError(f"{name}: {state['faults']}")
+        observation = {
+            key: device(camera, args={"output": "file"})["file"]
+            for key, camera in cameras.items()
+        }
+        chunk = call("run_policy", model="starvla", observation=observation,
+                     task="place the bottle in the basket", command=commands,
+                     action_hz=25, max_actions=25)
+        if chunk["ik_failure"] or chunk["actions_submitted"] == 0:
+            raise RuntimeError(f"policy chunk rejected: {chunk}")
+        chunks.append(chunk)
+        device("world", "wait", {"duration_s": chunk["duration_s"]})
+finally:
+    stop_owned()
+
+feedback = {name: device(name) for name in actuators}
+for name, state in feedback.items():
+    if state["faults"]:
+        raise RuntimeError(f"{name}: {state['faults']}")
+observations, images = [], []
+for camera in cameras.values():
+    frame = device(camera, args={"output": "file"})
+    observations.append({"deviceID": camera, "timestamp": frame["timestamp"]})
+    images.append(frame["file"])
+finish({"reason": "inspection required", "chunks": chunks,
+        "feedback": feedback, "observations": observations}, file=images)
 ```
 
-Each round reads the cameras, runs the policy on the next 25 actions, and waits one second of world time while they play out. Then it starts again with fresh images. With no `until` stage, the loop runs until `max_rounds`. Add one, as a tool or Python that checks the scene, to stop as soon as the task is done.
+Adapt the camera names, action order and feedback checks to the actual model and robot. The three-chunk limit bounds this example; it does not establish task success. If each chunk needs visual interpretation, run just one and return images before continuing. Ask the agent to run a short policy segment, inspect whether the bottle reached the basket, and decide what comes next.
 
-You rarely write this by hand. Ask the agent to "run the StarVLA policy to place the bottle in the basket, re-planning every second", and it builds the loop, watches the result and adjusts.
+- **Timing.** `run_policy` returns immediately with `actions_submitted`, `duration_s`, `execution_ids` and `ik_failure`. Wait on the `world` clock for the returned duration before assessing the resulting state. In a stepped simulator, inference time does not advance the world.
+- **Rejected actions.** IK rejection can return normally with a shortened or empty valid prefix. Inspect `ik_failure`; a successful tool call does not imply the whole chunk was accepted.
+- **Replanning.** A new chunk can replace the remaining references of the previous one. Choose an explicit shorter world-wait interval if the task needs replanning during execution.
+- **Cleanup.** `stop_owned()` in `finally` requests a stop on every exit. Runtime failure, timeout or cancellation also triggers cleanup attempts; successful execution alone does not stop motion.
 
-A few things the loop handles for you:
-
-- **Timing.** Waits use the `world` clock, so in a stepped simulator each round advances simulated time by exactly `wait_s`, however long inference takes in real time.
-- **Replanning.** A new chunk replaces whatever is left of the previous one, so `wait_s` sets how often the robot replans. Short waits react faster but can stall motion; long waits react slowly.
-- **Stopping safely.** On an error, a cancel, too many missed observations (`max_misses`) or the end of the loop, `closed_loop` stops the motion it started.
-- **Honest results.** The loop reports why it ended. Running out of rounds is not the same as success.
-
-The same loop works for more than VLAs. For example, it can track a moving target with `relative_pose` and `servo`, using `settled` as the stopping check. See [Tools & skills](/docs/tools-and-skills/).
+The former `closed_loop` and `settled` tools are no longer bundled. See [Feedback control](/docs/custom-tools/#feedback-control) for a measured joint-target check, and [vision models](/docs/vision/) for perception-driven motion.

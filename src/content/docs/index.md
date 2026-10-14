@@ -43,7 +43,7 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 | macOS or Ubuntu | Installing and running Kinex |
 | Node.js ≥ 22.19 + npm | Kinex itself (the installer can install them) |
 | `curl` | The installer |
-| Python 3 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
+| Python ≥ 3.11 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
 | `ffmpeg` | Video encoding during [recording](/docs/recording/) |
 
 **Already use Pi, OpenCode or Codex?** You can use Kinex capabilities from those harnesses instead: see [Plugin systems](/docs/plugins/).
@@ -80,4 +80,6 @@ Reference: [CLI](/docs/cli/), [slash commands](/docs/slash-commands/), [troubles
 
 ## About this version
 
-These pages describe **Kinex 1.0.0**, bundling the **Pi coding agent 1.1.0** (`@earendil-works/pi-coding-agent`). No separate Pi install is needed. Install on macOS and Ubuntu. Node.js ≥ 22.19 is required.
+These pages describe **Kinex 1.0.0**, bundling the **Pi coding agent 1.2.0** (`@earendil-works/pi-coding-agent`). No separate Pi install is needed. Install on macOS and Ubuntu. Node.js ≥ 22.19 is required.
+
+The documentation tracks source commit `afeddc6` (2026-10-14); each page links to the reviewed source. Kinex and its core/setup packages use the [Apache License, Version 2.0](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/LICENSE). Bundled third-party notices are listed in [THIRD_PARTY_NOTICES.txt](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/THIRD_PARTY_NOTICES.txt).

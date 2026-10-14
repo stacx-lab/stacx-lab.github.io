@@ -14,7 +14,7 @@ The Kinex runtime (`@kinex/core`) sits between the agent and the robot. Every ro
 Each device runs on its own. Its driver is a separate process with its own resources, such as an SDK connection, a camera stream or a model loaded on a GPU, so one device failing or hanging doesn't take down the others.
 
 - **Loading in parallel.** `/load all` starts every driver at once and waits for each independently, so a slow model server doesn't hold up the arm.
-- **Scheduling per device.** Writes to one device run one at a time, in order. Reads can run alongside writes, and different devices work concurrently. `devices` uses this to read a camera and an arm in one call.
+- **Scheduling per device.** Writes to one device are serialized; a new write supersedes older pending commands. Reads can run alongside writes, and different devices work concurrently. `devices` uses this to read a camera and an arm in one call.
 - **Clean release.** `/unload`, quitting or switching workspace shuts down the processes Kinex started. Services it only connected to, like a simulator you launched yourself, are left running.
 - **Surviving session changes.** Starting a new conversation or resuming an old one in the same workspace keeps devices connected. In-flight calls are cancelled, session approvals are reset and any active recording ends.
 - **No silent restarts.** If a driver fails, it stays failed until you reload it with `/unload` and `/load`.
@@ -56,10 +56,10 @@ To change the defaults, set rules in `.kinex/kinex.json` for one project or `~/.
 
 A few rules always hold, whatever the mode:
 
-- Stopping never needs approval. `/stop` cancels the agent's response and stops actuators in every mode.
+- `/stop` and `device_stop` never need approval. `/stop` also cancels the agent's response. A direct model `device` call with `action: "stop"` still requests `device_act`.
 - One approval for `exec` covers every device call that script makes.
 - Only your commands and the `device` tool can load or unload devices. Python tools and scripts cannot.
-- Calls run one at a time, so denying one stops the rest of the batch. Calls that already ran are not rolled back.
+- Standalone model-tool batches containing Kinex tools run in order, so denying a call stops later calls without rolling back completed work. Inside one `devices` call, device requests run concurrently and report independent outcomes.
 
 Approvals are a safeguard, not a sandbox. They don't isolate the agent from your system, and they don't make motion safe on their own: some operations can't be interrupted by their driver, so know where your hardware emergency stop is.
 
@@ -82,11 +82,13 @@ An arm's frames and its forward and inverse kinematics both come from its joint 
 
 ## Time and motion
 
-The runtime owns the link between motion and the [world clock](/docs/devices/#time-the-world-clock). `servo` waits out its planned trajectory and `closed_loop` waits `wait_s` after each control step, both on the `world` clock, so a stepped simulator advances only by those waits. When a call is cancelled, the runtime stops only the motion that call started, leaving commands from other calls in place.
+The runtime owns the link between motion and the [world clock](/docs/devices/#time-the-world-clock). By default, `servo` waits its planned trajectory duration on a loaded `world` clock. That wait does not confirm arrival; check fresh measured feedback afterward. For replanning during motion, use `block=False` in Python and choose an explicit interval with `device("world", "wait", {"duration_s": interval_s})`. A stepped simulator advances only during world waits.
+
+Use bounded loops in `exec` for feedback control. Scripts and their composed tools share motion ownership. On failure, timeout or cancellation, Kinex attempts to stop motion still owned by that invocation; cleanup failures are logged while the original error is returned. Successful execution may leave motion running. Call `stop_owned()` when the loop must stop on exit and surface any cleanup error. Ownership checks preserve other calls' replacements, subject to the driver's physical stop scope. See [Feedback control](/docs/custom-tools/#feedback-control).
 
 ## Python environment
 
-Drivers, Python tools and `exec` scripts all run in one Python environment per workspace, `.kinex/python/`, managed with [uv](https://docs.astral.sh/uv/). Kinex creates it the first time it is needed and never touches your own Python projects. Inside it, the `kinex` library gives scripts the same device access the agent has:
+By default, drivers, Python tools and `exec` scripts run in one Python ≥ 3.11 environment per workspace, `.kinex/python/`, managed with [uv](https://docs.astral.sh/uv/). Kinex creates it the first time it is needed and never touches your own Python projects. Inside it, the `kinex` library gives scripts the same device access the agent has:
 
 ```python
 from kinex import device, devices
@@ -94,7 +96,7 @@ from kinex import device, devices
 frame = device("camera", "read", {"output": "file"})
 ```
 
-See [Custom tools & skills](/docs/custom-tools/).
+Explicit interpreters use their own dependencies. Ordinary shell tools retain their existing environment; Kinex does not activate `.kinex/python/` in them. Existing managed environments are reused without automatic dependency synchronization. See [Custom tools & skills](/docs/custom-tools/).
 
 ## Context for the agent
 

@@ -53,7 +53,7 @@ description: One sentence.
 group: Guides          # Get started | Concepts | Guides | Reference (see src/config.ts)
 order: 90              # position inside the group
 label: Recording       # optional sidebar label
-sources: ["docs/commands.md"]   # kinex repo paths backing the page, linked at v<version>
+sources: ["docs/commands.md"]   # kinex repo paths backing the page, linked at the reviewed `site.sourceRef` commit
 ---
 ```
 
@@ -64,7 +64,16 @@ The sidebar, prev/next links, one-page view (`/docs/all/`) and search update aut
 ## Release a new version
 
 1. Bump `version` in `src/config.ts` and `package.json`.
-2. Update the docs against the tagged Kinex source, and keep each page's `sources` list accurate.
+2. Update the docs against the intended Kinex source, set `sourceRef` in
+   `src/config.ts` to its full commit hash, and keep each page's `sources` list accurate.
+
+The current documentation was reviewed against `../kinex` commit
+`afeddc698d14ea9fb5ae0e88f51fecd89000dec4` (2026-10-14), still version 1.0.0.
+For the next refresh, compare that commit with the new source revision. The
+previous site already covered the October 12 runtime and discovery changes;
+this refresh incorporates the subsequent Python control, image-result, Pi SDK,
+calibration guidance and licensing updates. Source footers use the reviewed
+commit because the package version alone does not identify these changes.
 
 ## Hero session demo
 

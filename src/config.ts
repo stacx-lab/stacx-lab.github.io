@@ -2,6 +2,7 @@
 export const site = {
   name: 'kinex',
   version: '1.0.0',
+  sourceRef: 'afeddc698d14ea9fb5ae0e88f51fecd89000dec4',
   tagline: 'A robotics harness for coding agents.',
   description:
     'Kinex is a robotics harness for coding agents, built on the Pi coding agent. Devices, tools and skills give agents access to robots, simulators and models.',

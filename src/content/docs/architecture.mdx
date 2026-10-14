@@ -23,8 +23,8 @@ A device is anything the agent can read from or command: an arm, a camera, a gri
 Tools bundle computation or a sequence of device calls into one named operation, so the agent doesn't have to orchestrate every step itself. For example:
 
 - `locate_object_3d` combines a camera image, a detection or segmentation model and depth to estimate where an object is in 3D.
-- `servo` plans a joint trajectory from the arm's measured state and sends it.
-- `exec` runs a snippet of Python for one-off work.
+- `servo` plans a joint trajectory from measured state, sends it and waits its planned duration by default. Arrival still needs fresh feedback.
+- `exec` runs Python source or script files to combine device calls, bounded feedback loops and computation, returning structured results and selected camera images for the agent's next decision.
 
 You can add your own as a `tool.yaml` plus `tool.py`. Python tools never load or unload devices; only the `device` tool and your own commands can. → [Tools & skills](/docs/tools-and-skills/)
 
