@@ -1,13 +1,13 @@
 ---
 title: Kinex documentation
-description: A robotics harness for coding agents — skills, tools and devices on top of the Pi coding agent.
+description: A general harness for arbitrary robots with coding agents — skills, tools and devices on top of the Pi coding agent.
 group: Get started
 order: 10
 label: Overview
 sources: ["README.md", "install.sh", "docs/architecture.md", "docs/overview.md", "packages/core/README.md", "packages/setup/README.md", "src/application.ts"]
 ---
 
-Kinex is a robotics harness for coding agents, built on the [Pi](https://pi.dev) coding agent. It gives an agent three layers to work with:
+Kinex is a general harness for arbitrary robots with coding agents, built on the [Pi](https://pi.dev) coding agent. It gives an agent three layers to work with:
 
 | Layer | Gives the agent | Example |
 | --- | --- | --- |
