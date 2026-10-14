@@ -136,7 +136,7 @@ git lfs pull
 
 Only `gallery/.masters/*.mp4` uses LFS. The compressed MP4/WebM files under
 `public/media/gallery/` remain ordinary Git assets so the existing Pages workflow
-can publish them without an LFS download. Website builds do not need the masters.
+can publish them without an LFS download. Local builds need `git lfs pull` for the ROS 2 video.
 Generated media under `gallery/<id>/` stays local; commit edits and provenance,
 then copy reviewed delivery files into `public/media/gallery/<id>/`. The local
 `gallery/index.html` review page references those published copies directly.
