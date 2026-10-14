@@ -39,7 +39,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         <div class="details">
           <div class="title-row">
             <h3 id={`${clip.id}-${slot}-title`}>{clip.title}</h3>
-            <span class="duration" aria-label={`${clip.duration === '01:00' ? '60' : '30'} seconds`}>{clip.duration}</span>
+            <span class="duration" aria-label={`${clip.duration.split(':').reduce((seconds, part) => seconds * 60 + Number(part), 0)} seconds`}>{clip.duration}</span>
           </div>
           <p id={`${clip.id}-${slot}-description`} class="description">{clip.description}</p>
           <div class="video-footer">

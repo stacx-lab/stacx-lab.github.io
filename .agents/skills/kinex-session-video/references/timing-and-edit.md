@@ -29,7 +29,7 @@ whole_event_duration = typing_s + sum(output_duration) + result_hold_s
 
 The compiled monotonic map drives the footage lookup, displayed scene clock, speed indicator, and tool result timing. Execution remains gray-blue until the entire motion map finishes. Tool results and read images only appear at the corresponding result boundary. The reconstructed text streams during `typing_s`; source footage holds there. Record a held frame as held, not “1×”, and never record a cut with a finite speed; these values live in provenance, not under the video.
 
-The map is continuous in position within an event and piecewise constant in speed. It does not synthesize optical-flow frames or recover original per-token timing. For a 10 FPS source, slow motion repeats available frames; inspect it rather than assuming 30 FPS export creates extra detail.
+The map is continuous in position within an event. Segments have constant speed by default. For a gradual speed transition, supply nonnegative `start_speed` and `end_speed` with `speed` equal to their positive arithmetic mean. Speed then varies linearly over output time, and the scene clock integrates that speed exactly. Match adjacent endpoint speeds and use zero next to held frames to avoid abrupt starts and stops. The compiled provenance identifies these segments as `linear_speed`; `speed` is the mean, while `scene_clock()` returns the instantaneous speed. This does not synthesize optical-flow frames or recover original per-token timing. For a 10 FPS source, slow motion repeats available frames; inspect it rather than assuming 30 FPS export creates extra detail.
 
 ## Edit JSON
 
@@ -81,7 +81,7 @@ Example `retime` for a release beginning at source time `113.424 s` and ending a
 
 For public message events, use `kind: "user"` or `kind: "assistant"`; `text` can select a verbatim substring. The renderer verifies it belongs to the source message. Otherwise the complete public text is used. Images are looked up automatically from the chosen tool result, verified against their SHA-256, and scaled for display without altering the originals.
 
-`gallery/yam-hang-mug/edit.json` is a 30-second example starting at source time zero. It retains the first task and observation, measured geometry, earlier attempts, grasping, release, withdrawal, and final camera evidence. Memo editing is omitted from the presentation, but intervening recording time is retained. Do not reuse source-specific entry indices for another session.
+`gallery/yam-hang-mug/edit.json` starts at source time zero. Its current revision follows the user's exact 45-second budget, retaining gradual speed transitions and slow critical moments. Ordinary travel reaches about 22.2×; the instantaneous playback multiplier appears beside the bottom-right time counter (`show_playback_speed: true`). The lower-left footer is blank. It retains the first task and observation, measured geometry, earlier attempts, grasping, release, withdrawal, and final camera evidence. Memo editing is omitted from the presentation, but intervening recording time is retained. Do not reuse source-specific entry indices for another session.
 
 ## External real-world recordings
 

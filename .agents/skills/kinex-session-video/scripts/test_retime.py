@@ -43,6 +43,25 @@ class RetimeTests(unittest.TestCase):
         event = self.event(); event['retime']['segments'][-1]['end_source_s'] = 13.
         with self.assertRaises(ValueError): compile_retime(event)
 
+    def test_speed_ramps_preserve_endpoints_and_report_true_speed(self):
+        event = dict(entry=0, duration=3., sim_start=0., sim_end=4., retime=dict(
+            typing_s=.5, result_hold_s=.5, segments=[
+                dict(end_source_s=2., speed=2., start_speed=0., end_speed=4., reason='Accelerate'),
+                dict(end_source_s='end', speed=2., start_speed=4., end_speed=0., reason='Decelerate')]))
+        compile_retime(event)
+        self.assertEqual(scene_clock(event, .5), (0., 0.))
+        self.assertEqual(scene_clock(event, 1.), (.5, 2.))
+        self.assertEqual(scene_clock(event, 1.5), (2., 4.))
+        self.assertEqual(scene_clock(event, 2.), (3.5, 2.))
+        self.assertEqual(scene_clock(event, 2.5), (4., 0.))
+        for i in range(1, 2000):
+            t = .5 + i / 1000
+            derivative = (scene_clock(event, t + 1e-6)[0] - scene_clock(event, t - 1e-6)[0]) / 2e-6
+            self.assertAlmostEqual(derivative, scene_clock(event, t)[1], places=5)
+        for change in [{'start_speed': -1}, {'end_speed': float('nan')}, {'speed': 3}]:
+            bad = copy.deepcopy(event); bad['retime']['segments'][0].update(change)
+            with self.assertRaises(ValueError): compile_retime(bad)
+
     def test_no_speed_plan_and_stationary_observation(self):
         for end in [10., 14.]:
             event = dict(entry=0, duration=4., sim_start=10., sim_end=end)

@@ -3,20 +3,20 @@
   "subtitle": "A coding agent sees, computes, and controls the robot.",
   "session_label": "Recorded Kinex session · from the beginning",
   "recording": "third_person.mp4",
-  "duration": 30,
+  "duration": 45,
   "review_times": [
     0.7,
     2.6,
     3.8,
-    5,
-    8,
+    7,
     11,
-    14,
-    17,
-    20,
+    15,
+    19,
     23,
-    26,
-    29.9
+    28,
+    33,
+    39,
+    44.9
   ],
   "typography": {
     "body": "Lato Regular",
@@ -36,7 +36,8 @@
       "kind": "user",
       "text": "Task: hang mug on mug rack",
       "typing_fraction": 0.75,
-      "result_fraction": 0.9
+      "result_fraction": 0.9,
+      "active_devices": []
     },
     {
       "entry": 19,
@@ -48,7 +49,13 @@
         "results.3.data.positions"
       ],
       "typing_fraction": 0.3,
-      "result_fraction": 0.58
+      "result_fraction": 0.58,
+      "active_devices": [
+        "camera_left",
+        "camera_top",
+        "left_arm",
+        "right_arm"
+      ]
     },
     {
       "entry": 21,
@@ -57,7 +64,10 @@
       "caption": "The first camera observation appears inside the session.",
       "call": 0,
       "typing_fraction": 0.16,
-      "result_fraction": 0.3
+      "result_fraction": 0.3,
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 28,
@@ -72,7 +82,10 @@
         8
       ],
       "typing_fraction": 0.6,
-      "result_fraction": 0.8
+      "result_fraction": 0.8,
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 32,
@@ -90,23 +103,52 @@
           "call": 0
         }
       ],
-      "duration": 1.2746721922638673,
+      "duration": 1.5106183921855467,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": 6.2,
-            "speed": 28.0959732006965,
+            "end_source_s": 1.331798645377697,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Approach the first grasp · ease in"
+          },
+          {
+            "end_source_s": 4.8082013546223035,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Approach the first grasp"
           },
           {
-            "end_source_s": "end",
-            "speed": 1,
+            "end_source_s": 6.2,
+            "speed": 11.598322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 1,
+            "reason": "Approach the first grasp · ease out"
+          },
+          {
+            "end_source_s": 6.943999999999451,
+            "speed": 1.0,
+            "start_speed": 1,
+            "end_speed": 1,
             "reason": "Inspect the first closure"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.5,
+            "start_speed": 1,
+            "end_speed": 0.0,
+            "reason": "Inspect the first closure · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm",
+        "left_gripper"
+      ]
     },
     {
       "entry": 40,
@@ -115,36 +157,77 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.10477509965623089,
+      "duration": 0.33999999999999986,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 7.475749999999442,
+            "speed": 3.9312499999999306,
+            "start_speed": 0.0,
+            "end_speed": 7.862499999999861,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 7.790249999999437,
+            "speed": 7.862499999999861,
+            "start_speed": 7.862499999999861,
+            "end_speed": 7.862499999999861,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 3.9312499999999306,
+            "start_speed": 7.862499999999861,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm",
+        "left_gripper"
+      ]
     },
     {
       "entry": 42,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828547207,
+      "duration": 0.04999999999999922,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 8.272199999999431,
+            "speed": 0.6800000000002271,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000004542,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 8.285799999999437,
+            "speed": 1.3600000000004542,
+            "start_speed": 1.3600000000004542,
+            "end_speed": 1.3600000000004542,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000002271,
+            "start_speed": 1.3600000000004542,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left",
+        "camera_right",
+        "camera_top"
+      ]
     },
     {
       "entry": 44,
@@ -153,7 +236,10 @@
       "caption": "Read fresh camera evidence before continuing.",
       "call": 0,
       "typing_fraction": 0.16,
-      "result_fraction": 0.3
+      "result_fraction": 0.3,
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 48,
@@ -171,36 +257,76 @@
           "call": 0
         }
       ],
-      "duration": 0.14955019931249325,
+      "duration": 0.33999999999999997,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 9.239499999999754,
+            "speed": 7.862500000002625,
+            "start_speed": 0.0,
+            "end_speed": 15.72500000000525,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 9.868499999999965,
+            "speed": 15.72500000000525,
+            "start_speed": 15.72500000000525,
+            "end_speed": 15.72500000000525,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 7.862500000002625,
+            "start_speed": 15.72500000000525,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm",
+        "left_gripper"
+      ]
     },
     {
       "entry": 54,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828547207,
+      "duration": 0.04999999999999922,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 10.822200000000283,
+            "speed": 0.6800000000002271,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000004542,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 10.835800000000289,
+            "speed": 1.3600000000004542,
+            "start_speed": 1.3600000000004542,
+            "end_speed": 1.3600000000004542,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000002271,
+            "start_speed": 1.3600000000004542,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left",
+        "camera_top"
+      ]
     },
     {
       "entry": 60,
@@ -209,18 +335,38 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.177383369369079,
+      "duration": 0.34,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 12.082750000000704,
+            "speed": 10.306250000003441,
+            "start_speed": 0.0,
+            "end_speed": 20.612500000006882,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 12.90725000000098,
+            "speed": 20.612500000006882,
+            "start_speed": 20.612500000006882,
+            "end_speed": 20.612500000006882,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 10.306250000003441,
+            "start_speed": 20.612500000006882,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm",
+        "left_gripper"
+      ]
     },
     {
       "entry": 62,
@@ -238,36 +384,76 @@
           "call": 0
         }
       ],
-      "duration": 0.43151231336372087,
+      "duration": 0.6502512667161777,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 15.47579864537909,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 23.250201354619556,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm",
+        "left_gripper"
+      ]
     },
     {
       "entry": 68,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828546131,
+      "duration": 0.04999999999999948,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 24.59219999999725,
+            "speed": 0.6799999999996231,
+            "start_speed": 0.0,
+            "end_speed": 1.3599999999992463,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 24.60579999999724,
+            "speed": 1.3599999999992463,
+            "start_speed": 1.3599999999992463,
+            "end_speed": 1.3599999999992463,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6799999999996231,
+            "start_speed": 1.3599999999992463,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_right",
+        "camera_top"
+      ]
     },
     {
       "entry": 74,
@@ -277,18 +463,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 79,
-      "duration": 0.2790349469668498,
+      "duration": 0.45724911816161157,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 25.94779864537493,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 29.438201354616126,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 82,
@@ -306,18 +512,38 @@
           "call": 0
         }
       ],
-      "duration": 0.39520817850779605,
+      "duration": 0.6042983742037845,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 32.101798645371524,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 38.856201354625455,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 86,
@@ -326,36 +552,77 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.4472441051354499,
+      "duration": 0.6701641868059296,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 41.519798645380845,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 49.73620135463875,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 88,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.01121013782854828,
+      "duration": 0.04999999999999895,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 51.07820000001646,
+            "speed": 0.680000000000831,
+            "start_speed": 0.0,
+            "end_speed": 1.360000000001662,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 51.09180000001648,
+            "speed": 1.360000000001662,
+            "start_speed": 1.360000000001662,
+            "end_speed": 1.360000000001662,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.680000000000831,
+            "start_speed": 1.360000000001662,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left",
+        "camera_right",
+        "camera_top"
+      ]
     },
     {
       "entry": 95,
@@ -363,18 +630,37 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 98,
-      "duration": 0.23183957165385588,
+      "duration": 0.3975103578951312,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 52.433798645394184,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 54.598201354644694,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm"
+      ]
     },
     {
       "entry": 99,
@@ -383,7 +669,10 @@
       "caption": "Read fresh camera evidence before continuing.",
       "call": 0,
       "typing_fraction": 0.16,
-      "result_fraction": 0.3
+      "result_fraction": 0.3,
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 103,
@@ -392,36 +681,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.10719537531338297,
+      "duration": 0.33999999999999936,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 56.427250000022994,
+            "speed": 4.143750000005064,
+            "start_speed": 0.0,
+            "end_speed": 8.287500000010128,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 56.758750000023404,
+            "speed": 8.287500000010128,
+            "start_speed": 8.287500000010128,
+            "end_speed": 8.287500000010128,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 4.143750000005064,
+            "start_speed": 8.287500000010128,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 105,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.01121013782854828,
+      "duration": 0.04999999999999895,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 57.26620000002402,
+            "speed": 0.680000000000831,
+            "start_speed": 0.0,
+            "end_speed": 1.360000000001662,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 57.27980000002404,
+            "speed": 1.360000000001662,
+            "start_speed": 1.360000000001662,
+            "end_speed": 1.360000000001662,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.680000000000831,
+            "start_speed": 1.360000000001662,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 113,
@@ -431,18 +759,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 118,
-      "duration": 0.13260826971289685,
+      "duration": 0.3400000000000005,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 58.05500000002499,
+            "speed": 6.375000000007791,
+            "start_speed": 0.0,
+            "end_speed": 12.750000000015582,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 58.565000000025606,
+            "speed": 12.750000000015582,
+            "start_speed": 12.750000000015582,
+            "end_speed": 12.750000000015582,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 6.375000000007791,
+            "start_speed": 12.750000000015582,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 129,
@@ -451,36 +799,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.28508563610977083,
+      "duration": 0.4649079335806817,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 60.66179864540424,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 64.32220135465069,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 131,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828543982,
+      "duration": 0.05,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 65.66420000002836,
+            "speed": 0.6799999999984152,
+            "start_speed": 0.0,
+            "end_speed": 1.3599999999968304,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 65.67780000002833,
+            "speed": 1.3599999999968304,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 1.3599999999968304,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6799999999984152,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 137,
@@ -489,36 +876,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.15560088845497455,
+      "duration": 0.3400000000000002,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 66.69525000002596,
+            "speed": 8.393749999980438,
+            "start_speed": 0.0,
+            "end_speed": 16.787499999960875,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 67.3667500000244,
+            "speed": 16.787499999960875,
+            "start_speed": 16.787499999960875,
+            "end_speed": 16.787499999960875,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 8.393749999980438,
+            "start_speed": 16.787499999960875,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 139,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828543982,
+      "duration": 0.05,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 68.38420000002202,
+            "speed": 0.6799999999984152,
+            "start_speed": 0.0,
+            "end_speed": 1.3599999999968304,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 68.39780000002199,
+            "speed": 1.3599999999968304,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 1.3599999999968304,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6799999999984152,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 143,
@@ -528,18 +954,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 148,
-      "duration": 0.09872441051340741,
+      "duration": 0.33999999999999997,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 68.81600000002102,
+            "speed": 3.399999999992076,
+            "start_speed": 0.0,
+            "end_speed": 6.799999999984152,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 69.08800000002039,
+            "speed": 6.799999999984152,
+            "start_speed": 6.799999999984152,
+            "end_speed": 6.799999999984152,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 3.399999999992076,
+            "start_speed": 6.799999999984152,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 153,
@@ -557,18 +1003,38 @@
           "call": 0
         }
       ],
-      "duration": 0.5791491284453681,
+      "duration": 0.8371263629343655,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 70.82779864539714,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 82.75020135460774,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 161,
@@ -578,18 +1044,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 166,
-      "duration": 0.4278818998773704,
+      "duration": 0.6456559774639794,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 85.41379864536314,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 93.08620135458365,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 170,
@@ -598,36 +1084,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.27419439565228476,
+      "duration": 0.4511220658260672,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 95.74979864533906,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 99.10420135456962,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 172,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.09751427268486343,
+      "duration": 0.3400000000000005,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 100.83124999994641,
+            "speed": 3.2937499999923237,
+            "start_speed": 0.0,
+            "end_speed": 6.587499999984647,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 101.09474999994579,
+            "speed": 6.587499999984647,
+            "start_speed": 6.587499999984647,
+            "end_speed": 6.587499999984647,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 3.2937499999923237,
+            "start_speed": 6.587499999984647,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 182,
@@ -636,18 +1161,38 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.21489764205362963,
+      "duration": 0.37606567472167585,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 102.82179864532257,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 104.51020135455703,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 184,
@@ -657,36 +1202,101 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 189,
-      "duration": 0.24757136342431715,
+      "duration": 2.2840965756722253,
       "retime": {
-        "typing_s": 0.035,
-        "result_hold_s": 0.025,
+        "typing_s": 0.08,
+        "result_hold_s": 0.25,
         "segments": [
           {
+            "end_source_s": 107.17379864531243,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Approach reorientation · ease in"
+          },
+          {
+            "end_source_s": 108.10820135462231,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
+            "reason": "Approach reorientation"
+          },
+          {
+            "end_source_s": 109.5,
+            "speed": 11.598322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 1.0,
+            "reason": "Approach reorientation · ease out"
+          },
+          {
+            "end_source_s": 111.05199999992244,
+            "speed": 1.0,
+            "start_speed": 1.0,
+            "end_speed": 1.0,
+            "reason": "Inspect slipping grasp and aperture-guard stop"
+          },
+          {
             "end_source_s": "end",
-            "speed": 28.0959732006965,
-            "reason": "Condense repeated attempts without a source-time cut"
+            "speed": 0.5,
+            "start_speed": 1.0,
+            "end_speed": 0.0,
+            "reason": "Inspect slipping grasp and aperture-guard stop · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
+    },
+    {
+      "entry": 190,
+      "call": 0,
+      "duration": 0.55,
+      "chapter": "Reobserve after grasp instability",
+      "caption": "Actual wrist observation after the aperture guard stops movement.",
+      "typing_fraction": 0.16,
+      "result_fraction": 0.3,
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 195,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.09630413485941847,
+      "duration": 0.3399999999999983,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 111.4944999999542,
+            "speed": 3.1875000002646647,
+            "start_speed": 0.0,
+            "end_speed": 6.3750000005293295,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 111.74949999997538,
+            "speed": 6.3750000005293295,
+            "start_speed": 6.3750000005293295,
+            "end_speed": 6.3750000005293295,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 3.1875000002646647,
+            "start_speed": 6.3750000005293295,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "world"
+      ]
     },
     {
       "entry": 199,
@@ -696,18 +1306,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 204,
-      "duration": 0.20400640159363478,
+      "duration": 0.3622798069638854,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 113.46379864538484,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 114.84620135453294,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 205,
@@ -725,36 +1355,75 @@
           "call": 0
         }
       ],
-      "duration": 0.16891240456895834,
+      "duration": 0.33999999999999964,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 117.32549999990796,
+            "speed": 9.562499999977714,
+            "start_speed": 0.0,
+            "end_speed": 19.124999999955428,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 118.09049999990619,
+            "speed": 19.124999999955428,
+            "start_speed": 19.124999999955428,
+            "end_speed": 19.124999999955428,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 9.562499999977714,
+            "start_speed": 19.124999999955428,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 209,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828543982,
+      "duration": 0.05,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 119.24819999990348,
+            "speed": 0.6799999999984152,
+            "start_speed": 0.0,
+            "end_speed": 1.3599999999968304,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 119.26179999990345,
+            "speed": 1.3599999999968304,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 1.3599999999968304,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6799999999984152,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 219,
@@ -763,36 +1432,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.12534744274137502,
+      "duration": 0.34000000000000064,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 119.96049999990183,
+            "speed": 5.737499999986628,
+            "start_speed": 0.0,
+            "end_speed": 11.474999999973257,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 120.41949999990075,
+            "speed": 11.474999999973257,
+            "start_speed": 11.474999999973257,
+            "end_speed": 11.474999999973257,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 5.737499999986628,
+            "start_speed": 11.474999999973257,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 221,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828543982,
+      "duration": 0.05,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 121.11819999989913,
+            "speed": 0.6799999999984152,
+            "start_speed": 0.0,
+            "end_speed": 1.3599999999968304,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 121.1317999998991,
+            "speed": 1.3599999999968304,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 1.3599999999968304,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6799999999984152,
+            "start_speed": 1.3599999999968304,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 227,
@@ -801,18 +1509,38 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.5404247179336394,
+      "duration": 0.788109944256071,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 122.47379864527677,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 133.3082013545371,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 229,
@@ -821,36 +1549,76 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.39641831633761726,
+      "duration": 0.6058301372891636,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 135.97179864529247,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 142.76020135458222,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 231,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 144.10219999995996,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 144.11579999996002,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left",
+        "camera_top"
+      ]
     },
     {
       "entry": 238,
@@ -858,36 +1626,74 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 243,
-      "duration": 0.3262303222818691,
+      "duration": 0.5169878784306547,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 145.45779864533776,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 150.27420135462657,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "left_arm"
+      ]
     },
     {
       "entry": 246,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.07452165394255814,
+      "duration": 0.33999999999999997,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 151.75900000000422,
+            "speed": 1.274999999999693,
+            "start_speed": 0.0,
+            "end_speed": 2.549999999999386,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 151.8610000000042,
+            "speed": 2.549999999999386,
+            "start_speed": 2.549999999999386,
+            "end_speed": 2.549999999999386,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 1.274999999999693,
+            "start_speed": 2.549999999999386,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "world"
+      ]
     },
     {
       "entry": 256,
@@ -896,36 +1702,75 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.1132460644560849,
+      "duration": 0.3399999999999985,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 152.57500000000442,
+            "speed": 4.67500000000225,
+            "start_speed": 0.0,
+            "end_speed": 9.3500000000045,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 152.94900000000462,
+            "speed": 9.3500000000045,
+            "start_speed": 9.3500000000045,
+            "end_speed": 9.3500000000045,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 4.67500000000225,
+            "start_speed": 9.3500000000045,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 258,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 153.52020000000493,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 153.533800000005,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 264,
@@ -935,18 +1780,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 269,
-      "duration": 0.14712992365578578,
+      "duration": 0.33999999999999997,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 154.46200000000943,
+            "speed": 7.650000000036528,
+            "start_speed": 0.0,
+            "end_speed": 15.300000000073055,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 155.07400000001235,
+            "speed": 15.300000000073055,
+            "start_speed": 15.300000000073055,
+            "end_speed": 15.300000000073055,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 7.650000000036528,
+            "start_speed": 15.300000000073055,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 272,
@@ -955,18 +1820,38 @@
       "call": 0,
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
-      "duration": 0.671119603419053,
+      "duration": 0.9535403573058553,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 157.32379864539442,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 171.83020135472103,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 274,
@@ -976,18 +1861,64 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 279,
-      "duration": 0.17375295588394254,
+      "duration": 2.078229803342361,
       "retime": {
-        "typing_s": 0.035,
-        "result_hold_s": 0.025,
+        "typing_s": 0.08,
+        "result_hold_s": 0.25,
         "segments": [
           {
+            "end_source_s": 173.8027661481344,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Approach reorientation · ease in"
+          },
+          {
+            "end_source_s": 174.13036614811466,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
+            "reason": "Approach reorientation"
+          },
+          {
+            "end_source_s": 174.8,
+            "speed": 11.598322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 1.0,
+            "reason": "Approach reorientation · ease out"
+          },
+          {
+            "end_source_s": 176.29800000011397,
+            "speed": 1.0,
+            "start_speed": 1.0,
+            "end_speed": 1.0,
+            "reason": "Inspect slipping grasp and aperture-guard stop"
+          },
+          {
             "end_source_s": "end",
-            "speed": 28.0959732006965,
-            "reason": "Condense repeated attempts without a source-time cut"
+            "speed": 0.5,
+            "start_speed": 1.0,
+            "end_speed": 0.0,
+            "reason": "Inspect slipping grasp and aperture-guard stop · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
+    },
+    {
+      "entry": 280,
+      "call": 0,
+      "duration": 0.55,
+      "chapter": "Reobserve after grasp instability",
+      "caption": "Actual wrist observation after the aperture guard stops movement.",
+      "typing_fraction": 0.16,
+      "result_fraction": 0.3,
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 285,
@@ -1005,36 +1936,75 @@
           "call": 0
         }
       ],
-      "duration": 0.3818966623949863,
+      "duration": 0.5874489802838759,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 177.68979864549166,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 184.07020135477947,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 291,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 185.4122000001572,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 185.42580000015727,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 297,
@@ -1059,36 +2029,75 @@
           "call": 0
         }
       ],
-      "duration": 0.5912505067345827,
+      "duration": 0.8524439937767732,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 186.767798645535,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 199.0302013548509,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 307,
       "call": 0,
       "chapter": "Read feedback",
       "caption": "Refresh camera and device feedback.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 200.37220000022864,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 200.3858000002287,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 313,
@@ -1098,18 +2107,38 @@
       "chapter": "Grasp, inspect, and adjust",
       "caption": "Recorded attempts and alignment, accelerated.",
       "end_clock_entry": 318,
-      "duration": 0.24999163908275507,
+      "duration": 0.4204868041525128,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 201.72779864560644,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 204.40220135487655,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 11.098322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 319,
@@ -1118,7 +2147,8 @@
       "caption": "Inspect the rim from the right wrist camera.",
       "call": 0,
       "typing_fraction": 0.18,
-      "result_fraction": 0.32
+      "result_fraction": 0.32,
+      "active_devices": []
     },
     {
       "entry": 323,
@@ -1133,28 +2163,66 @@
       ],
       "chapter": "Grasp the rim and lift",
       "caption": "Close on the rim, then check the gripper aperture.",
-      "duration": 1.8485901509707934,
+      "duration": 3.336322803471042,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": 210.85,
-            "speed": 28.0959732006965,
+            "end_source_s": 207.06579864563193,
+            "speed": 11.098322044814143,
+            "start_speed": 0.0,
+            "end_speed": 22.196644089628286,
+            "reason": "Reposition for the rim grasp · ease in"
+          },
+          {
+            "end_source_s": 209.4702013546223,
+            "speed": 22.196644089628286,
+            "start_speed": 22.196644089628286,
+            "end_speed": 22.196644089628286,
             "reason": "Reposition for the rim grasp"
+          },
+          {
+            "end_source_s": 210.85,
+            "speed": 11.498322044814143,
+            "start_speed": 22.196644089628286,
+            "end_speed": 0.8,
+            "reason": "Reposition for the rim grasp · ease out"
           },
           {
             "end_source_s": 211.65,
             "speed": 0.8,
+            "start_speed": 0.8,
+            "end_speed": 0.8,
             "reason": "Show rim closure"
           },
           {
-            "end_source_s": "end",
-            "speed": 4,
+            "end_source_s": 211.758,
+            "speed": 0.9,
+            "start_speed": 0.8,
+            "end_speed": 1.0,
+            "reason": "Inspect the initial lift · ease in"
+          },
+          {
+            "end_source_s": 213.25600000029044,
+            "speed": 1.0,
+            "start_speed": 1.0,
+            "end_speed": 1.0,
             "reason": "Inspect the initial lift"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.5,
+            "start_speed": 1.0,
+            "end_speed": 0.0,
+            "reason": "Inspect the initial lift · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 325,
@@ -1168,36 +2236,75 @@
       ],
       "chapter": "Carry toward the rack",
       "caption": "Maintain the grasp while moving the handle toward a peg.",
-      "duration": 0.3492313019413116,
+      "duration": 0.5300000000000017,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 214.36150000029545,
+            "speed": 8.7125000000416,
+            "start_speed": 0.0,
+            "end_speed": 17.4250000000832,
+            "reason": "Carry toward the rack · ease in"
+          },
+          {
+            "end_source_s": 215.05850000029875,
+            "speed": 17.4250000000832,
+            "start_speed": 17.4250000000832,
+            "end_speed": 17.4250000000832,
             "reason": "Carry toward the rack"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 8.7125000000416,
+            "start_speed": 17.4250000000832,
+            "end_speed": 0.0,
+            "reason": "Carry toward the rack · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 327,
       "call": 0,
       "chapter": "Read the other wrist",
       "caption": "Acquire a complementary view of the handle.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 216.1142000003038,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 216.12780000030386,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 329,
@@ -1206,7 +2313,8 @@
       "caption": "The opposite wrist reveals the opening and peg.",
       "call": 0,
       "typing_fraction": 0.18,
-      "result_fraction": 0.32
+      "result_fraction": 0.32,
+      "active_devices": []
     },
     {
       "entry": 333,
@@ -1223,7 +2331,10 @@
         "last.(295, 240)"
       ],
       "typing_fraction": 0.55,
-      "result_fraction": 0.78
+      "result_fraction": 0.78,
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 335,
@@ -1237,36 +2348,75 @@
       ],
       "chapter": "Align the handle with the peg",
       "caption": "Refine the position while checking the grasp.",
-      "duration": 0.1652819910840745,
+      "duration": 0.33999999999999925,
       "retime": {
         "typing_s": 0.035,
         "result_hold_s": 0.025,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 217.2472500003092,
+            "speed": 9.243750000044137,
+            "start_speed": 0.0,
+            "end_speed": 18.487500000088275,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 217.98675000031275,
+            "speed": 18.487500000088275,
+            "start_speed": 18.487500000088275,
+            "end_speed": 18.487500000088275,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 9.243750000044137,
+            "start_speed": 18.487500000088275,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 337,
       "call": 0,
       "chapter": "Read after moving",
       "caption": "Acquire a fresh view of the peg and handle.",
-      "duration": 0.011210137828552581,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 219.1062000003181,
+            "speed": 0.6800000000032469,
+            "start_speed": 0.0,
+            "end_speed": 1.3600000000064938,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 219.11980000031815,
+            "speed": 1.3600000000064938,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 1.3600000000064938,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.6800000000032469,
+            "start_speed": 1.3600000000064938,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 341,
@@ -1280,36 +2430,75 @@
       ],
       "chapter": "Thread the handle onto the peg",
       "caption": "Make the final controlled insertion.",
-      "duration": 1.4500000000057298,
+      "duration": 1.5700000000057008,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": "end",
+            "end_source_s": 219.1810000003182,
+            "speed": 0.425,
+            "start_speed": 0.0,
+            "end_speed": 0.85,
+            "reason": "Show final peg insertion · ease in"
+          },
+          {
+            "end_source_s": 220.0990000003231,
             "speed": 0.85,
+            "start_speed": 0.85,
+            "end_speed": 0.85,
             "reason": "Show final peg insertion"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 0.425,
+            "start_speed": 0.85,
+            "end_speed": 0.0,
+            "reason": "Show final peg insertion · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 347,
       "call": 0,
       "chapter": "Read before release",
       "caption": "Acquire the wrist view before opening the gripper.",
-      "duration": 0.01242027565710516,
+      "duration": 0.050000000000008364,
       "retime": {
         "typing_s": 0.005,
         "result_hold_s": 0.005,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 28.0959732006965,
+            "end_source_s": 220.17040000032318,
+            "speed": 1.3600000000064938,
+            "start_speed": 0.0,
+            "end_speed": 2.7200000000129876,
+            "reason": "Condense repeated attempts without a source-time cut · ease in"
+          },
+          {
+            "end_source_s": 220.1976000003233,
+            "speed": 2.7200000000129876,
+            "start_speed": 2.7200000000129876,
+            "end_speed": 2.7200000000129876,
             "reason": "Condense repeated attempts without a source-time cut"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 1.3600000000064938,
+            "start_speed": 2.7200000000129876,
+            "end_speed": 0.0,
+            "reason": "Condense repeated attempts without a source-time cut · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 349,
@@ -1318,7 +2507,8 @@
       "caption": "Check that the peg appears threaded through the handle.",
       "call": 0,
       "typing_fraction": 0.18,
-      "result_fraction": 0.32
+      "result_fraction": 0.32,
+      "active_devices": []
     },
     {
       "entry": 351,
@@ -1328,7 +2518,8 @@
       "kind": "assistant",
       "text": "The peg now appears threaded through the handle. I’ll release the rim grasp, withdraw, and check that the rack supports the mug.",
       "typing_fraction": 0.78,
-      "result_fraction": 0.9
+      "result_fraction": 0.9,
+      "active_devices": []
     },
     {
       "entry": 351,
@@ -1343,23 +2534,52 @@
       ],
       "chapter": "Release and withdraw",
       "caption": "Open the fingers, then move the gripper clear.",
-      "duration": 2.5114615380072536,
+      "duration": 2.6865865380072336,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
+            "end_source_s": 220.2570000003234,
+            "speed": 0.325,
+            "start_speed": 0.0,
+            "end_speed": 0.65,
+            "reason": "Show release and initial clearance · ease in"
+          },
+          {
             "end_source_s": 221.4,
             "speed": 0.65,
+            "start_speed": 0.65,
+            "end_speed": 0.65,
             "reason": "Show release and initial clearance"
           },
           {
-            "end_source_s": "end",
-            "speed": 8,
+            "end_source_s": 221.919,
+            "speed": 4.325,
+            "start_speed": 0.65,
+            "end_speed": 8,
+            "reason": "Withdraw after release · ease in"
+          },
+          {
+            "end_source_s": 224.46400000034598,
+            "speed": 8.0,
+            "start_speed": 8,
+            "end_speed": 8,
             "reason": "Withdraw after release"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 4.0,
+            "start_speed": 8,
+            "end_speed": 0.0,
+            "reason": "Withdraw after release · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 353,
@@ -1369,18 +2589,37 @@
       ],
       "chapter": "Let the mug settle",
       "caption": "Wait before verifying that the rack supports the mug.",
-      "duration": 0.9299999998800482,
+      "duration": 1.0499999998800527,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 3,
+            "end_source_s": 225.12400000034597,
+            "speed": 1.5,
+            "start_speed": 0.0,
+            "end_speed": 3,
+            "reason": "Let the mug settle · ease in"
+          },
+          {
+            "end_source_s": 226.8039999999861,
+            "speed": 3.0,
+            "start_speed": 3,
+            "end_speed": 3,
             "reason": "Let the mug settle"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 1.5,
+            "start_speed": 3,
+            "end_speed": 0.0,
+            "reason": "Let the mug settle · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "world"
+      ]
     },
     {
       "entry": 357,
@@ -1389,7 +2628,10 @@
       "caption": "The mug remains supported after the gripper withdraws.",
       "call": 0,
       "typing_fraction": 0.18,
-      "result_fraction": 0.32
+      "result_fraction": 0.32,
+      "active_devices": [
+        "camera_left"
+      ]
     },
     {
       "entry": 357,
@@ -1398,7 +2640,10 @@
       "caption": "A second view confirms the mug remains on the rack.",
       "call": 1,
       "typing_fraction": 0.18,
-      "result_fraction": 0.32
+      "result_fraction": 0.32,
+      "active_devices": [
+        "camera_top"
+      ]
     },
     {
       "entry": 368,
@@ -1412,18 +2657,38 @@
       ],
       "chapter": "Check the final gripper state",
       "caption": "The gripper remains open and clear of the mug.",
-      "duration": 0.4426666666675866,
+      "duration": 0.5626666666675912,
       "retime": {
         "typing_s": 0.15,
         "result_hold_s": 0.1,
         "segments": [
           {
-            "end_source_s": "end",
-            "speed": 3,
+            "end_source_s": 227.1640000003557,
+            "speed": 1.5,
+            "start_speed": 0.0,
+            "end_speed": 3,
+            "reason": "Check the open gripper · ease in"
+          },
+          {
+            "end_source_s": 227.38200000035846,
+            "speed": 3.0,
+            "start_speed": 3,
+            "end_speed": 3,
             "reason": "Check the open gripper"
+          },
+          {
+            "end_source_s": "end",
+            "speed": 1.5,
+            "start_speed": 3,
+            "end_speed": 0.0,
+            "reason": "Check the open gripper · ease out"
           }
         ]
-      }
+      },
+      "active_devices": [
+        "right_arm",
+        "right_gripper"
+      ]
     },
     {
       "entry": 374,
@@ -1433,7 +2698,538 @@
       "kind": "assistant",
       "text": "Mug hung on the rack and verified after releasing and withdrawing the gripper.",
       "typing_fraction": 0.7,
-      "result_fraction": 0.9
+      "result_fraction": 0.9,
+      "active_devices": []
     }
-  ]
+  ],
+  "device_map": {
+    "description": "Dual YAM arms on a shared bench, wrist RGB-D cameras and fixed overhead RGB-D camera. Static illustrative folded pose, not a calibrated or live kinematic render.",
+    "geometry_evidence": {
+      "profile_entries": [
+        13,
+        21,
+        70
+      ],
+      "arm_mounts_m": [
+        [
+          0.2525,
+          0.31,
+          0.76
+        ],
+        [
+          0.2525,
+          -0.31,
+          0.76
+        ]
+      ],
+      "main_link_lengths_m": [
+        0.264,
+        0.2522399651125888
+      ],
+      "gripper_tcp_m": 0.1347,
+      "left_wrist_camera_mount_m": [
+        -0.0017,
+        0.095,
+        0.062
+      ],
+      "overhead_camera_mount_m": [
+        0.08600512,
+        0,
+        1.70432053
+      ],
+      "right_camera_note": "Right wrist attachment confirmed in source footage and camera_right observations; mirrored drawing is illustrative."
+    },
+    "highlight_note": "Devices selected from original call arguments, helper side, and result-linked image metadata; grouped calls show the union because individual boundaries were not recorded.",
+    "shapes": [
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            220,
+            213
+          ],
+          [
+            490,
+            213
+          ],
+          [
+            510,
+            236
+          ],
+          [
+            200,
+            236
+          ]
+        ],
+        "device": "world"
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            215,
+            236
+          ],
+          [
+            215,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            495,
+            236
+          ],
+          [
+            495,
+            256
+          ]
+        ],
+        "device": "world",
+        "width": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            270,
+            228
+          ],
+          [
+            270,
+            210
+          ],
+          [
+            250,
+            140
+          ],
+          [
+            310,
+            174
+          ],
+          [
+            310,
+            186
+          ]
+        ],
+        "device": "left_arm",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            270,
+            210
+          ]
+        ],
+        "device": "left_arm",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            250,
+            140
+          ]
+        ],
+        "device": "left_arm",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            310,
+            174
+          ]
+        ],
+        "device": "left_arm",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            298,
+            213
+          ],
+          [
+            298,
+            186
+          ],
+          [
+            322,
+            186
+          ],
+          [
+            322,
+            213
+          ]
+        ],
+        "device": "left_gripper",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            294,
+            148
+          ],
+          [
+            314,
+            148
+          ],
+          [
+            314,
+            163
+          ],
+          [
+            294,
+            163
+          ]
+        ],
+        "device": "camera_left"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            304,
+            155
+          ]
+        ],
+        "device": "camera_left",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            440,
+            228
+          ],
+          [
+            440,
+            210
+          ],
+          [
+            460,
+            140
+          ],
+          [
+            400,
+            174
+          ],
+          [
+            400,
+            186
+          ]
+        ],
+        "device": "right_arm",
+        "width": 14
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            440,
+            210
+          ]
+        ],
+        "device": "right_arm",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            460,
+            140
+          ]
+        ],
+        "device": "right_arm",
+        "radius": 8
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            400,
+            174
+          ]
+        ],
+        "device": "right_arm",
+        "radius": 8
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            412,
+            213
+          ],
+          [
+            412,
+            186
+          ],
+          [
+            388,
+            186
+          ],
+          [
+            388,
+            213
+          ]
+        ],
+        "device": "right_gripper",
+        "width": 5
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            416,
+            148
+          ],
+          [
+            396,
+            148
+          ],
+          [
+            396,
+            163
+          ],
+          [
+            416,
+            163
+          ]
+        ],
+        "device": "camera_right"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            406,
+            155
+          ]
+        ],
+        "device": "camera_right",
+        "radius": 4
+      },
+      {
+        "kind": "line",
+        "points": [
+          [
+            355,
+            58
+          ],
+          [
+            335,
+            92
+          ],
+          [
+            375,
+            92
+          ],
+          [
+            355,
+            58
+          ]
+        ],
+        "device": "camera_top",
+        "width": 1
+      },
+      {
+        "kind": "polygon",
+        "points": [
+          [
+            340,
+            40
+          ],
+          [
+            370,
+            40
+          ],
+          [
+            370,
+            58
+          ],
+          [
+            340,
+            58
+          ]
+        ],
+        "device": "camera_top"
+      },
+      {
+        "kind": "joint",
+        "points": [
+          [
+            355,
+            49
+          ]
+        ],
+        "device": "camera_top",
+        "radius": 4
+      }
+    ],
+    "devices": [
+      {
+        "id": "left_arm",
+        "label": [
+          16,
+          133
+        ],
+        "anchor": [
+          250,
+          160
+        ]
+      },
+      {
+        "id": "left_gripper",
+        "label": [
+          16,
+          178
+        ],
+        "anchor": [
+          310,
+          200
+        ]
+      },
+      {
+        "id": "camera_left",
+        "label": [
+          16,
+          88
+        ],
+        "anchor": [
+          304,
+          155
+        ]
+      },
+      {
+        "id": "right_arm",
+        "label": [
+          548,
+          133
+        ],
+        "anchor": [
+          460,
+          160
+        ]
+      },
+      {
+        "id": "right_gripper",
+        "label": [
+          548,
+          178
+        ],
+        "anchor": [
+          400,
+          200
+        ]
+      },
+      {
+        "id": "camera_right",
+        "label": [
+          548,
+          88
+        ],
+        "anchor": [
+          406,
+          155
+        ]
+      },
+      {
+        "id": "camera_top",
+        "label": [
+          301,
+          0
+        ],
+        "anchor": [
+          355,
+          40
+        ]
+      },
+      {
+        "id": "world",
+        "label": [
+          16,
+          224
+        ],
+        "anchor": [
+          215,
+          236
+        ]
+      }
+    ]
+  },
+  "source_review": {
+    "continuous_source": true,
+    "source_interval_s": [
+      0,
+      227.562
+    ],
+    "zoom_keys": [],
+    "camera_motion": "The raw spectator camera pulls back near the opening; the edit preserves it. No editorial crop or zoom.",
+    "human_interventions": "None visible in the reviewed simulator footage.",
+    "critical_moments": [
+      {
+        "source_interval_s": [
+          109.5,
+          111.112
+        ],
+        "description": "Reorientation with grasp instability; aperture guard stops motion; followed by actual camera_left observation."
+      },
+      {
+        "source_interval_s": [
+          174.8,
+          176.358
+        ],
+        "description": "Another grasp slips during lift; aperture guard stops motion; followed by actual camera_left observation."
+      },
+      {
+        "source_interval_s": [
+          210.85,
+          213.316
+        ],
+        "description": "Successful rim closure and initial lift."
+      },
+      {
+        "source_interval_s": [
+          219.13,
+          220.15
+        ],
+        "description": "Peg insertion."
+      },
+      {
+        "source_interval_s": [
+          220.218,
+          221.4
+        ],
+        "description": "Release and initial clearance."
+      }
+    ],
+    "outcome": "Mug remains hanging after release, withdrawal and settling, corroborated by final wrist and overhead observations.",
+    "pacing_revision": {
+      "request": "Exactly 45 seconds, gradual speed transitions, and current playback multiplier beside the bottom-right time counter.",
+      "max_speed": 22.196644089628286,
+      "transition": "Linear speed ramps sharing the integrated recording/tool clock; 0.12 s ramps for movement and 0.015 s for brief acquisition ticks.",
+      "critical_moments": "Original 0.65–1x closure, slipping-grasp, lift, insertion and release segments retained.",
+      "frame_interpolation": "None; original frames only.",
+      "previous_duration_s": 79.6,
+      "duration_s": 45,
+      "speed_overlay": "Instantaneous source-clock seconds per output second; Frame held at zero speed."
+    }
+  },
+  "show_playback_speed": true
 }

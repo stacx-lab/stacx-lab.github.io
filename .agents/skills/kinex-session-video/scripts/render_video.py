@@ -40,9 +40,16 @@ def compile_retime(event):
             speed = segment['speed']
             if not math.isfinite(speed) or speed <= 0 or target <= source_t or target > event['sim_end'] + 1e-6:
                 raise ValueError('Retime must advance source time with a positive finite speed')
+            ramp = {}
+            if 'start_speed' in segment or 'end_speed' in segment:
+                v0, v1 = segment.get('start_speed'), segment.get('end_speed')
+                if (v0 is None or v1 is None or not all(math.isfinite(v) and v >= 0 for v in (v0, v1))
+                        or not math.isclose(speed, (v0 + v1) / 2, rel_tol=1e-9, abs_tol=1e-9)):
+                    raise ValueError('Speed ramps require nonnegative endpoints and their positive mean speed')
+                ramp = dict(start_speed=v0, end_speed=v1, interpolation='linear_speed')
             end = cursor + (target - source_t) / speed
             segments.append(dict(start_s=cursor, end_s=end, source_start_s=source_t,
-                                 source_end_s=target, speed=speed, reason=segment['reason']))
+                                 source_end_s=target, speed=speed, reason=segment['reason'], **ramp))
             knots.append(dict(at_s=end, source_s=target))
             cursor, source_t = end, target
         if abs(source_t - event['sim_end']) > 1e-6 or abs(cursor + hold - duration) > 1e-5:
@@ -67,6 +74,11 @@ def scene_clock(event, local_s):
         return event['sim_start'], 0.0
     for segment in event['speed_segments']:
         if local_s < segment['end_s']:
+            if segment.get('interpolation') == 'linear_speed':
+                dt = local_s - segment['start_s']
+                acceleration = (segment['end_speed'] - segment['start_speed']) / (segment['end_s'] - segment['start_s'])
+                return (segment['source_start_s'] + segment['start_speed'] * dt + .5 * acceleration * dt * dt,
+                        segment['start_speed'] + acceleration * dt)
             return segment['source_start_s'] + (local_s - segment['start_s']) * segment['speed'], segment['speed']
     return event['sim_end'], 0.0
 
@@ -215,6 +227,8 @@ def compile_events(source, edit):
 class Renderer:
     def __init__(self, source, edit, events):
         self.source, self.edit, self.events = source, edit, events
+        self.panel_y = 350 if edit.get('device_map') else RIGHT_Y
+        self.panel_h = RIGHT_H - (self.panel_y - RIGHT_Y)
         self.font = ImageFont.truetype(MONO, 17)
         self.tool_font = ImageFont.truetype(MONO_BOLD, 17)
         self.body_font = ImageFont.truetype(SANS, 22)
@@ -235,10 +249,10 @@ class Renderer:
         d.text((40, 28), edit['title'], font=self.title, fill=INK)
         d.text((42, 86), edit['subtitle'], font=self.body_font, fill=MUTED)
         d.text((RIGHT_X, 34), 'Kinex', font=self.heading, fill=INK)
-        d.text((RIGHT_X, 84), 'Session replay · code, tools & observations', font=self.small, fill=MUTED)
+        if not edit.get('device_map'):
+            d.text((RIGHT_X, 84), 'Session replay · code, tools & observations', font=self.small, fill=MUTED)
         d.line((1148, 124, 1148, 1033), fill='#d6d6ce', width=1)
         d.line((40, 1046, 1880, 1046), fill='#d6d6ce', width=1)
-        d.text((40, 1053), 'Recorded session · edited excerpts · camera frames inline', font=self.small, fill=MUTED)
 
     def card(self, event, progress=1.0, t=0):
         finished = progress >= 1
@@ -264,7 +278,7 @@ class Renderer:
         pics = event['images'] if done else []
         h = 50 + len(lines) * 24 + (len(result_lines) * 24 + 14 if result else 0)
         h += sum(self.images[r['filename']].height + 29 for r in pics)
-        if h > RIGHT_H:
+        if h > self.panel_h:
             raise ValueError(f"Entry {event['entry']}: card exceeds the visible session panel; shorten the excerpt")
         bg = (ERROR if event['error'] else DONE) if done else PENDING
         if not is_tool:
@@ -309,6 +323,39 @@ class Renderer:
             self.complete_cards[cache_key] = im
         return im
 
+    def device_map(self, out, event):
+        """Draw the source-specific setup supplied by the reviewed edit."""
+        config = self.edit.get('device_map')
+        if not config:
+            return
+        d = ImageDraw.Draw(out)
+        active = set(event.get('active_devices', []))
+        ox, oy = RIGHT_X, 80
+        def points(values):
+            return [(ox + x, oy + y) for x, y in values]
+        for shape in config['shapes']:
+            color = '#557f88' if shape.get('device') in active else '#b4b7af'
+            p = points(shape['points'])
+            if shape['kind'] == 'line':
+                d.line(p, fill=color, width=shape.get('width', 3), joint='curve')
+            elif shape['kind'] == 'polygon':
+                d.polygon(p, fill='#e8e8df', outline=color, width=2)
+            elif shape['kind'] == 'joint':
+                x, y = p[0]
+                radius = shape.get('radius', 7)
+                d.ellipse((x-radius, y-radius, x+radius, y+radius), fill=BG, outline=color, width=3)
+        for device in config['devices']:
+            color = '#416e78' if device['id'] in active else '#92978d'
+            fill = '#dce9e7' if device['id'] in active else '#eeede6'
+            x, y = device['label']
+            width = d.textlength(device['id'], font=self.small) + 20
+            anchor = points([device['anchor']])[0]
+            edge = ox+x+width if x < 200 else ox+x
+            if device.get('leader', True):
+                d.line([anchor, (edge, oy+y+14)], fill=color, width=2)
+            d.rounded_rectangle((ox+x, oy+y, ox+x+width, oy+y+29), radius=6, fill=fill)
+            d.text((ox+x+10, oy+y+5), device['id'], font=self.small, fill=color)
+
     def state(self, t):
         index = min(len(self.events) - 1, bisect.bisect_right([e['start'] for e in self.events], t) - 1)
         event = self.events[index]
@@ -320,42 +367,33 @@ class Renderer:
         index, event, progress, sim = self.state(t)
         out = self.background.copy()
         out.paste(recording, LEFT[:2])
+        self.device_map(out, event)
         d = ImageDraw.Draw(out)
         metadata = event['run_metadata']
         model = metadata['model'] or 'not recorded'
         effort = metadata['effort'] or 'not recorded'
         d.text((RIGHT_X + 115, 42), f'Model: {model} · Effort: {effort}', font=self.small, fill=MUTED)
-        # The scene clock is separate from the edited video clock.
-        label = f'{sim:06.2f} s'
-        d.rounded_rectangle((LEFT[0] + 14, LEFT[1] + 14, LEFT[0] + 163, LEFT[1] + 48), radius=5, fill='#f3f0e9')
-        d.text((LEFT[0] + 24, LEFT[1] + 20), label, font=self.small, fill=INK)
-        _, speed = scene_clock(event, progress * event['duration'])
-        speed_label = f'{speed:.2f}× speed' if speed > .001 else 'Frame held'
-        label_width = d.textlength(speed_label, font=self.small)
-        d.rounded_rectangle((LEFT[0] + LEFT[2] - label_width - 38, LEFT[1] + 14,
-                             LEFT[0] + LEFT[2] - 14, LEFT[1] + 48), radius=5, fill=BG)
-        d.text((LEFT[0] + LEFT[2] - label_width - 26, LEFT[1] + 20), speed_label, font=self.small, fill=INK)
-        if event['cut'] and t - event['start'] < .8:
-            d.rounded_rectangle((LEFT[0] + 175, LEFT[1] + 14, LEFT[0] + 367, LEFT[1] + 48), radius=5, fill='#f3f0e9')
-            d.text((LEFT[0] + 187, LEFT[1] + 20), 'Later in the session', font=self.small, fill=MUTED)
-        d.text((40, 960), event['chapter'], font=self.heading, fill=INK)
-        d.text((42, 1003), event['caption'], font=self.body_font, fill=MUTED)
         cards = [self.card(e) for e in self.events[max(0, index - 5):index]]
         cards.append(self.card(event, progress, t))
         content_h = sum(card.height for card in cards)
-        content = Image.new('RGB', (RIGHT_W, max(RIGHT_H, content_h)), '#faf8f3')
+        content = Image.new('RGB', (RIGHT_W, max(self.panel_h, content_h)), '#faf8f3')
         y = 0
         for card in cards:
             content.paste(card, (0, y)); y += card.height
         # Track the newest content; nothing is blanked between calls.
-        offset = max(0, content_h - RIGHT_H)
-        out.paste(content.crop((0, offset, RIGHT_W, offset + RIGHT_H)), (RIGHT_X, RIGHT_Y))
+        offset = max(0, content_h - self.panel_h)
+        out.paste(content.crop((0, offset, RIGHT_W, offset + self.panel_h)), (RIGHT_X, self.panel_y))
         d.line((RIGHT_X, 982, RIGHT_X + RIGHT_W, 982), fill='#a3b0c7', width=2)
         d.text((RIGHT_X + 7, 991), '›', font=self.body_font, fill=INK)
         d.text((RIGHT_X + 31, 996), 'Kinex session', font=self.small, fill=MUTED)
-        d.text((RIGHT_X, 1024), self.edit['session_label'], font=self.small, fill=MUTED)
+        environment = 'Simulator' if self.source['recording']['clock'] == 'simulation' else self.edit.get('environment', 'not recorded')
+        d.text((RIGHT_X, 1024), f'{model} · {effort} effort · {environment}', font=self.small, fill=MUTED)
         clock = f'{t:04.1f} / {self.edit["duration"]:.0f} s'
-        d.text((1730, 1053), clock, font=self.small, fill=MUTED)
+        if self.edit.get('show_playback_speed'):
+            _, speed = scene_clock(event, progress * event['duration'])
+            speed_label = (f'{speed:.1f}×' if speed >= .1 else f'{speed:.2f}×') if speed > 1e-6 else 'Frame held'
+            clock = f'{speed_label}  ·  {clock}'
+        d.text((1880 - d.textlength(clock, font=self.small), 1053), clock, font=self.small, fill=MUTED)
         return out
 
 
@@ -454,10 +492,13 @@ def main():
                       notes=['Edited replay, not a live connection. Original public text and tool code excerpts; omitted calls are not replayed.',
                              'Character streaming is reconstructed: the export does not contain token arrival times.',
                              'Video frames mapped through frames.jsonl; explicit piecewise speed maps interpolate measured scene-clock endpoints.',
-                             'Speed labels are source-clock seconds per output second, not agent wall-clock acceleration; held frames are labeled separately.',
+                             'Provenance speeds are source-clock seconds per output second, not agent wall-clock acceleration; zero denotes a held frame.',
                              'Scene clock holds while code streams. At explicit cuts, both panels jump to the same recorded stage.',
                              'Embedded camera images are checksum-verified source bytes, scaled only for layout.',
                              'No source code was executed and no robot or simulator was controlled.'], events=events)
+    provenance['device_map'] = edit.get('device_map')
+    provenance['source_review'] = edit.get('source_review')
+    provenance['environment'] = 'Simulator' if source['recording']['clock'] == 'simulation' else edit.get('environment', 'not recorded')
     args.output.with_suffix('.provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2))
     print(f'Validated {len(events)} events; duration {edit["duration"]}s', flush=True)
 

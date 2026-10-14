@@ -37,30 +37,31 @@
     {
       "id": "yam-hang-mug",
       "source": "gallery/.masters/yam-hang-mug.mp4",
-      "mp4_sha256": "022573dbef6e8b81772de84a064800d58ce6eb73d8b8f31e655fbbcc726e8e05",
-      "duration_s": 30,
+      "mp4_sha256": "c78aa4560211fc3b2afd34a8301af9664c21b1fca6a4f7d16d8bc331158bead4",
+      "duration_s": 45,
       "fps": 30,
       "playback_rate": 1,
       "model": "gpt-6-astra",
       "effort": "high",
       "metadata_source": "Recorded session export, captured in gallery/yam-hang-mug/yam-hang-mug.provenance.json.",
-      "source_sha256": "33136309ab6ee968c34ea07f54e8c5ddf097c108f3f31a520fc56816b724ff2f",
-      "source_bytes": 5481061,
+      "source_sha256": "11d3f1cf07b63eb20da8b2d84755b263d805ed0344ead3dbc97ec4d8c823b2a0",
+      "source_bytes": 6208151,
       "files": {
         "mp4": {
-          "bytes": 2518606,
-          "sha256": "022573dbef6e8b81772de84a064800d58ce6eb73d8b8f31e655fbbcc726e8e05"
+          "bytes": 2762936,
+          "sha256": "c78aa4560211fc3b2afd34a8301af9664c21b1fca6a4f7d16d8bc331158bead4"
         },
         "webm": {
-          "bytes": 2327930,
-          "sha256": "cad67bea9d96b2c609fcb211071d8579aa1eca052d5938279614723943a77a64"
+          "bytes": 2427706,
+          "sha256": "46e22dfa1a8ac3c49c8e1f66d6e5a10383c31b72c3c48a507a43a976fce362d6"
         }
       },
       "environment": "Simulator",
       "width": 1920,
       "height": 1080,
       "source_first_pts_s": 0.0,
-      "delivery_first_pts_s": 0
+      "delivery_first_pts_s": 0.0,
+      "frame_count": 1350
     }
   ]
 }

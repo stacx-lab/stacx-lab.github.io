@@ -12,7 +12,7 @@ export const galleryVideos = [
     id: 'yam-hang-mug',
     title: 'Hang a mug on the rack',
     description: 'Measure, grasp, and verify the release.',
-    duration: '00:30',
+    duration: '00:45',
     model: 'gpt-6-astra',
     effort: 'high',
     environment: 'Simulator',
