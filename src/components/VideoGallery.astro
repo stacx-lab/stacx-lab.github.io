@@ -225,7 +225,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .intro { max-width: calc(var(--wrap) - 48px); margin: 0 auto 24px; }
   h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 10px; }
   .lead { color: var(--ink-2); margin: 0; }
-  .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: center; }
+  .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: start; }
   .gallery-sidebar { min-width: 0; padding-block: 24px; }
   .counter { display: none; margin: 16px 2px 0; font: 16px/1.5 var(--font-mono); color: var(--ink-3); white-space: nowrap; }
   .is-enhanced .counter { display: block; }
@@ -237,9 +237,6 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .floating-arrow svg { width: 26px; height: 26px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
   .floating-arrow:hover, .floating-arrow:focus-visible { background: color-mix(in srgb, var(--accent) 6%, transparent); border-color: color-mix(in srgb, var(--accent) 60%, transparent); box-shadow: 0 3px 10px rgb(0 0 0 / .08); }
   .floating-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
-  .floating-arrow[data-gallery-prev]:hover { transform: translateY(-2px); }
-  .floating-arrow[data-gallery-next]:hover { transform: translateY(2px); }
-  .floating-arrow[data-gallery-prev]:active, .floating-arrow[data-gallery-next]:active { transform: scale(.94); }
   .videos { position: relative; min-width: 0; padding: 12px; }
   .rotor { display: grid; gap: 20px; }
   .video-card { position: relative; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; }

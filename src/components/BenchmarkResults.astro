@@ -13,9 +13,9 @@ import { benchmark, benchmarkScopes, astraComparison } from '../data/benchmark';
     we rewrite task instructions to make hidden criteria explicit, such as parking the arm at its home position.
   </p>
   <p>
-    For GPT-6 Astra (high effort) and Claude Opus 5.5, we compare Codex / Claude Code with the
+    For GPT-6-Astra (high effort), we compare Codex with the
     <strong>benchmark-native action API</strong>, with the <strong>device abstraction</strong>,
-    and <strong>Kinex</strong>. On Astra, Kinex raises success from {astraComparison.baselineSuccessRate.toFixed(1)}%
+    and <strong>Kinex</strong>. Kinex raises success from {astraComparison.baselineSuccessRate.toFixed(1)}%
     to <strong>{astraComparison.kinexSuccessRate.toFixed(1)}%</strong> at
     <strong>{astraComparison.costReductionPercent.toFixed(1)}% lower cost</strong>
     than Codex + Bare action API.
@@ -38,22 +38,16 @@ import { benchmark, benchmarkScopes, astraComparison } from '../data/benchmark';
       </p>
     ))}
   </div>
-  <div class="model-grid">
-    <section class="model" aria-labelledby="astra-heading">
-      <header><h3 id="astra-heading">GPT-6 Astra</h3><span>Codex · high effort</span></header>
+  <section class="model" aria-labelledby="astra-heading">
+    <header><h3 id="astra-heading">GPT-6-Astra</h3><span>Codex · high effort</span></header>
+    <div class="chart-grid">
       <BenchmarkChart metric="success" />
       <BenchmarkChart metric="cost" />
-    </section>
-    <section class="model" aria-labelledby="opus-heading">
-      <header><h3 id="opus-heading">Claude Opus 5.5</h3><span>Claude Code · results pending</span></header>
-      <BenchmarkChart metric="success" pending />
-      <BenchmarkChart metric="cost" pending />
-    </section>
-  </div>
+    </div>
+  </section>
   <p class="chart-note">
     Average weights all 132 tasks equally. Success rate is successful tasks / evaluated tasks;
     cost is the mean API-equivalent estimate in USD per task, including successful and failed episodes.
-    Opus 5.5 results are not yet available.
   </p>
   <div class="source-links">
     <a href={benchmark.source}>Evaluation details, demos, and agent traces ↗</a>
@@ -87,12 +81,12 @@ import { benchmark, benchmarkScopes, astraComparison } from '../data/benchmark';
   .scope-picker input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
   .scope-picker label:hover span { border-color: var(--accent); }
   .scope-summary p { margin: 0; font-size: var(--fs-1); }
-  .model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 20px; }
-  .model { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 16px; }
+  .model { min-width: 0; margin-top: 20px; }
+  .chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 16px; }
   header { border-bottom: 1px solid var(--rule); padding-bottom: 14px; }
   header h3 { font-size: var(--fs-3); margin: 0 0 4px; }
   header span { color: var(--ink-2); font-size: var(--fs-1); }
   .chart-note { margin: 20px 0 12px; font-size: var(--fs-1); }
   .source-links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: var(--fs-1); }
-  @media (max-width: 860px) { .model-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+  @media (max-width: 700px) { .chart-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
 </style>
