@@ -137,7 +137,8 @@ It rotates a vertical three-dimensional ring, with neighboring videos tilted abo
 fixed edge mask fades the top and bottom; card changes animate rotation. The
 right sidebar lists every video title with its robot name. Selecting a title switches
 playback and expands only that video's compact embodiment/model/effort/environment
-subtitle and highlights. The sidebar has no arrow buttons, counter, or pagination dots.
+subtitle and highlights. A compact current/total counter sits beneath the playlist;
+the sidebar has no arrow buttons or pagination dots.
 On narrow screens, the list sits below the videos. Translucent up/down buttons
 stack vertically inside the active video's right edge. Neighboring previews, vertical touch swipes, and
 Up/Down/Home/End keys on the track work. Reduced-motion preferences disable

@@ -25,7 +25,7 @@ type GalleryVideo = {
 export const galleryVideos: GalleryVideo[] = [
   {
     id: 'abc-yam-cube',
-    title: 'Solving a 2x2 cube',
+    title: 'Solving a pocket cube',
     description: 'Active sensing, solution reasoning, and precision control with collision avoidance.',
     highlights: [
       { moments: [{ start: 5.90, end: 12.21 }], title: 'Active sensing', text: 'Moves wrist cameras to inspect all six faces of the cube.' },
@@ -33,7 +33,7 @@ export const galleryVideos: GalleryVideo[] = [
       { moments: [{ start: 56.22, end: 68.06 }], title: 'Precision & collision avoidance', text: 'Coordinates layer turns and handoffs while avoiding collisions between arms, grippers, and cameras.' },
     ],
     duration: '01:15',
-    robot: 'YAM',
+    robot: 'YAM ABC Box',
     embodiment: 'Dual arm',
     model: 'GPT-6-Astra',
     effort: 'medium',
@@ -49,7 +49,7 @@ export const galleryVideos: GalleryVideo[] = [
       { moments: [{ start: 42.50, end: 53.96 }], title: 'Precision & recovery', text: 'Stops at suspected guide-rim contact, retracts, and corrects alignment before retrying the insertion in small, slow steps.' },
     ],
     duration: '01:15',
-    robot: 'TeleAvatar',
+    robot: 'Dexteleop TeleAvatar',
     embodiment: 'Wheeled dual-arm mobile manipulator',
     model: 'GPT-6-Astra',
     effort: 'high',
@@ -65,7 +65,7 @@ export const galleryVideos: GalleryVideo[] = [
       { moments: [{ start: 50.24, end: 59.48 }], title: 'Spatial memory', text: 'After the first deposit, returns to the previously observed litter area and locates the next piece to collect.' },
     ],
     duration: '01:29',
-    robot: 'Go2 + D1',
+    robot: 'Unitree Go2 + D1',
     embodiment: 'Legged mobile manipulator',
     model: 'GPT-6-Astra',
     effort: 'medium',
@@ -80,7 +80,7 @@ export const galleryVideos: GalleryVideo[] = [
       { moments: [{ start: 40.16, end: 47.91 }], title: 'Active sensing', text: 'During recovery, repositions the right arm for a clearer camera view to check whether the cup is actually hanging on the peg.' },
     ],
     duration: '01:00',
-    robot: 'YAM',
+    robot: 'YAM ABC Box',
     embodiment: 'Dual arm',
     model: 'GPT-6-Astra',
     effort: 'high',
@@ -88,7 +88,7 @@ export const galleryVideos: GalleryVideo[] = [
   },
   {
     id: 'xarm-sort',
-    title: 'Sorting objects by color',
+    title: 'Picking blue objects',
     description: 'Applies an open vocabulary color rule to varied objects and replans grasps after misses and slips.',
     highlights: [
       { title: 'Open vocabulary generalization', text: 'Sorts toy figures, a cube, corn, and a pineapple from a natural-language rule: anything containing blue goes left; everything else goes right.' },

@@ -10,7 +10,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   <div class="intro">
     <div>
       <p class="kicker">01 · Gallery</p>
-      <h2 id="gallery-heading">See the agent at work.</h2>
+      <h2 id="gallery-heading">See the agent at work in the real world.</h2>
       <p class="lead">Watch Agent + Kinex in the real world. Every demo is zero-shot—text instructions only, with no human demonstrations—showing the capabilities agents bring to robotics.</p>
     </div>
   </div>
@@ -75,6 +75,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
           </details>
         ))}
       </div>
+      <p class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / {String(galleryVideos.length).padStart(2, '0')}</p>
     </div>
   </div>
 </section>
@@ -86,6 +87,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     const cards = Array.from(gallery.querySelectorAll<HTMLElement>('.video-card'));
     const players = Array.from(gallery.querySelectorAll<HTMLVideoElement>('[data-gallery-video]'));
     const titles = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-select]'));
+    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')!;
     const previous = gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-prev]');
     const next = gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-next]');
     const rotor = gallery.querySelector<HTMLElement>('[data-gallery-rotor]')!;
@@ -131,6 +133,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         if (!centered) players[i].pause();
       });
       const clip = wrap(active, details.length);
+      counter.textContent = `${String(clip + 1).padStart(2, '0')} / ${String(details.length).padStart(2, '0')}`;
       details.forEach((detail, i) => {
         detail.classList.toggle('is-active', i === clip);
         const panel = detail.querySelector<HTMLElement>('.details-body')!;
@@ -224,6 +227,8 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .lead { color: var(--ink-2); margin: 0; }
   .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: center; }
   .gallery-sidebar { min-width: 0; padding-block: 24px; }
+  .counter { display: none; margin: 16px 2px 0; font: 16px/1.5 var(--font-mono); color: var(--ink-3); white-space: nowrap; }
+  .is-enhanced .counter { display: block; }
   .video-stage { --ring-peek: clamp(64px, 8vw, 104px); position: relative; isolation: isolate; min-width: 0; }
   .floating-arrow { display: none; position: absolute; z-index: 2; right: 24px; width: 52px; height: 52px; padding: 0; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--panel) 8%, transparent); color: var(--accent-ink); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px); box-shadow: 0 2px 8px rgb(0 0 0 / .03); cursor: pointer; touch-action: manipulation; transition: background 180ms, border-color 180ms, box-shadow 180ms, transform 180ms; }
   .is-enhanced .floating-arrow { display: grid; place-items: center; }
