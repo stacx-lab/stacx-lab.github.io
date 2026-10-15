@@ -1,0 +1,24 @@
+---
+// Public GA4 web-stream identifier for the Kinex website.
+const measurementId = 'G-HQE1HZB0FJ';
+const hostname = Astro.site?.hostname;
+---
+
+{import.meta.env.PROD && (
+  <script is:inline define:vars={{ measurementId, hostname }}>
+    (() => {
+      // Keep local previews and copies on other hosts out of production reports.
+      if (window.location.hostname !== hostname) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId);
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      document.head.appendChild(script);
+    })();
+  </script>
+)}
