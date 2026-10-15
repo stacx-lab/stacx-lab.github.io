@@ -195,6 +195,69 @@
       "provenance": "gallery/real-hang-mug/real-hang-mug.provenance.json"
     },
     {
+      "id": "xarm-sort",
+      "source": "gallery/.masters/xarm-sort.mp4",
+      "source_sha256": "dce143a143b864e5b8693863c13670ad662910bcf373e0466755e28f0eeffca2",
+      "source_bytes": 14157877,
+      "mp4_sha256": "4e1d694e3953a9423bb6ad0e3679ce7224ad7da945a428c870dc6dfed0c836dc",
+      "duration_s": 60,
+      "fps": 30,
+      "frame_count": 1800,
+      "width": 1920,
+      "height": 1080,
+      "playback_rate": 1,
+      "model": "gpt-6-astra",
+      "effort": "medium",
+      "environment": "Real world",
+      "robot": "xArm 7",
+      "metadata_source": "GPT-6-Astra from entry 8, before all tool calls; medium from entry 2. Initial inactive configuration GPT-5.5 retained in provenance.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
+      "files": {
+        "mp4": {
+          "bytes": 4638966,
+          "sha256": "4e1d694e3953a9423bb6ad0e3679ce7224ad7da945a428c870dc6dfed0c836dc"
+        },
+        "webm": {
+          "bytes": 4956839,
+          "sha256": "6bb8e8aae4ea8decfc32462934009958c9dcd2ef54560bcc9a301dd6480ca998"
+        },
+        "poster.jpg": {
+          "bytes": 401146,
+          "sha256": "2a3ddda81e42e7fe0c712e370e0b87091a9c4cc0609150af480ae9bda691a373"
+        }
+      },
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "3",
+          "-b:v",
+          "0",
+          "-crf",
+          "38",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/xarm-sort/xarm-sort.provenance.json"
+    },
+    {
       "id": "yam-hang-mug",
       "source": "gallery/.masters/yam-hang-mug.mp4",
       "mp4_sha256": "c78aa4560211fc3b2afd34a8301af9664c21b1fca6a4f7d16d8bc331158bead4",

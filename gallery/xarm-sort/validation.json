@@ -1,0 +1,40 @@
+{
+  "timeline": "Continuous source from frame zero through five visibly sorted objects; ramp continuity and inverse checked.",
+  "evidence": "No selected result or camera observation precedes its recorded result timestamp; all images hash verified.",
+  "status": "All frame labels match recording elapsed/retained total, fit the left column, and distinguish operator setup, recovery, grasp planning, and final verification.",
+  "framing": {
+    "xywh": [
+      96,
+      0,
+      1728,
+      1080
+    ],
+    "original_dimensions": [
+      1920,
+      1080
+    ],
+    "note": "User-requested mild side crop: 96 px (5%) from each side; full vertical frame retained, with no stretching. Checked left-basket approach, gripper extremes, and final arrangement."
+  },
+  "audio_streams": 0,
+  "files": [
+    {
+      "file": "gallery/.masters/xarm-sort.mp4",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/xarm-sort/xarm-sort.mp4",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/xarm-sort/xarm-sort.webm",
+      "frames": 1800,
+      "duration_s": 60,
+      "first_pts_s": 0
+    }
+  ],
+  "webm_timestamp_tolerance_s": 0.0011
+}

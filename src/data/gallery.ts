@@ -55,6 +55,20 @@ export const galleryVideos: GalleryVideo[] = [
     environment: 'Real world',
   },
   {
+    id: 'xarm-sort',
+    title: 'Sorting objects by color',
+    description: 'Applies an open vocabulary color rule to varied objects and replans grasps after misses and slips.',
+    highlights: [
+      { title: 'Open vocabulary generalization', text: 'Sorts toy figures, a cube, corn, and a pineapple from a natural-language rule: anything containing blue goes left; everything else goes right.' },
+      { title: 'Error recovery + grasp planning', text: 'Uses wrist-camera depth to rotate the grasp after missing the corn, then relocates a slipped cube and grasps it more deeply before retrying.' },
+    ],
+    duration: '01:00',
+    robot: 'xArm 7',
+    model: 'GPT-6-Astra',
+    effort: 'medium',
+    environment: 'Real world',
+  },
+  {
     id: 'yam-hang-mug',
     title: 'Hang a mug on the rack',
     description: 'Follow the agent as it measures the scene, grasps the mug, and verifies the release onto the rack in simulation.',
