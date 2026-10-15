@@ -31,9 +31,18 @@ def main():
             assert timeline.at(completion)>=e['source_result_s']-1e-5
             assert e['typing_fraction']<e['result_fraction']
     r=ReplayRenderer(source,edit,events,timeline)
+    # Brief planning spikes must not flash in the annotation. Sustained motion
+    # labels and real holds still appear, with no change to the source map.
+    assert set(r.speed_labels) == {0, 6, 7, 10, 15}
+    assert r.displayed_speed(10) == 10
+    assert r.displayed_speed(2.48) == 15
+    assert r.displayed_speed(56.02) == 7
+    assert r.displayed_speed(74.9) == 0
     from PIL import Image
     for i in range(n):
         autonomy,clock,action=r.status(i/30)
+        assert autonomy.startswith('Autonomous ')
+        assert autonomy.endswith(f' {r.displayed_speed(i/30)}×')
         assert action and '×' not in clock
         parse=lambda v:sum(int(x)*m for x,m in zip(v.split(':'),[3600,60,1]))
         shown,total=clock.split(' / ')
@@ -72,6 +81,6 @@ def main():
         print('Validated',path.name,flush=True)
     (HERE/'validation.json').write_text(json.dumps(dict(timeline='Continuous source from frame zero through independent tube placement; ramp continuity and inverse checked.',
       evidence='No selected result or camera observation precedes its recorded result timestamp; all images hash verified.',
-      status='All frame labels match recording elapsed/retained total, fit the left column, and distinguish human tether assistance, regrasping, guide-rim recovery, and final verification.',
+      status='Status remains Autonomous throughout. Speed annotations are rounded integers with changes shorter than 0.35 s suppressed; actual retiming is unchanged. All labels use 24 px text and a 22 px clock, match recording elapsed/retained total, and fit the left column; action captions remain unchanged.',
       framing='Original 16:9 full frame; letterboxed, no crop or interpolation',audio_streams=0,files=result,webm_timestamp_tolerance_s=.0011),indent=2)+'\n')
 if __name__=='__main__':main()

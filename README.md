@@ -125,18 +125,21 @@ in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
   `python3 gallery/real-hang-mug/build.py --preview` and without `--preview`.
   After rendering finishes, run `deliver.py` and `verify.py` in that same folder.
   Requires Pillow and FFmpeg; the clock anchors and uncertainty are in `edit.json`.
-- `yam-hang-mug`: the 45-second simulation recording/session replay, also compressed.
+- `yam-hang-mug`: the archived 45-second simulation recording/session replay, no longer listed in the homepage gallery.
 
 Delivery MP4s retain 1080p/30 FPS (x264 slow, CRF 28, faststart); WebM fallbacks
 use VP9 good, cpu-used 3, CRF 38. Archival MP4s live in this repository's
 `gallery/.masters/` through Git LFS, outside the published site. Each clip has an opening poster.
 
-The gallery rotates a vertical three-dimensional ring in the left two-thirds of
-the layout, with neighboring videos tilted above and below the active video. A
+The gallery uses a wider 1440px container, with the video taking roughly three
+quarters of the layout on large screens and two thirds on smaller desktops.
+It rotates a vertical three-dimensional ring, with neighboring videos tilted above and below the active video. A
 fixed edge mask fades the top and bottom; card changes animate rotation. The
-right third shows the selected task title with robot and embodiment, model, effort, Real world / Simulator,
-and highlights. On narrow screens, the notes sit below the videos. Up/down
-buttons, slide selectors, neighboring previews, vertical touch swipes, and
+right sidebar lists every video title with its robot name. Selecting a title switches
+playback and expands only that video's compact embodiment/model/effort/environment
+subtitle and highlights. The sidebar has no arrow buttons, counter, or pagination dots.
+On narrow screens, the list sits below the videos. Translucent up/down buttons
+stack vertically inside the active video's right edge. Neighboring previews, vertical touch swipes, and
 Up/Down/Home/End keys on the track work. Reduced-motion preferences disable
 the transitions. The cube run records medium effort. Both mug
 clips show high effort: the real clip's original footer says high, and all 178
@@ -156,8 +159,8 @@ buttons; hovering shows the action title, clicking anywhere on a sidebar highlig
 seeks and plays, and playback highlights the matching note. Clip bands use teal,
 amber, and blue; the purple playhead keeps a contrasting border in both themes.
 Cube and red-cup intervals are selected examples of each capability. The litter
-clip marks the disturbance/recovery interval as robustness and the rest as
-locomotion/manipulation.
+clip marks the disturbance/recovery interval as robustness, the return for the
+next piece at 00:50–00:59 as spatial memory, and the rest as locomotion/manipulation.
 `public/media/gallery/manifest.json` records master/delivery hashes, file sizes,
 durations, and metadata evidence. Use `url()` for every media link so they resolve
 beneath `/kinex/` in both local builds and GitHub Pages.

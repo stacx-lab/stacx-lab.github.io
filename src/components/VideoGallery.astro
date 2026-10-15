@@ -1,8 +1,6 @@
 ---
 import { galleryVideos } from '../data/gallery';
-import { url } from '../lib/url';
 import GalleryPlayer from './GalleryPlayer.astro';
-const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}.${extension}`);
 // Repeat clips around a full ring so both neighbors have a real face.
 const slotCount = galleryVideos.length * Math.ceil(8 / galleryVideos.length);
 const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVideos[slot % galleryVideos.length], slot }));
@@ -13,79 +11,69 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     <div>
       <p class="kicker">01 · Gallery</p>
       <h2 id="gallery-heading">See the agent at work.</h2>
-      <p class="lead">Watch Agent + Kinex in simulation and the real world. Every demo is zero-shot—text instructions only, with no human demonstrations—showing the capabilities agents bring to robotics.</p>
+      <p class="lead">Watch Agent + Kinex in the real world. Every demo is zero-shot—text instructions only, with no human demonstrations—showing the capabilities agents bring to robotics.</p>
     </div>
   </div>
   <div class="gallery-layout">
-    <div class="videos" id="gallery-track" tabindex="0" aria-label="Videos. Swipe vertically or use up and down arrow keys to browse.">
-      <div class="rotor" data-gallery-rotor>
-        {slots.map(({ clip, slot }) => (
-          <article class:list={['video-card', { 'is-active': slot === 0, 'is-copy': slot >= galleryVideos.length }]} style={`--face-angle: ${-slot * 360 / slotCount}deg`} data-gallery-slot={slot} data-clip={slot % galleryVideos.length} aria-roledescription="slide" aria-label={`${slot % galleryVideos.length + 1} of ${galleryVideos.length}: ${clip.title}`}>
-            <button type="button" class="preview-select" data-gallery-preview aria-label={`Show ${clip.title}`} aria-controls="gallery-track" tabindex="-1"></button>
-            <GalleryPlayer id={clip.id} title={clip.title} duration={clip.duration} highlights={clip.highlights} />
-          </article>
-        ))}
-      </div>
-    </div>
-    <div class="gallery-sidebar">
-      <div class="task-notes" aria-live="polite" aria-atomic="true">
-        {galleryVideos.map((clip, index) => (
-          <div class:list={['details', { 'is-active': index === 0 }]} data-gallery-details={index}>
-            <h3 id={`${clip.id}-title`}>
-              {clip.title}
-              <span class="robot-title">{clip.robot} <span aria-hidden="true">·</span> {clip.embodiment}</span>
-            </h3>
-            <p class="metadata">
-              <span class="setup"><span class="sr-only">Model: </span>{clip.model} <span aria-hidden="true">·</span> <span class="sr-only">Effort: </span>{clip.effort}</span>
-              <span class="environment">{clip.environment}</span>
-            </p>
-            {clip.highlights ? (
-              <ul id={`${clip.id}-description`} class="capabilities">
-                {clip.highlights.map((highlight, index) => (
-                  <li data-highlight-note={index} style={`--highlight-color: var(--cue-${index % 3})`}>
-                    {highlight.moments?.length ? (
-                    <button class="highlight-jump" type="button" data-highlight-time={highlight.moments[0].start} aria-label={`Jump to ${highlight.title} at ${Math.round(highlight.moments[0].start)} seconds`}>
-                      <span class="highlight-heading">
-                        <strong>{highlight.title}</strong>
-                        <span class="highlight-time">{`${Math.floor(Math.round(highlight.moments[0].start) / 60)}:${String(Math.round(highlight.moments[0].start) % 60).padStart(2, '0')}`} <span aria-hidden="true">↗</span></span>
-                      </span>
-                      <span class="highlight-text">{highlight.text}</span>
-                    </button>
-                    ) : (
-                      <div class="highlight-note">
-                        <strong>{highlight.title}</strong>
-                        <span class="highlight-text">{highlight.text}</span>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p id={`${clip.id}-description`} class="description">{clip.description}</p>
-            )}
-            <div class="video-footer">
-              <span class="duration" aria-label={`${clip.duration.split(':').reduce((seconds, part) => seconds * 60 + Number(part), 0)} seconds`}>{clip.duration}</span>
-              <a class="full-size" href={media(clip.id, 'mp4')} target="_blank" rel="noopener" aria-label={`Open ${clip.title} at full size in a new tab`}>Full size <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div class="navigation" aria-label="Gallery navigation">
-        <div class="arrow-controls" role="group" aria-label="Browse videos">
-          <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track" title="Previous video">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 10.5 5.5-5.5 5.5 5.5M12 5v14" /></svg>
-          </button>
-          <span class="arrow-divider" aria-hidden="true"></span>
-          <button type="button" class="arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track" title="Next video">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 13.5 5.5 5.5 5.5-5.5M12 19V5" /></svg>
-          </button>
-        </div>
-        <span class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / {String(galleryVideos.length).padStart(2, '0')}</span>
-        <div class="pagination" aria-label="Choose a video">
-          {galleryVideos.map((clip, index) => (
-            <button type="button" class="dot" data-gallery-dot={index} aria-label={`Show ${clip.title}`} aria-current={index === 0 ? 'true' : 'false'} aria-controls="gallery-track"><span></span></button>
+    <div class="video-stage">
+      <div class="videos" id="gallery-track" tabindex="0" aria-label="Videos. Swipe vertically or use up and down arrow keys to browse.">
+        <div class="rotor" data-gallery-rotor>
+          {slots.map(({ clip, slot }) => (
+            <article class:list={['video-card', { 'is-active': slot === 0, 'is-copy': slot >= galleryVideos.length }]} style={`--face-angle: ${-slot * 360 / slotCount}deg`} data-gallery-slot={slot} data-clip={slot % galleryVideos.length} aria-roledescription="slide" aria-label={`${slot % galleryVideos.length + 1} of ${galleryVideos.length}: ${clip.title}`}>
+              <button type="button" class="preview-select" data-gallery-preview aria-label={`Show ${clip.title}`} aria-controls="gallery-track" tabindex="-1"></button>
+              <GalleryPlayer id={clip.id} title={clip.title} duration={clip.duration} highlights={clip.highlights} />
+            </article>
           ))}
         </div>
+      </div>
+      <button type="button" class="floating-arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track" title="Previous video">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 10.5 5.5-5.5 5.5 5.5M12 5v14" /></svg>
+      </button>
+      <button type="button" class="floating-arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track" title="Next video">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 13.5 5.5 5.5 5.5-5.5M12 19V5" /></svg>
+      </button>
+    </div>
+    <div class="gallery-sidebar">
+      <div class="task-notes" role="group" aria-label="Video playlist">
+        {galleryVideos.map((clip, index) => (
+          <details class:list={['details', { 'is-active': index === 0 }]} data-gallery-details={index} open={index === 0}>
+            <summary data-gallery-select={index} aria-controls={`${clip.id}-details`}>
+              <h3 id={`${clip.id}-title`}>
+                {clip.title} <span class="robot-name">· {clip.robot}</span>
+              </h3>
+              <svg class="title-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+            </summary>
+            <div class="details-body" id={`${clip.id}-details`}>
+              <p class="metadata">
+                {clip.embodiment} <span aria-hidden="true">·</span> <span class="model-name">{clip.model}</span> <span aria-hidden="true">·</span> <span class="sr-only">Effort: </span>{clip.effort} <span aria-hidden="true">·</span> {clip.environment}
+              </p>
+              {clip.highlights ? (
+                <ul id={`${clip.id}-description`} class="capabilities">
+                  {clip.highlights.map((highlight, index) => (
+                    <li data-highlight-note={index} style={`--highlight-color: var(--cue-${index % 3})`}>
+                      {highlight.moments?.length ? (
+                      <button class="highlight-jump" type="button" data-highlight-time={highlight.moments[0].start} aria-label={`Jump to ${highlight.title} at ${Math.round(highlight.moments[0].start)} seconds`}>
+                        <span class="highlight-heading">
+                          <strong>{highlight.title}</strong>
+                          <span class="highlight-time">{`${Math.floor(Math.round(highlight.moments[0].start) / 60)}:${String(Math.round(highlight.moments[0].start) % 60).padStart(2, '0')}`} <span aria-hidden="true">↗</span></span>
+                        </span>
+                        <span class="highlight-text">{highlight.text}</span>
+                      </button>
+                      ) : (
+                        <div class="highlight-note">
+                          <strong>{highlight.title}</strong>
+                          <span class="highlight-text">{highlight.text}</span>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p id={`${clip.id}-description`} class="description">{clip.description}</p>
+              )}
+            </div>
+          </details>
+        ))}
       </div>
     </div>
   </div>
@@ -97,12 +85,11 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     const track = gallery.querySelector<HTMLElement>('.videos')!;
     const cards = Array.from(gallery.querySelectorAll<HTMLElement>('.video-card'));
     const players = Array.from(gallery.querySelectorAll<HTMLVideoElement>('[data-gallery-video]'));
-    const dots = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-dot]'));
-    const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]')!;
-    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]')!;
-    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')!;
+    const titles = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-select]'));
+    const previous = gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-prev]');
+    const next = gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-next]');
     const rotor = gallery.querySelector<HTMLElement>('[data-gallery-rotor]')!;
-    const details = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-details]'));
+    const details = Array.from(gallery.querySelectorAll<HTMLDetailsElement>('[data-gallery-details]'));
     const previews = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-preview]'));
     let active = 0;
     const wrap = (index: number, count = cards.length) => ((index % count) + count) % count;
@@ -143,28 +130,46 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         previews[i].tabIndex = neighbor ? 0 : -1;
         if (!centered) players[i].pause();
       });
-      const clip = wrap(active, dots.length);
+      const clip = wrap(active, details.length);
       details.forEach((detail, i) => {
         detail.classList.toggle('is-active', i === clip);
-        detail.inert = i !== clip;
-        detail.setAttribute('aria-hidden', String(i !== clip));
+        const panel = detail.querySelector<HTMLElement>('.details-body')!;
+        if (i !== clip && panel.contains(document.activeElement)) titles[i].focus({ preventScroll: true });
+        detail.open = i === clip;
+        panel.inert = i !== clip;
+        if (i === clip) titles[i].setAttribute('aria-current', 'true');
+        else titles[i].removeAttribute('aria-current');
       });
       showHighlights(Array.from(cards[wrap(active)].querySelectorAll<HTMLElement>('[data-moment].is-current')).map(moment => Number(moment.dataset.highlight)));
-      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === clip)));
-      counter.textContent = `${String(clip + 1).padStart(2, '0')} / ${String(dots.length).padStart(2, '0')}`;
     };
     const goTo = (index: number) => {
       select(index);
       void players[wrap(active)].play().catch(() => {});
     };
     const goToClip = (clip: number) => {
-      let distance = wrap(clip - active, dots.length);
-      if (distance > dots.length / 2) distance -= dots.length;
+      let distance = wrap(clip - active, details.length);
+      if (distance > details.length / 2) distance -= details.length;
       if (distance) goTo(active + distance);
     };
-    previous.addEventListener('click', () => goTo(active - 1));
-    next.addEventListener('click', () => goTo(active + 1));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => goToClip(i)));
+    previous.forEach(button => button.addEventListener('click', () => goTo(active - 1)));
+    next.forEach(button => button.addEventListener('click', () => goTo(active + 1)));
+    titles.forEach((title, i) => {
+      title.addEventListener('click', event => {
+        // The selected video always stays expanded; native details remain usable without JS.
+        event.preventDefault();
+        goToClip(i);
+      });
+      title.addEventListener('keydown', event => {
+        let target = i;
+        if (event.key === 'ArrowDown') target = wrap(i + 1, titles.length);
+        else if (event.key === 'ArrowUp') target = wrap(i - 1, titles.length);
+        else if (event.key === 'Home') target = 0;
+        else if (event.key === 'End') target = titles.length - 1;
+        else return;
+        event.preventDefault();
+        titles[target].focus({ preventScroll: true });
+      });
+    });
     previews.forEach((preview, i) => preview.addEventListener('click', () => {
       // Move focus before this preview becomes the center and its button hides.
       track.focus({ preventScroll: true });
@@ -173,7 +178,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     track.addEventListener('keydown', (event) => {
       if (event.target !== track) return;
       if (event.key === 'Home' || event.key === 'End') {
-        event.preventDefault(); goToClip(event.key === 'Home' ? 0 : dots.length - 1);
+        event.preventDefault(); goToClip(event.key === 'Home' ? 0 : details.length - 1);
       } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
         event.preventDefault(); goTo(active + (event.key === 'ArrowUp' ? -1 : 1));
       }
@@ -212,30 +217,29 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
 </script>
 
 <style>
-  .gallery { --cue-0: #137d78; --cue-1: #a4660c; --cue-2: #2563a6; padding-top: 72px; scroll-margin-top: 20px; }
+  .gallery { --cue-0: #137d78; --cue-1: #a4660c; --cue-2: #2563a6; max-width: 1440px; padding-top: 72px; scroll-margin-top: 20px; }
   :global(:root[data-theme="dark"]) .gallery { --cue-0: #52c8b8; --cue-1: #e7ad55; --cue-2: #68b8f0; }
-  .intro { margin-bottom: 24px; }
+  .intro { max-width: calc(var(--wrap) - 48px); margin: 0 auto 24px; }
   h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 10px; }
   .lead { color: var(--ink-2); margin: 0; }
-  .gallery-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+  .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: center; }
   .gallery-sidebar { min-width: 0; padding-block: 24px; }
-  .navigation { display: none; align-items: center; gap: 8px; margin-top: 28px; }
-  .is-enhanced .navigation { display: flex; }
-  .counter { font: 11px var(--font-mono); color: var(--ink-3); margin-left: 8px; white-space: nowrap; }
-  .arrow-controls { display: flex; flex-shrink: 0; align-items: center; gap: 3px; padding: 3px; border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--rule)); border-radius: 15px; background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 7%, var(--panel)), var(--panel)); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent), 0 3px 10px rgb(0 0 0 / .06); }
-  .arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid transparent; border-radius: 11px; background: transparent; color: var(--ink-2); cursor: pointer; transition: color 180ms, background 180ms, border-color 180ms, box-shadow 180ms, transform 180ms; }
-  .arrow svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 220ms cubic-bezier(.2, .8, .2, 1); }
-  .arrow-divider { width: 1px; height: 18px; background: linear-gradient(transparent, var(--rule-2), transparent); }
-  .arrow:hover, .arrow:focus-visible { color: var(--accent-ink); background: var(--accent-bg); border-color: color-mix(in srgb, var(--accent) 25%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent); }
-  .arrow[data-gallery-prev]:hover svg { transform: translateY(-2px); }
-  .arrow[data-gallery-next]:hover svg { transform: translateY(2px); }
-  .arrow:active { transform: scale(.94); background: color-mix(in srgb, var(--accent) 18%, var(--panel)); box-shadow: none; }
-  .arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .video-stage { --ring-peek: clamp(64px, 8vw, 104px); position: relative; isolation: isolate; min-width: 0; }
+  .floating-arrow { display: none; position: absolute; z-index: 2; right: 24px; width: 52px; height: 52px; padding: 0; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--panel) 8%, transparent); color: var(--accent-ink); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px); box-shadow: 0 2px 8px rgb(0 0 0 / .03); cursor: pointer; touch-action: manipulation; transition: background 180ms, border-color 180ms, box-shadow 180ms, transform 180ms; }
+  .is-enhanced .floating-arrow { display: grid; place-items: center; }
+  .floating-arrow[data-gallery-prev] { top: calc(50% - 58px); }
+  .floating-arrow[data-gallery-next] { top: calc(50% + 6px); }
+  .floating-arrow svg { width: 26px; height: 26px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .floating-arrow:hover, .floating-arrow:focus-visible { background: color-mix(in srgb, var(--accent) 6%, transparent); border-color: color-mix(in srgb, var(--accent) 60%, transparent); box-shadow: 0 3px 10px rgb(0 0 0 / .08); }
+  .floating-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+  .floating-arrow[data-gallery-prev]:hover { transform: translateY(-2px); }
+  .floating-arrow[data-gallery-next]:hover { transform: translateY(2px); }
+  .floating-arrow[data-gallery-prev]:active, .floating-arrow[data-gallery-next]:active { transform: scale(.94); }
   .videos { position: relative; min-width: 0; padding: 12px; }
   .rotor { display: grid; gap: 20px; }
   .video-card { position: relative; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; }
   .is-copy, .preview-select { display: none; }
-  .is-enhanced .videos { overflow: hidden; padding-block: clamp(64px, 8vw, 104px); perspective: 1800px; touch-action: pan-x pinch-zoom; mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent); }
+  .is-enhanced .videos { overflow: hidden; padding-block: var(--ring-peek); perspective: 1800px; touch-action: pan-x pinch-zoom; mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent); }
   .is-enhanced .rotor { grid-template-columns: minmax(0, 1fr); gap: 0; transform-style: preserve-3d; transform: translateZ(calc(-1 * var(--radius))); }
   /* Combine rotations on each face so the player controls remain in the
      browser's hit-test plane after playback ends. */
@@ -243,16 +247,21 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .is-enhanced .preview-select:not([hidden]) { display: block; position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
   .preview-select:focus-visible { outline-offset: -3px; }
   button:focus-visible, .videos:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .task-notes { display: grid; gap: 24px; }
-  .is-enhanced .task-notes { gap: 0; }
-  .is-enhanced .details { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(12px); transition: opacity 300ms ease, transform 440ms ease, visibility 300ms; }
-  .is-enhanced .details.is-active { visibility: visible; opacity: 1; transform: translateY(0); }
-  h3 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.25; letter-spacing: -0.02em; margin: 0; font-weight: 600; }
-  .robot-title { display: block; margin-top: 10px; font: 600 14px/1.5 var(--font-body); letter-spacing: 0; color: var(--ink-2); }
-  .metadata { display: grid; gap: 4px; font: 11px/1.6 var(--font-mono); color: var(--ink-3); margin: 6px 0 24px; }
-  .setup { color: var(--ink-2); }
-  .environment { color: var(--ink-3); }
-  .capabilities { display: grid; gap: 18px; list-style: none; padding: 0; margin: 0 0 24px; }
+  .task-notes { border-top: 1px solid var(--rule); }
+  .details { border-bottom: 1px solid var(--rule); }
+  .details summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 15px 2px; cursor: pointer; list-style: none; }
+  .details summary::-webkit-details-marker { display: none; }
+  .details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  h3 { font-size: 17px; line-height: 1.4; letter-spacing: -0.02em; margin: 0; font-weight: 600; color: var(--ink-2); }
+  .details[open] h3 { font-size: 21px; color: var(--ink); }
+  .details[open] summary { padding-bottom: 6px; }
+  .details summary:hover h3 { color: var(--accent-ink); }
+  .title-chevron { flex-shrink: 0; width: 18px; height: 18px; margin-top: 4px; color: var(--ink-3); stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 180ms, color 180ms; }
+  .details[open] .title-chevron { transform: rotate(180deg); color: var(--accent-ink); }
+  .details-body { padding: 0 2px 18px; }
+  .robot-name, .model-name { white-space: nowrap; }
+  .metadata { font: 400 13px/1.5 var(--font-head); letter-spacing: -0.02em; color: var(--ink-2); margin: 0 0 16px; }
+  .capabilities { display: grid; gap: 18px; list-style: none; padding: 0; margin: 0; }
   .capabilities li { border-left: 2px solid color-mix(in srgb, var(--highlight-color) 35%, var(--rule)); border-radius: 0 4px 4px 0; transition: background 180ms, border-color 180ms; }
   .capabilities li.is-current, .capabilities li:hover, .capabilities li:focus-within { border-color: var(--highlight-color); background: color-mix(in srgb, var(--highlight-color) 8%, transparent); }
   .highlight-jump { font: inherit; display: block; width: 100%; padding: 4px 8px 4px 12px; border: 0; border-radius: inherit; background: transparent; text-align: left; cursor: pointer; }
@@ -263,30 +272,24 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .highlight-jump:hover strong { color: var(--highlight-color); }
   .capabilities strong { display: block; font-size: 14px; line-height: 1.4; font-weight: 700; color: var(--accent-ink); }
   .highlight-text { display: block; font-size: 14px; line-height: 1.55; color: var(--ink-2); margin: 5px 0 0; }
-  .description { font-size: 15px; line-height: 1.75; color: var(--ink-2); margin: 0 0 24px; }
-  .video-footer { border-top: 1px solid var(--rule); padding-top: 12px; display: flex; align-items: baseline; gap: 16px; }
-  .duration { font: 11px var(--font-mono); color: var(--ink-3); }
-  .full-size { font-size: 12px; color: var(--accent-ink); white-space: nowrap; }
-  .full-size:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .pagination { display: flex; gap: 2px; margin-left: auto; }
-  .dot { border: 0; background: transparent; padding: 14px 6px; cursor: pointer; }
-  .dot span { display: block; width: 6px; height: 6px; border-radius: 6px; background: var(--ink-3); opacity: .4; transition: width 300ms ease, opacity 300ms ease, background 300ms ease; }
-  .dot[aria-current='true'] span { width: 24px; opacity: 1; background: var(--accent); }
+  .description { font-size: 15px; line-height: 1.75; color: var(--ink-2); margin: 0; }
+  @media (max-width: 1100px) {
+    .gallery-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 28px; }
+  }
   @media (max-width: 760px) {
     .gallery-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
     .gallery-sidebar { padding: 8px 12px 0; }
     .is-enhanced .videos { perspective: 1200px; }
-    .metadata { margin-bottom: 18px; }
-    .navigation { margin-top: 20px; }
   }
   @media (max-width: 600px) {
     .gallery { padding-top: 48px; }
     .intro { margin-bottom: 12px; }
     .videos { padding-inline: 4px; }
+    .floating-arrow { right: 12px; }
     .gallery-sidebar { padding-inline: 4px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .is-enhanced .details, .arrow, .arrow svg, .dot span, .is-enhanced .video-card { transition: none; }
-    .arrow:active, .arrow:hover svg { transform: none; }
+    .title-chevron, .floating-arrow, .is-enhanced .video-card { transition: none; }
+    .floating-arrow[data-gallery-prev]:hover, .floating-arrow[data-gallery-next]:hover, .floating-arrow[data-gallery-prev]:active, .floating-arrow[data-gallery-next]:active { transform: none; }
   }
 </style>

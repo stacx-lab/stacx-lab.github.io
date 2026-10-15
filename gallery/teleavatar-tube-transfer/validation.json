@@ -1,7 +1,7 @@
 {
   "timeline": "Continuous source from frame zero through independent tube placement; ramp continuity and inverse checked.",
   "evidence": "No selected result or camera observation precedes its recorded result timestamp; all images hash verified.",
-  "status": "All frame labels match recording elapsed/retained total, fit the left column, and distinguish human tether assistance, regrasping, guide-rim recovery, and final verification.",
+  "status": "Status remains Autonomous throughout. Speed annotations are rounded integers with changes shorter than 0.35 s suppressed; actual retiming is unchanged. All labels use 24 px text and a 22 px clock, match recording elapsed/retained total, and fit the left column; action captions remain unchanged.",
   "framing": "Original 16:9 full frame; letterboxed, no crop or interpolation",
   "audio_streams": 0,
   "files": [

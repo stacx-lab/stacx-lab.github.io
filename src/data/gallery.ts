@@ -19,8 +19,9 @@ type GalleryVideo = {
 
 // Highlight times are seconds in the delivered video, from gallery/<id>/<id>.provenance.json.
 // Cube: entries 108–170, 170–178, 378–440. Go2: the source 306–311 broom
-// disturbance through entry 278 is robustness; the remaining footage is
-// locomotion/manipulation. Red cup: entries 260–326, 413–428.
+// disturbance through entry 278 is robustness; entries 366–402 show the return
+// for remaining litter (spatial memory); the rest is locomotion/manipulation.
+// Red cup: entries 260–326, 413–428.
 export const galleryVideos: GalleryVideo[] = [
   {
     id: 'abc-yam-cube',
@@ -57,10 +58,11 @@ export const galleryVideos: GalleryVideo[] = [
   {
     id: 'go2-trash-clean',
     title: 'Collecting litter',
-    description: 'Coordinates locomotion and manipulation, then adapts its grasp after a human moves the litter.',
+    description: 'Coordinates locomotion and manipulation, adapts its grasp after a human moves the litter, and returns to previously observed litter locations.',
     highlights: [
       { moments: [{ start: 12.81, end: 38.03 }], title: 'Robustness & adaptiveness', text: 'After a person sweeps the litter away, detects the missed grasp, observes the changed scene, and repositions to grasp it again.' },
-      { moments: [{ start: 0, end: 12.81 }, { start: 38.03, end: 89 }], title: 'Locomotion & manipulation', text: 'Coordinates the Go2 base and D1 arm to approach, grasp, carry, and deposit litter in the bin.' },
+      { moments: [{ start: 0, end: 12.81 }, { start: 38.03, end: 50.24 }, { start: 59.48, end: 89 }], title: 'Locomotion & manipulation', text: 'Coordinates the Go2 base and D1 arm to approach, grasp, carry, and deposit litter in the bin.' },
+      { moments: [{ start: 50.24, end: 59.48 }], title: 'Spatial memory', text: 'After the first deposit, returns to the previously observed litter area and locates the next piece to collect.' },
     ],
     duration: '01:29',
     robot: 'Go2 + D1',
@@ -98,16 +100,5 @@ export const galleryVideos: GalleryVideo[] = [
     model: 'GPT-6-Astra',
     effort: 'medium',
     environment: 'Real world',
-  },
-  {
-    id: 'yam-hang-mug',
-    title: 'Hanging a mug on the rack',
-    description: 'Follow the agent as it measures the scene, grasps the mug, and verifies the release onto the rack in simulation.',
-    duration: '00:45',
-    robot: 'YAM',
-    embodiment: 'Dual arm',
-    model: 'GPT-6-Astra',
-    effort: 'high',
-    environment: 'Simulator',
   },
 ];

@@ -174,7 +174,7 @@ const media = (extension: string) => url(`/media/gallery/${id}/${id}.${extension
       ['timeupdate', 'durationchange', 'progress', 'play', 'pause', 'ended'].forEach(event => video.addEventListener(event, sync));
       video.addEventListener('waiting', () => { loading = true; sync(); });
       ['playing', 'canplay', 'seeked'].forEach(event => video.addEventListener(event, () => { loading = false; sync(); }));
-      video.addEventListener('error', () => { loading = false; sync(); showMessage('This video could not load. Try the Full size link.'); });
+      video.addEventListener('error', () => { loading = false; sync(); showMessage('This video could not load. Please refresh the page and try again.'); });
       const syncVolume = () => {
         const silent = video.muted || video.volume === 0;
         this.classList.toggle('is-muted', silent);
@@ -196,7 +196,7 @@ const media = (extension: string) => url(`/media/gallery/${id}/${id}.${extension
             const iosVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
             if (iosVideo.webkitEnterFullscreen) iosVideo.webkitEnterFullscreen();
           }
-        } catch { showMessage('Fullscreen is unavailable. You can use the Full size link.'); }
+        } catch { showMessage('Fullscreen is unavailable in this browser.'); }
       };
       fullscreen.addEventListener('click', () => void toggleFullscreen());
       this.addEventListener('fullscreenchange', () => fullscreen.setAttribute('aria-label', document.fullscreenElement === this ? 'Exit fullscreen' : 'Enter fullscreen'));

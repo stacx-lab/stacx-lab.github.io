@@ -144,9 +144,9 @@ for a,b in zip(sorted(points),sorted(points)[1:]):
     mid=(a+b)/2
     assisted=any(x<=mid<=y for x,y in human)
     activity.append(dict(start_source_s=a,end_source_s=b,
-        autonomy='Human assistance' if assisted else 'Autonomous',
+        autonomy='Autonomous',
         text='Operator clears the tether' if assisted else next(text for start,text in reversed(breaks) if start<=mid)))
-edit['status_overlay']=dict(activity=activity,elapsed_time=dict(format='HH:MM:SS / HH:MM:SS',total_source_s=1348,clock='Original DJI recording'))
+edit['status_overlay']=dict(activity=activity,elapsed_time=dict(format='HH:MM:SS / HH:MM:SS',total_source_s=1348,clock='Original DJI recording'),show_playback_speed=True,font_sizes=dict(text=24,clock=22),speed_label_min_duration_s=.35)
 
 def make_plan(factor):
     bounds={0,1348,*holds}
