@@ -9,7 +9,7 @@ sources: ["README.md", "packages/setup/README.md", "packages/setup/src/workflows
 
 Kinex drives real hardware through the same device interface it uses for simulators. You describe your robot and what you want it to do; the agent writes the device profiles and drivers, brings the hardware up and checks it, calibrating only what the task needs. Supported embodiments include arms, lifts, mobile bases, quadrupeds, grippers, suction, dexterous hands, cameras, IMUs and F/T sensors (see [Devices](/docs/devices/)).
 
-Assumes Kinex is installed (see [Install and run](/docs/installation/#install-and-run)).
+Assumes Kinex is installed (see [Install and run](/docs/#install-and-run)).
 
 ## 1. Start Kinex in a fresh workspace
 

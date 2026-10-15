@@ -17,18 +17,25 @@ Kinex is a general harness for arbitrary robots with coding agents, built on the
 
 Kinex lets you work with real hardware the way you already work with a coding agent. Describe the task in plain language and the robot carries it out.
 
-## Core and setup
+## Install and run
 
-Kinex has two reusable robotics packages:
+```sh
+curl -fsSL https://raw.githubusercontent.com/stacx-lab/kinex/main/install.sh | bash
+cd /path/to/robot-workspace
+kinex
+```
 
-| Package | What it provides |
+Then `/login` to connect a model provider and `/model` to choose a model.
+
+| Need | For |
 | --- | --- |
-| **`@kinex/core`** | The robotics runtime: devices and drivers, tools and skills for registering and operating devices, motion control, perception and recording. |
-| **`@kinex/setup`** | Task-scoped onboarding and calibration, including ROS 2 setup, built on top of core. |
+| macOS or Ubuntu | Installing and running Kinex |
+| Node.js ≥ 22.19 + npm | Kinex itself (the installer can install them) |
+| `curl` | The installer |
+| Python ≥ 3.11 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
+| `ffmpeg` | Video encoding during [recording](/docs/recording/) |
 
-Core can operate devices independently of setup. The standalone **`kinex`** app combines both packages with the Pi coding agent, which supplies the conversation loop and terminal interface. See [Architecture](/docs/architecture/#packages) for more detail.
-
-Start with [Installation](/docs/installation/) to install Kinex and connect a model provider.
+**Already use Pi, Claude Code or Codex?** Kinex plugins currently support these three harnesses: see [Plugin systems](/docs/plugins/).
 
 ## Pick a path
 

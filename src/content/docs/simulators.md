@@ -9,7 +9,7 @@ sources: ["README.md", "docs/devices.md", "docs/commands.md", "packages/core/ass
 
 [RoboEnv](https://github.com/stacx-lab/RoboEnv) runs simulator tasks (RoboCasa, LIBERO, RoboTwin, RoboDojo, BEHAVIOR, Isaac Lab, SIMPLE, ABC) and exposes their robots as Kinex devices. Kinex itself ships no simulator engine — just the device contracts RoboEnv implements.
 
-Assumes Kinex is installed (see [Install and run](/docs/installation/#install-and-run)).
+Assumes Kinex is installed (see [Install and run](/docs/#install-and-run)).
 
 ## 1. Launch a simulator
 
