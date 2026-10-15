@@ -23,7 +23,7 @@ const paths = [
           <h1>One Agent for Any Robot.</h1>
           <p class="sub">
             Tell <a class="self-link" href={url('/')} aria-label="Kinex home"><Wordmark /></a> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
-            and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>, including ROS 2 devices.
+            and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>, including <a class="inline-link" href="https://www.ros.org/" rel="noopener">ROS 2 devices</a>.
           </p>
           <p class="platform-note">Install on macOS and Ubuntu.</p>
           <CopyCmd cmd={site.install} />
@@ -122,4 +122,6 @@ const paths = [
 
   .self-link { border-bottom: 1px solid transparent; transition: border-color 0.15s; }
   .self-link:hover { border-bottom-color: var(--accent); }
+  .inline-link { color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 3px; }
+  .inline-link:hover { text-decoration-color: var(--accent); }
 </style>
