@@ -1,0 +1,279 @@
+---
+import { url } from '../lib/url';
+import type { GalleryHighlight } from '../data/gallery';
+interface Props { id: string; title: string; duration: string; highlights?: GalleryHighlight[] }
+const { id, title, duration, highlights = [] } = Astro.props;
+const hasMoments = highlights.some(highlight => highlight.moments?.length);
+const seconds = duration.split(':').reduce((sum, part) => sum * 60 + Number(part), 0);
+const media = (extension: string) => url(`/media/gallery/${id}/${id}.${extension}`);
+---
+
+<gallery-player data-duration={duration}>
+  <div class="screen">
+    <video controls playsinline preload="none" poster={media('poster.jpg')} aria-label={title} aria-describedby={`${id}-description`} data-gallery-video>
+      <source src={media('mp4')} type="video/mp4" />
+      <source src={media('webm')} type="video/webm" />
+      <a href={media('mp4')}>Download {title}</a>
+    </video>
+    <button class="launch" type="button" data-play aria-label={`Play ${title}`}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z" /></svg>
+      <span>Play demo</span>
+    </button>
+  </div>
+  <div class="player-dock" role="group" aria-label={`${title} playback controls`}>
+    <div class="controls-row">
+      <button class="control play-toggle" type="button" data-play aria-label="Play video" title="Play / pause (Space)">
+        <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z" /></svg>
+        <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+      </button>
+      <div class:list={['seek', { 'has-highlights': hasMoments }]} style="--played: 0%; --buffered: 0%">
+        <div class="seek-track" aria-hidden="true"><span class="buffered"></span><span class="played"></span><span class="playhead"></span></div>
+        {hasMoments && (
+          <div class="moment-track" aria-hidden="true">
+            {highlights.flatMap((highlight, index) => (highlight.moments ?? []).map(moment => (
+              <span class="moment" data-moment data-highlight={index} data-start={moment.start} data-end={moment.end} data-title={highlight.title} style={`--moment-start: ${moment.start / seconds * 100}%; --moment-width: ${(moment.end - moment.start) / seconds * 100}%; --moment-color: var(--cue-${index % 3});`}></span>
+            )))}
+          </div>
+        )}
+        <input class="timeline" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek video" aria-valuetext={`0:00 of ${duration}`} />
+        <output class="seek-tooltip" aria-hidden="true">0:00</output>
+      </div>
+      <span class="time"><span data-elapsed>0:00</span><span class="time-divider">/</span><span data-total>{duration}</span></span>
+      <div class="tools">
+        <div class="audio">
+          <button class="control mute-toggle" type="button" aria-label="Mute" title="Mute / unmute (M)" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z" /><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" /><path class="sound-off" d="m16 9 6 6m0-6-6 6" /></svg>
+          </button>
+          <input class="volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Volume" />
+        </div>
+        <button class="control fullscreen-toggle" type="button" aria-label="Enter fullscreen" title="Fullscreen (F)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" /></svg>
+        </button>
+      </div>
+    </div>
+    <p class="player-message" role="status" hidden></p>
+  </div>
+</gallery-player>
+
+<script>
+  class GalleryPlayer extends HTMLElement {
+    connectedCallback() {
+      if (this.hasAttribute('data-ready')) return;
+      const video = this.querySelector<HTMLVideoElement>('video')!;
+      const seek = this.querySelector<HTMLElement>('.seek')!;
+      const timeline = this.querySelector<HTMLInputElement>('.timeline')!;
+      const elapsed = this.querySelector<HTMLElement>('[data-elapsed]')!;
+      const total = this.querySelector<HTMLElement>('[data-total]')!;
+      const moments = Array.from(this.querySelectorAll<HTMLElement>('[data-moment]'));
+      let activeHighlights = '';
+      const matchingMoments = (at: number) => moments.filter(moment => at >= Number(moment.dataset.start) && (at < Number(moment.dataset.end) || at === duration() && at === Number(moment.dataset.end)));
+      const showTooltip = (at: number) => {
+        const titles = matchingMoments(at).map(moment => moment.dataset.title);
+        tooltip.textContent = [time(at), ...titles].join(' · ');
+      };
+      const tooltip = this.querySelector<HTMLOutputElement>('.seek-tooltip')!;
+      const play = this.querySelector<HTMLButtonElement>('.play-toggle')!;
+      const mute = this.querySelector<HTMLButtonElement>('.mute-toggle')!;
+      const volume = this.querySelector<HTMLInputElement>('.volume')!;
+      const fullscreen = this.querySelector<HTMLButtonElement>('.fullscreen-toggle')!;
+      const message = this.querySelector<HTMLElement>('.player-message')!;
+      const fallbackDuration = (this.dataset.duration || '').split(':').reduce((n, part) => n * 60 + Number(part), 0);
+      let scrubbing = false;
+      let resumeAfterSeek = false;
+      let pendingSeek: number | null = null;
+      let loading = false;
+      const duration = () => Number.isFinite(video.duration) ? video.duration : fallbackDuration;
+      const time = (value: number) => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
+      const showMessage = (text: string) => { message.textContent = text; message.hidden = !text; };
+      const start = () => {
+        showMessage('');
+        void video.play().catch(error => {
+          if (error.name !== 'AbortError') showMessage('Playback could not start. Please try again.');
+        });
+      };
+      const toggle = () => video.paused ? start() : video.pause();
+      const sync = () => {
+        const current = scrubbing || pendingSeek !== null ? Number(timeline.value) : video.currentTime;
+        const length = duration();
+        timeline.max = String(length || 1);
+        timeline.value = String(current);
+        timeline.setAttribute('aria-valuetext', `${time(current)} of ${time(length)}`);
+        elapsed.textContent = time(current);
+        total.textContent = time(length);
+        seek.style.setProperty('--played', `${length ? current / length * 100 : 0}%`);
+        let buffered = 0;
+        for (let i = 0; i < video.buffered.length; i++) {
+          if (video.buffered.start(i) <= current) buffered = video.buffered.end(i);
+        }
+        seek.style.setProperty('--buffered', `${length ? buffered / length * 100 : 0}%`);
+        this.classList.toggle('is-playing', !video.paused);
+        this.classList.toggle('has-started', current > 0 || !video.paused);
+        this.classList.toggle('is-loading', loading);
+        play.setAttribute('aria-label', video.paused ? (video.ended ? 'Replay video' : 'Play video') : 'Pause video');
+        const matches = matchingMoments(current);
+        moments.forEach(moment => moment.classList.toggle('is-current', matches.includes(moment)));
+        const indices = matches.map(moment => Number(moment.dataset.highlight));
+        const key = indices.join(',');
+        if (key !== activeHighlights) {
+          activeHighlights = key;
+          this.dispatchEvent(new CustomEvent('highlightchange', { bubbles: true, detail: { indices } }));
+        }
+      };
+      const seekTo = (value: number) => {
+        const target = Math.max(0, Math.min(duration(), value));
+        timeline.value = String(target);
+        if (video.readyState === 0) {
+          pendingSeek = target;
+          loading = true;
+          if (video.networkState !== HTMLMediaElement.NETWORK_LOADING) video.load();
+        } else { video.currentTime = target; }
+        sync();
+      };
+      this.addEventListener('seekhighlight', event => {
+        seekTo((event as CustomEvent<{ time: number }>).detail.time);
+        start();
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-play]').forEach(button => button.addEventListener('click', toggle));
+      video.addEventListener('click', toggle);
+      timeline.addEventListener('pointerdown', event => {
+        timeline.setPointerCapture(event.pointerId);
+        scrubbing = true;
+        resumeAfterSeek = !video.paused;
+        video.pause();
+        seek.classList.add('is-scrubbing');
+      });
+      const finishSeek = () => {
+        if (!scrubbing) return;
+        scrubbing = false;
+        seek.classList.remove('is-scrubbing');
+        if (resumeAfterSeek) start();
+        resumeAfterSeek = false;
+        sync();
+      };
+      timeline.addEventListener('input', () => {
+        seekTo(Number(timeline.value));
+        showTooltip(Number(timeline.value));
+        seek.style.setProperty('--hover', `${Number(timeline.value) / duration() * 100}%`);
+      });
+      timeline.addEventListener('change', finishSeek);
+      timeline.addEventListener('pointerup', finishSeek);
+      timeline.addEventListener('pointercancel', finishSeek);
+      timeline.addEventListener('lostpointercapture', finishSeek);
+      timeline.addEventListener('blur', finishSeek);
+      timeline.addEventListener('pointermove', event => {
+        if (scrubbing) return;
+        const rect = timeline.getBoundingClientRect();
+        const fraction = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+        seek.style.setProperty('--hover', `${fraction * 100}%`);
+        showTooltip(fraction * duration());
+      });
+      video.addEventListener('loadedmetadata', () => {
+        if (pendingSeek !== null) { video.currentTime = Math.min(pendingSeek, duration()); pendingSeek = null; }
+        sync();
+      });
+      ['timeupdate', 'durationchange', 'progress', 'play', 'pause', 'ended'].forEach(event => video.addEventListener(event, sync));
+      video.addEventListener('waiting', () => { loading = true; sync(); });
+      ['playing', 'canplay', 'seeked'].forEach(event => video.addEventListener(event, () => { loading = false; sync(); }));
+      video.addEventListener('error', () => { loading = false; sync(); showMessage('This video could not load. Try the Full size link.'); });
+      const syncVolume = () => {
+        const silent = video.muted || video.volume === 0;
+        this.classList.toggle('is-muted', silent);
+        mute.setAttribute('aria-label', silent ? 'Unmute' : 'Mute');
+        mute.setAttribute('aria-pressed', String(silent));
+        volume.value = String(video.muted ? 0 : video.volume);
+      };
+      mute.addEventListener('click', () => {
+        if (video.volume === 0) { video.volume = 1; video.muted = false; }
+        else video.muted = !video.muted;
+      });
+      volume.addEventListener('input', () => { video.volume = Number(volume.value); video.muted = video.volume === 0; });
+      video.addEventListener('volumechange', syncVolume);
+      const toggleFullscreen = async () => {
+        try {
+          if (document.fullscreenElement) await document.exitFullscreen();
+          else if (this.requestFullscreen && document.fullscreenEnabled) await this.requestFullscreen();
+          else {
+            const iosVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+            if (iosVideo.webkitEnterFullscreen) iosVideo.webkitEnterFullscreen();
+          }
+        } catch { showMessage('Fullscreen is unavailable. You can use the Full size link.'); }
+      };
+      fullscreen.addEventListener('click', () => void toggleFullscreen());
+      this.addEventListener('fullscreenchange', () => fullscreen.setAttribute('aria-label', document.fullscreenElement === this ? 'Exit fullscreen' : 'Enter fullscreen'));
+      this.addEventListener('keydown', event => {
+        if ((event.target as HTMLElement).matches('input, select, button')) return;
+        if (event.key === ' ' || event.key.toLowerCase() === 'k') { event.preventDefault(); toggle(); }
+        else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); seekTo(video.currentTime + (event.key === 'ArrowLeft' ? -5 : 5)); }
+        else if (event.key.toLowerCase() === 'm') mute.click();
+        else if (event.key.toLowerCase() === 'f') void toggleFullscreen();
+      });
+      video.controls = false;
+      this.setAttribute('data-ready', '');
+      syncVolume();
+      sync();
+    }
+  }
+  if (!customElements.get('gallery-player')) customElements.define('gallery-player', GalleryPlayer);
+</script>
+
+<style>
+  gallery-player { display: block; background: var(--panel); color: var(--ink); }
+  .screen { position: relative; }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #f3f0e9; }
+  .launch, .player-dock { display: none; }
+  [data-ready] video { cursor: pointer; }
+  [data-ready] .launch { position: absolute; top: 50%; left: 50%; display: flex; align-items: center; gap: 8px; transform: translate(-50%, -50%); padding: 10px 16px 10px 12px; border: 1px solid rgb(255 255 255 / .3); border-radius: 40px; background: rgb(21 21 28 / .8); backdrop-filter: blur(16px); color: #f5f3ff; font: 12px var(--font-mono); box-shadow: 0 8px 32px #0003; cursor: pointer; transition: background 180ms, opacity 180ms; }
+  .launch svg { width: 22px; height: 22px; fill: #b4afff; }
+  .launch:hover { background: #4b43c0; }
+  [data-ready].has-started .launch { opacity: 0; visibility: hidden; pointer-events: none; }
+  [data-ready] .player-dock { display: block; border-top: 1px solid var(--rule); background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 5%, var(--panel)), var(--panel) 65%); padding: 4px 10px; }
+  .seek { position: relative; min-width: 60px; flex: 1; height: 32px; display: flex; align-items: center; --hover: 0%; }
+  .seek-track { pointer-events: none; position: relative; width: 100%; height: 3px; border-radius: 8px; background: var(--rule); transition: height 150ms; }
+  .has-highlights .seek-track { transform: translateY(-5px); }
+  .buffered, .played { position: absolute; height: 100%; left: 0; border-radius: inherit; }
+  .buffered { width: var(--buffered); background: var(--rule-2); }
+  .played { width: var(--played); background: var(--accent); }
+  .moment-track { position: absolute; top: 23px; left: 0; right: 0; height: 4px; pointer-events: none; }
+  .moment { position: absolute; top: 0; left: var(--moment-start); width: var(--moment-width); height: 100%; background: var(--moment-color); border-inline: 1px solid var(--panel); border-radius: 2px; pointer-events: none; }
+  .moment.is-current { box-shadow: 0 0 0 1px var(--panel), 0 0 0 2px var(--moment-color); }
+  .playhead { z-index: 1; position: absolute; width: 12px; height: 12px; top: 50%; left: var(--played); transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid var(--panel); background: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 1px 4px rgb(0 0 0 / .3); }
+  .timeline { position: absolute; inset: 0 -6px; width: calc(100% + 12px); height: 100%; margin: 0; opacity: 0; cursor: pointer; touch-action: none; }
+  .seek:hover .seek-track, .seek:focus-within .seek-track, .is-scrubbing .seek-track { height: 5px; }
+  .seek:focus-within .playhead { outline: 2px solid var(--ink); outline-offset: 4px; }
+  .seek-tooltip { position: absolute; z-index: 2; bottom: 34px; left: 50%; transform: translateX(-50%); width: max-content; max-width: min(260px, 70vw); text-align: center; padding: 4px 7px; border: 1px solid var(--rule-2); border-radius: 5px; background: var(--panel); color: var(--ink); font: 10px var(--font-mono); box-shadow: 0 3px 12px #0002; opacity: 0; pointer-events: none; }
+  .seek:hover .seek-tooltip, .is-scrubbing .seek-tooltip { opacity: 1; }
+  .controls-row, .tools, .audio { display: flex; align-items: center; }
+  .controls-row { gap: 10px; }
+  .control { display: grid; place-items: center; flex-shrink: 0; width: 28px; height: 28px; padding: 6px; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--ink-2); cursor: pointer; transition: color 150ms, background 150ms; }
+  .control:hover { background: var(--accent-bg); color: var(--accent-ink); }
+  .control svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .play-toggle { background: var(--accent); color: var(--bg); }
+  .play-toggle:hover { background: var(--accent-ink); color: var(--bg); }
+  .play-toggle .play-icon { fill: currentColor; stroke: none; }
+  .play-toggle .pause-icon { stroke-width: 3; }
+  .pause-icon, .sound-off, .is-playing .play-icon, .is-muted .sound-waves { display: none; }
+  .is-playing .pause-icon, .is-muted .sound-off { display: block; }
+  .time { display: flex; gap: 5px; white-space: nowrap; font: 11px var(--font-mono); font-variant-numeric: tabular-nums; }
+  [data-total], .time-divider { color: var(--ink-3); }
+  .tools { gap: 2px; }
+  .volume { width: 0; opacity: 0; transition: width 150ms, opacity 150ms; height: 20px; margin: 0 4px 0 0; accent-color: var(--accent); cursor: pointer; }
+  .audio:hover .volume, .audio:focus-within .volume { width: 40px; opacity: 1; }
+  .is-loading .play-toggle { animation: pulse 1s ease-in-out infinite alternate; }
+  .player-message { margin: 8px 0 0; font-size: 12px; color: var(--ink-2); }
+  button:focus-visible, .volume:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  video:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+  gallery-player:fullscreen { display: flex; flex-direction: column; justify-content: center; background: var(--bg); width: 100%; height: 100%; }
+  :fullscreen .screen { min-height: 0; flex: 1; display: flex; align-items: center; justify-content: center; }
+  :fullscreen video { width: 100%; height: 100%; background: var(--bg); }
+  :fullscreen .player-dock { flex-shrink: 0; padding-inline: max(24px, env(safe-area-inset-left)); padding-bottom: max(6px, env(safe-area-inset-bottom)); }
+  @keyframes pulse { to { opacity: .3; } }
+  @media (max-width: 1000px) and (min-width: 761px), (max-width: 480px) {
+    .volume { display: none; }
+    .time-divider, [data-total] { display: none; }
+    [data-ready] .player-dock { padding-inline: 8px; }
+    .controls-row { gap: 6px; }
+    .tools { gap: 0; }
+    .time { font-size: 10px; gap: 5px; }
+  }
+  @media (pointer: coarse) { .control { width: 36px; height: 36px; } .seek { height: 32px; } }
+</style>

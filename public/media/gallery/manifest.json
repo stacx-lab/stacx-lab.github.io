@@ -69,6 +69,69 @@
       "provenance": "gallery/abc-yam-cube/abc-yam-cube.provenance.json"
     },
     {
+      "id": "teleavatar-tube-transfer",
+      "source": "gallery/.masters/teleavatar-tube-transfer.mp4",
+      "source_sha256": "d77e14aefded19d4d1066e8d2808515ab9dc56a88e61841cd50ad45b0b818b8f",
+      "source_bytes": 13770913,
+      "mp4_sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad",
+      "duration_s": 75,
+      "fps": 30,
+      "frame_count": 2250,
+      "width": 1920,
+      "height": 1080,
+      "playback_rate": 1,
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "environment": "Real world",
+      "robot": "TeleAvatar",
+      "metadata_source": "GPT-6-Astra from entry 1; high effort from entry 3 before the user task. Robot display name confirmed by user.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
+      "files": {
+        "mp4": {
+          "bytes": 4941397,
+          "sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad"
+        },
+        "webm": {
+          "bytes": 5397478,
+          "sha256": "bcda71c0c59b269b5844bf9597f6794a661dc511b5d8cd8283e23c11e01a6865"
+        },
+        "poster.jpg": {
+          "bytes": 423434,
+          "sha256": "f7473efd9eceec2e1714170fef742346941b1933ee8cdf903ceb2134c5999611"
+        }
+      },
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "3",
+          "-b:v",
+          "0",
+          "-crf",
+          "38",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.provenance.json"
+    },
+    {
       "id": "go2-trash-clean",
       "source": "gallery/.masters/go2-trash-clean.mp4",
       "source_sha256": "31961f393eff23d1a955d015be468e86c395be5d029fe001df3f31d072551f0d",

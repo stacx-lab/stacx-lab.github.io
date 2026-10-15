@@ -1,6 +1,7 @@
 ---
 import { galleryVideos } from '../data/gallery';
 import { url } from '../lib/url';
+import GalleryPlayer from './GalleryPlayer.astro';
 const media = (id: string, extension: string) => url(`/media/gallery/${id}/${id}.${extension}`);
 // Repeat clips around a full ring so both neighbors have a real face.
 const slotCount = galleryVideos.length * Math.ceil(8 / galleryVideos.length);
@@ -21,17 +22,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         {slots.map(({ clip, slot }) => (
           <article class:list={['video-card', { 'is-active': slot === 0, 'is-copy': slot >= galleryVideos.length }]} style={`--face-angle: ${-slot * 360 / slotCount}deg`} data-gallery-slot={slot} data-clip={slot % galleryVideos.length} aria-roledescription="slide" aria-label={`${slot % galleryVideos.length + 1} of ${galleryVideos.length}: ${clip.title}`}>
             <button type="button" class="preview-select" data-gallery-preview aria-label={`Show ${clip.title}`} aria-controls="gallery-track" tabindex="-1"></button>
-            <video
-              controls playsinline preload="none"
-              poster={media(clip.id, 'poster.jpg')}
-              aria-labelledby={`${clip.id}-title`}
-              aria-describedby={`${clip.id}-description`}
-              data-gallery-video
-            >
-              <source src={media(clip.id, 'mp4')} type="video/mp4" />
-              <source src={media(clip.id, 'webm')} type="video/webm" />
-              <a href={media(clip.id, 'mp4')}>Download {clip.title}</a>
-            </video>
+            <GalleryPlayer id={clip.id} title={clip.title} duration={clip.duration} highlights={clip.highlights} />
           </article>
         ))}
       </div>
@@ -40,15 +31,33 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
       <div class="task-notes" aria-live="polite" aria-atomic="true">
         {galleryVideos.map((clip, index) => (
           <div class:list={['details', { 'is-active': index === 0 }]} data-gallery-details={index}>
-            <h3 id={`${clip.id}-title`}>{clip.title}</h3>
+            <h3 id={`${clip.id}-title`}>
+              {clip.title}
+              <span class="robot-title">{clip.robot} <span aria-hidden="true">·</span> {clip.embodiment}</span>
+            </h3>
             <p class="metadata">
-              <span class="setup"><span class="sr-only">Robot and model: </span>{clip.robot} × {clip.model} <span aria-hidden="true">·</span> <span class="sr-only">Effort: </span>{clip.effort}</span>
+              <span class="setup"><span class="sr-only">Model: </span>{clip.model} <span aria-hidden="true">·</span> <span class="sr-only">Effort: </span>{clip.effort}</span>
               <span class="environment">{clip.environment}</span>
             </p>
             {clip.highlights ? (
               <ul id={`${clip.id}-description`} class="capabilities">
-                {clip.highlights.map((highlight) => (
-                  <li><strong>{highlight.title}</strong><p>{highlight.text}</p></li>
+                {clip.highlights.map((highlight, index) => (
+                  <li data-highlight-note={index} style={`--highlight-color: var(--cue-${index % 3})`}>
+                    {highlight.moments?.length ? (
+                    <button class="highlight-jump" type="button" data-highlight-time={highlight.moments[0].start} aria-label={`Jump to ${highlight.title} at ${Math.round(highlight.moments[0].start)} seconds`}>
+                      <span class="highlight-heading">
+                        <strong>{highlight.title}</strong>
+                        <span class="highlight-time">{`${Math.floor(Math.round(highlight.moments[0].start) / 60)}:${String(Math.round(highlight.moments[0].start) % 60).padStart(2, '0')}`} <span aria-hidden="true">↗</span></span>
+                      </span>
+                      <span class="highlight-text">{highlight.text}</span>
+                    </button>
+                    ) : (
+                      <div class="highlight-note">
+                        <strong>{highlight.title}</strong>
+                        <span class="highlight-text">{highlight.text}</span>
+                      </div>
+                    )}
+                  </li>
                 ))}
               </ul>
             ) : (
@@ -62,8 +71,15 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         ))}
       </div>
       <div class="navigation" aria-label="Gallery navigation">
-        <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track">↑</button>
-        <button type="button" class="arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track">↓</button>
+        <div class="arrow-controls" role="group" aria-label="Browse videos">
+          <button type="button" class="arrow" data-gallery-prev aria-label="Previous video" aria-controls="gallery-track" title="Previous video">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 10.5 5.5-5.5 5.5 5.5M12 5v14" /></svg>
+          </button>
+          <span class="arrow-divider" aria-hidden="true"></span>
+          <button type="button" class="arrow" data-gallery-next aria-label="Next video" aria-controls="gallery-track" title="Next video">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6.5 13.5 5.5 5.5 5.5-5.5M12 19V5" /></svg>
+          </button>
+        </div>
         <span class="counter" aria-live="polite" aria-atomic="true" data-gallery-counter>01 / {String(galleryVideos.length).padStart(2, '0')}</span>
         <div class="pagination" aria-label="Choose a video">
           {galleryVideos.map((clip, index) => (
@@ -91,6 +107,25 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     let active = 0;
     const wrap = (index: number, count = cards.length) => ((index % count) + count) % count;
     const offset = (index: number) => wrap(index - active + cards.length / 2) - cards.length / 2;
+    const showHighlights = (indices: number[]) => {
+      details.forEach(detail => detail.querySelectorAll<HTMLElement>('[data-highlight-note]').forEach(note => {
+        const current = detail.classList.contains('is-active') && indices.includes(Number(note.dataset.highlightNote));
+        note.classList.toggle('is-current', current);
+        const button = note.querySelector('button');
+        if (!button) return;
+        if (current) button.setAttribute('aria-current', 'true');
+        else button.removeAttribute('aria-current');
+      }));
+    };
+    gallery.addEventListener('highlightchange', event => {
+      if (event.target !== cards[wrap(active)].querySelector('gallery-player')) return;
+      showHighlights((event as CustomEvent<{ indices: number[] }>).detail.indices);
+    });
+    gallery.querySelectorAll<HTMLButtonElement>('[data-highlight-time]').forEach(button => {
+      button.addEventListener('click', () => {
+        cards[wrap(active)].querySelector('gallery-player')!.dispatchEvent(new CustomEvent('seekhighlight', { detail: { time: Number(button.dataset.highlightTime) } }));
+      });
+    });
     const select = (index: number) => {
       active = index;
       rotor.style.setProperty('--rotation', `${active * 360 / cards.length}deg`);
@@ -100,7 +135,9 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         card.classList.toggle('is-active', centered);
         card.inert = !centered && !neighbor;
         card.setAttribute('aria-hidden', String(!centered && !neighbor));
-        players[i].controls = centered;
+        const customPlayer = card.querySelector<HTMLElement>('gallery-player')!;
+        customPlayer.inert = !centered;
+        players[i].controls = centered && !customPlayer.hasAttribute('data-ready');
         players[i].tabIndex = centered ? 0 : -1;
         previews[i].hidden = centered;
         previews[i].tabIndex = neighbor ? 0 : -1;
@@ -112,6 +149,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         detail.inert = i !== clip;
         detail.setAttribute('aria-hidden', String(i !== clip));
       });
+      showHighlights(Array.from(cards[wrap(active)].querySelectorAll<HTMLElement>('[data-moment].is-current')).map(moment => Number(moment.dataset.highlight)));
       dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === clip)));
       counter.textContent = `${String(clip + 1).padStart(2, '0')} / ${String(dots.length).padStart(2, '0')}`;
     };
@@ -142,6 +180,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     });
     let touchStart: { x: number; y: number } | null = null;
     track.addEventListener('touchstart', event => {
+      if ((event.target as HTMLElement).closest('.player-dock, button, input, select')) { touchStart = null; return; }
       const touch = event.touches[0];
       touchStart = { x: touch.clientX, y: touch.clientY };
     }, { passive: true });
@@ -173,7 +212,8 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
 </script>
 
 <style>
-  .gallery { padding-top: 72px; scroll-margin-top: 20px; }
+  .gallery { --cue-0: #137d78; --cue-1: #a4660c; --cue-2: #2563a6; padding-top: 72px; scroll-margin-top: 20px; }
+  :global(:root[data-theme="dark"]) .gallery { --cue-0: #52c8b8; --cue-1: #e7ad55; --cue-2: #68b8f0; }
   .intro { margin-bottom: 24px; }
   h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 10px; }
   .lead { color: var(--ink-2); margin: 0; }
@@ -182,35 +222,47 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .navigation { display: none; align-items: center; gap: 8px; margin-top: 28px; }
   .is-enhanced .navigation { display: flex; }
   .counter { font: 11px var(--font-mono); color: var(--ink-3); margin-left: 8px; white-space: nowrap; }
-  .arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--rule); border-radius: 50%; background: var(--panel); color: var(--ink); font-size: 20px; cursor: pointer; transition: color 160ms, border-color 160ms, transform 160ms; }
-  .arrow:hover { border-color: var(--accent); color: var(--accent-ink); transform: translateY(2px); }
-  .arrow[data-gallery-prev]:hover { transform: translateY(-2px); }
+  .arrow-controls { display: flex; flex-shrink: 0; align-items: center; gap: 3px; padding: 3px; border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--rule)); border-radius: 15px; background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 7%, var(--panel)), var(--panel)); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent), 0 3px 10px rgb(0 0 0 / .06); }
+  .arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid transparent; border-radius: 11px; background: transparent; color: var(--ink-2); cursor: pointer; transition: color 180ms, background 180ms, border-color 180ms, box-shadow 180ms, transform 180ms; }
+  .arrow svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform 220ms cubic-bezier(.2, .8, .2, 1); }
+  .arrow-divider { width: 1px; height: 18px; background: linear-gradient(transparent, var(--rule-2), transparent); }
+  .arrow:hover, .arrow:focus-visible { color: var(--accent-ink); background: var(--accent-bg); border-color: color-mix(in srgb, var(--accent) 25%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 10%, transparent); }
+  .arrow[data-gallery-prev]:hover svg { transform: translateY(-2px); }
+  .arrow[data-gallery-next]:hover svg { transform: translateY(2px); }
+  .arrow:active { transform: scale(.94); background: color-mix(in srgb, var(--accent) 18%, var(--panel)); box-shadow: none; }
+  .arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .videos { position: relative; min-width: 0; padding: 12px; }
   .rotor { display: grid; gap: 20px; }
-  .video-card { position: relative; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; }
+  .video-card { position: relative; min-width: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; }
   .is-copy, .preview-select { display: none; }
   .is-enhanced .videos { overflow: hidden; padding-block: clamp(64px, 8vw, 104px); perspective: 1800px; touch-action: pan-x pinch-zoom; mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent); }
   .is-enhanced .rotor { grid-template-columns: minmax(0, 1fr); gap: 0; transform-style: preserve-3d; transform: translateZ(calc(-1 * var(--radius))); }
-  /* Combine rotations on each face: nested opposing rotations can leave native
-     video controls outside the browser's hit-test plane after playback ends. */
+  /* Combine rotations on each face so the player controls remain in the
+     browser's hit-test plane after playback ends. */
   .is-enhanced .video-card { display: block; grid-area: 1 / 1; width: 100%; backface-visibility: hidden; transform: rotateX(calc(var(--face-angle) + var(--rotation, 0deg))) translateZ(var(--radius)); transition: transform 760ms cubic-bezier(.22, .68, .2, 1); border-color: color-mix(in srgb, var(--accent) 30%, var(--rule)); box-shadow: 0 16px 32px rgb(0 0 0 / .12); }
   .is-enhanced .preview-select:not([hidden]) { display: block; position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
   .preview-select:focus-visible { outline-offset: -3px; }
-  video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #f3f0e9; }
   button:focus-visible, .videos:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  video:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .task-notes { display: grid; gap: 24px; }
   .is-enhanced .task-notes { gap: 0; }
   .is-enhanced .details { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(12px); transition: opacity 300ms ease, transform 440ms ease, visibility 300ms; }
   .is-enhanced .details.is-active { visibility: visible; opacity: 1; transform: translateY(0); }
   h3 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.25; letter-spacing: -0.02em; margin: 0; font-weight: 600; }
-  .metadata { display: grid; gap: 4px; font: 11px/1.6 var(--font-mono); color: var(--ink-3); margin: 12px 0 24px; }
+  .robot-title { display: block; margin-top: 10px; font: 600 14px/1.5 var(--font-body); letter-spacing: 0; color: var(--ink-2); }
+  .metadata { display: grid; gap: 4px; font: 11px/1.6 var(--font-mono); color: var(--ink-3); margin: 6px 0 24px; }
   .setup { color: var(--ink-2); }
   .environment { color: var(--ink-3); }
   .capabilities { display: grid; gap: 18px; list-style: none; padding: 0; margin: 0 0 24px; }
-  .capabilities li { border-left: 2px solid var(--rule); padding-left: 12px; }
+  .capabilities li { border-left: 2px solid color-mix(in srgb, var(--highlight-color) 35%, var(--rule)); border-radius: 0 4px 4px 0; transition: background 180ms, border-color 180ms; }
+  .capabilities li.is-current, .capabilities li:hover, .capabilities li:focus-within { border-color: var(--highlight-color); background: color-mix(in srgb, var(--highlight-color) 8%, transparent); }
+  .highlight-jump { font: inherit; display: block; width: 100%; padding: 4px 8px 4px 12px; border: 0; border-radius: inherit; background: transparent; text-align: left; cursor: pointer; }
+  .highlight-note { padding: 4px 8px 4px 12px; }
+  .highlight-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .highlight-time { flex-shrink: 0; color: var(--highlight-color); font: 10px var(--font-mono); white-space: nowrap; }
+  .highlight-jump:hover .highlight-time { text-decoration: underline; text-underline-offset: 3px; }
+  .highlight-jump:hover strong { color: var(--highlight-color); }
   .capabilities strong { display: block; font-size: 14px; line-height: 1.4; font-weight: 700; color: var(--accent-ink); }
-  .capabilities p { font-size: 14px; line-height: 1.55; color: var(--ink-2); margin: 5px 0 0; }
+  .highlight-text { display: block; font-size: 14px; line-height: 1.55; color: var(--ink-2); margin: 5px 0 0; }
   .description { font-size: 15px; line-height: 1.75; color: var(--ink-2); margin: 0 0 24px; }
   .video-footer { border-top: 1px solid var(--rule); padding-top: 12px; display: flex; align-items: baseline; gap: 16px; }
   .duration { font: 11px var(--font-mono); color: var(--ink-3); }
@@ -234,6 +286,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     .gallery-sidebar { padding-inline: 4px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .is-enhanced .details, .arrow, .dot span, .is-enhanced .video-card { transition: none; }
+    .is-enhanced .details, .arrow, .arrow svg, .dot span, .is-enhanced .video-card { transition: none; }
+    .arrow:active, .arrow:hover svg { transform: none; }
   }
 </style>

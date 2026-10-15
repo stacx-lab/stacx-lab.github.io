@@ -99,8 +99,13 @@ in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
 
 - `abc-yam-cube`: a 75-second real-world dual-YAM cube solve, with a synchronized
   session replay, device map, and camera observations. Source: `../sources/abc-yam-cube`.
+- `teleavatar-tube-transfer`: a 75-second real-world TeleAvatar tube transfer in
+  the second slot. Shows mobile manipulation, wrist-camera clearance checks, and
+  recovery from guide-rim contact. Visible tether assistance is labeled. Recorded
+  model/effort: GPT-6-Astra high. Source: `../demo6-dexteleop`; editable timeline,
+  renderer, and validation are in `gallery/teleavatar-tube-transfer/`.
 - `go2-trash-clean`: an 89-second real-world Go2 + D1 litter collection task,
-  immediately after the cube. Shows coordinated locomotion/manipulation and
+  immediately after TeleAvatar. Shows coordinated locomotion/manipulation and
   grasp recovery after a broom moves the paper. Includes the operator inspection
   pause and ends at the second verified deposit; does not claim all trash was cleared.
   Source: `../sources/go2-trash-clean`. Rebuild with
@@ -109,7 +114,7 @@ in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
   run `python3 gallery/go2-trash-clean/deliver.py` to stage, encode, and validate
   delivery copies, then `python3 gallery/go2-trash-clean/verify.py` for timeline
   and full-decode checks. Requires Pillow and FFmpeg.
-- `real-hang-mug`: a 60-second real-world YAM red-cup session in the third slot.
+- `real-hang-mug`: a 60-second real-world YAM red-cup session in the fourth slot.
   Preserves the failed first hang, recovery and replanning, and the right arm's
   active camera positioning to verify peg support. A fixed crop removes 15% of
   the original left edge and 10% of the right edge, retaining full height and
@@ -129,7 +134,7 @@ use VP9 good, cpu-used 3, CRF 38. Archival MP4s live in this repository's
 The gallery rotates a vertical three-dimensional ring in the left two-thirds of
 the layout, with neighboring videos tilted above and below the active video. A
 fixed edge mask fades the top and bottom; card changes animate rotation. The
-right third shows the selected task title, model, effort, Real world / Simulator,
+right third shows the selected task title with robot and embodiment, model, effort, Real world / Simulator,
 and highlights. On narrow screens, the notes sit below the videos. Up/down
 buttons, slide selectors, neighboring previews, vertical touch swipes, and
 Up/Down/Home/End keys on the track work. Reduced-motion preferences disable
@@ -137,8 +142,22 @@ the transitions. The cube run records medium effort. Both mug
 clips show high effort: the real clip's original footer says high, and all 178
 assistant entries in new7 report high after a pre-task change from medium.
 
-Players load on demand and use native controls at normal playback rate. Starting
+Players load on demand. `GalleryPlayer.astro` adds a theme-aware control dock
+in a compact single row below the footage with a draggable timeline, hover timestamps, buffered progress,
+play/pause, volume, and fullscreen. Playback runs at 1×;
+native controls remain available without JavaScript. With the video focused,
+Space/K toggles playback, Left/Right seeks five seconds, M mutes, and F opens
+fullscreen. Range controls support their native keyboard interactions. Starting
 one pauses the other, and changing the selected card pauses the outgoing player.
+Dragging player controls does not trigger the gallery's vertical swipe gesture.
+Highlight intervals in `src/data/gallery.ts` use delivered-video times from each
+clip's provenance. A separate colored strip below the playback progress line matches the sidebar's timestamp
+buttons; hovering shows the action title, clicking anywhere on a sidebar highlight
+seeks and plays, and playback highlights the matching note. Clip bands use teal,
+amber, and blue; the purple playhead keeps a contrasting border in both themes.
+Cube and red-cup intervals are selected examples of each capability. The litter
+clip marks the disturbance/recovery interval as robustness and the rest as
+locomotion/manipulation.
 `public/media/gallery/manifest.json` records master/delivery hashes, file sizes,
 durations, and metadata evidence. Use `url()` for every media link so they resolve
 beneath `/kinex/` in both local builds and GitHub Pages.

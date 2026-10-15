@@ -1,0 +1,4135 @@
+{
+  "title": "Transferring a test tube",
+  "robot_label": "TeleAvatar",
+  "subtitle": "TeleAvatar × GPT-6-Astra · high · Real world",
+  "environment": "Real world",
+  "recording": "DJI_20261015033335_0035_D.MP4",
+  "from_start": true,
+  "continuous_source": true,
+  "end_source_s": 1348,
+  "clock": {
+    "camera_start_utc": "2026-10-15T07:33:37.000Z",
+    "fps": 29.97002997002997,
+    "frames": 40734,
+    "last_frame_s": 1359.1244333333334,
+    "metadata_creation_utc": "2026-10-15T07:33:35Z",
+    "uncertainty_s": 0.75,
+    "method": "Constant offset from first arm approach and final withdrawal, reviewed in half-second source samples.",
+    "anchors": [
+      {
+        "entry": 67,
+        "event": "First arm approach",
+        "source_window_s": [
+          158,
+          159
+        ],
+        "plan_epoch_s": 1792049775.4997172,
+        "inferred_source_s": 158.499717138
+      },
+      {
+        "entry": 178,
+        "event": "Final open-gripper withdrawal",
+        "source_window_s": [
+          1335.5,
+          1336.5
+        ],
+        "plan_epoch_s": 1792050953.1215663,
+        "inferred_source_s": 1336.12156629
+      }
+    ],
+    "note": "Visual alignment is approximate, not subframe. Plan filenames are creation times, not servo start times; review windows include command/start uncertainty."
+  },
+  "device_map": {
+    "devices": [
+      {
+        "id": "head_stereo"
+      },
+      {
+        "id": "lift_velocity"
+      },
+      {
+        "id": "base"
+      },
+      {
+        "id": "right_arm"
+      },
+      {
+        "id": "left_arm"
+      },
+      {
+        "id": "right_wrist_stereo"
+      },
+      {
+        "id": "left_wrist_stereo"
+      },
+      {
+        "id": "right_gripper"
+      },
+      {
+        "id": "left_gripper"
+      }
+    ],
+    "renderer": "device_map.py",
+    "reference": "src/components/DeviceDiagram.astro, adapted to the user-supplied robot abstraction",
+    "description": "User-requested rounded robot abstraction with wheeled base, torso, articulated arms, camera lenses and grippers. Exact recorded device IDs are highlighted in purple. Illustrative topology, not calibrated geometry or live kinematics.",
+    "geometry_evidence": {
+      "right_arm": {
+        "extrinsics": {
+          "source": "introspected",
+          "calibrated_at": null,
+          "method": "introspection",
+          "mount": {
+            "translation_m": [
+              0.22,
+              0.00019999999999999185,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0.7071067811865475,
+              0.7071067811865476
+            ],
+            "parent": "lift_velocity",
+            "parent_frame": "body_link"
+          }
+        },
+        "frames": {
+          "right_shoulder_base": {
+            "parent_frame": null,
+            "translation_m": [
+              0,
+              0,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "tcp": {
+            "parent_frame": "right_ee",
+            "translation_m": [
+              0.233,
+              0,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "chain": [
+          {
+            "origin": [
+              -0.0002,
+              0.22,
+              0,
+              0,
+              0,
+              -0.707106781186547,
+              0.707106781186548
+            ]
+          },
+          {
+            "origin": [
+              0.1005,
+              0.0002,
+              0,
+              0,
+              -0.707106781186547,
+              0,
+              0.707106781186548
+            ],
+            "joint": 0,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              -0.1195,
+              -0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "joint": 1,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0.134,
+              0,
+              0,
+              -0.5,
+              -0.5,
+              0.5,
+              0.5
+            ],
+            "joint": 2,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              -0.03,
+              -0.14,
+              0.707106781186548,
+              0,
+              -0.707106781186547,
+              0
+            ],
+            "joint": 3,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0.1135,
+              -0.03,
+              0,
+              0,
+              -0.707106781186547,
+              0,
+              0.707106781186548
+            ],
+            "joint": 4,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              -0.162,
+              -0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "joint": 5,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              -0.021,
+              0,
+              -0.707106781186547,
+              0,
+              0,
+              0.707106781186548
+            ],
+            "joint": 6,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              0.021,
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "left_arm": {
+        "extrinsics": {
+          "source": "introspected",
+          "calibrated_at": null,
+          "method": "introspection",
+          "mount": {
+            "translation_m": [
+              -0.22,
+              0.0002000000000000196,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0.7071067811865475,
+              0.7071067811865476
+            ],
+            "parent": "lift_velocity",
+            "parent_frame": "body_link"
+          }
+        },
+        "frames": {
+          "left_shoulder_base": {
+            "parent_frame": null,
+            "translation_m": [
+              0,
+              0,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "tcp": {
+            "parent_frame": "left_ee",
+            "translation_m": [
+              0.233,
+              0,
+              0
+            ],
+            "rotation_xyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "chain": [
+          {
+            "origin": [
+              -0.0002,
+              -0.22,
+              0,
+              0,
+              0,
+              -0.707106781186547,
+              0.707106781186548
+            ]
+          },
+          {
+            "origin": [
+              -0.1005,
+              0.0002,
+              0,
+              0,
+              0.707106781186547,
+              0,
+              0.707106781186548
+            ],
+            "joint": 0,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              -0.1195,
+              0.5,
+              0.5,
+              0.5,
+              -0.5
+            ],
+            "joint": 1,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              -0.134,
+              0,
+              0,
+              0.5,
+              -0.5,
+              -0.5,
+              0.5
+            ],
+            "joint": 2,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0.03,
+              0.14,
+              0,
+              0.707106781186547,
+              0,
+              0.707106781186548
+            ],
+            "joint": 3,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              -0.1135,
+              -0.03,
+              0,
+              -0.5,
+              0.5,
+              -0.5,
+              0.5
+            ],
+            "joint": 4,
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              -0.162,
+              0.707106781186548,
+              0,
+              0.707106781186547,
+              0
+            ],
+            "joint": 5,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0.021,
+              0,
+              0,
+              0.707106781186548,
+              0.707106781186547,
+              0
+            ],
+            "joint": 6,
+            "axis": [
+              0,
+              0,
+              -1
+            ],
+            "anchor": [
+              0,
+              0,
+              0
+            ],
+            "reference": 0
+          },
+          {
+            "origin": [
+              0,
+              0,
+              -0.021,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "left_wrist_stereo": {
+        "extrinsics": {
+          "source": "calibration",
+          "calibrated_at": "2026-10-14T19:13:40.663Z",
+          "method": "manual",
+          "left": {
+            "translation_m": [
+              -0.05166072042130191,
+              0.0007055691659257988,
+              0.004717414779936909
+            ],
+            "rotation_xyzw": [
+              0.0008896163451065208,
+              -0.0011034850255655676,
+              0.0007603175041147273,
+              0.9999987064095882
+            ],
+            "parent": "left_wrist_stereo",
+            "parent_frame": "right"
+          },
+          "right": {
+            "translation_m": [
+              0.10808968049245687,
+              -0.039914998883420136,
+              -0.023090337552148628
+            ],
+            "rotation_xyzw": [
+              -0.12056843734744693,
+              0.6845245306888321,
+              0.11558427907242669,
+              0.7095982618581702
+            ],
+            "parent": "left_arm",
+            "parent_frame": "left_ee"
+          }
+        },
+        "frames": {},
+        "chain": null
+      },
+      "right_wrist_stereo": {
+        "extrinsics": {
+          "source": "calibration",
+          "calibrated_at": "2026-10-14T17:12:28.596Z",
+          "method": "manual",
+          "left": {
+            "translation_m": [
+              0.10297835379339405,
+              0.041334695380902994,
+              -0.021163451590309877
+            ],
+            "rotation_xyzw": [
+              0.6960420270234042,
+              -0.11071687979612606,
+              0.6997861662224191,
+              0.11647570866532476
+            ],
+            "parent": "right_arm",
+            "parent_frame": "right_ee"
+          },
+          "right": {
+            "translation_m": [
+              0.04858389252860044,
+              -0.00047462504782244176,
+              0.0004569577400504874
+            ],
+            "rotation_xyzw": [
+              -0.0018459422633646584,
+              -0.004866365088239223,
+              -0.0010932739811491086,
+              0.9999858577699938
+            ],
+            "parent": "right_wrist_stereo",
+            "parent_frame": "left"
+          }
+        },
+        "frames": {},
+        "chain": null
+      }
+    },
+    "source_entries": [
+      17,
+      18,
+      26,
+      27
+    ]
+  },
+  "events": [
+    {
+      "entry": 5,
+      "kind": "user",
+      "text": "there is a tube on the rack on the desk in front of you. Pick it up and move it to another rack on the right, rotate\nthe base to check if you cannot find it. Prioritize task efficiency and proceed until the task is finshed. Fully\nleverage the omniwheel on the base and do minimum check. Do insertion precisely and slowly, use the other arm to check\nclearance. Do not give up the task."
+    },
+    {
+      "entry": 32,
+      "active_devices": [
+        "head_stereo",
+        "base",
+        "right_arm",
+        "left_arm",
+        "right_gripper"
+      ],
+      "arg_fields": [
+        "calls.0"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 39,
+      "active_devices": [
+        "head_stereo",
+        "right_arm",
+        "left_arm"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "code_field": "python",
+      "code_excerpt": "r=call('triangulate',camera='head_stereo',left_pixel=[493,643],right_pixel=[404,640]);print(r)"
+    },
+    {
+      "entry": 63,
+      "active_devices": [
+        "right_arm"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "result_text": "no motion submitted"
+    },
+    {
+      "entry": 65,
+      "active_devices": [],
+      "arg_fields": [
+        "edits.0.newText"
+      ],
+      "result_text": "Successfully replaced 1 block(s) in .kinex/lib/tube_transfer_checked.py."
+    },
+    {
+      "entry": 67,
+      "active_devices": [
+        "right_arm",
+        "head_stereo",
+        "right_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        2
+      ],
+      "image_label": "right_wrist_stereo · left eye"
+    },
+    {
+      "entry": 72,
+      "active_devices": [
+        "left_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 78,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo",
+        "right_gripper"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        2
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 82,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo",
+        "right_gripper"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "right_wrist_stereo · left eye"
+    },
+    {
+      "entry": 84,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo",
+        "right_gripper"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        2
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 86,
+      "active_devices": [
+        "head_stereo",
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        2
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 88,
+      "active_devices": [
+        "head_stereo",
+        "base"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 92,
+      "active_devices": [
+        "head_stereo",
+        "base"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 96,
+      "active_devices": [
+        "head_stereo",
+        "base"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 100,
+      "active_devices": [
+        "head_stereo",
+        "right_arm",
+        "left_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "result_text": "IK discontinuity"
+    },
+    {
+      "entry": 108,
+      "active_devices": [
+        "head_stereo",
+        "lift_velocity"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 110,
+      "active_devices": [
+        "head_stereo",
+        "right_arm"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 116,
+      "active_devices": [
+        "head_stereo",
+        "base",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "head_stereo · left eye"
+    },
+    {
+      "entry": 118,
+      "active_devices": [
+        "left_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 126,
+      "active_devices": [
+        "head_stereo",
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 128,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description",
+        "args.delta",
+        "args.linear_speed"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 136,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description",
+        "args.delta",
+        "args.linear_speed"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 140,
+      "active_devices": [
+        "right_arm"
+      ],
+      "arg_fields": [
+        "deviceID",
+        "reason"
+      ]
+    },
+    {
+      "entry": 144,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 148,
+      "active_devices": [
+        "right_arm"
+      ],
+      "arg_fields": [
+        "deviceID",
+        "reason"
+      ]
+    },
+    {
+      "entry": 152,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 156,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description",
+        "args.delta",
+        "args.linear_speed"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 162,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description",
+        "args.delta",
+        "args.linear_speed"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 166,
+      "active_devices": [
+        "left_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 170,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 174,
+      "active_devices": [
+        "right_arm",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description",
+        "args.delta",
+        "args.linear_speed"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 176,
+      "active_devices": [
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo",
+        "right_gripper"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        0
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    },
+    {
+      "entry": 178,
+      "active_devices": [
+        "head_stereo",
+        "right_arm",
+        "right_wrist_stereo",
+        "left_wrist_stereo"
+      ],
+      "arg_fields": [
+        "description"
+      ],
+      "images": [
+        4
+      ],
+      "image_label": "left_wrist_stereo · left eye"
+    }
+  ],
+  "status_overlay": {
+    "activity": [
+      {
+        "start_source_s": 0,
+        "end_source_s": 17,
+        "autonomy": "Autonomous",
+        "text": "Reading the task"
+      },
+      {
+        "start_source_s": 17,
+        "end_source_s": 82,
+        "autonomy": "Autonomous",
+        "text": "Inspecting the source rack"
+      },
+      {
+        "start_source_s": 82,
+        "end_source_s": 93,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 93,
+        "end_source_s": 95,
+        "autonomy": "Autonomous",
+        "text": "Inspecting the source rack"
+      },
+      {
+        "start_source_s": 95,
+        "end_source_s": 151,
+        "autonomy": "Autonomous",
+        "text": "Correcting the approach plan"
+      },
+      {
+        "start_source_s": 151,
+        "end_source_s": 157,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 157,
+        "end_source_s": 159,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 159,
+        "end_source_s": 192,
+        "autonomy": "Autonomous",
+        "text": "Approaching the tube"
+      },
+      {
+        "start_source_s": 192,
+        "end_source_s": 235,
+        "autonomy": "Autonomous",
+        "text": "Positioning the observation wrist"
+      },
+      {
+        "start_source_s": 235,
+        "end_source_s": 266,
+        "autonomy": "Autonomous",
+        "text": "Testing the first grasp"
+      },
+      {
+        "start_source_s": 266,
+        "end_source_s": 306,
+        "autonomy": "Autonomous",
+        "text": "Correcting fingertip reach"
+      },
+      {
+        "start_source_s": 306,
+        "end_source_s": 351,
+        "autonomy": "Autonomous",
+        "text": "Regrasping and lifting"
+      },
+      {
+        "start_source_s": 351,
+        "end_source_s": 357,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 357,
+        "end_source_s": 359,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 359,
+        "end_source_s": 397,
+        "autonomy": "Autonomous",
+        "text": "Finding the destination rack"
+      },
+      {
+        "start_source_s": 397,
+        "end_source_s": 406,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 406,
+        "end_source_s": 425,
+        "autonomy": "Autonomous",
+        "text": "Finding the destination rack"
+      },
+      {
+        "start_source_s": 425,
+        "end_source_s": 465,
+        "autonomy": "Autonomous",
+        "text": "Approaching the counter"
+      },
+      {
+        "start_source_s": 465,
+        "end_source_s": 505,
+        "autonomy": "Autonomous",
+        "text": "Planning countertop clearance"
+      },
+      {
+        "start_source_s": 505,
+        "end_source_s": 560,
+        "autonomy": "Autonomous",
+        "text": "Raising the lift and arm"
+      },
+      {
+        "start_source_s": 560,
+        "end_source_s": 570,
+        "autonomy": "Human assistance",
+        "text": "Operator clears the tether"
+      },
+      {
+        "start_source_s": 570,
+        "end_source_s": 580,
+        "autonomy": "Autonomous",
+        "text": "Raising the lift and arm"
+      },
+      {
+        "start_source_s": 580,
+        "end_source_s": 640,
+        "autonomy": "Autonomous",
+        "text": "Positioning the wrist camera"
+      },
+      {
+        "start_source_s": 640,
+        "end_source_s": 705,
+        "autonomy": "Autonomous",
+        "text": "Aligning with the empty hole"
+      },
+      {
+        "start_source_s": 705,
+        "end_source_s": 845,
+        "autonomy": "Autonomous",
+        "text": "Beginning slow insertion"
+      },
+      {
+        "start_source_s": 845,
+        "end_source_s": 900,
+        "autonomy": "Autonomous",
+        "text": "Inspecting the guide rim"
+      },
+      {
+        "start_source_s": 900,
+        "end_source_s": 1025,
+        "autonomy": "Autonomous",
+        "text": "Checking possible resistance"
+      },
+      {
+        "start_source_s": 1025,
+        "end_source_s": 1090,
+        "autonomy": "Autonomous",
+        "text": "Retracting and correcting"
+      },
+      {
+        "start_source_s": 1090,
+        "end_source_s": 1200,
+        "autonomy": "Autonomous",
+        "text": "Inserting through the guides"
+      },
+      {
+        "start_source_s": 1200,
+        "end_source_s": 1314,
+        "autonomy": "Autonomous",
+        "text": "Checking the lower guide"
+      },
+      {
+        "start_source_s": 1314,
+        "end_source_s": 1335,
+        "autonomy": "Autonomous",
+        "text": "Releasing the tube"
+      },
+      {
+        "start_source_s": 1335,
+        "end_source_s": 1346.367,
+        "autonomy": "Autonomous",
+        "text": "Withdrawing the open gripper"
+      },
+      {
+        "start_source_s": 1346.367,
+        "end_source_s": 1348,
+        "autonomy": "Autonomous",
+        "text": "Tube placed and released"
+      }
+    ],
+    "elapsed_time": {
+      "format": "HH:MM:SS / HH:MM:SS",
+      "total_source_s": 1348,
+      "clock": "Original DJI recording"
+    }
+  },
+  "duration": 75,
+  "retime": [
+    {
+      "end_source_s": 0,
+      "hold_s": 2,
+      "reason": "Original task"
+    },
+    {
+      "end_source_s": 0.5,
+      "speed": 0,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 5.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 6,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 6.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 17.835999965667725,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 18.335999965667725,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 18.335999965667725,
+      "hold_s": 0.8,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 18.835999965667725,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 34.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 35,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 35.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 49.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 50,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 50.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 78.25699996948242,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 78.75699996948242,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 79.25699996948242,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 81.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 82,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 82.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 85.32999992370605,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 85.82999992370605,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "align omniwheel base with source tube"
+    },
+    {
+      "end_source_s": 86.32999992370605,
+      "speed": 10.253739726375631,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 92.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 93,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 93.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 134.67400002479553,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 135.17400002479553,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 135.17400002479553,
+      "hold_s": 0.6,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 135.67400002479553,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 150.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 151,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 151.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 156.9943618774414,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 157.4943618774414,
+      "speed": 14.648199609108046,
+      "end_speed": 10.253739726375631,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 157.9943618774414,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 158.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 159,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 159.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 171.1095061302185,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 171.6095061302185,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "approach source tube with level fingers"
+    },
+    {
+      "end_source_s": 171.65633742014566,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 171.70316871007284,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 171.75,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 171.75,
+      "hold_s": 0.4,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 172.25,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 193.06508684158325,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 193.56508684158325,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 194.06508684158325,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "position left wrist for clearance view"
+    },
+    {
+      "end_source_s": 206.279230594635,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "position left wrist for clearance view"
+    },
+    {
+      "end_source_s": 206.779230594635,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "position left wrist for clearance view"
+    },
+    {
+      "end_source_s": 207.279230594635,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 215.89693427085876,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 216.39693427085876,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 216.89693427085876,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "place open fingers around tube body"
+    },
+    {
+      "end_source_s": 227.48608136177063,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "place open fingers around tube body"
+    },
+    {
+      "end_source_s": 227.98608136177063,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "place open fingers around tube body"
+    },
+    {
+      "end_source_s": 228.48608136177063,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 235.64970231056213,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 236.14970231056213,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 236.64970231056213,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "aim left wrist at tube and rack guides"
+    },
+    {
+      "end_source_s": 248.15585947036743,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "aim left wrist at tube and rack guides"
+    },
+    {
+      "end_source_s": 248.65585947036743,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "aim left wrist at tube and rack guides"
+    },
+    {
+      "end_source_s": 249.15585947036743,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 257.0829999446869,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 257.5829999446869,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 258.0829999446869,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 259.74733996391296,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 260.24733996391296,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 260.74733996391296,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 266.48442339897156,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 266.98442339897156,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 267.26661562919617,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 267.5488078594208,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 267.8310000896454,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp tube and perform short test lift"
+    },
+    {
+      "end_source_s": 268.3310000896454,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 275.48799991607666,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 275.98799991607666,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 276.48799991607666,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "Opening the gripper"
+    },
+    {
+      "end_source_s": 278.0150001049042,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "Opening the gripper"
+    },
+    {
+      "end_source_s": 278.5150001049042,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "Opening the gripper"
+    },
+    {
+      "end_source_s": 279.0150001049042,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 285.84778881073,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 286.34778881073,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 286.84778881073,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "correct fingertip reach for grasp"
+    },
+    {
+      "end_source_s": 297.1520788669586,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "correct fingertip reach for grasp"
+    },
+    {
+      "end_source_s": 297.6520788669586,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "correct fingertip reach for grasp"
+    },
+    {
+      "end_source_s": 298.1520788669586,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 306.2520000934601,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 306.7520000934601,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 307.2520000934601,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 308.90272855758667,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 309.40272855758667,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 309.90272855758667,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 316.7420001029968,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.2420001029968,
+      "speed": 5.859279843643218,
+      "end_speed": 0,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.2420001029968,
+      "hold_s": 0.4,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 317.2813350359599,
+      "speed": 0,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.3206699689229,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.360004901886,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.6540033022563,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 317.9480017026265,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 318.2420001029968,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "grasp corrected tube position and verify lift"
+    },
+    {
+      "end_source_s": 318.7420001029968,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 327.4622459411621,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 327.9622459411621,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 328.4622459411621,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "lift tube clear of source rack"
+    },
+    {
+      "end_source_s": 341.5301105976105,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "lift tube clear of source rack"
+    },
+    {
+      "end_source_s": 342.0301105976105,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "lift tube clear of source rack"
+    },
+    {
+      "end_source_s": 342.1284070809682,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 342.226703564326,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 342.3250000476837,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 342.3250000476837,
+      "hold_s": 0.5,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 342.8250000476837,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 350.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 351,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 351.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 357.84500002861023,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 358.34500002861023,
+      "speed": 14.648199609108046,
+      "end_speed": 10.253739726375631,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 358.5633333524068,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 358.78166667620343,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 359,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 359.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 364.41100001335144,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 364.91100001335144,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "turn right to locate destination rack"
+    },
+    {
+      "end_source_s": 365.41100001335144,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 375.0309998989105,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 375.5309998989105,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 376.0309998989105,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "continue rightward visual search"
+    },
+    {
+      "end_source_s": 382.6449999809265,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "continue rightward visual search"
+    },
+    {
+      "end_source_s": 383.1449999809265,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "continue rightward visual search"
+    },
+    {
+      "end_source_s": 383.6449999809265,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 392.7420001029968,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 393.2420001029968,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 393.7420001029968,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 396.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 397,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 397.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 400.26900005340576,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 400.76900005340576,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "scan right-side work surface"
+    },
+    {
+      "end_source_s": 401.26900005340576,
+      "speed": 10.253739726375631,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 405.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 406,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 406.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 425.414999961853,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 425.914999961853,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 426.414999961853,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 434.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 435,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 435.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 438.0390000343323,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 438.5390000343323,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "orient toward destination and advance across clear floor"
+    },
+    {
+      "end_source_s": 439.0390000343323,
+      "speed": 10.253739726375631,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 449.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 450,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 450.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 504.82599997520447,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 505.32599997520447,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 505.82599997520447,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise lift for countertop clearance"
+    },
+    {
+      "end_source_s": 509.87400007247925,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise lift for countertop clearance"
+    },
+    {
+      "end_source_s": 510.37400007247925,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise lift for countertop clearance"
+    },
+    {
+      "end_source_s": 510.87400007247925,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 520.1772487163544,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 520.6772487163544,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 521.1772487163544,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise tube to clear destination rack"
+    },
+    {
+      "end_source_s": 529.842999458313,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise tube to clear destination rack"
+    },
+    {
+      "end_source_s": 530.342999458313,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise tube to clear destination rack"
+    },
+    {
+      "end_source_s": 530.842999458313,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 543.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 544,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 544.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 545.1329998970032,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 545.6329998970032,
+      "speed": 14.648199609108046,
+      "end_speed": 10.253739726375631,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 546.1329998970032,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 557.5,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 558,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 558.185333331426,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 558.3706666628519,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 558.555999994278,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "increase vertical clearance then advance base"
+    },
+    {
+      "end_source_s": 559.0373333295187,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 559.5186666647593,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 560,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 560.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 569.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 570,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Operator clears the tether"
+    },
+    {
+      "end_source_s": 570.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 581.1819999217987,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 581.6819999217987,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 582.1819999217987,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "omniwheel final approach to destination counter"
+    },
+    {
+      "end_source_s": 588.5409998893738,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "omniwheel final approach to destination counter"
+    },
+    {
+      "end_source_s": 589.0409998893738,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "omniwheel final approach to destination counter"
+    },
+    {
+      "end_source_s": 589.5409998893738,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 599.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 600,
+      "speed": 180,
+      "end_speed": 14.648199609108046,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 600.4526795546213,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 600.9053591092428,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 601.3580386638641,
+      "speed": 14.648199609108046,
+      "end_speed": 10.253739726375631,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 601.8580386638641,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise left wrist for unobstructed insertion view"
+    },
+    {
+      "end_source_s": 609.2738587856293,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise left wrist for unobstructed insertion view"
+    },
+    {
+      "end_source_s": 609.7738587856293,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "raise left wrist for unobstructed insertion view"
+    },
+    {
+      "end_source_s": 610.2738587856293,
+      "speed": 10.253739726375631,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 627.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 628,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 628.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 662.1879999637604,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 662.6879999637604,
+      "speed": 180,
+      "end_speed": 10.253739726375631,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 663.1879999637604,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "use omniwheel for final tube-to-rack alignment"
+    },
+    {
+      "end_source_s": 668.7550001144409,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "use omniwheel for final tube-to-rack alignment"
+    },
+    {
+      "end_source_s": 669.2550001144409,
+      "speed": 10.253739726375631,
+      "end_speed": 10.253739726375631,
+      "reason": "use omniwheel for final tube-to-rack alignment"
+    },
+    {
+      "end_source_s": 669.7550001144409,
+      "speed": 10.253739726375631,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 709.3919372558594,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 709.8919372558594,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 710.3919372558594,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "align tube above selected destination hole"
+    },
+    {
+      "end_source_s": 724.2374963760376,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "align tube above selected destination hole"
+    },
+    {
+      "end_source_s": 724.7374963760376,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "align tube above selected destination hole"
+    },
+    {
+      "end_source_s": 725.2374963760376,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 755.8040800094604,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 756.3040800094604,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 756.8040800094604,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "slow descent toward destination guide"
+    },
+    {
+      "end_source_s": 768.182954788208,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "slow descent toward destination guide"
+    },
+    {
+      "end_source_s": 768.682954788208,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "slow descent toward destination guide"
+    },
+    {
+      "end_source_s": 769.182954788208,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 825.8239405155182,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 826.3239405155182,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 826.8239405155182,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine alignment while tube tip remains clear"
+    },
+    {
+      "end_source_s": 836.7347123622894,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine alignment while tube tip remains clear"
+    },
+    {
+      "end_source_s": 837.2347123622894,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine alignment while tube tip remains clear"
+    },
+    {
+      "end_source_s": 837.7347123622894,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 851.5031819343567,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 852.0031819343567,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 852.5031819343567,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "test insertion with four-millimetre descent"
+    },
+    {
+      "end_source_s": 857.2927007675171,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "test insertion with four-millimetre descent"
+    },
+    {
+      "end_source_s": 857.7927007675171,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "test insertion with four-millimetre descent"
+    },
+    {
+      "end_source_s": 858.2927007675171,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 885.2620000839233,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 885.7620000839233,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 885.7620000839233,
+      "hold_s": 0.7,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 886.2620000839233,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 900.100902557373,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 900.600902557373,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 901.100902557373,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "verify stop and retract tube tip off rim"
+    },
+    {
+      "end_source_s": 908.9614427089691,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "verify stop and retract tube tip off rim"
+    },
+    {
+      "end_source_s": 909.4614427089691,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "verify stop and retract tube tip off rim"
+    },
+    {
+      "end_source_s": 909.9614427089691,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 922.9933521747589,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 923.4933521747589,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 923.9933521747589,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "center tube over guide after clear retreat"
+    },
+    {
+      "end_source_s": 932.6629495620728,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "center tube over guide after clear retreat"
+    },
+    {
+      "end_source_s": 933.1629495620728,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "center tube over guide after clear retreat"
+    },
+    {
+      "end_source_s": 933.6629495620728,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 949.3781576156616,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 949.8781576156616,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 950.3781576156616,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower aligned tube to guide entrance"
+    },
+    {
+      "end_source_s": 958.897807598114,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower aligned tube to guide entrance"
+    },
+    {
+      "end_source_s": 959.397807598114,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower aligned tube to guide entrance"
+    },
+    {
+      "end_source_s": 959.897807598114,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 973.420000076294,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 973.920000076294,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 973.920000076294,
+      "hold_s": 0.7,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 974.420000076294,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1024.619918346405,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1025.119918346405,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1025.619918346405,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1033.4967210292816,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1033.9967210292816,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1034.4131112098694,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1034.8295013904572,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1035.245891571045,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1035.745891571045,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1042.8359999656677,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1043.3359999656677,
+      "speed": 6.591689824098621,
+      "end_speed": 0,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1043.3359999656677,
+      "hold_s": 0.5,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 1043.4300345579784,
+      "speed": 0,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1043.5240691502888,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1043.6181037425995,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "retract from rim and correct alignment clear of contact"
+    },
+    {
+      "end_source_s": 1044.1181037425995,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1067.5936877727509,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1068.0936877727509,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1068.5936877727509,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine lateral correction above the opening"
+    },
+    {
+      "end_source_s": 1077.23206448555,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine lateral correction above the opening"
+    },
+    {
+      "end_source_s": 1077.73206448555,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "fine lateral correction above the opening"
+    },
+    {
+      "end_source_s": 1078.23206448555,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1089.800751209259,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1090.300751209259,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1090.800751209259,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "enter guide with a small controlled descent"
+    },
+    {
+      "end_source_s": 1097.4882924556732,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "enter guide with a small controlled descent"
+    },
+    {
+      "end_source_s": 1097.9882924556732,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "enter guide with a small controlled descent"
+    },
+    {
+      "end_source_s": 1098.4882924556732,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1108.1044948101044,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1108.6044948101044,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1109.1044948101044,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "advance tube through entrance by four millimetres"
+    },
+    {
+      "end_source_s": 1113.919914484024,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "advance tube through entrance by four millimetres"
+    },
+    {
+      "end_source_s": 1114.419914484024,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "advance tube through entrance by four millimetres"
+    },
+    {
+      "end_source_s": 1114.919914484024,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1127.0010418891907,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1127.5010418891907,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1128.0010418891907,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue slow insertion through top guide"
+    },
+    {
+      "end_source_s": 1133.838543176651,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue slow insertion through top guide"
+    },
+    {
+      "end_source_s": 1134.338543176651,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue slow insertion through top guide"
+    },
+    {
+      "end_source_s": 1134.838543176651,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1147.5200045108795,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1148.0200045108795,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1148.5200045108795,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower tube within first guide slowly"
+    },
+    {
+      "end_source_s": 1157.0435132980347,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower tube within first guide slowly"
+    },
+    {
+      "end_source_s": 1157.5435132980347,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower tube within first guide slowly"
+    },
+    {
+      "end_source_s": 1158.0435132980347,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1170.077035188675,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1170.577035188675,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1171.077035188675,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1177.5,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1178,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1178.5,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1179.640563249588,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1180.140563249588,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "approach lower guide slowly"
+    },
+    {
+      "end_source_s": 1180.640563249588,
+      "speed": 6.591689824098621,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1200.5479819774628,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1201.0479819774628,
+      "speed": 14.648199609108046,
+      "end_speed": 6.591689824098621,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1201.5479819774628,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower observation wrist to inspect both guide levels"
+    },
+    {
+      "end_source_s": 1208.6599607467651,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower observation wrist to inspect both guide levels"
+    },
+    {
+      "end_source_s": 1209.1599607467651,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "lower observation wrist to inspect both guide levels"
+    },
+    {
+      "end_source_s": 1209.6599607467651,
+      "speed": 6.591689824098621,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1211.5,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1212,
+      "speed": 14.648199609108046,
+      "end_speed": 14.648199609108046,
+      "reason": "Recording camera repositions"
+    },
+    {
+      "end_source_s": 1212.5,
+      "speed": 14.648199609108046,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1221.2456784248352,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1221.7456784248352,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1222.2456784248352,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "pass the lower guide carefully"
+    },
+    {
+      "end_source_s": 1228.9912350177765,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "pass the lower guide carefully"
+    },
+    {
+      "end_source_s": 1229.4912350177765,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "pass the lower guide carefully"
+    },
+    {
+      "end_source_s": 1229.9912350177765,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1242.1795239448547,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1242.6795239448547,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1243.1795239448547,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue supported insertion slowly"
+    },
+    {
+      "end_source_s": 1250.2493546009064,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue supported insertion slowly"
+    },
+    {
+      "end_source_s": 1250.7493546009064,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "continue supported insertion slowly"
+    },
+    {
+      "end_source_s": 1251.2493546009064,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1264.0314717292786,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1264.5314717292786,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1265.0314717292786,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "seat tube farther through lower guide"
+    },
+    {
+      "end_source_s": 1273.5940136909485,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "seat tube farther through lower guide"
+    },
+    {
+      "end_source_s": 1274.0940136909485,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "seat tube farther through lower guide"
+    },
+    {
+      "end_source_s": 1274.5940136909485,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1288.0327153205872,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1288.5327153205872,
+      "speed": 180,
+      "end_speed": 6.591689824098621,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1289.0327153205872,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "final slow seating step"
+    },
+    {
+      "end_source_s": 1297.5680747032166,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "final slow seating step"
+    },
+    {
+      "end_source_s": 1298.0680747032166,
+      "speed": 6.591689824098621,
+      "end_speed": 6.591689824098621,
+      "reason": "final slow seating step"
+    },
+    {
+      "end_source_s": 1298.5680747032166,
+      "speed": 6.591689824098621,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1315.255000114441,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1315.755000114441,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1316.255000114441,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "release tube into destination rack support"
+    },
+    {
+      "end_source_s": 1320.9210000038147,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "release tube into destination rack support"
+    },
+    {
+      "end_source_s": 1321.4210000038147,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "release tube into destination rack support"
+    },
+    {
+      "end_source_s": 1321.9210000038147,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1334.614202260971,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1335.114202260971,
+      "speed": 180,
+      "end_speed": 5.859279843643218,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1335.614202260971,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "withdraw open gripper and verify independent placement"
+    },
+    {
+      "end_source_s": 1345.6239643096924,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "withdraw open gripper and verify independent placement"
+    },
+    {
+      "end_source_s": 1346.1239643096924,
+      "speed": 5.859279843643218,
+      "end_speed": 5.859279843643218,
+      "reason": "withdraw open gripper and verify independent placement"
+    },
+    {
+      "end_source_s": 1346.204976240794,
+      "speed": 5.859279843643218,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1346.2859881718953,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1346.3670001029968,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1346.3670001029968,
+      "hold_s": 0.8,
+      "reason": "Inspect the evidence"
+    },
+    {
+      "end_source_s": 1346.8670001029968,
+      "speed": 0,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1347.5,
+      "speed": 180,
+      "end_speed": 180,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1348,
+      "speed": 180,
+      "end_speed": 0,
+      "reason": "Stationary planning"
+    },
+    {
+      "end_source_s": 1348,
+      "hold_s": 2.499999999999986,
+      "reason": "Final verification"
+    }
+  ],
+  "pacing": {
+    "target_duration_s": 75,
+    "motion_fit_factor": 1.4648199609108046,
+    "stationary_speed": 180,
+    "note": "Every submitted arm plan and base/lift/gripper call protected. Insertion and release slowest. Camera repositioning and human tether handling retained. Smooth speed ramps; no source gaps."
+  },
+  "source_review": {
+    "critical_moments": [
+      {
+        "start_source_s": 0,
+        "end_source_s": 6,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 35,
+        "end_source_s": 50,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 78.75699996948242,
+        "end_source_s": 85.82999992370605,
+        "speed": 10.253739726375631,
+        "entry": 45,
+        "text": "align omniwheel base with source tube",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 82,
+        "end_source_s": 93,
+        "speed": 14.648199609108046,
+        "text": "Operator clears the tether",
+        "kind": "human"
+      },
+      {
+        "start_source_s": 151,
+        "end_source_s": 159,
+        "speed": 14.648199609108046,
+        "text": "Operator clears the tether",
+        "kind": "human"
+      },
+      {
+        "start_source_s": 157.4943618774414,
+        "end_source_s": 171.6095061302185,
+        "speed": 10.253739726375631,
+        "entry": 67,
+        "text": "approach source tube with level fingers",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049775499717138.json",
+        "plan_sha256": "843fb9f7ef238a4660450975bd230548c82d8aad1c76e8b655ce9776cc39d792",
+        "result_sha256": "18202ac3cd2fd27d9826fa9aa3290bd585b5350d6cf1637feb1556a7bdf6cdb2",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 193.56508684158325,
+        "end_source_s": 206.779230594635,
+        "speed": 10.253739726375631,
+        "entry": 72,
+        "text": "position left wrist for clearance view",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049811564504386.json",
+        "plan_sha256": "d818b3c7a82cf02706a9aa505a22ca505ab574cf0ada1c98a03a8ca78b39f3cc",
+        "result_sha256": "379123850129171159db087a50595335d065a41787b5cf50cf0c228eb40c5d0d",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 216.39693427085876,
+        "end_source_s": 227.98608136177063,
+        "speed": 10.253739726375631,
+        "entry": 74,
+        "text": "place open fingers around tube body",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049834396334478.json",
+        "plan_sha256": "28da50a1630e2b1d45e18bcc9eb77b71683ae78b1763a42b603c9df644ed4126",
+        "result_sha256": "d7f2a342af29f376d176c5d6c88d92b4c7c5785c4ea687bf1ddd6c87c6580fe1",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 236.14970231056213,
+        "end_source_s": 248.65585947036743,
+        "speed": 10.253739726375631,
+        "entry": 76,
+        "text": "aim left wrist at tube and rack guides",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049854151019276.json",
+        "plan_sha256": "73733aeec902bf6296abfaee700ecb9c5600f182686f166e3e1cfe6662dce435",
+        "result_sha256": "7918245623052343bf68615e52e4d6ab8e10ff8a47b4ce2485a661a9a9a3b60a",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 257.5829999446869,
+        "end_source_s": 267.8310000896454,
+        "speed": 5.859279843643218,
+        "entry": 78,
+        "text": "grasp tube and perform short test lift",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 260.24733996391296,
+        "end_source_s": 266.98442339897156,
+        "speed": 5.859279843643218,
+        "entry": 78,
+        "text": "grasp tube and perform short test lift",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049878247092545.json",
+        "plan_sha256": "0b3128d716243d25ef03c3dfbc7db060b3515e2eae04858b2f33f9e77b2fd94a",
+        "result_sha256": "629ae99c8da7fe931f1b6832bd9a09a308341ce013640a823b95c628bd30ce58",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 275.98799991607666,
+        "end_source_s": 278.5150001049042,
+        "speed": 5.859279843643218,
+        "entry": 80,
+        "text": "Opening the gripper",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 286.34778881073,
+        "end_source_s": 297.6520788669586,
+        "speed": 10.253739726375631,
+        "entry": 82,
+        "text": "correct fingertip reach for grasp",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049904354459783.json",
+        "plan_sha256": "0012952b4f3d367a1fecf1c47b32c3b5275f04e41a79201e5e5e9c6a254c5aba",
+        "result_sha256": "f0301f25655d2397c1cc433caaf3e22bcf07324b870a6f50d760ddc75aa067b1",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 306.7520000934601,
+        "end_source_s": 318.2420001029968,
+        "speed": 5.859279843643218,
+        "entry": 84,
+        "text": "grasp corrected tube position and verify lift",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 309.40272855758667,
+        "end_source_s": 317.360004901886,
+        "speed": 5.859279843643218,
+        "entry": 84,
+        "text": "grasp corrected tube position and verify lift",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049927402182992.json",
+        "plan_sha256": "055366085c0022424e656a324763f99da3a75dacfe4cecfed935124e167ea075",
+        "result_sha256": "4eb1982405c9f3c81758df20f5754c8dc12f9aa44cba6752fa64fcca28f2dc76",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 327.9622459411621,
+        "end_source_s": 342.0301105976105,
+        "speed": 5.859279843643218,
+        "entry": 86,
+        "text": "lift tube clear of source rack",
+        "kind": "arm",
+        "plan": "tube-transfer-1792049945973360010.json",
+        "plan_sha256": "05a7819cb558ae98a9c2e85f6c41640170ae0012fc56d1ad12400cd0d4fb03e5",
+        "result_sha256": "1500680a75aabaffec87cc2593f36115b84fa19ff265d206600e715bfaa5f83a",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 351,
+        "end_source_s": 359,
+        "speed": 14.648199609108046,
+        "text": "Operator clears the tether",
+        "kind": "human"
+      },
+      {
+        "start_source_s": 358.34500002861023,
+        "end_source_s": 364.91100001335144,
+        "speed": 10.253739726375631,
+        "entry": 88,
+        "text": "turn right to locate destination rack",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 375.5309998989105,
+        "end_source_s": 383.1449999809265,
+        "speed": 10.253739726375631,
+        "entry": 90,
+        "text": "continue rightward visual search",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 393.2420001029968,
+        "end_source_s": 400.76900005340576,
+        "speed": 10.253739726375631,
+        "entry": 92,
+        "text": "scan right-side work surface",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 397,
+        "end_source_s": 406,
+        "speed": 14.648199609108046,
+        "text": "Operator clears the tether",
+        "kind": "human"
+      },
+      {
+        "start_source_s": 425.914999961853,
+        "end_source_s": 438.5390000343323,
+        "speed": 10.253739726375631,
+        "entry": 96,
+        "text": "orient toward destination and advance across clear floor",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 435,
+        "end_source_s": 450,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 505.32599997520447,
+        "end_source_s": 510.37400007247925,
+        "speed": 10.253739726375631,
+        "entry": 108,
+        "text": "raise lift for countertop clearance",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 520.6772487163544,
+        "end_source_s": 530.342999458313,
+        "speed": 10.253739726375631,
+        "entry": 110,
+        "text": "raise tube to clear destination rack",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050138676134226.json",
+        "plan_sha256": "ed2206c8742678e5f557687a2e8ce6e470ca1764da39e0049761bdd4bb79306c",
+        "result_sha256": "3e614448a3ffe0d3a7a7a8472b5183aa683bbcdf23ef12873fe35ed58db3b1fb",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 544,
+        "end_source_s": 558,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 545.6329998970032,
+        "end_source_s": 558.555999994278,
+        "speed": 10.253739726375631,
+        "entry": 112,
+        "text": "increase vertical clearance then advance base",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 560,
+        "end_source_s": 570,
+        "speed": 14.648199609108046,
+        "text": "Operator clears the tether",
+        "kind": "human"
+      },
+      {
+        "start_source_s": 581.6819999217987,
+        "end_source_s": 589.0409998893738,
+        "speed": 10.253739726375631,
+        "entry": 116,
+        "text": "omniwheel final approach to destination counter",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 600,
+        "end_source_s": 628,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 601.3580386638641,
+        "end_source_s": 609.7738587856293,
+        "speed": 10.253739726375631,
+        "entry": 118,
+        "text": "raise left wrist for unobstructed insertion view",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050219358354038.json",
+        "plan_sha256": "f29eebf17a3ed5c59a0fc7351cf1493cc39d2ef0a4d1b650a13a270d9d98077f",
+        "result_sha256": "fd058ab2b110c44d56f9650194d4c65b35d7f6fb594d6788741ca5d3249b56d4",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 662.6879999637604,
+        "end_source_s": 669.2550001144409,
+        "speed": 10.253739726375631,
+        "entry": 122,
+        "text": "use omniwheel for final tube-to-rack alignment",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 709.8919372558594,
+        "end_source_s": 724.7374963760376,
+        "speed": 6.591689824098621,
+        "entry": 126,
+        "text": "align tube above selected destination hole",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050327889858822.json",
+        "plan_sha256": "355668b4ea49e5567548dda9da4a08392f41b427cad51dde04730d269e74dc98",
+        "result_sha256": "6ba31e800c1c88eb2a4db1bc560d4938bbe6f8cf88ee434b178205c2df38c4e2",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 756.3040800094604,
+        "end_source_s": 768.682954788208,
+        "speed": 6.591689824098621,
+        "entry": 128,
+        "text": "slow descent toward destination guide",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050374303801927.json",
+        "plan_sha256": "f77619b373e30983062c223c13db019dfc7e60cc58e3411ec8dd32cfefc054ac",
+        "result_sha256": "5c9b96b6791bf90cfe77ead2397afb0d742367b767e2e1424d63a7b5624eed02",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 826.3239405155182,
+        "end_source_s": 837.2347123622894,
+        "speed": 6.591689824098621,
+        "entry": 134,
+        "text": "fine alignment while tube tip remains clear",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050444323522894.json",
+        "plan_sha256": "92e4f38392c3e603d28bf818afa57bf01a9afa57b10be2c6a34435844c6e9ed1",
+        "result_sha256": "78d7cc34d91167698f9e4ca46870403d8b3221c73e11caf0282a052730148267",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 852.0031819343567,
+        "end_source_s": 857.7927007675171,
+        "speed": 6.591689824098621,
+        "entry": 136,
+        "text": "test insertion with four-millimetre descent",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050470007411129.json",
+        "plan_sha256": "74a94a65b0c6c52a7134ff81f5466ac5862a7abe014e54920c7e8de4f50eb4e6",
+        "result_sha256": "fe79f343fc75a691ea42fbe4a91946ac8300af85898df480bbc0dfd9287fe3b7",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 900.600902557373,
+        "end_source_s": 909.4614427089691,
+        "speed": 6.591689824098621,
+        "entry": 142,
+        "text": "verify stop and retract tube tip off rim",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050518607211749.json",
+        "plan_sha256": "1a87f13662a8eb317049906d872242b4cf82e52c940f0542398834882a8313e5",
+        "result_sha256": "d4cfbcd664fcd0d794ba1c86a3d4513e93df20e5728ac770a69b83c71cdc9f27",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 923.4933521747589,
+        "end_source_s": 933.1629495620728,
+        "speed": 6.591689824098621,
+        "entry": 144,
+        "text": "center tube over guide after clear retreat",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050541496981994.json",
+        "plan_sha256": "6f38b514ff567c7e2aa22619e81c9a976b6b96ab1b43614b5232258e4d1bb27b",
+        "result_sha256": "86c9fddc010dc952f0dd140ca5a17099bd80215ad6c814291e521527770829e6",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 949.8781576156616,
+        "end_source_s": 959.397807598114,
+        "speed": 6.591689824098621,
+        "entry": 146,
+        "text": "lower aligned tube to guide entrance",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050567879924565.json",
+        "plan_sha256": "f08bccf79dc0af7023ff69953e758eb6589f5642d169ad9a544af26533e6c309",
+        "result_sha256": "0e8a6ea6553e6ae1c3f392da757d6fa834ccaf8881519b21d4fda4eaccd9cf1c",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1025.119918346405,
+        "end_source_s": 1035.245891571045,
+        "speed": 6.591689824098621,
+        "entry": 152,
+        "text": "retract from rim and correct alignment clear of contact",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050643120682952.json",
+        "plan_sha256": "01e80c1c7f3f69c35eb6b75bf6ac6bc151fad1b3ad2be034be8b5c08108666d0",
+        "result_sha256": "0e86c4171bf827dee74b29ebd0e878034dde2ace95b4e5d0a77870a11ece0134",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1033.9967210292816,
+        "end_source_s": 1043.6181037425995,
+        "speed": 6.591689824098621,
+        "entry": 152,
+        "text": "retract from rim and correct alignment clear of contact",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050651999055987.json",
+        "plan_sha256": "c322aae8c8ca1df5c3baecfce26b1dde662416b8b6b8b2851e4e1f61c6c47c3c",
+        "result_sha256": "4f8b2f2000e92f2e073dda0fce2911b1c170c63f9ebeaeb656eb670cccd84404",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1068.0936877727509,
+        "end_source_s": 1077.73206448555,
+        "speed": 6.591689824098621,
+        "entry": 154,
+        "text": "fine lateral correction above the opening",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050686097235089.json",
+        "plan_sha256": "1a2d42ea7e4a007306ee0be30d7a695eaeaa46e1a27eed275c015fb593c6d73e",
+        "result_sha256": "7eac00c72836a594d5069ebcb47100a59852d6dac6e0cb9f43ce95b82421d090",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1090.300751209259,
+        "end_source_s": 1097.9882924556732,
+        "speed": 6.591689824098621,
+        "entry": 156,
+        "text": "enter guide with a small controlled descent",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050708301258923.json",
+        "plan_sha256": "908cd55c84c1e83312ce55ea7fbb44885168ecd8c3057099248e9785036ee18f",
+        "result_sha256": "74a8c1aaa048221491b970b447c483ed4828a44f8c0c9c2b221bb4c5580f4ef6",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1108.6044948101044,
+        "end_source_s": 1114.419914484024,
+        "speed": 6.591689824098621,
+        "entry": 158,
+        "text": "advance tube through entrance by four millimetres",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050726611512377.json",
+        "plan_sha256": "2c323ba02163c31d39798a6ea0cb19ff43fe3722e05b436b633a5d64a05294e8",
+        "result_sha256": "fe6deaf22095b8a4738c33e053e3c33981d2c0be9124677233c946a04821e5f4",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1127.5010418891907,
+        "end_source_s": 1134.338543176651,
+        "speed": 6.591689824098621,
+        "entry": 160,
+        "text": "continue slow insertion through top guide",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050745501009367.json",
+        "plan_sha256": "a85ce9490868a4de8fa4c2dfee9ca61cdee8a4cbffb2b25bf3ea9aae2cf043b7",
+        "result_sha256": "a872404158a49a04f1869825b1ed8c850faabc6267cc7efe4fdff8ff7f2addf9",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1148.0200045108795,
+        "end_source_s": 1157.5435132980347,
+        "speed": 6.591689824098621,
+        "entry": 162,
+        "text": "lower tube within first guide slowly",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050766023011194.json",
+        "plan_sha256": "9256ea13254cde9c86e611803e5d582bb00c06363f308b605ab44aa347c25d68",
+        "result_sha256": "a2a7c4ebed28ad6e8419e6952cb9378338860a28a1eaf484c8c8b23ed2958988",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1170.577035188675,
+        "end_source_s": 1180.140563249588,
+        "speed": 6.591689824098621,
+        "entry": 164,
+        "text": "approach lower guide slowly",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050788580927167.json",
+        "plan_sha256": "842b2361b633b72b3fd6d43af7c1c462b4cfe3354da267ecdd95f66840b248fa",
+        "result_sha256": "4bcd92e1552876376ee6f730644cdbf358e14b4ffb7958f836aa7368b4c0f970",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1178,
+        "end_source_s": 1212,
+        "speed": 14.648199609108046,
+        "text": "Recording camera repositions",
+        "kind": "camera"
+      },
+      {
+        "start_source_s": 1201.0479819774628,
+        "end_source_s": 1209.1599607467651,
+        "speed": 6.591689824098621,
+        "entry": 166,
+        "text": "lower observation wrist to inspect both guide levels",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050819051236052.json",
+        "plan_sha256": "66585664e5f18a9e1b2f2dd19443583236a2fccf3bfdd1ae0a1b9d9cff2cbf5e",
+        "result_sha256": "f626729a08a969053be43c2d1a72853eb1ff76fbfce059abe979eadfcf497f57",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1221.7456784248352,
+        "end_source_s": 1229.4912350177765,
+        "speed": 6.591689824098621,
+        "entry": 168,
+        "text": "pass the lower guide carefully",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050839746198677.json",
+        "plan_sha256": "bd4cac0f2f08dcd0a0e988a6b8229a1f0c08a01db24b6cb9306ca338f58903e5",
+        "result_sha256": "24d560279cc32106a30477126d5535203acf8bc10c4589c9b8cf44e3b0da369c",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1242.6795239448547,
+        "end_source_s": 1250.7493546009064,
+        "speed": 6.591689824098621,
+        "entry": 170,
+        "text": "continue supported insertion slowly",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050860681560178.json",
+        "plan_sha256": "b685c97bb5e4ce195d0701eada36a83dc155b1cca19c864e90832fe49d569952",
+        "result_sha256": "cfdd9a1f84f2aa7cab47fcca6a7cdb947369adbf99df3d0b1b89168ed418ac38",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1264.5314717292786,
+        "end_source_s": 1274.0940136909485,
+        "speed": 6.591689824098621,
+        "entry": 172,
+        "text": "seat tube farther through lower guide",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050882530605282.json",
+        "plan_sha256": "5235bd58dc87e3b266ab8dd1f20a901a89374753678fa3370a926b3cdf532edf",
+        "result_sha256": "6c4bd89274f6bed732549fae07e21e3649953ab8c4fb545fc31a5df326174f89",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1288.5327153205872,
+        "end_source_s": 1298.0680747032166,
+        "speed": 6.591689824098621,
+        "entry": 174,
+        "text": "final slow seating step",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050906537033956.json",
+        "plan_sha256": "4cb2991e3f012cac3efdc1230781f7897bfdd58c947c75bc2c92d7c3156cd923",
+        "result_sha256": "a8cf0c8d9089b16ac93b6aa17654287642ee297ecf4d385c7223a9f94536bbba",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      },
+      {
+        "start_source_s": 1315.755000114441,
+        "end_source_s": 1321.4210000038147,
+        "speed": 5.859279843643218,
+        "entry": 176,
+        "text": "release tube into destination rack support",
+        "kind": "other-command",
+        "timing": "Complete call/result interval plus 1 s guards."
+      },
+      {
+        "start_source_s": 1335.114202260971,
+        "end_source_s": 1346.1239643096924,
+        "speed": 5.859279843643218,
+        "entry": 178,
+        "text": "withdraw open gripper and verify independent placement",
+        "kind": "arm",
+        "plan": "tube-transfer-1792050953121566290.json",
+        "plan_sha256": "d8680ef350777bf0017f370823fafb5b1709c46e0710164a192916ccddee0b78",
+        "result_sha256": "8ab6429f107a0f5298e7d225061074e6d09470b07e6727200ccab1de7402045b",
+        "timing": "Epoch feedback minus observed monotonic world time; submission through observed completion, with 1 s guards."
+      }
+    ],
+    "review": "272 source frames at 5 s intervals across the full run; first arm approach and final withdrawal at 0.5 s intervals; initial/final external frames and selected inline observations.",
+    "endpoint": "Tube upright and independently supported after open-gripper withdrawal. Final stereo evidence returned at source 1346.367 s; end at source 1348 s with 2.5 s hold.",
+    "framing": "Original 16:9 full frame, letterboxed into the recording column. All camera movement is from original footage.",
+    "human_assistance": [
+      [
+        82,
+        93
+      ],
+      [
+        151,
+        159
+      ],
+      [
+        351,
+        359
+      ],
+      [
+        397,
+        406
+      ],
+      [
+        560,
+        570
+      ]
+    ],
+    "model_evidence": "GPT-6-Astra from entry 1, high effort from entry 3 before the task; all assistant metadata checked."
+  },
+  "poster_time": 2.8174113464983033,
+  "review_times": [
+    0,
+    2.8174113464983033,
+    5.584239753917793,
+    5.996958331373239,
+    8.390536791169719,
+    10.190422803512465,
+    15.146676279190412,
+    18.78014294643219,
+    20.881457007134433,
+    23.4315626704915,
+    25.41040536513859,
+    29.465089934922208,
+    37.370024763749754,
+    43.22989613854855,
+    49.54402062416115,
+    56.02462480805338,
+    62.66839539549702,
+    69.48032047100898,
+    72.49999999504419,
+    74.9
+  ]
+}

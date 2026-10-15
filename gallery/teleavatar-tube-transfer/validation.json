@@ -1,0 +1,28 @@
+{
+  "timeline": "Continuous source from frame zero through independent tube placement; ramp continuity and inverse checked.",
+  "evidence": "No selected result or camera observation precedes its recorded result timestamp; all images hash verified.",
+  "status": "All frame labels match recording elapsed/retained total, fit the left column, and distinguish human tether assistance, regrasping, guide-rim recovery, and final verification.",
+  "framing": "Original 16:9 full frame; letterboxed, no crop or interpolation",
+  "audio_streams": 0,
+  "files": [
+    {
+      "file": "gallery/.masters/teleavatar-tube-transfer.mp4",
+      "frames": 2250,
+      "duration_s": 75,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.mp4",
+      "frames": 2250,
+      "duration_s": 75,
+      "first_pts_s": 0
+    },
+    {
+      "file": "public/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.webm",
+      "frames": 2250,
+      "duration_s": 75,
+      "first_pts_s": 0
+    }
+  ],
+  "webm_timestamp_tolerance_s": 0.0011
+}
