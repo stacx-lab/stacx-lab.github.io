@@ -16,9 +16,9 @@ import { benchmark, benchmarkScopes, astraComparison } from '../data/benchmark';
     For GPT-6 Astra (high effort) and Claude Opus 5.5, we compare Codex / Claude Code with the
     <strong>benchmark-native action API</strong>, with the <strong>device abstraction</strong>,
     and <strong>Kinex</strong>. On Astra, Kinex raises success from {astraComparison.baselineSuccessRate.toFixed(1)}%
-    to <strong>{astraComparison.kinexSuccessRate.toFixed(1)}%</strong> while using
-    <strong>{astraComparison.tokenReductionPercent.toFixed(1)}% fewer total tokens</strong>
-    than Codex + Bare action API (including fresh input, cache reads, and output).
+    to <strong>{astraComparison.kinexSuccessRate.toFixed(1)}%</strong> at
+    <strong>{astraComparison.costReductionPercent.toFixed(1)}% lower cost</strong>
+    than Codex + Bare action API.
     See the <a href={benchmark.source}>Hugging Face release</a>
     for evaluation details, demos, and agent traces.
   </p>
