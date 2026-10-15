@@ -39,6 +39,7 @@ jobs:
           mkdir -p _site/kinex
           cp -R dist/. _site/kinex/
           cp dist/404.html _site/404.html
+          cp -R blog _site/blog
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
