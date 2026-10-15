@@ -7,7 +7,6 @@ export const site = {
   description:
     'Kinex is a general harness for arbitrary robots with coding agents, built on the Pi coding agent. Devices, tools and skills give agents access to robots, simulators and models.',
   repo: 'https://github.com/stacx-lab/kinex',
-  editBase: 'https://github.com/stacx-lab/stacx-lab.github.io/edit/main/src/content/',
   install: 'curl -fsSL https://raw.githubusercontent.com/stacx-lab/kinex/main/install.sh | bash',
 };
 

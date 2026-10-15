@@ -18,6 +18,25 @@
 .prose a { color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 3px; }
 .prose a:hover { text-decoration-color: var(--accent); }
 .prose strong { font-weight: 600; }
+.prose .doc-paths { display: grid; gap: 12px; margin-bottom: 1.2em; }
+.prose .doc-path {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto 136px; gap: 16px; align-items: center;
+  padding: 18px; border: 1px solid var(--rule-2); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink); text-decoration: none;
+}
+.prose .doc-path:hover, .prose .doc-path:focus-visible { border-color: var(--accent); background: var(--accent-bg); }
+.prose .doc-path-copy { display: grid; gap: 6px; }
+.prose .doc-path-copy > span { color: var(--ink-2); font-size: var(--fs-1); }
+.prose .doc-path-arrow { color: var(--accent-ink); font-size: 24px; }
+.prose .doc-path-destination {
+  padding: 8px 10px; border: 1px solid var(--accent); border-radius: var(--radius);
+  color: var(--accent-ink); font-size: var(--fs-1); font-weight: 600; text-align: center;
+}
+@media (max-width: 600px) {
+  .prose .doc-path { grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 16px; }
+  .prose .doc-path-copy { grid-column: 1 / -1; }
+  .prose .doc-path-destination { justify-self: start; }
+}
 .prose ul, .prose ol { padding-left: 1.4em; }
 .prose ul { list-style: none; }
 .prose ul > li { position: relative; }

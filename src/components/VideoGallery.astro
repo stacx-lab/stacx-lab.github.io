@@ -102,6 +102,9 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     const details = Array.from(gallery.querySelectorAll<HTMLDetailsElement>('[data-gallery-details]'));
     const previews = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-preview]'));
     const picker = gallery.querySelector<HTMLSelectElement>('[data-gallery-picker]')!;
+    const sidebar = gallery.querySelector<HTMLElement>('.gallery-sidebar')!;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let notesAnimation: Animation | undefined;
     let active = 0;
     const wrap = (index: number, count = cards.length) => ((index % count) + count) % count;
     const offset = (index: number) => wrap(index - active + cards.length / 2) - cards.length / 2;
@@ -125,6 +128,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
       });
     });
     const select = (index: number) => {
+      const direction = Math.sign(index - active);
       active = index;
       rotor.style.setProperty('--rotation', `${active * 360 / cards.length}deg`);
       cards.forEach((card, i) => {
@@ -154,6 +158,13 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         else titles[i].removeAttribute('aria-current');
       });
       showHighlights(Array.from(cards[wrap(active)].querySelectorAll<HTMLElement>('[data-moment].is-current')).map(moment => Number(moment.dataset.highlight)));
+      notesAnimation?.cancel();
+      if (direction && !reducedMotion.matches) {
+        notesAnimation = sidebar.animate([
+          { opacity: 0, transform: `translateY(${direction * 20}px)` },
+          { opacity: 1, transform: 'translateY(0)' },
+        ], { duration: 600, easing: 'cubic-bezier(.22, .68, .2, 1)' });
+      }
     };
     const goTo = (index: number) => {
       select(index);
@@ -232,12 +243,12 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
 </script>
 
 <style>
-  .gallery { --cue-0: #137d78; --cue-1: #a4660c; --cue-2: #2563a6; max-width: 1440px; padding-top: 72px; scroll-margin-top: 20px; }
+  .gallery { --cue-0: #137d78; --cue-1: #a4660c; --cue-2: #2563a6; padding-top: 72px; scroll-margin-top: 20px; }
   :global(:root[data-theme="dark"]) .gallery { --cue-0: #52c8b8; --cue-1: #e7ad55; --cue-2: #68b8f0; }
-  .intro { max-width: calc(var(--wrap) - 48px); margin: 0 auto 24px; }
+  .intro { margin-bottom: 24px; }
   h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 10px; }
   .lead { color: var(--ink-2); margin: 0; }
-  .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: start; }
+  .gallery-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); gap: 32px; align-items: center; }
   .gallery-sidebar { min-width: 0; padding-block: 24px; }
   .mobile-picker { display: none; }
   .counter { display: none; margin: 16px 2px 0; font: 16px/1.5 var(--font-mono); color: var(--ink-3); white-space: nowrap; }

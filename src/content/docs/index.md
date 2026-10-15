@@ -39,12 +39,32 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 
 ## Pick a path
 
-- **Already using ROS 2?**\
-  Connect your ROS 2 hardware with `/onboarding` or `/register`. See [ROS 2 onboarding](/docs/ros2/) for requirements and the setup workflow.
-- **Playing with a simulator?**\
-  Launch a task in [RoboEnv](https://github.com/stacx-lab/RoboEnv) (RoboCasa, LIBERO, RoboTwin, Isaac Lab and more) and drive its robot like a real one. See [Simulators](/docs/simulators/).
-- **Working with real robots?**\
-  Describe your hardware and task with `/onboarding`. See [Real robots](/docs/real-robots/), then [Onboarding & calibration](/docs/onboarding/) for the details.
+<nav class="doc-paths" aria-label="Choose your getting started guide">
+  <a class="doc-path" href="/docs/simulators/">
+    <span class="doc-path-copy">
+      <strong>Playing with a simulator?</strong>
+      <span>Launch a task in RoboEnv, such as loading condiments into a fridge in RoboCasa, and drive its robot with Kinex.</span>
+    </span>
+    <span class="doc-path-arrow" aria-hidden="true">→</span>
+    <span class="doc-path-destination">Simulators</span>
+  </a>
+  <a class="doc-path" href="/docs/real-robots/">
+    <span class="doc-path-copy">
+      <strong>Working with real robots?</strong>
+      <span>Describe your hardware and task with <code>/onboarding</code> to connect and calibrate your robot.</span>
+    </span>
+    <span class="doc-path-arrow" aria-hidden="true">→</span>
+    <span class="doc-path-destination">Real robots</span>
+  </a>
+  <a class="doc-path" href="/docs/ros2/">
+    <span class="doc-path-copy">
+      <strong>Already using ROS 2?</strong>
+      <span>Connect your existing ROS 2 hardware with <code>/onboarding</code> or <code>/register</code>.</span>
+    </span>
+    <span class="doc-path-arrow" aria-hidden="true">→</span>
+    <span class="doc-path-destination">ROS 2 onboarding</span>
+  </a>
+</nav>
 
 ## Understand the design of Kinex
 

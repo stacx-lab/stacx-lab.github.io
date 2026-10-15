@@ -6,7 +6,6 @@ import '../styles/prose.css';
 import type { MarkdownHeading } from 'astro';
 import type { Doc as DocEntry } from '../lib/content';
 import { docHref } from '../lib/content';
-import { site } from '../config';
 
 interface Props {
   docs: DocEntry[];
@@ -39,7 +38,6 @@ const next = i >= 0 && i < docs.length - 1 ? docs[i + 1] : undefined;
 
       {entry && (
         <footer class="df" data-pagefind-ignore>
-          <p class="edit"><a href={`${site.editBase}docs/${entry.id}.${entry.filePath?.endsWith('.mdx') ? 'mdx' : 'md'}`} rel="noopener">Edit this page ↗</a></p>
           <nav class="pn" aria-label="pagination">
             {prev ? <a class="p" href={docHref(prev)}><span class="dim">← Previous</span>{prev.data.label ?? prev.data.title}</a> : <span />}
             {next && <a class="n" href={docHref(next)}><span class="dim">Next →</span>{next.data.label ?? next.data.title}</a>}
@@ -107,9 +105,6 @@ const next = i >= 0 && i < docs.length - 1 ? docs[i + 1] : undefined;
   .lede { color: var(--ink-2); margin: 0; font-size: 15px; }
 
   .df { margin-top: 48px; border-top: 1px solid var(--rule); padding-top: 18px; font-size: 12px; }
-  .edit a { color: var(--ink-2); }
-  .edit a:hover { color: var(--accent); }
-  .edit { margin: 0 0 24px; }
   .pn { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .pn a { display: grid; gap: 4px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: var(--radius); font-size: 13.5px; }
   .pn a:hover { border-color: var(--accent); }
