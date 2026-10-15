@@ -22,7 +22,7 @@ const ticks = success ? ['0', '25', '50', '75', '100%'] : ['$0', '$1.50', '$3', 
       <span>Results forthcoming</span>
     </div>
   ) : benchmarkScopes.map((scope) => (
-    <div class="plot" data-scope-panel={scope.id} hidden={scope.id !== 'average'}>
+    <div class="plot" data-benchmark-plot data-scope-panel={scope.id} hidden={scope.id !== 'average'}>
       <div class="grid-lines" aria-hidden="true"></div>
       <div class="y-axis" aria-hidden="true">
         {ticks.map((tick, index) => <span style={`bottom: ${index * 25}%`}>{tick}</span>)}
@@ -44,6 +44,41 @@ const ticks = success ? ['0', '25', '50', '75', '100%'] : ['$0', '$1.50', '$3', 
     </div>
   ))}
 </figure>
+
+<script>
+  const plots = document.querySelectorAll<HTMLElement>('[data-benchmark-plot]');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || entry.intersectionRatio < 0.35) return;
+      observer.unobserve(entry.target);
+      if (motion.matches) return;
+
+      entry.target.querySelectorAll<HTMLElement>('.bar').forEach((bar, index) => {
+        bar.animate(
+          [{ height: '0%' }, { height: bar.style.height }],
+          {
+            duration: 1000,
+            delay: index * 100,
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            fill: 'backwards',
+          },
+        );
+      });
+    });
+  }, { threshold: 0.35 });
+
+  // Observe each plot separately so stacked charts animate when they come into view.
+  plots.forEach((plot) => observer.observe(plot));
+  motion.addEventListener('change', () => {
+    if (!motion.matches) return;
+    plots.forEach((plot) => {
+      plot.querySelectorAll('.bar').forEach((bar) => {
+        bar.getAnimations().forEach((animation) => animation.cancel());
+      });
+    });
+  });
+</script>
 
 <style>
   .chart { margin: 0; padding: 20px; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
