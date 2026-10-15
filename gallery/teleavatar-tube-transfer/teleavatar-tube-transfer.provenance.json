@@ -9,7 +9,7 @@
   "source_session_sha256": "203ef938e6c2aa36e824a5b8ce32262c8ff42f64b0b8af9031fc8d67f364efcc",
   "recording": "DJI_20261015033335_0035_D.MP4",
   "recording_sha256": "541f5c11cbdb78c1d2f390fb6e9a05f6aaf4bf6c6df72a9f9f4e44f9f3d0ab10",
-  "edit_sha256": "0cf1a361aea2289b0c591b3f96123164ed34b7626be2060bdf6d596a036aafda",
+  "edit_sha256": "01bffa8accf8aca599ee591dc44c2cd5713553cfc9e2294295b5c561deac0a9b",
   "device_map_renderer_sha256": "c83212cd680e0f6191d56155c6698976652fd2a2cb010277975ac47693b4f14c",
   "clock": {
     "camera_start_utc": "2026-10-15T07:33:37.000Z",
@@ -646,6 +646,12 @@
     "note": "Every submitted arm plan and base/lift/gripper call protected. Insertion and release slowest. Camera repositioning and human tether handling retained. Smooth speed ramps; no source gaps."
   },
   "status_overlay": {
+    "show_playback_speed": true,
+    "font_sizes": {
+      "text": 24,
+      "clock": 22
+    },
+    "speed_label_min_duration_s": 0.35,
     "activity": [
       {
         "start_source_s": 0,
@@ -662,7 +668,7 @@
       {
         "start_source_s": 82,
         "end_source_s": 93,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -680,13 +686,13 @@
       {
         "start_source_s": 151,
         "end_source_s": 157,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
         "start_source_s": 157,
         "end_source_s": 159,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -722,13 +728,13 @@
       {
         "start_source_s": 351,
         "end_source_s": 357,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
         "start_source_s": 357,
         "end_source_s": 359,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -740,7 +746,7 @@
       {
         "start_source_s": 397,
         "end_source_s": 406,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -770,7 +776,7 @@
       {
         "start_source_s": 560,
         "end_source_s": 570,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -8815,17 +8821,18 @@
     "Character streaming reconstructed. Results and images first appear at their recorded completion time.",
     "Continuous source from frame zero. Original aspect ratio and full frame preserved; no synthesized frames.",
     "Original source and its audio unchanged; delivery is silent.",
+    "Speed labels are rounded integers; changes shorter than 0.35 output seconds retain the previous stable label. Actual retiming is unchanged.",
     "Model from entry 1; high effort set in entry 3 before the task. Robot display name confirmed by user.",
-    "Visible human tether handling labeled. Camera operator movement is retained.",
+    "Status label is fixed to Autonomous by user request. Visible tether handling and camera operator movement remain in footage and source-review records.",
     "Final state verified visually; no calibrated contact-force or seating-depth claim."
   ],
   "source_frame_mapping_sha256": "968415c833d6e6ec1802bceb69149cc05045269ba43f30fc205a54847d547d43",
   "delivery": {
     "id": "teleavatar-tube-transfer",
     "source": "gallery/.masters/teleavatar-tube-transfer.mp4",
-    "source_sha256": "d77e14aefded19d4d1066e8d2808515ab9dc56a88e61841cd50ad45b0b818b8f",
-    "source_bytes": 13770913,
-    "mp4_sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad",
+    "source_sha256": "9ed93bfac3579dcc020d8925fa0f9dbf2049959fd4a733846eabb0508fe086eb",
+    "source_bytes": 13814431,
+    "mp4_sha256": "9c48e2bcb835544be4157622a8cde917a04ff2e7c75e6ee685847b5e39a1f08c",
     "duration_s": 75,
     "fps": 30,
     "frame_count": 2250,
@@ -8841,16 +8848,16 @@
     "delivery_first_pts_s": 0,
     "files": {
       "mp4": {
-        "bytes": 4941397,
-        "sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad"
+        "bytes": 4950917,
+        "sha256": "9c48e2bcb835544be4157622a8cde917a04ff2e7c75e6ee685847b5e39a1f08c"
       },
       "webm": {
-        "bytes": 5397478,
-        "sha256": "bcda71c0c59b269b5844bf9597f6794a661dc511b5d8cd8283e23c11e01a6865"
+        "bytes": 5407826,
+        "sha256": "2215dc054e51bb5475164077129b1853b739ceefd6472d7d1566d5b74de9e13f"
       },
       "poster.jpg": {
-        "bytes": 423434,
-        "sha256": "f7473efd9eceec2e1714170fef742346941b1933ee8cdf903ceb2134c5999611"
+        "bytes": 426363,
+        "sha256": "4d233f0386a1dff49a09e40c3eb506a0ca67a901e0b04539eda5c45714d24566"
       }
     },
     "encoder_settings": {

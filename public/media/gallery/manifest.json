@@ -71,9 +71,9 @@
     {
       "id": "teleavatar-tube-transfer",
       "source": "gallery/.masters/teleavatar-tube-transfer.mp4",
-      "source_sha256": "d77e14aefded19d4d1066e8d2808515ab9dc56a88e61841cd50ad45b0b818b8f",
-      "source_bytes": 13770913,
-      "mp4_sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad",
+      "source_sha256": "9ed93bfac3579dcc020d8925fa0f9dbf2049959fd4a733846eabb0508fe086eb",
+      "source_bytes": 13814431,
+      "mp4_sha256": "9c48e2bcb835544be4157622a8cde917a04ff2e7c75e6ee685847b5e39a1f08c",
       "duration_s": 75,
       "fps": 30,
       "frame_count": 2250,
@@ -89,16 +89,16 @@
       "delivery_first_pts_s": 0,
       "files": {
         "mp4": {
-          "bytes": 4941397,
-          "sha256": "5b2f65358542f590a9d3d8120d7253a093eae1f691e9bacd51c6e7d798c478ad"
+          "bytes": 4950917,
+          "sha256": "9c48e2bcb835544be4157622a8cde917a04ff2e7c75e6ee685847b5e39a1f08c"
         },
         "webm": {
-          "bytes": 5397478,
-          "sha256": "bcda71c0c59b269b5844bf9597f6794a661dc511b5d8cd8283e23c11e01a6865"
+          "bytes": 5407826,
+          "sha256": "2215dc054e51bb5475164077129b1853b739ceefd6472d7d1566d5b74de9e13f"
         },
         "poster.jpg": {
-          "bytes": 423434,
-          "sha256": "f7473efd9eceec2e1714170fef742346941b1933ee8cdf903ceb2134c5999611"
+          "bytes": 426363,
+          "sha256": "4d233f0386a1dff49a09e40c3eb506a0ca67a901e0b04539eda5c45714d24566"
         }
       },
       "encoder_settings": {

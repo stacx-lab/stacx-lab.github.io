@@ -1101,6 +1101,9 @@
     }
   ],
   "status_overlay": {
+    "show_playback_speed": true,
+    "font_sizes": {"text": 24, "clock": 22},
+    "speed_label_min_duration_s": 0.35,
     "activity": [
       {
         "start_source_s": 0,
@@ -1117,7 +1120,7 @@
       {
         "start_source_s": 82,
         "end_source_s": 93,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -1135,13 +1138,13 @@
       {
         "start_source_s": 151,
         "end_source_s": 157,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
         "start_source_s": 157,
         "end_source_s": 159,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -1177,13 +1180,13 @@
       {
         "start_source_s": 351,
         "end_source_s": 357,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
         "start_source_s": 357,
         "end_source_s": 359,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -1195,7 +1198,7 @@
       {
         "start_source_s": 397,
         "end_source_s": 406,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {
@@ -1225,7 +1228,7 @@
       {
         "start_source_s": 560,
         "end_source_s": 570,
-        "autonomy": "Human assistance",
+        "autonomy": "Autonomous",
         "text": "Operator clears the tether"
       },
       {

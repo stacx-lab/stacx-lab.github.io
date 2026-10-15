@@ -7,9 +7,10 @@ import importlib.util
 import json
 import math
 import subprocess
+from itertools import groupby
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
@@ -85,6 +86,28 @@ def compile_events(source, edit, timeline):
 
 
 class ReplayRenderer(shared.ReplayRenderer):
+    def __init__(self, source, edit, events, timeline):
+        super().__init__(source, edit, events, timeline)
+        sizes = edit['status_overlay']['font_sizes']
+        self.status_bold = ImageFont.truetype(BOLD, sizes['text'])
+        self.status_mono = ImageFont.truetype(MONO, sizes['clock'])
+        self.status_text = ImageFont.truetype(SANS, sizes['text'])
+        # Filter only the annotation. The original timeline still drives every
+        # recording frame, elapsed clock, and session event without alteration.
+        minimum = math.ceil(edit['status_overlay']['speed_label_min_duration_s'] * 30)
+        rounded = [round(timeline.speed_at(i / 30)) for i in range(round(edit['duration'] * 30))]
+        self.speed_labels = []
+        previous = rounded[0]
+        for value, group in groupby(rounded):
+            count = sum(1 for _ in group)
+            if count >= minimum:
+                previous = value
+            self.speed_labels.extend([previous] * count)
+
+    def displayed_speed(self, t):
+        index = max(0, min(len(self.speed_labels) - 1, math.floor(t * 30 + 1e-7)))
+        return self.speed_labels[index]
+
     def device_map(self, out, event):
         paste_device_map(self, out, event)
 
@@ -97,7 +120,10 @@ class ReplayRenderer(shared.ReplayRenderer):
                     if a['start_source_s'] <= source <= a['end_source_s'])
         text = item['text']
         if self.timeline.segment(t)['reason'] == 'Final verification': text = 'Tube placed and released'
-        return item.get('autonomy', 'Autonomous'), elapsed_label(source, self.timeline.last_source), text
+        autonomy = item.get('autonomy', 'Autonomous')
+        if self.edit['status_overlay'].get('show_playback_speed'):
+            autonomy += f' {self.displayed_speed(t)}×'
+        return autonomy, elapsed_label(source, self.timeline.last_source), text
 
 
 def main():
@@ -156,8 +182,9 @@ def main():
                'Character streaming reconstructed. Results and images first appear at their recorded completion time.',
                'Continuous source from frame zero. Original aspect ratio and full frame preserved; no synthesized frames.',
                'Original source and its audio unchanged; delivery is silent.',
+               'Speed labels are rounded integers; changes shorter than 0.35 output seconds retain the previous stable label. Actual retiming is unchanged.',
                'Model from entry 1; high effort set in entry 3 before the task. Robot display name confirmed by user.',
-               'Visible human tether handling labeled. Camera operator movement is retained.',
+               'Status label is fixed to Autonomous by user request. Visible tether handling and camera operator movement remain in footage and source-review records.',
                'Final state verified visually; no calibrated contact-force or seating-depth claim.'])
     provenance['source_frame_mapping_sha256'] = hashlib.sha256(json.dumps(provenance['output_source_frames']).encode()).hexdigest()
     (HERE / f'{NAME}.provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')
