@@ -25,74 +25,61 @@ Getting a new robot ready means two things: describing the hardware so Kinex can
 
 ## Onboarding
 
-Start from a workspace and describe the hardware, how it connects, and what you want done:
+Start Kinex in your [robot workspace](/docs/real-robots/#1-start-kinex-in-a-fresh-workspace), then describe your hardware and goal in your own words. For example:
 
-```text
-/onboarding Set up my robot arm, gripper, and overhead camera to pick objects from the table.
-```
+> I have a robot arm, a gripper, and an overhead camera. Help me set them up to pick objects from the table.
 
-Onboarding runs as an interview. The agent:
+Share any connection details, manuals, or SDKs you already have. The agent checks the workspace, asks for missing information, and prepares the device connections and drivers. It then checks that the devices respond and identifies any calibration the task needs.
 
-1. **Looks before asking.** It checks existing device profiles, installed ROS packages and SDKs, local models and any prepared simulator files.
-2. **Asks for what's missing.** Questions come in one batch, each with an "unknown" option. Facts nobody knows stay marked `???` instead of being guessed.
-3. **Plans the work.** It records a plan in `.kinex/setup/plan.json`: which devices are needed, how they attach to each other, and which steps the task depends on.
-4. **Prepares devices.** For each device it picks a guide, writes a driver and a profile, and leaves the device unloaded.
-5. **Brings them up and checks them.** Once the devices are loaded (with `/load`, or by the agent with your permission), it runs reads and checks that matter for the task and keeps the results as evidence.
-6. **Calibrates if the task needs it.** See [Calibration](#calibration) below.
-
-Run `/onboarding` without a task to just prepare the device inventory; the agent then suggests next steps instead of measuring anything. Running it again with a new objective reuses everything already established and only revisits what the new task changes.
+You can also ask it to prepare the hardware before choosing a task. When you add a new goal later, it reuses the setup and measurements that still apply.
 
 ### One device at a time
 
-To add a single device instead of a whole robot, use `/register`:
+To add or remove a device, tell the agent what changed:
 
-```text
-/register rgbd
-/register grounding-dino
-```
+> Add this depth camera to my robot. Here is its connection information and documentation.
 
-The agent follows the built-in `setup-device` skill: choose a guide, set up a driver, write an unloaded profile and verify the interface. `/unregister <device>` unloads a device and, after you confirm, deletes its profile, driver and files.
+> I no longer use the wrist camera. Remove it from this workspace.
+
+The agent prepares and checks new devices before use. Removing a device requires confirmation because it deletes that device's configuration and files. See [Devices](/docs/devices/) for more detail.
 
 ## Calibration
 
-Calibration pins down the physical facts a task depends on but that Kinex can't know in advance: a camera's intrinsics, where a camera sits relative to an arm, the tool-tip offset, joint limits, how two arms relate to each other. Describe what you want calibrated, or leave it blank and the agent picks up the current task:
+Calibration measures facts such as where a camera sits, where the tool tip is, or how two arms are positioned relative to each other. Explain what you want the robot to do, or what has changed:
 
-```text
-/calibrate camera-to-arm transform for picking
-/calibrate
-```
+> Help the arm pick objects using the overhead camera. Check what needs calibrating first.
 
-A calibration follows the same loop every time:
+> I moved the wrist camera. Update its calibration before we continue.
 
-1. **Plan.** The agent reuses facts that are already known (from the manufacturer, a robot model or the simulator) and picks a procedure for whatever is still missing.
-2. **Sample.** It moves the robot or asks you to, and captures measurements: images of a calibration board, joint readings, contact points. Each sample is saved as evidence under `.kinex/calib/`.
-3. **Compute.** A built-in solver turns the samples into a result and checks its quality.
-4. **Apply.** If the result is good enough, the agent writes it into the device's profile and marks that step of the plan done. If not, the agent tells you why and writes nothing, unless you choose to keep the approximate result; the failed quality check is then recorded with it.
+The agent chooses a suitable procedure and guides you through it:
 
-When something physical changes, such as a camera being remounted, ask the agent to reassess and it will redo the affected calibration.
+1. **Prepare.** Reuse reliable manufacturer or robot-model information and identify the measurements still needed.
+2. **Measure.** Guide robot movements or ask you to position a target, then collect images and readings.
+3. **Check.** Calculate the result and assess whether it meets the task's accuracy needs.
+4. **Apply.** Save an accepted result to the device configuration. If the measurements are insufficient, explain what needs improving.
+
+If you choose to keep an approximate result, the agent retains its measured error and quality assessment. A result that failed a quality check is still recorded as such.
 
 ### Sampling and evidence
 
-Calibration samples and solver results belong to an attempt under `.kinex/calib/`. When calling `calib_sample` for a camera, pass `args: {output: "file"}` so it archives image files; RGB-D sampling copies both color and depth before recording the sample.
-
-Blocking `servo` waits its planned duration, but check fresh measured feedback before sampling. The sampler's settling checks require declared measured velocities and distinct device timestamps. They do not advance simulated time: arrange any additional `world.wait` before sampling. A settling timeout after a read saves `settled: false`; cancellation saves no sample. These calibration checks remain available even though the general-purpose `settled` tool was removed.
-
-Unregistering a device removes its device directory and legacy calibration files named `*-<device>.json`. Attempt directories and setup plans remain as evidence.
+The agent checks that the robot has reached the intended position before collecting measurements. It saves calibration images, readings, and results so they can be reviewed later. When hardware moves or changes, it reassesses the affected measurements.
 
 ### Bundled calibration skills
 
-| Skill | What it determines |
-| --- | --- |
-| `calibrate-camera-intrinsics` | A camera's lens and image geometry |
-| `calibrate-camera-extrinsics` | Where a camera is mounted, on an arm or in the scene |
-| `calibrate-tcp-offset` | The position of the tool tip relative to the arm's flange |
-| `calibrate-fixed-arm-mount` | Where an arm is mounted relative to its parent, such as a table, mobile base or torso |
-| `calibrate-dual-arm` | How two arms are positioned relative to each other |
-| `calibrate-joint-range` | Joint limits, from the robot model or measurements |
-| `calibrate-world-geometry` | Measured geometry of the surrounding environment |
-| `verify-base-interface`, `verify-base-motion`, `verify-base-posture` | That a mobile or legged base behaves as declared |
+Describe the outcome you need; the agent selects the procedure.
 
-You can add your own calibration skills like any other [skill](/docs/tools-and-skills/#discovery).
+| Calibration | What it determines |
+| --- | --- |
+| Camera geometry | Lens parameters and image geometry |
+| Camera position | Where a camera sits on the robot or in the scene |
+| Tool tip | Where the working tip is relative to the arm |
+| Arm mounting | Where an arm sits on a table, mobile base, or torso |
+| Two-arm alignment | How the two arms are positioned relative to each other |
+| Joint limits | Each joint's range of motion |
+| Workspace geometry | Positions and dimensions in the surrounding environment |
+| Mobile base checks | Whether a wheeled or legged base responds as expected |
+
+For custom procedures, see [Tools & skills](/docs/tools-and-skills/#discovery).
 
 ### Calibration in practice
 
@@ -100,19 +87,23 @@ These recordings show Kinex calibrating a simulated YAM dual-arm robot in Isaac 
 
 <figure>
   <video src="/video/calib-wrist-cameras.mp4" poster="/video/calib-wrist-cameras.jpg" controls muted playsinline preload="none"></video>
-  <figcaption><b>Wrist cameras.</b> Each arm moves its wrist camera around a fixed calibration board on the table to find where the camera sits on the flange (<code>calibrate-camera-extrinsics</code>).</figcaption>
+  <figcaption><b>Wrist cameras.</b> Each arm moves its wrist camera around a fixed calibration board on the table to find where the camera sits on the flange.</figcaption>
 </figure>
 
 <figure>
   <video src="/video/calib-overhead-camera.mp4" poster="/video/calib-overhead-camera.jpg" controls muted playsinline preload="none"></video>
-  <figcaption><b>Overhead camera.</b> The left arm holds a calibration board up to the fixed overhead camera in several poses to find the camera's position in the scene (<code>calibrate-camera-extrinsics</code>).</figcaption>
+  <figcaption><b>Overhead camera.</b> The left arm holds a calibration board up to the fixed overhead camera in several poses to find the camera's position in the scene.</figcaption>
 </figure>
 
 <figure>
   <video src="/video/calib-dual-arm.mp4" poster="/video/calib-dual-arm.jpg" controls muted playsinline preload="none"></video>
-  <figcaption><b>Dual arm.</b> Both arms touch the same set of reference points on the table, which lets the agent work out where the right arm's base is relative to the left (<code>calibrate-dual-arm</code>).</figcaption>
+  <figcaption><b>Dual arm.</b> Both arms touch the same set of reference points on the table, which lets the agent work out where the right arm's base is relative to the left.</figcaption>
 </figure>
 
 ## All set!
 
-You're ready to go. Load your devices with `/load all`, check them with `/ping all`, and give Kinex its first task in plain language.
+Ask the agent to connect the devices and check that they respond, then describe your first task. For example:
+
+> Check that the arm, gripper, and camera are ready, then pick up the blue block from the table.
+
+If you prefer command shortcuts, see [Slash commands](/docs/slash-commands/).

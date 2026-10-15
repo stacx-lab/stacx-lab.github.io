@@ -10,30 +10,7 @@ import RosDiagram from '../../components/RosDiagram.astro';
 import { url as assetUrl } from '../../lib/url';
 import walkthroughVideo from '../../../gallery/.masters/ros2-instructional.mp4?url';
 
-## Supported setup
-
-The ROS driver host needs **[ROS 2 Jazzy on Ubuntu 24.04](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)** with **system Python 3.12**. Before onboarding, [install Kinex](/docs/#install-and-run) and [open a robot workspace](/docs/real-robots/#1-start-kinex-in-a-fresh-workspace).
-
-## Where ROS 2 fits
-
-ROS 2 connects through Kinex's [device layer](/docs/devices/). Adapters translate between Kinex device operations and ROS interfaces for joint trajectories, velocity commands, cameras and IMUs.
-
-<RosDiagram />
-
-## What onboarding handles
-
-The standard [onboarding workflow](/docs/onboarding/#onboarding) uses the [`onboard-ros2` skill](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md) to:
-
-- **Reuse packages.** Prefer installed ROS packages, then official apt packages. Build from source only for a specific need or your request.
-- **Resolve dependencies.** If installation requires `sudo`, provide the commands and target host for you to run them on.
-- **Prepare drivers.** Create a versioned bundle for your hardware using Kinex's common ROS adapters and compatible ROS packages. A failed rebuild preserves the working version.
-- **Verify interfaces.** After loading, measure live ROS interfaces and record the results. Report failed checks explicitly.
-
-Start the robot's ROS stack before loading devices; unloading a Kinex device leaves the stack running.
-
-Continue with [calibration](/docs/onboarding/#calibration) for the measurements your task needs.
-
-## ROS 2 demo
+## Reference onboarding video
 
 <figure>
   <video
@@ -43,8 +20,29 @@ Continue with [calibration](/docs/onboarding/#calibration) for the measurements 
     poster={assetUrl('/media/gallery/ros2-instructional/ros2-instructional.poster.jpg')}
     aria-label="Kinex ROS 2 instructional walkthrough"
   />
-  <figcaption style="max-width: none">
-    ROS 2 Jazzy on Ubuntu 24.04 · 13:08.{' '}
-    <a href={walkthroughVideo} target="_blank" rel="noopener">Open full size ↗</a>
-  </figcaption>
 </figure>
+
+## Supported setup
+
+Use your robot's existing ROS 2 installation. Kinex runs ROS drivers in a separate process with the matching ROS environment and Python interpreter—for example, Jazzy on Ubuntu 24.04 with Python 3.12, or Humble on Ubuntu 22.04 with Python 3.10. Onboarding handles the additional compatibility setup needed for ROS interpreters older than Python 3.11.
+
+Before onboarding, [install Kinex](/docs/installation/#install-and-run) and [open a robot workspace](/docs/real-robots/#1-start-kinex-in-a-fresh-workspace).
+
+## Where ROS 2 fits
+
+ROS 2 connects through Kinex's [device layer](/docs/devices/). Adapters translate between Kinex device operations and ROS interfaces for joint trajectories, velocity commands, cameras and IMUs.
+
+<RosDiagram />
+
+## What onboarding handles
+
+The standard [onboarding workflow](/docs/onboarding/#onboarding) uses the [`onboard-ros2` skill](https://github.com/stacx-lab/kinex/blob/8d428c392d20c260068c21ed6310b799471ea404/packages/setup/assets/builtin/skill/onboard-ros2/SKILL.md) to:
+
+- **Reuse packages.** Prefer installed ROS packages, then official apt packages. Build from source only for a specific need or your request.
+- **Resolve dependencies.** If installation requires `sudo`, provide the commands and target host for you to run them on.
+- **Prepare drivers.** Write drivers and ROS configuration in each device's directory, reusing existing nodes and a shared ROS backend in `.kinex/lib/` where appropriate.
+- **Verify interfaces.** Check live ROS interfaces and report observations and failed checks. Apply measured camera calibration updates to device profiles.
+
+Start the robot's ROS stack before loading devices; unloading a Kinex device leaves the stack running.
+
+Continue with [calibration](/docs/onboarding/#calibration) for the measurements your task needs.

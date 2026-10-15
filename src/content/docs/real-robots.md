@@ -1,15 +1,15 @@
 ---
-title: Working with real robots
+title: Onboarding real robots
 description: Onboard hardware for a concrete task with /onboarding and /register.
 group: Get started
-order: 30
-label: Real robots
-sources: ["README.md", "packages/setup/README.md", "packages/setup/src/workflows/onboarding.txt", "packages/core/assets/builtin/skill/setup-device/SKILL.md", "docs/setup.md"]
+order: 20
+label: Onboarding real robots
+sources: ["README.md", "packages/setup/README.md", "packages/setup/src/workflows/onboarding.txt", "packages/core/assets/builtin/skill/setup-device/SKILL.md", "docs/setup.md", "docs/agent-integration.md", "src/settings.ts", "packages/core/src/python/launch.ts"]
 ---
 
 Kinex drives real hardware through the same device interface it uses for simulators. You describe your robot and what you want it to do; the agent writes the device profiles and drivers, brings the hardware up and checks it, calibrating only what the task needs. Supported embodiments include arms, lifts, mobile bases, quadrupeds, grippers, suction, dexterous hands, cameras, IMUs and F/T sensors (see [Devices](/docs/devices/)).
 
-Assumes Kinex is installed (see [Install and run](/docs/#install-and-run)).
+Assumes Kinex is installed (see [Install and run](/docs/installation/#install-and-run)).
 
 ## 1. Start Kinex in a fresh workspace
 
@@ -66,3 +66,31 @@ Then give the task in plain language. Useful during work:
 | `/stop [device]` | Cancel the response, stop actuators in their stop scope |
 | `/unload <device>` | Release a device |
 | `/unregister <device>` | Confirm, then delete its profile, driver and files |
+
+## Workspace layout
+
+Start Kinex from your project folder. Directories are created as needed.
+
+```text
+robot-workspace/
+├── .kinex/                     # robotics workspace
+│   ├── workspace.yaml          # robot and workspace settings
+│   ├── kinex.json              # permission rules
+│   ├── devices/<name>/         # one folder per device
+│   │   ├── profile.yaml        # connection and calibration
+│   │   ├── driver.py           # Python driver, when used
+│   │   └── out/                # images and other outputs
+│   ├── lib/                    # shared Python helpers
+│   ├── tools/                  # callable agent tools
+│   ├── skills/                 # task procedures (SKILL.md)
+│   ├── setup/plan.json         # onboarding plan
+│   ├── python/                 # managed Python environment
+│   ├── recordings/             # recorded runs
+│   └── agent/settings.json     # agent settings and packages
+└── .pi/                        # Pi agent resources
+```
+
+- **`.kinex/`** holds robot configuration. **`devices/`** contains each device's profile, driver, and outputs. See [Devices](/docs/devices/#profiles).
+- **`.kinex/lib/`** holds shared Python helpers that drivers and tools can import. **`tools/`** and **`skills/`** add callable operations and task procedures. See [Custom tools & skills](/docs/custom-tools/).
+- **`.pi/`** holds Pi agent resources; **`.kinex/agent/`** holds project agent settings and package choices. See [Plugin systems](/docs/plugins/).
+- **`.kinex/recordings/`** holds recorded runs. See [Recording](/docs/recording/). Conversation sessions are stored separately, outside the workspace; see [Working with the agent](/docs/agent/).

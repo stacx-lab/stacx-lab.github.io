@@ -53,7 +53,7 @@ description: One sentence.
 group: Guides          # Get started | Concepts | Guides | Reference (see src/config.ts)
 order: 90              # position inside the group
 label: Recording       # optional sidebar label
-sources: ["docs/commands.md"]   # kinex repo paths backing the page, linked at the reviewed `site.sourceRef` commit
+sources: ["docs/commands.md"]   # internal source references at the reviewed `site.sourceRef` commit
 ---
 ```
 
@@ -72,8 +72,8 @@ The current documentation was reviewed against `../kinex` commit
 For the next refresh, compare that commit with the new source revision. The
 previous site already covered the October 12 runtime and discovery changes;
 this refresh incorporates the subsequent Python control, image-result, Pi SDK,
-calibration guidance and licensing updates. Source footers use the reviewed
-commit because the package version alone does not identify these changes.
+calibration guidance and licensing updates. Source references remain in page
+frontmatter for maintenance and are not displayed in the documentation footer.
 
 ## Hero session demo
 

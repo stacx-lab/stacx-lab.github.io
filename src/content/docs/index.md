@@ -28,25 +28,7 @@ Kinex has two reusable robotics packages:
 
 Core can operate devices independently of setup. The standalone **`kinex`** app combines both packages with the Pi coding agent, which supplies the conversation loop and terminal interface. See [Architecture](/docs/architecture/#packages) for more detail.
 
-## Install and run
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/stacx-lab/kinex/main/install.sh | bash
-cd /path/to/robot-workspace
-kinex
-```
-
-Then `/login` to connect a model provider and `/model` to choose a model.
-
-| Need | For |
-| --- | --- |
-| macOS or Ubuntu | Installing and running Kinex |
-| Node.js ≥ 22.19 + npm | Kinex itself (the installer can install them) |
-| `curl` | The installer |
-| Python ≥ 3.11 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
-| `ffmpeg` | Video encoding during [recording](/docs/recording/) |
-
-**Already use Pi, Claude Code or Codex?** Kinex plugins currently support these three harnesses: see [Plugin systems](/docs/plugins/).
+Start with [Installation](/docs/installation/) to install Kinex and connect a model provider.
 
 ## Pick a path
 
@@ -82,4 +64,4 @@ Reference: [CLI](/docs/cli/), [slash commands](/docs/slash-commands/), [troubles
 
 These pages describe **Kinex 1.0.0**, bundling the **Pi coding agent 1.2.0** (`@earendil-works/pi-coding-agent`). No separate Pi install is needed. Install on macOS and Ubuntu. Node.js ≥ 22.19 is required.
 
-The documentation tracks source commit `afeddc6` (2026-10-14); each page links to the reviewed source. Kinex and its core/setup packages use the [Apache License, Version 2.0](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/LICENSE). Bundled third-party notices are listed in [THIRD_PARTY_NOTICES.txt](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/THIRD_PARTY_NOTICES.txt).
+The documentation tracks source commit `afeddc6` (2026-10-14). Source references are recorded in each page's metadata. Kinex and its core/setup packages use the [Apache License, Version 2.0](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/LICENSE). Bundled third-party notices are listed in [THIRD_PARTY_NOTICES.txt](https://github.com/stacx-lab/kinex/blob/afeddc698d14ea9fb5ae0e88f51fecd89000dec4/THIRD_PARTY_NOTICES.txt).
