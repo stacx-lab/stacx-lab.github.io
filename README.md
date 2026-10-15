@@ -42,6 +42,19 @@ gallery/<id>/                 tracked edit timeline/provenance; ignored render o
 gallery/index.html            local review page using public/media/gallery/ assets
 ```
 
+## Social sharing preview
+
+`public/img/kinex-social-preview.jpg` is the shared 1200 × 630 cover for the
+homepage and docs. `src/layouts/Base.astro` emits Open Graph image metadata and
+an X large-image card, keeping each page's own title and description. The image
+URL uses the configured site origin and base path, including `/kinex/` in production.
+
+The cover was composed with imagegen from the existing
+`public/media/gallery/real-hang-mug/real-hang-mug.poster.jpg` robot demo poster,
+using the headline “One Agent for Any Robot.” and the site's ivory/purple palette.
+The generated artwork was resized to 1200 × 630 and exported as an optimized JPEG.
+When replacing the cover, keep its dimensions and metadata in sync.
+
 ## Add a doc page
 
 Create `src/content/docs/<slug>.md`:
