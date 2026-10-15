@@ -1,6 +1,6 @@
 ---
 title: Plugin systems
-description: Install and manage Pi plugins in Kinex, and use Kinex itself as a plugin in Pi, OpenCode or Codex.
+description: Install and manage Pi plugins in Kinex, and use Kinex itself as a plugin in Pi, Claude Code or Codex.
 group: Guides
 order: 70
 label: Plugin systems
@@ -10,7 +10,7 @@ sources: ["README.md", "src/packages.ts", "src/integration/default-extensions.ts
 Plugins work in two directions with Kinex:
 
 - **Into Kinex.** Kinex is built on [Pi](https://pi.dev), so it can install and run plugins from Pi's ecosystem: extensions, skills, prompt templates and themes.
-- **Out of Kinex.** Kinex's robotics layer is itself packaged as plugins, so you can use your devices, tools and skills from Pi, OpenCode or Codex instead of the Kinex app.
+- **Out of Kinex.** Kinex's robotics layer is itself packaged as plugins, so you can use your devices, tools and skills from Pi, Claude Code or Codex instead of the Kinex app.
 
 ## Installing Pi plugins
 
@@ -39,46 +39,60 @@ Packages install for your user by default; add `-l` to install for the current p
 
 ## Using Kinex from other harnesses
 
-If you'd rather keep working in your usual coding agent, the [kinex-plugins](https://github.com/stacx-lab/kinex-plugins) repository brings Kinex's robotics layer to it: your devices, robotics tools, skills and workspace context. Your harness keeps its own coding tools, sessions, credentials and approval UI. You don't need the Kinex app installed. Each plugin works with the same `.kinex/` workspace, so you can switch between Kinex and your harness on the same robot.
+The [kinex-plugins](https://github.com/stacx-lab/kinex-plugins) repository currently supports **Pi, Claude Code and Codex**. It brings Kinex's devices, robotics tools, skills and workspace context into those hosts. Your harness keeps its own coding tools, sessions, credentials and approval UI. You don't need the standalone Kinex app installed. OpenCode is not currently supported.
 
 | Harness | How Kinex plugs in |
 | --- | --- |
-| **Pi** | A native Pi extension. Kinex's slash commands and tools appear directly in Pi. |
-| **OpenCode** | An OpenCode plugin, with a server part for the model's tools and a TUI part for slash commands. |
-| **Codex** | A local MCP server that Codex connects to, plus a small CLI for direct commands. |
+| **Pi** | A Pi extension with direct lifecycle commands and approval/questionnaire dialogs, connected to the shared MCP server. |
+| **Claude Code** | A marketplace plugin with shared Kinex skills and MCP server configuration. |
+| **Codex** | A marketplace plugin with shared Kinex skills and MCP server configuration. |
 
-All three use the shared robotics core. Plugin releases are versioned separately and consume explicit packed core/setup snapshots; updating standalone Kinex does not update a plugin's snapshot. Check the plugin's bundled version before relying on newly added tools or runtime behavior.
+All three use the shared `@kinex/mcp` adapter and packed `@kinex/core`/`@kinex/setup` snapshots. Plugin releases are versioned separately; updating standalone Kinex does not update a plugin's snapshot. Check the plugin's bundled version before relying on newly added tools or runtime behavior. Hosts can use the same `.kinex/` workspace in separate sessions; independent hosts do not coordinate concurrent control of the same physical devices.
 
 ### Installing a plugin
 
-The plugins aren't on npm yet, so you build them from the repository and install the packed release. They need Node.js 22.22.2 or newer (see the repository's `.nvmrc`):
+Install from a local checkout on Linux or macOS; npm publication is not required. The plugins need Node.js 22.22.2 or newer. Build with the repository's selected Node version:
 
 ```sh
 git clone https://github.com/stacx-lab/kinex-plugins.git
 cd kinex-plugins
-npm ci && npm run build
-npm run pack -- /tmp/kinex-plugins-release
+nvm use
+npm ci
+npm run build
+export KINEX_SOURCE="$PWD"
 ```
 
-Then install the core packages together with the plugin for your harness, and register it. For Pi:
+For Pi, install the package directly from this checkout:
 
 ```sh
-npm install --prefix ~/kinex-plugins \
-  /tmp/kinex-plugins-release/kinex-core-*.tgz \
-  /tmp/kinex-plugins-release/kinex-setup-*.tgz \
-  /tmp/kinex-plugins-release/kinex-pi-*.tgz
-pi install ~/kinex-plugins/node_modules/@kinex/pi
+pi install "$KINEX_SOURCE/packages/pi"
 ```
 
-For OpenCode, install `kinex-opencode-*.tgz` the same way and register it with `opencode plugin file://…/@kinex/opencode`. For Codex, install `kinex-codex-*.tgz` and add Kinex as an MCP server in `.codex/config.toml`, pointing it at your robot workspace. Each plugin's README in the repository has the exact steps.
+For Claude Code and Codex, follow the [local marketplace setup](https://github.com/stacx-lab/kinex-plugins#claude-code-and-codex). It copies the generated bundles outside the checkout and points their MCP configurations at the built local server with host-managed approvals. Install `kinex@kinex-plugins` through the selected host. Keep the checkout and its dependencies in place; the installed plugins use its built files. Packed tarball installation is also covered in the [shared server README](https://github.com/stacx-lab/kinex-plugins/blob/main/packages/mcp/README.md#local-tarballs-before-publication).
 
 ### Using it
 
-Open your robot workspace in your harness.
+Open your robot workspace and launch a new host session:
 
-- **In Pi and OpenCode**, Kinex's commands work as usual: `/devices`, `/load`, `/ping`, `/stop`, `/record`, `/onboarding`, `/calibrate` and so on. Each also has a `/kinex-` alias, such as `/kinex-devices`, in case the harness already uses the same name.
-- **In Pi**, the agent gets Kinex's tools and skills alongside its own.
-- **In OpenCode and Codex**, the agent reaches Kinex through two tools: `kinex_tools` lists what's available and loads skills, and `kinex_call` runs a tool. Codex also gets `kinex_stop`, which stops the robot without Kinex's approval check (set `approval_mode = "auto"` for it in Codex's config, as the plugin README shows, so Codex doesn't ask either). Check the Codex connection with `/mcp`.
+```sh
+cd /path/to/robot-workspace
+export KINEX_WORKSPACE="$PWD"
+# Launch pi, claude, or codex.
+```
+
+Connecting the plugin leaves robotics inactive. Use these lifecycle commands or skills:
+
+| Action | Pi direct command | Claude Code or Codex request |
+| --- | --- | --- |
+| Start the runtime and restore configured loaded devices | `/kinex-start` | “Start Kinex” |
+| Inspect state, permission mode and recordings without activating robotics | `/kinex-status` | “Show Kinex status” |
+| Cancel work, finalize recordings and release devices while keeping the host open | `/kinex-end` | “End Kinex” |
+
+Claude Code and Codex include the corresponding `kinex-start`, `kinex-status` and `kinex-end` skills. In Codex, explicitly ask “Start Kinex”; installing or enabling the plugin does not activate robotics. Starting after an end creates a fresh runtime. Normal host exit also disposes its runtime; borrowed external services remain running.
+
+All three hosts discover current tools, skills, workflows and context through `kinex_tools`, and execute robotics tools through `kinex_call`. The shared server also exposes `kinex_start`, `kinex_status`, `kinex_shutdown` and `kinex_stop`. Pi's direct lifecycle commands run without a model round trip.
+
+The plugins use **host-managed approvals** by default. Explicit `allow`, `ask` and `deny` rules in `kinex.json` still apply; setup questionnaires still require answers. See the [plugin permissions documentation](https://github.com/stacx-lab/kinex-plugins#permissions) for details and how to restore Kinex-managed approvals.
 
 ## Building your own integration
 

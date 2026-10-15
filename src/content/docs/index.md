@@ -46,7 +46,7 @@ Then `/login` to connect a model provider and `/model` to choose a model.
 | Python ≥ 3.11 + [uv](https://docs.astral.sh/uv/) | Python tools, drivers, `exec` |
 | `ffmpeg` | Video encoding during [recording](/docs/recording/) |
 
-**Already use Pi, OpenCode or Codex?** You can use Kinex capabilities from those harnesses instead: see [Plugin systems](/docs/plugins/).
+**Already use Pi, Claude Code or Codex?** Kinex plugins currently support these three harnesses: see [Plugin systems](/docs/plugins/).
 
 ## Pick a path
 
