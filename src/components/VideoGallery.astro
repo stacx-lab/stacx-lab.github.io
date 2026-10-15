@@ -15,6 +15,14 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     </div>
   </div>
   <div class="gallery-layout">
+      <label class="mobile-picker">
+        <span>Choose a demo</span>
+        <select data-gallery-picker aria-controls="gallery-track">
+          {galleryVideos.map((clip, index) => (
+            <option value={index}>{index + 1}. {clip.title} · {clip.robot}</option>
+          ))}
+        </select>
+      </label>
     <div class="video-stage">
       <div class="videos" id="gallery-track" tabindex="0" aria-label="Videos. Swipe vertically or use up and down arrow keys to browse.">
         <div class="rotor" data-gallery-rotor>
@@ -93,6 +101,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     const rotor = gallery.querySelector<HTMLElement>('[data-gallery-rotor]')!;
     const details = Array.from(gallery.querySelectorAll<HTMLDetailsElement>('[data-gallery-details]'));
     const previews = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-preview]'));
+    const picker = gallery.querySelector<HTMLSelectElement>('[data-gallery-picker]')!;
     let active = 0;
     const wrap = (index: number, count = cards.length) => ((index % count) + count) % count;
     const offset = (index: number) => wrap(index - active + cards.length / 2) - cards.length / 2;
@@ -133,6 +142,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         if (!centered) players[i].pause();
       });
       const clip = wrap(active, details.length);
+      picker.value = String(clip);
       counter.textContent = `${String(clip + 1).padStart(2, '0')} / ${String(details.length).padStart(2, '0')}`;
       details.forEach((detail, i) => {
         detail.classList.toggle('is-active', i === clip);
@@ -154,6 +164,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
       if (distance > details.length / 2) distance -= details.length;
       if (distance) goTo(active + distance);
     };
+    picker.addEventListener('change', () => goToClip(Number(picker.value)));
     previous.forEach(button => button.addEventListener('click', () => goTo(active - 1)));
     next.forEach(button => button.addEventListener('click', () => goTo(active + 1)));
     titles.forEach((title, i) => {
@@ -170,6 +181,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
         else if (event.key === 'End') target = titles.length - 1;
         else return;
         event.preventDefault();
+        goToClip(target);
         titles[target].focus({ preventScroll: true });
       });
     });
@@ -227,6 +239,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .lead { color: var(--ink-2); margin: 0; }
   .gallery-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 1fr); gap: 32px; align-items: start; }
   .gallery-sidebar { min-width: 0; padding-block: 24px; }
+  .mobile-picker { display: none; }
   .counter { display: none; margin: 16px 2px 0; font: 16px/1.5 var(--font-mono); color: var(--ink-3); white-space: nowrap; }
   .is-enhanced .counter { display: block; }
   .video-stage { --ring-peek: clamp(64px, 8vw, 104px); position: relative; isolation: isolate; min-width: 0; }
@@ -261,6 +274,10 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   .title-chevron { flex-shrink: 0; width: 18px; height: 18px; margin-top: 4px; color: var(--ink-3); stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 180ms, color 180ms; }
   .details[open] .title-chevron { transform: rotate(180deg); color: var(--accent-ink); }
   .details-body { padding: 0 2px 18px; }
+  .is-enhanced .details:not(.is-active) { display: none; }
+  .is-enhanced .task-notes { border-top: 0; }
+  .is-enhanced .details summary { padding-top: 0; }
+  .is-enhanced .title-chevron { display: none; }
   .robot-name, .model-name { white-space: nowrap; }
   .metadata { font: 400 13px/1.5 var(--font-head); letter-spacing: -0.02em; color: var(--ink-2); margin: 0 0 16px; }
   .capabilities { display: grid; gap: 18px; list-style: none; padding: 0; margin: 0; }
@@ -281,6 +298,9 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
   @media (max-width: 760px) {
     .gallery-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
     .gallery-sidebar { padding: 8px 12px 0; }
+    .is-enhanced .mobile-picker { display: grid; gap: 6px; padding: 0 12px 14px; font-size: 13px; color: var(--ink-2); }
+    .mobile-picker select { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid var(--rule); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; font-size: 16px; }
+    .mobile-picker select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     .is-enhanced .videos { perspective: 1200px; }
   }
   @media (max-width: 600px) {
@@ -289,6 +309,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
     .videos { padding-inline: 4px; }
     .floating-arrow { right: 12px; }
     .gallery-sidebar { padding-inline: 4px; }
+    .is-enhanced .mobile-picker { padding-inline: 4px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .title-chevron, .floating-arrow, .is-enhanced .video-card { transition: none; }
