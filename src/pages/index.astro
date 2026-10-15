@@ -7,6 +7,7 @@ import CopyCmd from '../components/CopyCmd.astro';
 import VideoGallery from '../components/VideoGallery.astro';
 import Contributors from '../components/Contributors.astro';
 import Wordmark from '../components/Wordmark.astro';
+import BenchmarkResults from '../components/BenchmarkResults.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 const paths = [
@@ -56,6 +57,7 @@ const paths = [
 
     <section class="wrap sec benchmark" id="benchmark-results" aria-labelledby="benchmark-heading">
       <h2 class="kicker" id="benchmark-heading">03 · Benchmark results</h2>
+      <BenchmarkResults />
     </section>
 
     <section class="wrap sec">
@@ -97,7 +99,6 @@ const paths = [
   .sec { padding-top: 72px; }
   main > .sec { border-top: 1px solid var(--rule); margin-top: 72px; }
   .sec h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 24px; }
-  .benchmark { min-height: 200px; }
   .benchmark h2.kicker { font-size: var(--fs-0); letter-spacing: var(--tracking); font-weight: 400; margin: 0; }
   .architecture h2 { margin-bottom: 16px; }
   @media (min-width: 960px) { #architecture-heading { white-space: nowrap; } }

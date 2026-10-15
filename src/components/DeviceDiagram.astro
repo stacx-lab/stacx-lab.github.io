@@ -130,7 +130,6 @@ const feedback = [
       <p class="device-inspection" id="device-inspection" aria-live="polite"><strong data-device-name>{devices[0].name}.</strong> <span data-device-description>{devices[0].detail}</span></p>
     </aside>
   </div>
-  <figcaption>Illustrative robot and control loop. Each device has its own type, profile, and driver; tools coordinate them into a workflow.</figcaption>
 </figure>
 
 <script>
@@ -288,7 +287,6 @@ const feedback = [
   .device-chip.is-flowing { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 6%, var(--panel)); }
   .device-inspection { font-size: 11px; line-height: 1.6; color: var(--ink-2); margin: 14px 0 0; }
   .device-inspection strong { color: var(--ink); font-weight: 600; }
-  figcaption { padding: 10px 18px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   @media (max-width: 760px) {
     .diagram-body { grid-template-columns: minmax(0, 1fr); }
@@ -304,6 +302,5 @@ const feedback = [
     .flow-view { padding: 8px 2px 12px; }
     .flow-summary { font-size: 11px; }
     .device-bank { padding: 12px; }
-    figcaption { padding-inline: 12px; }
   }
 </style>

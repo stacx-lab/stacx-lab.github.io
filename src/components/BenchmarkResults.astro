@@ -1,0 +1,98 @@
+---
+import BenchmarkChart from './BenchmarkChart.astro';
+import { benchmark, benchmarkScopes, astraComparison } from '../data/benchmark';
+---
+
+<div class="benchmark-content">
+  <h3>Zero-Shot Robotic Manipulation Evaluation</h3>
+  <p>
+    We evaluate 132 tasks from LIBERO, RoboTwin, and RoboDojo under a <strong>zero-shot</strong> protocol
+    with native success criteria. Control-step budgets are unchanged except for RoboDojo, increased to
+    1,875 steps per episode. Following
+    <a href="https://huggingface.co/benchmend">BenchMend</a>,
+    we rewrite task instructions to make hidden criteria explicit, such as parking the arm at its home position.
+  </p>
+  <p>
+    For GPT-6 Astra (high effort) and Claude Opus 5.5, we compare Codex / Claude Code with the
+    <strong>benchmark-native action API</strong>, with the <strong>device abstraction</strong>,
+    and <strong>Kinex</strong>. On Astra, Kinex raises success from {astraComparison.baselineSuccessRate.toFixed(1)}%
+    to <strong>{astraComparison.kinexSuccessRate.toFixed(1)}%</strong> while using
+    <strong>{astraComparison.tokenReductionPercent.toFixed(1)}% fewer total tokens</strong>
+    than Codex + Bare action API (including fresh input, cache reads, and output).
+    See the <a href={benchmark.source}>Hugging Face release</a>
+    for evaluation details, demos, and agent traces.
+  </p>
+  <fieldset class="scope-picker">
+    <legend class="sr-only">Choose benchmark results</legend>
+    {benchmarkScopes.map((scope) => (
+      <label>
+        <input class="sr-only" type="radio" name="benchmark-scope" value={scope.id} checked={scope.id === 'average'} />
+        <span>{scope.label}</span>
+      </label>
+    ))}
+  </fieldset>
+  <div class="scope-summary" aria-live="polite" aria-atomic="true">
+    {benchmarkScopes.map((scope) => (
+      <p data-scope-panel={scope.id} hidden={scope.id !== 'average'}>
+        {scope.id === 'average' ? 'All benchmarks' : scope.label} · {scope.tasks} tasks per setup
+      </p>
+    ))}
+  </div>
+  <div class="model-grid">
+    <section class="model" aria-labelledby="astra-heading">
+      <header><h3 id="astra-heading">GPT-6 Astra</h3><span>Codex · high effort</span></header>
+      <BenchmarkChart metric="success" />
+      <BenchmarkChart metric="cost" />
+    </section>
+    <section class="model" aria-labelledby="opus-heading">
+      <header><h3 id="opus-heading">Claude Opus 5.5</h3><span>Claude Code · results pending</span></header>
+      <BenchmarkChart metric="success" pending />
+      <BenchmarkChart metric="cost" pending />
+    </section>
+  </div>
+  <p class="chart-note">
+    Average weights all 132 tasks equally. Success rate is successful tasks / evaluated tasks;
+    cost is the mean API-equivalent estimate in USD per task, including successful and failed episodes.
+    Opus 5.5 results are not yet available.
+  </p>
+  <div class="source-links">
+    <a href={benchmark.source}>Evaluation details, demos, and agent traces ↗</a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.benchmark-content').forEach((section) => {
+    section.querySelectorAll<HTMLInputElement>('input[name="benchmark-scope"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        if (!input.checked) return;
+        section.querySelectorAll<HTMLElement>('[data-scope-panel]').forEach((panel) => {
+          panel.hidden = panel.dataset.scopePanel !== input.value;
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .benchmark-content { margin-top: 16px; }
+  h3 { margin: 0 0 16px; font-size: var(--fs-4); font-weight: 600; letter-spacing: -0.02em; }
+  p { color: var(--ink-2); margin: 0 0 16px; line-height: 1.75; }
+  strong { color: var(--ink); font-weight: 600; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  .scope-picker { display: flex; flex-wrap: wrap; gap: 6px; margin: 28px 0 8px; padding: 0; border: 0; }
+  .scope-picker label { cursor: pointer; }
+  .scope-picker span { display: block; padding: 6px 14px; border: 1px solid var(--rule); border-radius: 4px; font-size: var(--fs-1); background: var(--panel); color: var(--ink-2); }
+  .scope-picker input:checked + span { border-color: var(--accent); background: var(--accent-bg); color: var(--accent-ink); }
+  .scope-picker input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .scope-picker label:hover span { border-color: var(--accent); }
+  .scope-summary p { margin: 0; font-size: var(--fs-1); }
+  .model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 20px; }
+  .model { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 16px; }
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 14px; }
+  header h3 { font-size: var(--fs-3); margin: 0 0 4px; }
+  header span { color: var(--ink-2); font-size: var(--fs-1); }
+  .chart-note { margin: 20px 0 12px; font-size: var(--fs-1); }
+  .source-links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: var(--fs-1); }
+  @media (max-width: 860px) { .model-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+</style>
