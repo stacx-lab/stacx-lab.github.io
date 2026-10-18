@@ -1,6 +1,6 @@
 ---
-title: ABB RobotStudio tutorial
-description: A recorded example of connecting Kinex to an ABB simulation and verifying a six-block sorting task.
+title: Kinex with ABB RobotStudio
+description: A two-minute walkthrough of onboarding and color sorting in simulation.
 group: Guides
 order: 26
 label: ABB RobotStudio
@@ -8,6 +8,8 @@ label: ABB RobotStudio
 
 import { url as assetUrl } from '../../lib/url';
 import walkthroughVideo from '../../../gallery/.masters/abb-sorting.mp4?url';
+
+[Kinex](/docs/) connects a coding agent to robots and simulators. [ABB RobotStudio](https://www.abb.com/global/en/areas/robotics/products/software/robotstudio-suite/robotstudio-desktop) provides robot simulation and offline programming. This recording shows Kinex onboarding an existing RobotStudio setup and using an ABB IRB 1200 to sort six blocks by color.
 
 ## Watch the walkthrough
 
@@ -19,62 +21,15 @@ import walkthroughVideo from '../../../gallery/.masters/abb-sorting.mp4?url';
     poster={assetUrl('/media/gallery/abb-sorting/abb-sorting.poster.jpg')}
     aria-label="Kinex ABB RobotStudio onboarding and sorting walkthrough"
   />
-  <figcaption>Two-minute edit: onboarding at 0:00, sorting at 0:53, and final verification at 1:46. Accelerated sections are labeled in the video.</figcaption>
+  <figcaption>Edited replay: recorded RobotStudio footage on the left, the Kinex session log on the right, and an interpolated robot diagram. Speed changes are labeled.</figcaption>
 </figure>
 
-Recorded with RobotStudio 2026.3.1 on Windows, Kinex 1.0.0 in WSL Ubuntu, and GPT-6-Astra with high reasoning effort and auto mode. RobotStudio appears on the left, Kinex on the right. The small robot diagram interpolates recorded joint poses.
+## What the video shows
 
-## 1. Prepare the simulation
+The station and local bridge are already running when the recording begins.
 
-This example starts with a prepared IRB1200_5_90 station, six blocks, two bins, and a simulated suction tool. The station, bridge add-in, and `abb.py` client are project-specific prerequisites, not bundled with Kinex.
+1. **Onboarding · 0:00–0:53.** Kinex launches with GPT-6-Astra, high reasoning effort, and auto mode. It inspects the existing bridge, prepares device profiles and drivers, and verifies the connection.
+2. **Sorting · 0:53–1:46.** Kinex writes and runs a Python routine that reads the live scene, moves each block into its matching bin, and checks each placement.
+3. **Verification · 1:46–2:00.** Kinex confirms six correctly sorted blocks, zero in the wrong bin, and no object held, then reports the saved station and results.
 
-Open the station and add-in in RobotStudio with the RAPID motion module loaded and the virtual controller in Auto mode. The bridge accepts only virtual controllers.
-
-In WSL Ubuntu, [install Kinex](/docs/#install-and-run), open the local project folder, and check the connection:
-
-```sh
-python3 abb.py scene
-```
-
-The response should report controller status, tool position, blocks, bin slots, and whether an object is held.
-
-## 2. Connect the bridge
-
-The Python client exchanges JSON files with a C# RobotStudio add-in through a local folder accessible from Windows and WSL. The add-in reads the station through the RobotStudio SDK and sends RAPID `MoveL` or `MoveJ` commands to the virtual controller.
-
-Positions use meters in the station frame. Each motion request waits for controller completion and verifies the tool position before returning. Onboarding wraps the connection in two [devices](/docs/devices/):
-
-| Device | Role in this integration |
-| --- | --- |
-| `abb` (`other`) | Cartesian motion, scene reads, simulated grasp/release, snapshots, save, and stop. Joint positions are read-only. |
-| `world` (`world`) | Host-clock reads and waiting; the bridge exposes no simulator clock or stepping. |
-
-## 3. Onboard in Kinex
-
-Start Kinex from the local project folder with the recorded settings:
-
-```sh
-kinex --auto --provider openai --model gpt-6-astra --thinking high
-```
-
-Give [onboarding](/docs/onboarding/#onboarding) the task and connection details:
-
-```text
-/onboarding Prepare this ABB RobotStudio IRB 1200 simulation for sorting
-six red and blue blocks into matching bins. Read the task instructions,
-abb.py, and the RobotStudio bridge. Reuse the running virtual controller
-and existing connection. Inspect the live scene, register the supported
-devices, and verify them before sorting.
-```
-
-Kinex inspects the bridge, saves profiles and drivers under `.kinex/`, and checks the devices. This run verified scene reads, controller status, host-clock behavior, and an idle stop acknowledgement. Sorting used station geometry, so no camera calibration was needed.
-
-## 4. Sort and verify
-
-Ask Kinex to sort all six blocks by color, verify each placement, and save the final scene and station.
-
-For each block, the agent reads the scene, selects a free slot in the matching bin, picks the block, lifts before lateral travel, then lowers and releases it. A fresh scene read confirms placement before the next pick.
-
-The final check reports **six correctly sorted, zero in the wrong bin, and no object held**. To reconnect later, reopen the station and bridge, start Kinex in the same workspace, load the devices, and run `/ping all`.
-
-The example uses scene metadata and kinematic suction attachment, without contact-force or slip simulation. Collision checks sample the robot against the table and bin walls.
+The task uses simulator metadata for object colors and positions, with simulated suction attachment.
