@@ -1,6 +1,6 @@
 ---
 title: ABB RobotStudio tutorial
-description: How an existing ABB RobotStudio simulation was connected to Kinex, onboarded, and used to sort six blocks into matching bins.
+description: A recorded example of connecting Kinex to an ABB simulation and verifying a six-block sorting task.
 group: Guides
 order: 26
 label: ABB RobotStudio
@@ -8,8 +8,6 @@ label: ABB RobotStudio
 
 import { url as assetUrl } from '../../lib/url';
 import walkthroughVideo from '../../../gallery/.masters/abb-sorting.mp4?url';
-
-This walkthrough follows the recorded integration of an ABB IRB 1200 in RobotStudio: prepare the simulator connection, onboard it in Kinex, then sort six red and blue blocks into matching bins.
 
 ## Watch the walkthrough
 
@@ -24,44 +22,42 @@ This walkthrough follows the recorded integration of an ABB IRB 1200 in RobotStu
   <figcaption>Two-minute edit: onboarding at 0:00, sorting at 0:53, and final verification at 1:46. Accelerated sections are labeled in the video.</figcaption>
 </figure>
 
-The recording uses RobotStudio 2026.3.1 on Windows, Kinex 1.0.0 in WSL Ubuntu, and GPT-6-Astra with high reasoning effort and auto mode. RobotStudio is on the left; the Kinex terminal is on the right. The small robot diagram above the terminal is reconstructed from recorded joint poses with interpolation.
+Recorded with RobotStudio 2026.3.1 on Windows, Kinex 1.0.0 in WSL Ubuntu, and GPT-6-Astra with high reasoning effort and auto mode. RobotStudio appears on the left, Kinex on the right. The small robot diagram interpolates recorded joint poses.
 
-## 1. Prepare the RobotStudio workspace
+## 1. Prepare the simulation
 
-The recorded workspace already contained an IRB1200_5_90 virtual controller, a table, six blocks, two color-matched bins, and a simulated suction tool. The station and its project-specific bridge were prepared before Kinex onboarding. These station and bridge files are separate from the standard Kinex installation; the steps below summarize how that integration was assembled.
+This example starts with a prepared IRB1200_5_90 station, six blocks, two bins, and a simulated suction tool. The station, bridge add-in, and `abb.py` client are project-specific prerequisites, not bundled with Kinex.
 
-On Windows, open the saved RobotStudio station with its bridge add-in. Load the RAPID motion module and check that the virtual controller is in Auto mode with motors on. The bridge used here rejects physical controllers.
+Open the station and add-in in RobotStudio with the RAPID motion module loaded and the virtual controller in Auto mode. The bridge accepts only virtual controllers.
 
-In WSL Ubuntu, [install Kinex](/docs/#install-and-run) and open the shared workspace containing the Python bridge client, `abb.py`. Check the connection before starting the agent:
+In WSL Ubuntu, [install Kinex](/docs/#install-and-run), open the shared workspace, and check the connection:
 
 ```sh
 python3 abb.py scene
 ```
 
-A fresh response should identify the virtual controller and report the tool position, six blocks, matching bin slots, and whether an object is held.
+The response should report controller status, tool position, blocks, bin slots, and whether an object is held.
 
-## 2. Expose the simulator through a bridge
+## 2. Connect the bridge
 
-The Python client exchanges JSON request and response files with a C# RobotStudio add-in through a shared directory. The add-in reads the station through the RobotStudio SDK and sends RAPID `MoveL` or `MoveJ` commands to the virtual controller. This connection uses the existing ABB controller and SDK directly.
+The Python client exchanges JSON files with a C# RobotStudio add-in through a shared directory. The add-in reads the station through the RobotStudio SDK and sends RAPID `MoveL` or `MoveJ` commands to the virtual controller.
 
-For this task, the bridge exposes scene reads, Cartesian motion, object attachment and release, snapshots, station saving, and stopping. Positions use meters in the station coordinate frame. Motion requests wait for controller completion and check the resulting tool position before returning.
-
-Kinex onboarding wraps that connection in two [devices](/docs/devices/):
+Positions use meters in the station frame. Each motion request waits for controller completion and verifies the tool position before returning. Onboarding wraps the connection in two [devices](/docs/devices/):
 
 | Device | Role in this integration |
 | --- | --- |
-| `abb`, type `other` | The custom interface for Cartesian motion, scene reads, simulated grasp/release, and station operations. Joint positions are observations; this bridge does not expose joint-position commands. |
-| `world`, type `world` | Host-clock reads and waiting. The bridge exposes no simulator clock or step operation, so this device provides wall-time pacing. |
+| `abb` (`other`) | Cartesian motion, scene reads, simulated grasp/release, snapshots, save, and stop. Joint positions are read-only. |
+| `world` (`world`) | Host-clock reads and waiting; the bridge exposes no simulator clock or stepping. |
 
-## 3. Onboard the existing connection
+## 3. Onboard in Kinex
 
-Start Kinex from the shared workspace. The recording uses:
+Start Kinex from the shared workspace with the recorded settings:
 
 ```sh
 kinex --auto --provider openai --model gpt-6-astra --thinking high
 ```
 
-Give [onboarding](/docs/onboarding/#onboarding) the task and the existing connection details. A concise version of the recorded request is:
+Give [onboarding](/docs/onboarding/#onboarding) the task and connection details:
 
 ```text
 /onboarding Prepare this ABB RobotStudio IRB 1200 simulation for sorting
@@ -71,14 +67,14 @@ and existing connection. Inspect the live scene, register the supported
 devices, and verify them before sorting.
 ```
 
-Kinex inspects the client and bridge, records the workspace and device profiles under `.kinex/`, prepares drivers, then loads and checks the connection. In this run, verification covered a live scene read, controller status, host-clock behavior, and an idle stop acknowledgement. The station supplied the geometry needed for sorting, so no camera calibration was performed.
+Kinex inspects the bridge, saves profiles and drivers under `.kinex/`, and checks the devices. This run verified scene reads, controller status, host-clock behavior, and an idle stop acknowledgement. Sorting used station geometry, so no camera calibration was needed.
 
 ## 4. Sort and verify
 
-After onboarding, ask Kinex to sort all six blocks by their observed colors, verify each placement, and save the final scene and station.
+Ask Kinex to sort all six blocks by color, verify each placement, and save the final scene and station.
 
-For each block, the agent reads the live scene, selects a free slot in the matching bin, approaches above the block, descends and attaches it, lifts before moving sideways, then lowers and releases it at the slot. It reads the scene again to check the actual placement before continuing.
+For each block, the agent reads the scene, selects a free slot in the matching bin, picks the block, lifts before lateral travel, then lowers and releases it. A fresh scene read confirms placement before the next pick.
 
-The recorded final check reports **six correctly sorted, zero in the wrong bin, and no object held**. The workspace retains the device profiles and drivers, so later sessions can reopen the station and bridge, load the devices, and check the connection with `/ping all`.
+The final check reports **six correctly sorted, zero in the wrong bin, and no object held**. To reconnect later, reopen the station and bridge, start Kinex in the same workspace, load the devices, and run `/ping all`.
 
-This example uses simulator metadata for object colors and positions, plus kinematic suction attachment. It does not model contact forces or slipping. Collision checks sample the robot against the table and bin walls; the recording demonstrates the simulation integration and task workflow.
+The example uses scene metadata and kinematic suction attachment, without contact-force or slip simulation. Collision checks sample the robot against the table and bin walls.
