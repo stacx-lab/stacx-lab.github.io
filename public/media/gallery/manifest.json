@@ -1,9 +1,9 @@
 {
   "schema": "kinex/gallery/1",
   "notes": [
-    "Delivery videos are compressed at 1920\u00d71080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
+    "Delivery videos are compressed at 1920×1080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
     "Original frame order, duration, cuts, and variable speed are preserved; container timestamp origins are normalized to zero.",
-    "H.264: libx264 slow CRF 28, faststart. WebM: libvpx-vp9 good cpu-used 3 CRF 38."
+    "H.264 and WebM encoder settings are recorded per clip below."
   ],
   "clips": [
     {
@@ -348,6 +348,70 @@
       "source_first_pts_s": 0.0,
       "delivery_first_pts_s": 0.0,
       "frame_count": 1350
+    },
+    {
+      "id": "abb-sorting",
+      "source": "gallery/.masters/abb-sorting.mp4",
+      "source_sha256": "9d25426d7e2cd4e9a517f9f33c05198cfe64701ad84af62fc52576eba05a26ea",
+      "source_bytes": 5771916,
+      "mp4_sha256": "56185bd9e0a241b0a7e42b131bda4809536c638c2b3347ae25d1ec456ae5c72b",
+      "duration_s": 120,
+      "fps": 30,
+      "frame_count": 3600,
+      "width": 1920,
+      "height": 1080,
+      "playback_rate": 1,
+      "robot": "ABB IRB 1200",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "mode": "auto",
+      "environment": "Simulator",
+      "metadata_source": "Recorded Kinex session and RobotStudio bridge evidence; gallery/abb-sorting/abb-sorting.provenance.json.",
+      "source_first_pts_s": 0,
+      "delivery_first_pts_s": 0,
+      "files": {
+        "mp4": {
+          "bytes": 3054777,
+          "sha256": "56185bd9e0a241b0a7e42b131bda4809536c638c2b3347ae25d1ec456ae5c72b"
+        },
+        "webm": {
+          "bytes": 3740185,
+          "sha256": "a01fe2e28de149a47cfa68a1d5fec98b27144057f982648e0f1e3ebe0bac294e"
+        },
+        "poster.jpg": {
+          "bytes": 191691,
+          "sha256": "9f391a8ddd9c435f8e0948ce59e07d42b23e7fef52a7836faa3eedd8fdcf72a6"
+        }
+      },
+      "encoder_settings": {
+        "mp4": [
+          "-c:v",
+          "libx264",
+          "-preset",
+          "slow",
+          "-crf",
+          "28",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart"
+        ],
+        "webm": [
+          "-c:v",
+          "libvpx-vp9",
+          "-deadline",
+          "good",
+          "-cpu-used",
+          "4",
+          "-crf",
+          "38",
+          "-b:v",
+          "0",
+          "-row-mt",
+          "1"
+        ]
+      },
+      "provenance": "gallery/abb-sorting/abb-sorting.provenance.json"
     }
   ]
 }
