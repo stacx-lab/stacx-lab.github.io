@@ -30,7 +30,7 @@ This example starts with a prepared IRB1200_5_90 station, six blocks, two bins, 
 
 Open the station and add-in in RobotStudio with the RAPID motion module loaded and the virtual controller in Auto mode. The bridge accepts only virtual controllers.
 
-In WSL Ubuntu, [install Kinex](/docs/#install-and-run), open the shared workspace, and check the connection:
+In WSL Ubuntu, [install Kinex](/docs/#install-and-run), open the local project folder, and check the connection:
 
 ```sh
 python3 abb.py scene
@@ -40,7 +40,7 @@ The response should report controller status, tool position, blocks, bin slots, 
 
 ## 2. Connect the bridge
 
-The Python client exchanges JSON files with a C# RobotStudio add-in through a shared directory. The add-in reads the station through the RobotStudio SDK and sends RAPID `MoveL` or `MoveJ` commands to the virtual controller.
+The Python client exchanges JSON files with a C# RobotStudio add-in through a local folder accessible from Windows and WSL. The add-in reads the station through the RobotStudio SDK and sends RAPID `MoveL` or `MoveJ` commands to the virtual controller.
 
 Positions use meters in the station frame. Each motion request waits for controller completion and verifies the tool position before returning. Onboarding wraps the connection in two [devices](/docs/devices/):
 
@@ -51,7 +51,7 @@ Positions use meters in the station frame. Each motion request waits for control
 
 ## 3. Onboard in Kinex
 
-Start Kinex from the shared workspace with the recorded settings:
+Start Kinex from the local project folder with the recorded settings:
 
 ```sh
 kinex --auto --provider openai --model gpt-6-astra --thinking high
