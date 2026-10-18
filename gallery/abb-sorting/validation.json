@@ -1,0 +1,368 @@
+{
+  "source_frame_zero": true,
+  "all_source_time_retained": true,
+  "monotonic_frame_map": true,
+  "registered_device_ids": [
+    "abb",
+    "world"
+  ],
+  "motion_windows": [
+    {
+      "source_start_s": 422.16428995132446,
+      "source_end_s": 424.05029582977295,
+      "output_seconds": 0.5927453164258694
+    },
+    {
+      "source_start_s": 424.05029582977295,
+      "source_end_s": 425.998193025589,
+      "output_seconds": 0.649299065272011
+    },
+    {
+      "source_start_s": 425.998193025589,
+      "source_end_s": 429.2191379070282,
+      "output_seconds": 1.2839424484306505
+    },
+    {
+      "source_start_s": 429.2191379070282,
+      "source_end_s": 432.6085138320923,
+      "output_seconds": 1.812383187409786
+    },
+    {
+      "source_start_s": 432.6085138320923,
+      "source_end_s": 435.70658683776855,
+      "output_seconds": 1.0326910018920898
+    },
+    {
+      "source_start_s": 435.70658683776855,
+      "source_end_s": 438.84249687194824,
+      "output_seconds": 1.2648634952063276
+    },
+    {
+      "source_start_s": 438.84249687194824,
+      "source_end_s": 442.2269878387451,
+      "output_seconds": 1.8014888721251907
+    },
+    {
+      "source_start_s": 442.2269878387451,
+      "source_end_s": 447.0216028690338,
+      "output_seconds": 1.5982050100962297
+    },
+    {
+      "source_start_s": 447.0216028690338,
+      "source_end_s": 450.31693482398987,
+      "output_seconds": 1.388040082461707
+    },
+    {
+      "source_start_s": 450.31693482398987,
+      "source_end_s": 453.60061287879944,
+      "output_seconds": 1.6978486211328203
+    },
+    {
+      "source_start_s": 453.60061287879944,
+      "source_end_s": 456.70959091186523,
+      "output_seconds": 1.0363260110219414
+    },
+    {
+      "source_start_s": 456.70959091186523,
+      "source_end_s": 459.8466649055481,
+      "output_seconds": 1.3356966135446555
+    },
+    {
+      "source_start_s": 459.8466649055481,
+      "source_end_s": 463.2702398300171,
+      "output_seconds": 1.7440717261786176
+    },
+    {
+      "source_start_s": 463.2702398300171,
+      "source_end_s": 468.2303948402405,
+      "output_seconds": 1.6533850034077915
+    },
+    {
+      "source_start_s": 468.2303948402405,
+      "source_end_s": 471.5342538356781,
+      "output_seconds": 1.3034948842219336
+    },
+    {
+      "source_start_s": 471.5342538356781,
+      "source_end_s": 474.9298059940338,
+      "output_seconds": 1.822527534048504
+    },
+    {
+      "source_start_s": 474.9298059940338,
+      "source_end_s": 478.0071349143982,
+      "output_seconds": 1.0257763067881314
+    },
+    {
+      "source_start_s": 478.0071349143982,
+      "source_end_s": 481.0616979598999,
+      "output_seconds": 1.3197177083520728
+    },
+    {
+      "source_start_s": 481.0616979598999,
+      "source_end_s": 484.41117000579834,
+      "output_seconds": 1.707846022453964
+    },
+    {
+      "source_start_s": 484.41117000579834,
+      "source_end_s": 489.37148904800415,
+      "output_seconds": 1.653439680735275
+    },
+    {
+      "source_start_s": 489.37148904800415,
+      "source_end_s": 492.5112659931183,
+      "output_seconds": 1.3222046149056297
+    },
+    {
+      "source_start_s": 492.5112659931183,
+      "source_end_s": 495.83084297180176,
+      "output_seconds": 1.723798726699556
+    },
+    {
+      "source_start_s": 495.83084297180176,
+      "source_end_s": 498.9193079471588,
+      "output_seconds": 1.0294883251190186
+    },
+    {
+      "source_start_s": 498.9193079471588,
+      "source_end_s": 502.05709505081177,
+      "output_seconds": 1.2665243232111294
+    },
+    {
+      "source_start_s": 502.05709505081177,
+      "source_end_s": 505.5460648536682,
+      "output_seconds": 1.8352800126313298
+    },
+    {
+      "source_start_s": 505.5460648536682,
+      "source_end_s": 510.46487498283386,
+      "output_seconds": 1.6396033763885498
+    },
+    {
+      "source_start_s": 510.46487498283386,
+      "source_end_s": 513.7742619514465,
+      "output_seconds": 1.403470047698434
+    },
+    {
+      "source_start_s": 513.7742619514465,
+      "source_end_s": 517.1437549591064,
+      "output_seconds": 1.7157086447317482
+    },
+    {
+      "source_start_s": 517.1437549591064,
+      "source_end_s": 520.1471059322357,
+      "output_seconds": 1.0011169910430908
+    },
+    {
+      "source_start_s": 520.1471059322357,
+      "source_end_s": 523.2671420574188,
+      "output_seconds": 1.2376905783924315
+    },
+    {
+      "source_start_s": 523.2671420574188,
+      "source_end_s": 526.7700550556183,
+      "output_seconds": 1.8628444964077602
+    },
+    {
+      "source_start_s": 526.7700550556183,
+      "source_end_s": 531.5319418907166,
+      "output_seconds": 1.5872956116994175
+    },
+    {
+      "source_start_s": 531.5319418907166,
+      "source_end_s": 534.750058889389,
+      "output_seconds": 1.351589901370673
+    },
+    {
+      "source_start_s": 534.750058889389,
+      "source_end_s": 538.0402419567108,
+      "output_seconds": 1.710728820966736
+    },
+    {
+      "source_start_s": 538.0402419567108,
+      "source_end_s": 541.1257438659668,
+      "output_seconds": 1.02850063641867
+    },
+    {
+      "source_start_s": 541.1257438659668,
+      "source_end_s": 544.2903199195862,
+      "output_seconds": 1.2780433620974776
+    },
+    {
+      "source_start_s": 544.2903199195862,
+      "source_end_s": 547.7441658973694,
+      "output_seconds": 1.8209826820426969
+    }
+  ],
+  "critical_windows": [
+    {
+      "kind": "grasp",
+      "source_start_s": 428.8224419593811,
+      "source_end_s": 430.2724419593811,
+      "output_seconds": 1.3418803418803904
+    },
+    {
+      "kind": "release",
+      "source_start_s": 438.4329189300537,
+      "source_end_s": 439.88291893005373,
+      "output_seconds": 1.3418803418803904
+    },
+    {
+      "kind": "grasp",
+      "source_start_s": 449.80998983383176,
+      "source_end_s": 451.2599898338318,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "release",
+      "source_start_s": 459.33915104866026,
+      "source_end_s": 460.7891510486603,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "grasp",
+      "source_start_s": 471.14879884719846,
+      "source_end_s": 472.5987988471985,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "release",
+      "source_start_s": 480.5381618976593,
+      "source_end_s": 481.9881618976593,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "grasp",
+      "source_start_s": 492.0237618923187,
+      "source_end_s": 493.47376189231875,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "release",
+      "source_start_s": 501.64607801437376,
+      "source_end_s": 503.0960780143738,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "grasp",
+      "source_start_s": 513.2523788452148,
+      "source_end_s": 514.7023788452149,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "release",
+      "source_start_s": 522.8879848957062,
+      "source_end_s": 524.3379848957062,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "grasp",
+      "source_start_s": 534.2580060005188,
+      "source_end_s": 535.7080060005188,
+      "output_seconds": 1.3418803418803833
+    },
+    {
+      "kind": "release",
+      "source_start_s": 543.8757030010223,
+      "source_end_s": 545.3257030010224,
+      "output_seconds": 1.3418803418803833
+    }
+  ],
+  "elapsed_clock": "checked for all 3600 output frames; explicitly recorded wall time",
+  "timing_invariants": "12 repository tests passed",
+  "source_master_unchanged": true,
+  "visual_review": "Opening launch, onboarding error/recovery, code, motion, snapshot and final result reviewed at full resolution",
+  "animated_device_map": {
+    "moving_intervals": 37,
+    "all_moves_visible": true,
+    "minimum_screen_displacement_px": 9.20000373512446,
+    "onboarding_stationary": true,
+    "recorded_video_frame_map_unchanged": true,
+    "retiming_unchanged": true,
+    "max_endpoint_tcp_error_m": 3.0531133177191805e-16
+  },
+  "terminal_sync": {
+    "onboarding_tool_calls": 48,
+    "all_calls_displayed_once": true,
+    "result_boundaries_checked": 32,
+    "result_visibility": "no early result; full result at completion",
+    "scrollback_frames_checked": 3600,
+    "launch_matches_original_source_frame": 120
+  },
+  "outputs": [
+    {
+      "file": "gallery/.masters/abb-sorting.mp4",
+      "bytes": 5771916,
+      "sha256": "9d25426d7e2cd4e9a517f9f33c05198cfe64701ad84af62fc52576eba05a26ea",
+      "codec": "h264",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "frames": 3600,
+      "duration_s": 120.0,
+      "timestamp_origin_s": 0.0,
+      "max_timestamp_error_s": 3.333333467026023e-07,
+      "full_decode": "passed"
+    },
+    {
+      "file": "public/media/gallery/abb-sorting/abb-sorting.mp4",
+      "bytes": 3054777,
+      "sha256": "56185bd9e0a241b0a7e42b131bda4809536c638c2b3347ae25d1ec456ae5c72b",
+      "codec": "h264",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "frames": 3600,
+      "duration_s": 120.0,
+      "timestamp_origin_s": 0.0,
+      "max_timestamp_error_s": 3.333333467026023e-07,
+      "full_decode": "passed",
+      "encoder_options": [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "slow",
+        "-crf",
+        "28",
+        "-pix_fmt",
+        "yuv420p",
+        "-movflags",
+        "+faststart"
+      ]
+    },
+    {
+      "file": "public/media/gallery/abb-sorting/abb-sorting.webm",
+      "bytes": 3740185,
+      "sha256": "a01fe2e28de149a47cfa68a1d5fec98b27144057f982648e0f1e3ebe0bac294e",
+      "codec": "vp9",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "fps": 30,
+      "frames": 3600,
+      "duration_s": 120.0,
+      "timestamp_origin_s": 0.0,
+      "max_timestamp_error_s": 0.00033333333334439885,
+      "full_decode": "passed",
+      "encoder_options": [
+        "-c:v",
+        "libvpx-vp9",
+        "-deadline",
+        "good",
+        "-cpu-used",
+        "4",
+        "-crf",
+        "38",
+        "-b:v",
+        "0",
+        "-row-mt",
+        "1"
+      ]
+    }
+  ],
+  "website_copy_sha256_matches": true
+}
