@@ -101,20 +101,4 @@ export const galleryVideos: GalleryVideo[] = [
     effort: 'medium',
     environment: 'Real world',
   },
-  {
-    id: 'abb-sorting',
-    title: 'Sorting objects into bins',
-    description: 'Onboards an existing ABB RobotStudio setup, sorts six red and blue blocks into matching bins, and verifies every placement.',
-    highlights: [
-      { moments: [{ start: 0, end: 53.25 }], title: 'Robot onboarding', text: 'Inspects the existing RobotStudio bridge, registers the robot and world devices, and verifies the connection before sorting.' },
-      { moments: [{ start: 53.25, end: 105.89 }], title: 'Color sorting', text: 'Uses simulated scene metadata to choose matching bin slots and move six blocks with a simulated suction tool.' },
-      { moments: [{ start: 105.89, end: 120 }], title: 'Placement verification', text: 'Checks each released block and finishes with six correctly sorted, zero in the wrong bin, and none held.' },
-    ],
-    duration: '02:00',
-    robot: 'ABB IRB 1200',
-    embodiment: 'Single arm',
-    model: 'GPT-6-Astra',
-    effort: 'high',
-    environment: 'Simulator · RobotStudio',
-  },
 ];
