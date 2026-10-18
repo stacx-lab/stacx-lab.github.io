@@ -1,7 +1,7 @@
 {
   "schema": "kinex/gallery/1",
   "notes": [
-    "Delivery videos are compressed at 1920×1080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
+    "Delivery videos are compressed at 1920\u00d71080, 30 FPS; archival MP4 masters are retained in gallery/.masters/.",
     "Original frame order, duration, cuts, and variable speed are preserved; container timestamp origins are normalized to zero.",
     "H.264 and WebM encoder settings are recorded per clip below."
   ],
@@ -366,7 +366,7 @@
       "effort": "high",
       "mode": "auto",
       "environment": "Simulator",
-      "metadata_source": "Recorded Kinex session and RobotStudio bridge evidence; gallery/abb-sorting/abb-sorting.provenance.json.",
+      "metadata_source": "Recorded Kinex session and RobotStudio bridge evidence; production records retained separately.",
       "source_first_pts_s": 0,
       "delivery_first_pts_s": 0,
       "files": {
@@ -410,8 +410,7 @@
           "-row-mt",
           "1"
         ]
-      },
-      "provenance": "gallery/abb-sorting/abb-sorting.provenance.json"
+      }
     }
   ]
 }
