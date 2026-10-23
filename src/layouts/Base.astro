@@ -44,7 +44,7 @@ const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.u
     <a class="sr-only" href="#main">Skip to content</a>
     <Nav section={section} />
     <slot />
-    {footer && (section === 'kinex' ? <Footer /> : <footer class="lab-footer wrap"><a href="/">STACX Lab</a><a href="/kinex/">Kinex</a><a href="/blog/">Blog</a></footer>)}
+    {footer && (section === 'kinex' ? <Footer /> : <footer class="lab-footer wrap"><a href="/">STACX Lab</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a></footer>)}
     {section === 'kinex' && <Search />}
   </body>
 </html>

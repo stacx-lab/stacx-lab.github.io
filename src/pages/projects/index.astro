@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects';
+---
+<Base title="Projects" description="Open-source agent systems, reinforcement learning libraries, and control tools from STACX Lab." section="lab">
+  <main id="main" class="wrap projects-page">
+    <header class="intro grid-bg"><p class="kicker">STACX Lab</p><h1>Projects</h1><p>Research in code.</p><p class="description">Open-source tools for agents, learning, and control.</p></header>
+    <div class="project-grid">{projects.map((project) => <article>
+      <p class="category">{project.category}</p><h2>{project.name}</h2><p class="summary">{project.description}</p>
+      <div class="project-links">{project.website && <a href={project.website}>Website ↗</a>}<a href={project.code}>Code ↗</a></div>
+    </article>)}</div>
+    <p class="source">Project catalog based on <a href="https://bo-dai.github.io/software.html">Bo Dai’s software page</a>, alongside Kinex.</p>
+  </main>
+</Base>
+<style>
+  .projects-page { max-width: 1120px; padding-bottom: 72px; min-height: calc(100vh - 125px); }
+  .intro { padding-block: 56px 36px; border-bottom: 1px solid var(--rule); }
+  h1 { font-size: var(--fs-5); line-height: 1.1; margin: 16px 0 24px; letter-spacing: -.025em; }
+  .intro > p:not(.kicker) { margin: 0 0 8px; font-size: 22px; color: var(--ink-2); }
+  .intro > p.description { font-size: 16px; }
+  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 32px; }
+  article { display: flex; flex-direction: column; align-items: start; padding: 28px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--panel); min-width: 0; }
+  .category { color: var(--ink-3); font: 12px var(--font-mono); margin: 0 0 20px; }
+  h2 { font-size: 23px; line-height: 1.35; margin: 0 0 14px; letter-spacing: -.02em; }
+  .summary { color: var(--ink-2); margin: 0 0 24px; }
+  .project-links { display: flex; gap: 24px; margin-top: auto; color: var(--accent-ink); font-size: 14px; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .source { margin: 28px 0 0; font-size: 12px; color: var(--ink-3); }
+  .source a { text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } article { padding: 24px; } }
+</style>

@@ -1,0 +1,6 @@
+@font-face{font-family:'Lato';font-style:normal;font-weight:400;font-display:swap;src:url('./lato-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Lato';font-style:normal;font-weight:700;font-display:swap;src:url('./lato-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Lato';font-style:italic;font-weight:400;font-display:swap;src:url('./lato-latin-400-italic.woff2') format('woff2');}
+@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url('./roboto-slab-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:400;font-display:swap;src:url('./commit-mono-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:700;font-display:swap;src:url('./commit-mono-latin-700-normal.woff2') format('woff2');}

@@ -31,14 +31,16 @@ the website.
 ```
 src/pages/index.astro         / — lab homepage
 src/pages/kinex/               /kinex/ — project homepage and docs routes
-src/pages/blog/                /blog/ — blog roll and generated article routes
-src/content/blog/*.mdx         blog posts and publication metadata
-src/components/blog/           article-specific diagrams
+src/pages/projects/            /projects/ — software and project catalog
+src/pages/blog/index.astro     /blog/ — blog roll
+public/blog/<slug>/            self-contained post: index.html, post.json, assets/
+src/data/lab.ts                current students and former members
+src/data/projects.ts           project links and descriptions
 src/config.ts                 Kinex version, tagline, install cmd, repo, doc groups
 src/content/docs/*.md         docs (one file = one page; index.md = /kinex/docs/)
 src/data/hero-terminal.json   landing-page simulator walkthrough
 src/components/               Terminal, ArchDiagram, DeviceDiagram, Wordmark, Contributors, Sidebar, Toc, Search…
-src/layouts/                  Base (shared shell), Doc, Blog
+src/layouts/                  Base (shared shell), Doc
 src/styles/                   global.css (tokens, light/dark), prose.css (markdown)
 public/kinex/                 published Kinex images, camera observations, and videos
 .agents/skills/kinex-session-video/  video-generation skill, scripts, fonts, references
@@ -205,10 +207,12 @@ then copy reviewed delivery files into `public/kinex/media/gallery/<id>/`. The l
 
 `.github/workflows/deploy.yml` checks and builds on every push to `main` and publishes
 `dist/` directly to GitHub Pages. Set *Settings → Pages → Source* to **GitHub Actions**.
-The build mirrors the public URLs: `/`, `/kinex/`, `/kinex/docs/`, `/blog/`, and
+The build mirrors the public URLs: `/`, `/projects/`, `/kinex/`, `/kinex/docs/`, `/blog/`, and
 `/blog/<slug>/`. GitHub Pages redirects directory URLs without the trailing slash.
 The root `404.html` serves missing pages across the site. `SITE_URL` can override
-the origin; the site always builds at the root (there is no `BASE_PATH` setting).
+the origin of generated pages; standalone article canonical/social URLs must be
+updated in their HTML when moving hosts. The site always builds at the root
+(there is no `BASE_PATH` setting).
 
 Published Kinex assets live in `public/kinex/`, preserving `/kinex/img/`,
 `/kinex/media/`, and `/kinex/video/` URLs. Bundled shared assets live in `/_astro/`.
@@ -216,32 +220,58 @@ Published Kinex assets live in `public/kinex/`, preserving `/kinex/img/`,
 at the organization root. Pagefind indexes only `dist/kinex/` and writes its bundle
 to `/kinex/pagefind/`; blog pages do not load the Kinex search UI.
 
-## Add a blog post
+## Lab content
 
-Create `src/content/blog/<slug>.md` or `.mdx` with frontmatter:
+The homepage introduces the research and personnel; Projects and Blog are the
+lab navigation links. Research and personnel were reviewed against
+[Bo Dai’s homepage](https://bo-dai.github.io/) and
+[team page](https://bo-dai.github.io/team.html) on 2026-10-22. Project entries come
+from his [software page](https://bo-dai.github.io/software.html), plus Kinex.
+Update `src/data/lab.ts` and `src/data/projects.ts` as people and projects change.
+The principal investigator portrait is from `https://bo-dai.github.io/images/bodai.jpg`.
+Keep former members distinct from current students.
 
-```yaml
----
-title: A new post
-description: A short summary for the blog roll and social previews.
-published: "2026-10"          # publication month, newest first
-# Optional:
-author:
-  name: Author name
-  url: https://example.com/
-readingTime: "5 min read"
-topic: Agents and robotics
----
+## Add or edit a blog post
+
+Every article is a standalone directory copied unchanged into the published site:
+
+```
+public/blog/<slug>/
+  index.html           article HTML, including inline SVG figures
+  post.json            metadata used by the blog roll
+  assets/              all styles, scripts, fonts, images, and font licenses
 ```
 
-Write the body starting at `##`; the shared blog layout renders the title, summary,
-date, and byline. MDX posts can import diagrams from `src/components/blog/`.
-For a contents sidebar, add `contents` entries with `id`, `label`, and `number`,
-matching explicit section IDs in the body. The existing article is an example.
-The filename supplies the URL slug. Posts automatically appear on `/blog/` and
-in the sitemap; no route file, list edit, or deployment copy step is needed.
-Run `npm run check`, then `npm run preview` to review the complete site locally.
-Use trailing slashes in Astro preview; directory redirects are handled by GitHub Pages.
+Edit the HTML and resources directly. Use relative URLs such as
+`./assets/article.css` for rendering resources. Navigation may link to `/`,
+`/projects/`, `/blog/`, and other pages. The article must not depend on `/_astro/`
+assets or resources from another article or project. The existing post includes
+snapshots of the lab theme and navigation; keep these aligned when updating the
+shared site design. No MDX, duplicate article source, or generated article route
+is needed. Open `index.html` directly to read a post locally, or preview the site
+for root-relative navigation.
+
+`post.json` contains:
+
+```json
+{
+  "title": "A new post",
+  "description": "A short summary for the blog roll.",
+  "published": "2026-10",
+  "author": { "name": "Author name", "url": "https://example.com/" }
+}
+```
+
+`published` records the publication month; `author` is optional. The directory
+name supplies the slug. The blog roll and sitemap discover posts automatically
+and sort newest first. Set the HTML title, description, canonical URL, and social
+metadata consistently with `post.json`. Preserve existing section IDs when editing.
+
+Lab pages embed their CSS in the HTML to keep layout styles coupled to the page
+across deployments. Article styles use stable local filenames. Run `npm run check`
+for route, anchor, stylesheet dependency, and self-contained article checks, then
+`npm run preview`. Use trailing slashes in Astro preview; GitHub Pages handles
+directory redirects for URLs such as `/blog`.
 
 ### Cube video reproduction
 

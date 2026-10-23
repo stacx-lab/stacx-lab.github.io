@@ -1,40 +1,72 @@
 ---
 import Base from '../layouts/Base.astro';
-import Wordmark from '../components/Wordmark.astro';
+import { students, alumni } from '../data/lab';
 ---
-<Base description="Explore Kinex and the STACX Lab blog." section="lab">
-  <main id="main" class="wrap home">
-    <header class="grid-bg intro">
-      <p class="kicker">Agents · Robotics · Systems</p>
+<Base description="STACX Lab at Georgia Tech studies agent AI through generative models, representation learning, and reinforcement learning." section="lab">
+  <main id="main" class="wrap lab-home">
+    <header class="intro grid-bg">
+      <p class="kicker">Georgia Tech · Computational Science & Engineering</p>
       <h1>STACX Lab</h1>
-      <p>Our projects and ideas.</p>
+      <p class="lead">Learning to model the world.<br />Building agents that can act in it.</p>
+      <p class="about">We study <strong>agent AI</strong> through generative models, representation learning, and reinforcement learning. Our goal is to give agents the ability to make decisions and plan by modeling the world around them.</p>
+      <p class="about">Led by <a href="https://bo-dai.github.io/">Bo Dai</a> at Georgia Tech, our research connects the foundations of learning with practical agent systems.</p>
+      <div class="intro-links"><a href="/projects/">Explore our projects →</a><a href="#personnel">Meet the people ↓</a></div>
     </header>
-    <div class="destinations">
-      <a class="destination" href="/kinex/">
-        <span class="kicker">Project</span>
-        <h2><Wordmark size={30} /></h2>
-        <p>A general harness that connects coding agents to any physical robot.</p>
-        <span class="go">Explore Kinex →</span>
-      </a>
-      <a class="destination" href="/blog/">
-        <span class="kicker">Writing</span>
-        <h2>Blog</h2>
-        <p>Notes on agents, robotics, and the systems we build.</p>
-        <span class="go">Read the blog →</span>
-      </a>
-    </div>
+    <section class="research" aria-labelledby="research-title">
+      <div class="section-heading"><p class="kicker">Research</p><h2 id="research-title">From models to decisions</h2></div>
+      <div class="research-grid">
+        <article><span class="number">01</span><h3>Generative models</h3><p>Models of the world as a foundation for agents that can reason about what comes next.</p></article>
+        <article><span class="number">02</span><h3>Representation learning</h3><p>Representations that make complex, stochastic environments tractable for learning and control.</p></article>
+        <article><span class="number">03</span><h3>Reinforcement learning</h3><p>Learning to make decisions and plan, from algorithmic foundations to end-to-end agent systems.</p></article>
+      </div>
+    </section>
+    <section id="personnel" aria-labelledby="personnel-title">
+      <div class="section-heading"><p class="kicker">People</p><h2 id="personnel-title">Personnel</h2></div>
+      <div class="faculty">
+        <img src="/images/bo-dai.jpg" alt="Bo Dai" width="160" height="192" loading="lazy" />
+        <div><p class="role">Principal investigator</p><h3><a href="https://bo-dai.github.io/">Bo Dai ↗</a></h3><p>Assistant Professor<br />School of Computational Science & Engineering, Georgia Tech</p><p class="secondary">Also affiliated with Google DeepMind as a Senior Staff Research Scientist.</p><a class="contact" href="mailto:bodai@cc.gatech.edu">bodai@cc.gatech.edu</a></div>
+      </div>
+      <h3 class="group-title">Current students</h3>
+      <ul class="people-grid">{students.map((person) => <li><h4>{person.href ? <a href={person.href}>{person.name}<span aria-hidden="true"> ↗</span></a> : person.name}</h4><p>PhD student · Georgia Tech CSE</p></li>)}</ul>
+      <h3 class="group-title">Former members</h3>
+      <ul class="people-grid alumni">{alumni.map((person) => <li><h4><a href={person.href}>{person.name}<span aria-hidden="true"> ↗</span></a></h4><p>{person.degree}</p>{person.next && <p class="next">{person.next}</p>}</li>)}</ul>
+      <p class="source">Personnel and affiliations from <a href="https://bo-dai.github.io/team.html">Bo Dai’s team page</a>.</p>
+    </section>
   </main>
 </Base>
 <style>
-  .home { max-width: 1040px; min-height: calc(100vh - 125px); padding-bottom: 80px; }
-  .intro { padding-block: 80px 48px; border-bottom: 1px solid var(--rule); }
-  h1 { font-size: var(--fs-5); line-height: 1.1; letter-spacing: -.025em; margin: 16px 0 20px; }
-  .intro > p:last-child { font-size: 21px; color: var(--ink-2); margin: 0; }
-  .destinations { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 32px; }
-  .destination { padding: 28px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); display: flex; flex-direction: column; align-items: start; }
-  .destination:hover { border-color: var(--accent); }
-  h2 { font-size: 30px; line-height: 1.3; margin: 20px 0 12px; }
-  .destination p { margin: 0 0 24px; color: var(--ink-2); max-width: 38ch; }
-  .go { color: var(--accent-ink); font-size: 14px; margin-top: auto; }
-  @media (max-width: 640px) { .intro { padding-block: 48px 32px; } .destinations { grid-template-columns: 1fr; } }
+  .lab-home { max-width: 1120px; padding-bottom: 72px; }
+  .intro { padding-block: 64px 48px; border-bottom: 1px solid var(--rule); }
+  h1 { font-size: clamp(42px, 7vw, 74px); line-height: 1.08; margin: 22px 0 24px; letter-spacing: -.035em; }
+  .lead { font-family: var(--font-head); font-size: clamp(23px, 3vw, 34px); line-height: 1.4; margin: 0 0 28px; }
+  .about { max-width: 74ch; color: var(--ink-2); font-size: 18px; margin: 0 0 16px; }
+  .about a, .source a { text-decoration: underline; text-underline-offset: 3px; }
+  .intro-links { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 28px; font-size: 14px; color: var(--accent-ink); }
+  section { padding-top: 48px; scroll-margin-top: 24px; }
+  .section-heading { margin-bottom: 28px; }
+  .section-heading .kicker { margin: 0 0 8px; }
+  h2 { font-size: 28px; margin: 0; letter-spacing: -.02em; }
+  .research { padding-bottom: 40px; border-bottom: 1px solid var(--rule); }
+  .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .number { font: 12px var(--font-mono); color: var(--accent); }
+  .research h3 { font-size: 18px; margin: 14px 0 10px; }
+  .research p { color: var(--ink-2); font-size: 15px; margin: 0; }
+  .faculty { display: flex; gap: 28px; align-items: start; padding: 28px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--panel); }
+  .faculty img { width: 160px; height: 192px; object-fit: cover; border-radius: 3px; }
+  .role { font: 12px var(--font-mono); color: var(--ink-3); margin: 0 0 8px; }
+  .faculty h3 { margin: 0 0 10px; font-size: 25px; }
+  .faculty p:not(.role) { margin: 0 0 12px; color: var(--ink-2); }
+  .faculty .secondary { font-size: 14px; }
+  .contact { color: var(--accent-ink); font-size: 14px; }
+  .group-title { font-size: 19px; margin: 36px 0 12px; }
+  .people-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 28px; }
+  .people-grid li { padding: 20px 0; border-top: 1px solid var(--rule); min-width: 0; }
+  .people-grid h4 { margin: 0 0 6px; font-size: 17px; }
+  .people-grid h4 span { font-family: var(--font-body); color: var(--accent); font-size: 13px; }
+  .people-grid p { color: var(--ink-2); font-size: 13px; margin: 0; }
+  .people-grid .next { margin-top: 5px; color: var(--ink-3); }
+  a:hover { color: var(--accent-ink); }
+  .source { margin: 20px 0 0; color: var(--ink-3); font-size: 12px; }
+  @media (max-width: 800px) { .research-grid { gap: 20px; } .people-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 580px) { .intro { padding-block: 40px 32px; } .about { font-size: 16px; } .research-grid { grid-template-columns: 1fr; gap: 28px; } .faculty { padding: 20px; flex-direction: column; } .faculty img { width: 120px; height: 144px; } .people-grid { grid-template-columns: 1fr; } }
 </style>

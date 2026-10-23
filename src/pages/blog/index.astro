@@ -12,27 +12,29 @@ const posts = await getPosts();
     </header>
     <ol class="posts">
       {posts.map((post) => <li>
-        <article>
+        <article class="post">
           <div class="meta"><time datetime={post.data.published}>{publicationLabel(post.data.published)}</time>{post.data.author && <span>{post.data.author.name}</span>}</div>
-          <h2><a href={postHref(post)}>{post.data.title}<span aria-hidden="true"> ↗</span></a></h2>
+          <div class="post-summary"><h2><a href={postHref(post)}>{post.data.title}<span aria-hidden="true"> ↗</span></a></h2>
           <p>{post.data.description}</p>
-          <a class="read" href={postHref(post)} aria-label={`Read ${post.data.title}`}>Read article →</a>
+          <a class="read" href={postHref(post)} aria-label={`Read ${post.data.title}`}>Read article →</a></div>
         </article>
       </li>)}
     </ol>
   </main>
 </Base>
 <style>
-  .blog-index { max-width: 960px; min-height: calc(100vh - 125px); padding-bottom: 100px; }
-  .intro { padding-block: 64px 40px; border-bottom: 1px solid var(--rule); }
+  .blog-index { max-width: 1120px; min-height: calc(100vh - 125px); padding-bottom: 100px; }
+  .intro { padding-block: 56px 36px; border-bottom: 1px solid var(--rule); }
   h1 { font-size: var(--fs-5); line-height: 1.1; margin: 12px 0 18px; letter-spacing: -.025em; }
   .description { color: var(--ink-2); font-size: 20px; margin: 0; }
   .posts { list-style: none; padding: 0; margin: 0; }
   li { padding-block: 36px; border-bottom: 1px solid var(--rule); }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--ink-3); font: 12px var(--font-mono); }
-  h2 { margin: 16px 0 12px; font-size: clamp(22px, 4vw, 30px); line-height: 1.3; letter-spacing: -.02em; }
+  .post { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 32px; }
+  .meta { display: flex; flex-direction: column; align-items: start; gap: 12px; padding-top: 6px; color: var(--ink-3); font: 12px var(--font-mono); }
+  h2 { margin: 0 0 12px; font-size: clamp(22px, 4vw, 30px); line-height: 1.3; letter-spacing: -.02em; }
   h2 a:hover, .read:hover { color: var(--accent-ink); }
   h2 span { color: var(--accent); }
   article p { max-width: 62ch; color: var(--ink-2); margin: 0 0 20px; }
   .read { font-size: 14px; color: var(--accent-ink); }
+  @media (max-width: 600px) { .post { grid-template-columns: 1fr; gap: 18px; } .meta { flex-direction: row; flex-wrap: wrap; gap: 20px; } }
 </style>

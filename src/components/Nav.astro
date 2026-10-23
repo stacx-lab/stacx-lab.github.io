@@ -12,7 +12,7 @@ const isKinex = section === 'kinex';
       {isKinex ? <><Wordmark size={20} /><span class="ver">v{site.version}</span></> : <span class="lab-brand">STACX Lab</span>}
     </a>
     <div class="links">
-      {isKinex ? <a class="link" href={url('/docs/')}>Docs</a> : <a class="link" href={url('/')}>Kinex</a>}
+      {isKinex ? <a class="link" href={url('/docs/')}>Docs</a> : <a class="link" href="/projects/" aria-current={Astro.url.pathname.startsWith('/projects/') ? 'page' : undefined}>Projects</a>}
       <a class="link" href="/blog/" aria-current={Astro.url.pathname.startsWith('/blog/') ? 'page' : undefined}>Blog</a>
       {isKinex && <a class="link github" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>}
     </div>

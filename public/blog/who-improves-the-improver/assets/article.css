@@ -45,12 +45,13 @@
 .blog-article h1{
   font-family:var(--sans);
   font-weight:700;
-  font-size:clamp(30px,5.2vw,50px);
+  font-size:clamp(17px,4.1vw,50px);
   line-height:1.06;
   letter-spacing:-.021em;
   margin:0 0 14px;
-  text-wrap:balance;
-  max-width:16ch;
+  max-width:none;
+  white-space:nowrap;
+  text-wrap:nowrap;
 }
 .blog-article .standfirst{
   font-size:clamp(17px,2.2vw,20.5px);
@@ -313,7 +314,7 @@
 .blog-article .back { display: inline-block; color: var(--accent-ink); margin-bottom: 24px; font-size: 14px; }
 .blog-article .back:hover { text-decoration: underline; }
 .blog-article .doc { width: 100%; }
-.blog-article .masthead h1 { max-width: 20ch; }
+.blog-article .masthead h1 { max-width: none; }
 .blog-article .masthead .standfirst { max-width: 56ch; }
 .blog-article .byline { margin-bottom: 0; }
 .blog-article .rail { max-height: calc(100vh - var(--topbar) - 48px); overflow-y: auto; }

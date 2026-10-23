@@ -1,54 +1,66 @@
----
-title: Who Improves the Improver?
-description: Breaking the infinite regress of self-improving agents with a skill-oriented architecture in Kinex.
-published: "2026-10"
-author:
-  name: Bo Dai
-  url: https://bo-dai.github.io/
-readingTime: "25 min read"
-topic: Self-improving agent architecture
-contents:
-  - id: tldr
-    label: "TL;DR"
-    number: "00"
-  - id: s1
-    label: "Motivation"
-    number: "01"
-  - id: s2
-    label: "The Idea"
-    number: "02"
-  - id: s3
-    label: "What the Architecture Buys"
-    number: "03"
-  - id: s4
-    label: "Back to the 1940s"
-    number: "04"
-  - id: s5
-    label: "Beyond von Neumann"
-    number: "05"
-  - id: s6
-    label: "How It Improves"
-    number: "06"
-  - id: s7
-    label: "Partial Precedent"
-    number: "07"
-  - id: s8
-    label: "Conclusion"
-    number: "08"
-  - id: ack
-    label: "Acknowledgments"
-    number: "\u2014"
-  - id: refs
-    label: "References"
-    number: "\u2014"
----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Who Improves the Improver? · STACX Lab</title>
+  <meta name="description" content="Breaking the infinite regress of self-improving agents with a skill-oriented architecture in Kinex.">
+  <meta property="og:title" content="Who Improves the Improver?">
+  <meta property="og:description" content="Breaking the infinite regress of self-improving agents with a skill-oriented architecture in Kinex.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://stacx-lab.github.io/blog/who-improves-the-improver/">
+  <link rel="canonical" href="https://stacx-lab.github.io/blog/who-improves-the-improver/">
+  <link rel="icon" type="image/svg+xml" href="./assets/kinex-logo-day.svg">
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/article.css">
+  <script src="./assets/theme.js"></script>
+  <script src="./assets/contents.js" defer></script>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <header class="topbar">
+    <nav class="wrap bar" aria-label="main">
+      <a class="brand lab-brand" href="/" aria-label="STACX Lab home">STACX Lab</a>
+      <div class="links"><a class="link" href="/projects/">Projects</a><a class="link" href="/blog/" aria-current="page">Blog</a></div>
+      <div class="tools"><button class="theme" type="button" data-theme-toggle aria-label="toggle theme" title="Toggle theme"><span class="sun">☀</span><span class="moon">☾</span></button></div>
+    </nav>
+  </header>
+  <main id="main" class="blog-article">
+<div class="shell">
 
-import Figure1 from '../../components/blog/who-improves-the-improver/Figure1.astro';
-import Figure2 from '../../components/blog/who-improves-the-improver/Figure2.astro';
-import Figure3 from '../../components/blog/who-improves-the-improver/Figure3.astro';
-import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.astro';
+  <header class="masthead">
+    <a class="back" href="/blog/">← All posts</a>
+    <p class="kicker"><span>Self-improving agent architecture</span><span>Oct 2026</span></p>
+    <h1>Who Improves the Improver?</h1>
+    <p class="standfirst">Breaking the infinite regress of self-improving agents with a skill-oriented architecture in <a class="kinex-link" href="https://stacx-lab.github.io/kinex/" aria-label="Kinex"><span class="wordmark"><img class="day" src="./assets/kinex-logo-text-day.svg" alt="Kinex" width="814" height="191"><img class="night" src="./assets/kinex-logo-text-night.svg" alt="" width="814" height="191"></span></a>.</p>
+    <p class="byline">
+      <span>Author: <a class="ext" href="https://bo-dai.github.io/"><b>Bo Dai</b></a></span>
+      <span>~25 min read</span>
+    </p>
+  </header>
 
-<section id="tldr">
+  <nav class="rail" aria-label="Contents">
+    <div class="rail-head">Contents</div>
+    <ol>
+      <li><a href="#tldr"><span class="n">00</span><span>TL;DR</span></a></li>
+      <li><a href="#s1"><span class="n">01</span><span>Motivation</span></a></li>
+      <li><a href="#s2"><span class="n">02</span><span>The Idea</span></a></li>
+      <li><a href="#s3"><span class="n">03</span><span>What the Architecture Buys</span></a></li>
+      <li><a href="#s4"><span class="n">04</span><span>Back to the 1940s</span></a></li>
+      <li><a href="#s5"><span class="n">05</span><span>Beyond von Neumann</span></a></li>
+      <li><a href="#s6"><span class="n">06</span><span>How It Improves</span></a></li>
+      <li><a href="#s7"><span class="n">07</span><span>Partial Precedent</span></a></li>
+      <li><a href="#s8"><span class="n">08</span><span>Conclusion</span></a></li>
+      <li><a href="#ack"><span class="n">&mdash;</span><span>Acknowledgments</span></a></li>
+      <li><a href="#refs"><span class="n">&mdash;</span><span>References</span></a></li>
+    </ol>
+  </nav>
+
+  <article class="doc">
+
+    <!-- ================= TL;DR ================= -->
+    <section id="tldr">
       <span class="sec-num">TL;DR</span>
       <p><strong>Who improves the improver?</strong> To improve an agent, you need another agent. To improve that one, you need a third, and so on without end. This is an infinite regress.</p>
       <p>Our answer is one principle: <em>everything is a skill</em>. Move everything you can out of an agent&rsquo;s core, and only a simple loop is left: take in what was observed, call the model, run what it returns, repeat. Everything else is a <strong>skill</strong>: written instructions, a piece of code, or other agents. The loop never changes. Every skill can be rewritten.</p>
@@ -56,7 +68,7 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>We build this self-improving skill as a coding agent, so the parts of the system talk to each other in code. An existing coding agent, Pi, already has much of this base, but not the self-improving skill.</p>
     </section>
 
-
+    <!-- ================= 1 ================= -->
     <section id="s1">
       <span class="sec-num">&sect; 01</span>
       <h2>Motivation</h2>
@@ -74,13 +86,50 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>Suppose an agent fumbles a task and you would like it to stop. Who does the fixing? Not the agent itself. It is one thing &mdash; a prompt, some tools, a loop &mdash; and there is no separate part of it standing by to do the editing. So you bring in a second agent to read the first one and fix it.</p>
       <p>Now the second agent fumbles. It is built the same way, so it cannot fix itself either, and you bring in a third. And a fourth. Either this goes on forever, or you stop at some agent that nobody fixes &mdash; and from then on, that one is as good as any of them will ever get. Call this an <strong>infinite regress</strong> <a class="ext" href="#refs">[1, 2]</a>: every improver needs an improver above it, so the stack of agents never closes, or closes at a ceiling.</p>
 
-      <Figure1 />
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 400 330" role="img" aria-label="Three agent boxes stacked vertically. Each is improved by the one above it. Above the top box is a question: who improves this one? The chain has no top.">
+            <defs>
+              <marker id="ar0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"/>
+              </marker>
+            </defs>
+            <text class="fig-head" x="40" y="20">INFINITE REGRESS</text>
+
+            <text class="fig-sub" x="40" y="52">who improves this one?</text>
+            <path class="fig-dash" d="M108 60 L108 86"/>
+            <text class="fig-sub" x="116" y="78">&hellip;</text>
+
+            <rect class="fig-box" x="40" y="92" width="150" height="42" rx="2"/>
+            <text class="fig-label" x="56" y="119">agent 3</text>
+            <line class="fig-line" x1="108" y1="176" x2="108" y2="140" marker-end="url(#ar0)"/>
+            <text class="fig-sub" x="120" y="162">improves</text>
+
+            <rect class="fig-box" x="40" y="176" width="150" height="42" rx="2"/>
+            <text class="fig-label" x="56" y="203">agent 2</text>
+            <line class="fig-line" x1="108" y1="260" x2="108" y2="224" marker-end="url(#ar0)"/>
+            <text class="fig-sub" x="120" y="246">improves</text>
+
+            <rect class="fig-box" x="40" y="260" width="150" height="42" rx="2"/>
+            <text class="fig-label" x="56" y="287">agent 1</text>
+
+            <text class="fig-sub" x="230" y="119">each agent is one piece,</text>
+            <text class="fig-sub" x="230" y="137">so it cannot revise itself</text>
+            <text class="fig-sub" x="230" y="203">the fix has to come from</text>
+            <text class="fig-sub" x="230" y="221">an agent above it</text>
+            <text class="fig-sub" x="230" y="287">which is built the same way</text>
+
+            <text class="fig-label" x="40" y="322">the chain has no top</text>
+          </svg>
+        </div>
+        <figcaption><b>Figure 1.</b> The naive route to self-improvement. Every agent needs an improver above it, and the improver is built the same way, so the stack either never ends or ends at something nobody improves. <b>The problem is not any one agent; it is that the agent is the smallest thing there is.</b></figcaption>
+      </figure>
 
       <p>Building each agent more carefully does not help. The trouble is that the agent is the smallest piece we have. There is nothing smaller to fix on its own, and nothing smaller to hold what the agent learned, so what it learns is lost when the task ends. What is missing is a smaller piece, small enough to improve on its own. The improver should be one of these pieces too, so it can be improved the same way. That last part is what breaks the regress.</p>
       <p>The rest of this post is our answer: an architecture that meets all four requirements, the fourth included.</p>
     </section>
 
-
+    <!-- ================= 2 ================= -->
     <section id="s2">
       <span class="sec-num">&sect; 02</span>
       <h2>The Idea</h2>
@@ -88,7 +137,82 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>This section states the principle and works out what survives it. Two things do: <strong>a loop, and a short list of skills</strong> the system cannot start without.</p>
       <p>The principle is borrowed from operating systems. A microkernel keeps only a thin core &mdash; scheduling, memory, message passing &mdash; and runs everything else, from drivers to file systems, as separate pieces beside it that can be loaded and replaced one at a time. We draw an agent the same way: a thin core that only runs the loop, and everything else beside it as a skill. Figure 2 sets the two side by side.</p>
 
-      <Figure2 />
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 900 378" role="img" aria-label="A microkernel operating system beside skill-oriented design, drawn the same way. Each has a top layer of applications or tasks, a row of separate side-by-side modules, one thin core strip, and hardware or the model underneath. Drivers, file systems and servers correspond to the three kinds of skill; modprobe and the pager correspond to the skill manager and the context skill; the self-improving skill has no operating-system counterpart.">
+            <defs>
+              <marker id="arK" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"/>
+              </marker>
+            </defs>
+            <rect x="12" y="246" width="876" height="44" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1" stroke-opacity=".5"/>
+            <rect class="fig-box" x="20" y="36" width="400" height="36" rx="2"/>
+            <text class="fig-label" x="220.0" y="59" text-anchor="middle">applications</text>
+            <rect class="fig-box" x="20.0" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="50.5" y1="72" x2="50.5" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="50.5" y="162" text-anchor="middle">device</text>
+            <text class="fig-col" x="50.5" y="178" text-anchor="middle">drivers</text>
+            <rect class="fig-box" x="87.8" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="118.3" y1="72" x2="118.3" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="118.3" y="162" text-anchor="middle">file</text>
+            <text class="fig-col" x="118.3" y="178" text-anchor="middle">systems</text>
+            <rect class="fig-box" x="155.6" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="186.1" y1="72" x2="186.1" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="186.1" y="170" text-anchor="middle">servers</text>
+            <rect class="fig-box-key" x="223.4" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="253.9" y1="72" x2="253.9" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="253.9" y="170" text-anchor="middle">modprobe</text>
+            <rect class="fig-box-key" x="291.2" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="321.7" y1="72" x2="321.7" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="321.7" y="170" text-anchor="middle">pager</text>
+            <rect class="fig-dash" x="359.0" y="108" width="61" height="116" rx="2"/>
+            <text class="fig-sub" x="389.5" y="170" text-anchor="middle">none</text>
+            <text class="fig-sub" x="118.3" y="238" text-anchor="middle">loaded modules</text>
+            <text class="fig-sub" x="321.7" y="238" text-anchor="middle">boot helpers</text>
+            <rect class="fig-box" x="20" y="252" width="400" height="32" rx="2"/>
+            <text class="fig-label" x="220.0" y="273" text-anchor="middle">kernel &#8212; IPC &#183; memory &#183; scheduling</text>
+            <rect class="fig-box" x="20" y="306" width="400" height="30" rx="2"/>
+            <text class="fig-sub" x="220.0" y="325" text-anchor="middle">hardware</text>
+            <rect class="fig-box" x="482" y="36" width="400" height="36" rx="2"/>
+            <text class="fig-label" x="682.0" y="59" text-anchor="middle">tasks</text>
+            <rect class="fig-box" x="482.0" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="512.5" y1="72" x2="512.5" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="512.5" y="170" text-anchor="middle" style="font-size:8.5px">instructions</text>
+            <rect class="fig-box" x="549.8" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="580.3" y1="72" x2="580.3" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="580.3" y="162" text-anchor="middle">fixed</text>
+            <text class="fig-col" x="580.3" y="178" text-anchor="middle">code</text>
+            <rect class="fig-box" x="617.6" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="648.1" y1="72" x2="648.1" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="648.1" y="170" text-anchor="middle">subagents</text>
+            <rect class="fig-box-key" x="685.4" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="715.9" y1="72" x2="715.9" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="715.9" y="162" text-anchor="middle">skill</text>
+            <text class="fig-col" x="715.9" y="178" text-anchor="middle">manager</text>
+            <rect class="fig-box-key" x="753.2" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="783.7" y1="72" x2="783.7" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="783.7" y="162" text-anchor="middle">context</text>
+            <text class="fig-col" x="783.7" y="178" text-anchor="middle">skill</text>
+            <rect class="fig-box-key" x="821.0" y="108" width="61" height="116" rx="2"/>
+            <line class="fig-line" x1="851.5" y1="72" x2="851.5" y2="106" marker-start="url(#arK)" marker-end="url(#arK)"/>
+            <text class="fig-col" x="851.5" y="162" text-anchor="middle">self-</text>
+            <text class="fig-col" x="851.5" y="178" text-anchor="middle">improving</text>
+            <text class="fig-sub" x="580.3" y="238" text-anchor="middle">kinds of skill</text>
+            <text class="fig-sub" x="783.7" y="238" text-anchor="middle">the seed</text>
+            <rect class="fig-box" x="482" y="252" width="400" height="32" rx="2"/>
+            <text class="fig-label" x="682.0" y="273" text-anchor="middle">primitive agent &#8212; the loop</text>
+            <rect class="fig-box" x="482" y="306" width="400" height="30" rx="2"/>
+            <text class="fig-sub" x="682.0" y="325" text-anchor="middle">model</text>
+            <text class="fig-sub" x="451" y="59" text-anchor="middle">&#8596;</text>
+            <text class="fig-sub" x="451" y="170" text-anchor="middle">&#8596;</text>
+            <text class="fig-accent-t" x="451" y="273" text-anchor="middle">core</text>
+            <text class="fig-sub" x="451" y="325" text-anchor="middle">&#8596;</text>
+            <text class="fig-head" x="220.0" y="366" text-anchor="middle">MICROKERNEL OPERATING SYSTEM</text>
+            <text class="fig-head" x="682.0" y="366" text-anchor="middle">SKILL-ORIENTED DESIGN</text>
+          </svg>
+        </div>
+        <figcaption><b>Figure 2.</b> In both, the core is one thin shaded strip and everything else sits beside it as a separate piece that can be loaded, replaced or removed on its own. Column for column: drivers, file systems and servers line up with the three kinds of skill; <code>modprobe</code> and the pager line up with the skill manager and the context skill. <b>The self-improving skill has no counterpart</b> &mdash; the dashed column is the part this design adds.</figcaption>
+      </figure>
 
       <h3><span class="h-num">2.1</span>The principle: everything is a skill</h3>
       <p>Start with the question the principle answers: what belongs inside an agent? Today the answer is nearly everything. The prompt, the tool definitions, the workflow, the logic that decides what the model sees next &mdash; all of it is built into one piece, and changing any part means changing the agent.</p>
@@ -123,14 +247,65 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>The two skills above keep the system running. The seed has one more member, and it is the one this post is about: the <strong>self-improving skill</strong>. It looks at what past runs did: what was tried, what failed, what kept coming up. Then it changes skills to match. It can write a new skill, fix one that keeps failing, or turn written instructions that always play out the same way into fixed code that is faster and cheaper. <a class="xref" href="#s5">&sect;5</a> says what does this work, and <a class="xref" href="#s6">&sect;6</a> says how.</p>
       <p>The self-improving skill is itself a skill, so it can change itself too. That is what ends the infinite regress of <a class="xref" href="#s1">&sect;1</a>. There, every improver needed another improver above it. Here the improver is one of the things it improves, so nothing has to sit above it.</p>
 
-      <Figure3 />
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 560 350" role="img" aria-label="Tasks on top. Below them, six skills side by side: written instructions, fixed code and subagents, then the seed: skill manager, context skill and self-improving skill. An arrow leaves the self-improving skill and points back up into all six columns, itself included. Beneath them is a thin core strip, the primitive agent, which no arrow reaches, and the model at the bottom.">
+            <defs>
+              <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+            <rect class="fig-box" x="60" y="26" width="420" height="34" rx="2"/>
+            <text class="fig-label" x="270" y="48" text-anchor="middle">tasks</text>
+
+            <text class="fig-sub" x="162.6" y="86" text-anchor="middle">kinds of skill</text>
+            <text class="fig-sub" x="377.4" y="86" text-anchor="middle">the seed</text>
+
+            <rect class="fig-box" x="60.0" y="96" width="62" height="116" rx="2"/>
+            <text class="fig-col" x="91.0" y="158" text-anchor="middle" style="font-size:8.5px">instructions</text>
+            <rect class="fig-box" x="131.6" y="96" width="62" height="116" rx="2"/>
+            <text class="fig-col" x="162.6" y="150" text-anchor="middle">fixed</text>
+            <text class="fig-col" x="162.6" y="166" text-anchor="middle">code</text>
+            <rect class="fig-box" x="203.2" y="96" width="62" height="116" rx="2"/>
+            <text class="fig-col" x="234.2" y="158" text-anchor="middle">subagents</text>
+            <rect class="fig-box-key" x="274.8" y="96" width="62" height="116" rx="2"/>
+            <text class="fig-col" x="305.8" y="150" text-anchor="middle">skill</text>
+            <text class="fig-col" x="305.8" y="166" text-anchor="middle">manager</text>
+            <rect class="fig-box-key" x="346.4" y="96" width="62" height="116" rx="2"/>
+            <text class="fig-col" x="377.4" y="150" text-anchor="middle">context</text>
+            <text class="fig-col" x="377.4" y="166" text-anchor="middle">skill</text>
+            <rect class="fig-box-key" x="418.0" y="96" width="62" height="116" rx="2" stroke="var(--accent)" stroke-width="1.8"/>
+            <text class="fig-col" x="449.0" y="150" text-anchor="middle">self-</text>
+            <text class="fig-col" x="449.0" y="166" text-anchor="middle">improving</text>
+            <line class="fig-accent" x1="91.0" y1="230" x2="91.0" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <line class="fig-accent" x1="162.6" y1="230" x2="162.6" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <line class="fig-accent" x1="234.2" y1="230" x2="234.2" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <line class="fig-accent" x1="305.8" y1="230" x2="305.8" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <line class="fig-accent" x1="377.4" y1="230" x2="377.4" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+            <line class="fig-accent" x1="449.0" y1="230" x2="449.0" y2="216" stroke-width="1.4" marker-end="url(#ar1)"/>
+
+            <path class="fig-accent" d="M480.0 172 L504 172 L504 230 L91.0 230" fill="none" stroke-width="1.4"/>
+            <circle cx="480.0" cy="172" r="3" fill="var(--accent)"/>
+            <text class="fig-accent-t" x="270" y="248" text-anchor="middle">revises every skill, including itself</text>
+
+            <rect x="44" y="260" width="472" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1" stroke-opacity=".5"/>
+            <rect class="fig-box" x="60" y="264" width="420" height="32" rx="2"/>
+            <text class="fig-label" x="270" y="285" text-anchor="middle">primitive agent &#8212; the loop</text>
+            <text class="fig-accent-t" x="528" y="285" text-anchor="middle">core</text>
+
+            <rect class="fig-box" x="60" y="310" width="420" height="30" rx="2"/>
+            <text class="fig-sub" x="270" y="329" text-anchor="middle">model</text>
+          </svg>
+        </div>
+        <figcaption><b>Figure 3.</b> The same layout as Figure 2. The self-improving skill revises every skill, and since it is one of them, it revises itself too. <b>The primitive agent is the only part no arrow reaches</b>: it is never revised.</figcaption>
+      </figure>
 
       <p>The same two questions apply to it as to the other two. It can live outside the core, because the loop never needs to know how improvement works; it runs the self-improving skill the way it runs any other. And it has to live outside the core, because it is the part that most needs to keep changing. How to read a run, what counts as a failure, when written instructions are ready to become code: none of that can be settled in advance. If it sat in the core, the core would have to keep changing, and the core is the one part we never want to change. Outside the core it is just another skill, and that is exactly what lets it improve itself.</p>
 
 
     </section>
 
-
+    <!-- ================= 3 ================= -->
     <section id="s3">
       <span class="sec-num">&sect; 03</span>
       <h2>What the Architecture Buys</h2>
@@ -153,7 +328,7 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>So the architecture gives a core with no reason to change, and a place for all the change to go. The split is not arbitrary. Von Neumann arrived at the same two parts in the 1940s, for a different problem, as the next section shows.</p>
     </section>
 
-
+    <!-- ================= 4 ================= -->
     <section id="s4">
       <span class="sec-num">&sect; 04</span>
       <h2>Back to the 1940s: Von Neumann&rsquo;s Design</h2>
@@ -163,12 +338,31 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>A second idea of von Neumann&rsquo;s matters just as much. Three years earlier, in his design for the <strong>stored-program computer</strong> <a class="ext" href="#refs">[7]</a>, he kept programs in memory as ordinary data, next to the numbers they work on. A fixed processor runs whatever program sits there, and because a program is just data, one program can read and rewrite another.</p>
       <p><strong>Our design uses both ideas.</strong> From the universal constructor it takes the split: the primitive agent is the builder, fixed, simple and never improved, and the skills are the blueprint. From the stored-program computer it takes code as data: skills are stored as text and code that the system itself can read and rewrite. The self-improving skill is the part that does the rewriting: it reads a skill, changes it, and writes it back. Because it is part of the blueprint itself, it can change itself, and nothing has to sit above it. That is how the infinite regress of <a class="xref" href="#s1">&sect;1</a> stops.</p>
 
+      <!-- figure hidden for now: same picture as §1 and §2.2
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 910 340" role="img" aria-label="On the left, three agents stacked, each improved by the one above, with a question mark above the top: the chain has no top. On the right, the same layout as the figure in section 2.2 in von Neumann's terms: six skills side by side form the tape, the self-improving skill revises every one of them including itself, and beneath them the builder, the primitive agent, is never revised.">
+            <defs>
+              <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+              </marker>
+              <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-3)"/>
+              </marker>
+            </defs>
 
+            <text class="fig-head" x="24" y="20">INFINITE REGRESS</text>
+            <text class="fig-head" x="410" y="20">VON NEUMANN&rsquo;S SPLIT</text>
+            <line class="fig-line" x1="370" y1="30" x2="370" y2="328" stroke-dasharray="3 5"/>
 
+            <!-- LEFT: infinite regress -->
 
+      <!-- paragraph hidden for now: Gödel machine comparison
+      <p>This is also what sets the design apart from earlier self-improving programs. Schmidhuber's <strong>G&ouml;del machine</strong> <a class="ext" href="#refs">[5]</a> may rewrite any part of itself, but only after proving that the change makes it better, and that proof can take forever to find. The <strong>Darwin G&ouml;del Machine</strong> <a class="ext" href="#refs">[6]</a> replaced the proof with benchmark scores, and got a coding agent that measurably improves itself. Both treat the program as one piece, so both need an outside guard to keep a rewrite from breaking the rewriter. Von Neumann's split builds the guard into the structure instead: the builder is never on the tape, so no rewrite can reach it. <strong>The G&ouml;del machine protects itself with a proof, the Darwin G&ouml;del Machine with a benchmark, and this design does it the way biology does, with a decomposition.</strong></p>
+      -->
     </section>
 
-
+    <!-- ================= 5 ================= -->
     <section id="s5">
       <span class="sec-num">&sect; 05</span>
       <h2>Beyond von Neumann: A Coding Agent for Self-Improvement</h2>
@@ -178,13 +372,44 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>Revising a skill means writing a new version of it, based on what past runs showed: what failed, and what kept repeating. Because every skill is stored as text or code, just as the <strong>stored-program computer</strong> of <a class="xref" href="#s4">&sect;4</a> stores programs as data, this is always the same kind of work: editing files. For written instructions, it means editing the text. For fixed code, it means editing the program. For a subagent, it means editing the code that sets the subagent up and starts it. Editing text and code is exactly what a coding agent does, so we build the self-improving skill as a coding agent.</p>
       <p>The coding agent is itself a skill: a subagent (<a class="xref" href="#s2">&sect;2.1</a>) that runs the same loop as everything else, with a skill for writing code. That coding skill is a skill like any other, so the coding agent can improve it too. <strong>The skill that writes code improves itself.</strong></p>
 
-      <Figure4 />
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 700 186" role="img" aria-label="The self-improving skill is composed of a primitive agent plus the coding skill plus the skill of revising. An arrow leaves the composed whole and returns to the coding skill inside it.">
+            <defs>
+              <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+            <text class="fig-head" x="30" y="20">THE IMPROVER, ASSEMBLED LIKE ANYTHING ELSE</text>
+
+            <rect class="fig-box" x="30" y="36" width="170" height="40" rx="2"/>
+            <text class="fig-label" x="46" y="61">primitive agent</text>
+            <text class="fig-label" x="212" y="61">+</text>
+            <rect class="fig-box-key" x="234" y="36" width="160" height="40" rx="2"/>
+            <text class="fig-label" x="250" y="61">the coding skill</text>
+            <text class="fig-label" x="406" y="61">+</text>
+            <rect class="fig-box" x="428" y="36" width="182" height="40" rx="2"/>
+            <text class="fig-label" x="444" y="61">skill of revising</text>
+
+            <line class="fig-line" x1="30" y1="96" x2="610" y2="96"/>
+            <text class="fig-label" x="30" y="126">=&nbsp; the self-improving skill</text>
+
+            <path class="fig-accent" d="M314 140 L314 160 L660 160 L660 56 L400 56" fill="none" stroke-width="1.4" marker-end="url(#ar4)"/>
+            <text class="fig-accent-t" x="330" y="154">revises every skill &mdash; the coding skill included</text>
+          </svg>
+        </div>
+        <figcaption><b>Figure 4.</b> Built as a coding agent, the self-improving skill is <b>a primitive agent with skills plugged in</b>, exactly like every other agent in the system. Nothing new is introduced.</figcaption>
+      </figure>
 
 
       <h3><span class="h-num">5.2</span>Code as the interface</h3>
       <p>The self-improving skill does more than rewrite skills one at a time. It also changes how they work together: it connects two skills, or swaps one for a better version without breaking the skills that call it. To do that, it must be able to read and edit the calls between skills too. So we make one design decision: <strong>code is the interface between skills</strong>. The model calls skills, and skills call each other, by writing ordinary code that runs, such as Python.</p>
       <p>Continuing the mug example from <a class="xref" href="#s2">&sect;2.1</a>, the model might find the mug and pick it up like this:</p>
-      <pre class="code"><code>{"mug = find_mug(camera_top.read())\nfor attempt in range(3):\n    if grasp(right_arm, mug):\n        break\n    mug = find_mug(camera_top.read())"}</code></pre>
+      <pre class="code"><code>mug = find_mug(camera_top.read())
+for attempt in range(3):
+    if grasp(right_arm, mug):
+        break
+    mug = find_mug(camera_top.read())</code></pre>
       <p>Here <code>find_mug</code> and <code>grasp</code> are skills. The few lines of code glue them into new behavior: pick up the mug, and look again if the grasp fails. Saved under a name such as <code>pick_up_mug</code>, those lines become a new skill that anything else can call. So the self-improving skill can build a new skill not only by writing it from scratch, but by composing existing skills in code. Three things follow.</p>
       <p><strong>One interface for all three kinds of skill.</strong> <code>find_mug</code> might be written instructions, a vision function or a subagent. The call looks the same either way: for instructions it hands the text to the model, for code it runs the program, for a subagent it starts the agent. So a skill can change kind without anything that calls it noticing, which <a class="xref" href="#s6">&sect;6.4</a> relies on.</p>
       <p><strong>More than one step at a time.</strong> With tool calls, as in most agents today, the model picks one tool, waits for the result, then picks the next. The loop and the retry above would take several trips back to the model. In code, they are written once and run.</p>
@@ -193,7 +418,7 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
 
       </section>
 
-
+    <!-- ================= 6 ================= -->
     <section id="s6">
       <span class="sec-num">&sect; 06</span>
       <h2>How the Self-Improving Skill Works</h2>
@@ -225,7 +450,7 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>A fair worry is that a system which keeps rewriting itself will grow into something no one can follow. The design pushes against this in three ways. Skills call each other through code, so every dependency is written down and can be read. Each change is tested, kept only if it works, and recorded so it can be undone; since the core never changes, a bad change breaks one skill, not the system. And simplifying is part of the improver&rsquo;s job: merging skills that overlap and deleting ones nothing calls count as improvements, just as adding new ones does. None of this guarantees that the skills stay easy to understand as they grow. That remains an open problem, and for now we expect people to review what the improver changes.</p>
     </section>
 
-
+    <!-- ================= 7 ================= -->
     <section id="s7">
       <span class="sec-num">&sect; 07</span>
       <h2>A Partial Precedent</h2>
@@ -248,7 +473,7 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>So Pi has the base: a small fixed loop, and skills of two kinds that a coding agent can write and reload. What it lacks is the self-improving skill, the part this post is about. But Pi&rsquo;s design makes it easy to add one without running into the infinite regress. The self-improving skill would be just another skill, and Pi can already rewrite its skills. So it could rewrite the self-improving skill too, and nothing would have to sit above it. It still could not improve compaction or how skills are found, since those stay in Pi&rsquo;s core. That is why we see Pi as a partial precedent: the base is in place, and the missing piece can be added on top.</p>
     </section>
 
-
+    <!-- ================= 8 ================= -->
     <section id="s8">
       <span class="sec-num">&sect; 08</span>
       <h2>Conclusion</h2>
@@ -258,13 +483,13 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
       <p>So what we describe is not another agent for a particular task. It is the base that agents are built from. An operating system works the same way: its kernel knows nothing about the programs that run on it, which is why so many different programs can. A primitive agent that is only a loop knows nothing about any task, for the same reason. That is the sense of <em>universal</em> in von Neumann&rsquo;s phrase: a builder that can build anything it is given a description of.</p>
     </section>
 
-
+    <!-- ================= ack ================= -->
     <section id="ack" class="refs">
       <span class="sec-num">Acknowledgments</span>
-      <p>We thank <a class="ext" href="https://about.gaocx.io/">Chenxiao Gao</a> and <a class="ext" href="https://rushi-q.github.io/">Rushi Qiang</a>, who inspired the principle and instantiated it in <a class="kinex-link" href="https://stacx-lab.github.io/kinex/" aria-label="Kinex"><span class="wordmark"><img class="day" src="/kinex/img/kinex-logo-text-day.svg" alt="Kinex" width="814" height="191" /><img class="night" src="/kinex/img/kinex-logo-text-night.svg" alt="" width="814" height="191" /></span></a>, and <a class="ext" href="https://nali.seas.harvard.edu/">Na Li</a> and <a class="ext" href="https://webdocs.cs.ualberta.ca/~dale/">Dale Schuurmans</a> for proofreading and comments.</p>
+      <p>We thank <a class="ext" href="https://about.gaocx.io/">Chenxiao Gao</a> and <a class="ext" href="https://rushi-q.github.io/">Rushi Qiang</a>, who inspired the principle and instantiated it in <a class="kinex-link" href="https://stacx-lab.github.io/kinex/" aria-label="Kinex"><span class="wordmark"><img class="day" src="./assets/kinex-logo-text-day.svg" alt="Kinex" width="814" height="191"><img class="night" src="./assets/kinex-logo-text-night.svg" alt="" width="814" height="191"></span></a>, and <a class="ext" href="https://nali.seas.harvard.edu/">Na Li</a> and <a class="ext" href="https://webdocs.cs.ualberta.ca/~dale/">Dale Schuurmans</a> for proofreading and comments.</p>
     </section>
 
-
+    <!-- ================= refs ================= -->
     <section id="refs" class="refs">
       <span class="sec-num">References</span>
       <ol>
@@ -275,7 +500,14 @@ import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.ast
         <li>Mario Zechner. <cite>Pi: a minimal, extensible coding agent.</cite> MIT license. <a class="ext" href="https://github.com/earendil-works/pi">github.com/earendil-works/pi</a>; design notes: &ldquo;What I learned building an opinionated and minimal coding agent,&rdquo; November 30, 2025. <a class="ext" href="https://mariozechner.at/posts/2025-11-30-pi-coding-agent/">mariozechner.at</a></li>
         <li>Kinex: a robotics agent built on Pi. stacx-lab, 2026. <a class="ext" href="https://stacx-lab.github.io/kinex/">stacx-lab.github.io/kinex</a></li>
         <li>John von Neumann. <cite>First Draft of a Report on the EDVAC.</cite> Moore School of Electrical Engineering, University of Pennsylvania, 1945.</li>
-
-
+        <!-- <li>J&uuml;rgen Schmidhuber. <cite>G&ouml;del Machines: Self-Referential Universal Problem Solvers Making Provably Optimal Self-Improvements.</cite> arXiv:cs/0309048, 2003. In <cite>Artificial General Intelligence</cite>, Springer, 2006. <a class="ext" href="https://arxiv.org/abs/cs/0309048">arxiv.org/abs/cs/0309048</a></li> -->
+        <!-- <li>Jenny Zhang, Shengran Hu, Cong Lu, Robert Lange, and Jeff Clune. <cite>Darwin G&ouml;del Machine: Open-Ended Evolution of Self-Improving Agents.</cite> arXiv:2505.22954, 2025. <a class="ext" href="https://arxiv.org/abs/2505.22954">arxiv.org/abs/2505.22954</a></li> -->
       </ol>
     </section>
+
+  </article>
+</div>
+  </main>
+  <footer class="lab-footer wrap"><a href="/">STACX Lab</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a></footer>
+</body>
+</html>
