@@ -57,13 +57,13 @@ def main():
     if '--timeline-only' in sys.argv:
         print('Validated source map, result/image timing, device highlights, and every status label')
         return
-    files=[REPO/'gallery/.masters/teleavatar-tube-transfer.mp4']+[REPO/f'public/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.{ext}' for ext in ['mp4','webm']]
+    files=[REPO/'gallery/.masters/teleavatar-tube-transfer.mp4']+[REPO/f'public/kinex/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.{ext}' for ext in ['mp4','webm']]
     provenance=json.loads((HERE/'teleavatar-tube-transfer.provenance.json').read_text())
     assert provenance['edit_sha256']==sha256(HERE/'edit.json')
     assert provenance['device_map_renderer_sha256']==sha256(HERE/'device_map.py')
     assert provenance['delivery']['source_sha256']==sha256(files[0])
     for ext in ['mp4','webm','poster.jpg']:
-        assert provenance['delivery']['files'][ext]['sha256']==sha256(REPO/f'public/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.{ext}')
+        assert provenance['delivery']['files'][ext]['sha256']==sha256(REPO/f'public/kinex/media/gallery/teleavatar-tube-transfer/teleavatar-tube-transfer.{ext}')
     result=[]
     for path in files:
         probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-count_frames','-show_entries','stream=width,height,nb_read_frames:format=duration','-of','json',str(path)]))

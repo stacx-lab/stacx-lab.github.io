@@ -9,7 +9,7 @@ _site/
 __pycache__/
 *.py[cod]
 
-# Local renders and review images; published copies live in public/media/gallery/.
+# Local renders and review images; published copies live in public/kinex/media/gallery/.
 # Archive masters in gallery/.masters/ are tracked separately with Git LFS.
 /gallery/*/*.mp4
 /gallery/*/*.webm

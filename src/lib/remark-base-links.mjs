@@ -1,5 +1,5 @@
-// Prefix root-relative Markdown links ("/docs/x/") and raw-HTML src/href/poster with the site base path,
-// so content stays portable when the base changes.
+// Resolve project-relative Markdown links and HTML assets within Kinex docs.
+// Other collections use normal site-root URLs.
 export default function remarkBaseLinks({ base = '/' } = {}) {
   const prefix = base.replace(/\/$/, '');
   const visit = (node) => {
@@ -16,5 +16,8 @@ export default function remarkBaseLinks({ base = '/' } = {}) {
     }
     node.children?.forEach(visit);
   };
-  return (tree) => visit(tree);
+  return (tree, file) => {
+    // Only Kinex docs use project-relative links. Blog links are site-relative.
+    if (file.history.some((path) => /[/\\]content[/\\]docs[/\\]/.test(path))) visit(tree);
+  };
 }

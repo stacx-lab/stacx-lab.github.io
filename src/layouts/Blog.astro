@@ -1,0 +1,53 @@
+---
+import Base from './Base.astro';
+import '../styles/blog.css';
+import { publicationLabel, type Post } from '../lib/blog';
+interface Props { post: Post }
+const { post } = Astro.props;
+const { title, description, published, author, readingTime, topic, contents } = post.data;
+---
+<Base title={title} description={description} section="lab" article>
+  <main id="main" class="blog-article">
+    <div class="shell">
+      <header class="masthead">
+        <a class="back" href="/blog/">← All posts</a>
+        <p class="kicker"><span>{topic ?? 'STACX Lab'}</span><time datetime={published}>{publicationLabel(published)}</time></p>
+        <h1>{title}</h1>
+        <p class="standfirst">{description}</p>
+        <p class="byline">
+          {author && <span>Author: {author.url ? <a class="ext" href={author.url}><b>{author.name}</b></a> : <b>{author.name}</b>}</span>}
+          {readingTime && <span>~{readingTime}</span>}
+        </p>
+      </header>
+      {contents.length > 0 && <nav class="rail" aria-label="Contents">
+        <div class="rail-head">Contents</div>
+        <ol>{contents.map(({ id, number, label }) => <li><a href={`#${id}`}><span class="n">{number}</span><span>{label}</span></a></li>)}</ol>
+      </nav>}
+      <article class:list={['doc', { 'no-rail': !contents.length }]}><slot /></article>
+    </div>
+  </main>
+</Base>
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.rail a')];
+  const targets = links.map((link) => document.getElementById(link.hash.slice(1))).filter((el): el is HTMLElement => !!el);
+  if (targets.length && 'IntersectionObserver' in window) {
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top);
+        else visible.delete(entry.target.id);
+      }
+      const best = [...visible].sort((a, b) => a[1] - b[1])[0]?.[0];
+      if (best) for (const link of links) {
+        const active = link.hash === `#${best}`;
+        link.classList.toggle('on', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    }, { rootMargin: '-10% 0px -72% 0px', threshold: 0 });
+    targets.forEach((target) => observer.observe(target));
+  }
+</script>
+<style>
+  .no-rail { grid-column: 1 / -1; max-width: 72ch; margin-inline: auto; }
+</style>

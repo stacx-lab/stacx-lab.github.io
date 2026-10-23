@@ -1,0 +1,281 @@
+---
+title: Who Improves the Improver?
+description: Breaking the infinite regress of self-improving agents with a skill-oriented architecture in Kinex.
+published: "2026-10"
+author:
+  name: Bo Dai
+  url: https://bo-dai.github.io/
+readingTime: "25 min read"
+topic: Self-improving agent architecture
+contents:
+  - id: tldr
+    label: "TL;DR"
+    number: "00"
+  - id: s1
+    label: "Motivation"
+    number: "01"
+  - id: s2
+    label: "The Idea"
+    number: "02"
+  - id: s3
+    label: "What the Architecture Buys"
+    number: "03"
+  - id: s4
+    label: "Back to the 1940s"
+    number: "04"
+  - id: s5
+    label: "Beyond von Neumann"
+    number: "05"
+  - id: s6
+    label: "How It Improves"
+    number: "06"
+  - id: s7
+    label: "Partial Precedent"
+    number: "07"
+  - id: s8
+    label: "Conclusion"
+    number: "08"
+  - id: ack
+    label: "Acknowledgments"
+    number: "\u2014"
+  - id: refs
+    label: "References"
+    number: "\u2014"
+---
+
+import Figure1 from '../../components/blog/who-improves-the-improver/Figure1.astro';
+import Figure2 from '../../components/blog/who-improves-the-improver/Figure2.astro';
+import Figure3 from '../../components/blog/who-improves-the-improver/Figure3.astro';
+import Figure4 from '../../components/blog/who-improves-the-improver/Figure4.astro';
+
+<section id="tldr">
+      <span class="sec-num">TL;DR</span>
+      <p><strong>Who improves the improver?</strong> To improve an agent, you need another agent. To improve that one, you need a third, and so on without end. This is an infinite regress.</p>
+      <p>Our answer is one principle: <em>everything is a skill</em>. Move everything you can out of an agent&rsquo;s core, and only a simple loop is left: take in what was observed, call the model, run what it returns, repeat. Everything else is a <strong>skill</strong>: written instructions, a piece of code, or other agents. The loop never changes. Every skill can be rewritten.</p>
+      <p>Improving the system is then a skill too. It reads past runs and rewrites skills, and since it is a skill itself, it can rewrite itself. Nothing has to sit above it, so the regress stops. Von Neumann found the same shape in 1948 for machines that copy themselves: a fixed builder, and a blueprint that can be changed.</p>
+      <p>We build this self-improving skill as a coding agent, so the parts of the system talk to each other in code. An existing coding agent, Pi, already has much of this base, but not the self-improving skill.</p>
+    </section>
+
+
+    <section id="s1">
+      <span class="sec-num">&sect; 01</span>
+      <h2>Motivation</h2>
+      <p>For most of computing history, writing software meant fixing a procedure in advance. You enumerated the branches, pinned down the control flow, and handed the machine something that behaved identically on every run. The discipline is what made software dependable. It is also what made it brittle: whatever the author did not anticipate was simply not in the program. Nothing like an agent was possible under that constraint. You could not hand a program a goal and let it work out the steps, because nothing inside a program could work out steps.</p>
+      <p>A large language model is exactly that missing thing. Put one inside a program and the program can work out steps: hand it a goal and some tools, and it decides what to do next as it goes. That is what an agent is &mdash; a program whose judgment comes from a model at runtime instead of from an author in advance.</p>
+      <p>So the agent became the thing we build, and anyone who has built a few of them knows what that looks like. Each agent is built around one task: an agent that fixes code cannot drive a robot, and for that you start over. When you do start over, most of the new agent is a copy of the last one, retyped with the nouns changed. Reaching a library that already exists means writing an adapter for it, again. And when an agent fumbles, someone patches it by hand; whatever it worked out while doing its job stays inside it and is gone when the task ends.</p>
+      <p>Turn each complaint around and you get the four things we want:</p>
+      <ul class="plain">
+        <li><strong>Generality.</strong> One architecture handles any task in any domain, without being rebuilt for each.</li>
+        <li><strong>Reuse.</strong> Write something once, and every task and every agent that needs it can use it.</li>
+        <li><strong>Interoperability.</strong> Use the software that already exists, such as libraries, drivers and solvers, as it is, instead of rebuilding it as prompts.</li>
+        <li><strong>Self-improvement.</strong> Get better with experience. What the system learns on one task is kept and carried to the next, not lost when the task ends.</li>
+      </ul>
+      <p>This post proposes an architecture that meets all four. The fourth is the hard one, though, and the obvious way to get it fails in an instructive way, so it is worth seeing that failure before going further.</p>
+      <p>Suppose an agent fumbles a task and you would like it to stop. Who does the fixing? Not the agent itself. It is one thing &mdash; a prompt, some tools, a loop &mdash; and there is no separate part of it standing by to do the editing. So you bring in a second agent to read the first one and fix it.</p>
+      <p>Now the second agent fumbles. It is built the same way, so it cannot fix itself either, and you bring in a third. And a fourth. Either this goes on forever, or you stop at some agent that nobody fixes &mdash; and from then on, that one is as good as any of them will ever get. Call this an <strong>infinite regress</strong> <a class="ext" href="#refs">[1, 2]</a>: every improver needs an improver above it, so the stack of agents never closes, or closes at a ceiling.</p>
+
+      <Figure1 />
+
+      <p>Building each agent more carefully does not help. The trouble is that the agent is the smallest piece we have. There is nothing smaller to fix on its own, and nothing smaller to hold what the agent learned, so what it learns is lost when the task ends. What is missing is a smaller piece, small enough to improve on its own. The improver should be one of these pieces too, so it can be improved the same way. That last part is what breaks the regress.</p>
+      <p>The rest of this post is our answer: an architecture that meets all four requirements, the fourth included.</p>
+    </section>
+
+
+    <section id="s2">
+      <span class="sec-num">&sect; 02</span>
+      <h2>The Idea</h2>
+      <p>Our answer is one principle, pushed as far as it will go: <em>everything is a skill</em>. Nothing stays in the core that could be moved out of it.</p>
+      <p>This section states the principle and works out what survives it. Two things do: <strong>a loop, and a short list of skills</strong> the system cannot start without.</p>
+      <p>The principle is borrowed from operating systems. A microkernel keeps only a thin core &mdash; scheduling, memory, message passing &mdash; and runs everything else, from drivers to file systems, as separate pieces beside it that can be loaded and replaced one at a time. We draw an agent the same way: a thin core that only runs the loop, and everything else beside it as a skill. Figure 2 sets the two side by side.</p>
+
+      <Figure2 />
+
+      <h3><span class="h-num">2.1</span>The principle: everything is a skill</h3>
+      <p>Start with the question the principle answers: what belongs inside an agent? Today the answer is nearly everything. The prompt, the tool definitions, the workflow, the logic that decides what the model sees next &mdash; all of it is built into one piece, and changing any part means changing the agent.</p>
+      <p>Operating systems faced the same question and answered it the other way. A kernel does not know how to talk to your camera, how to lay out your disk, or what your programs are for. It keeps a few mechanisms, such as scheduling, memory and I/O, and everything else arrives from outside at runtime: a driver loaded as a module, a filesystem mounted into the tree. Microkernel designers made this a rule. A concept belongs inside the core only if moving it out would break something that cannot be broken.</p>
+      <p>Stated for agents, that rule is our principle: anything that can be moved out of the core becomes a skill. What is left behind is the core.</p>
+      <p>Push honestly and something survives. Whatever cannot be moved out is what the system fundamentally is, and we call it the <strong>primitive agent</strong>. Pushed all the way, it is one thing:</p>
+      <div class="residue"><span class="lbl">The execution loop.</span> Take in what was observed. Call the model on it. Run what the model returns. Repeat.</div>
+      <p>Its dullness is the point. Every decision worth making has been moved out, so there is nothing in the loop to tune and no better version to look for. Nobody, and nothing, needs to go back and improve it. <a class="xref" href="#s3">&sect;3</a> explains why that matters.</p>
+      <p>So the core holds almost nothing. It has the loop, a place to plug skills in, and a tiny bootstrap that loads the first few skills when the system starts. It has no domain knowledge, no written instructions, no task. Alone, it cannot do any real task; every ability the system has comes from a skill. The core, the <strong>primitive agent</strong>, is the one thing in the system that is not a skill.</p>
+      <p>By <strong>skill</strong> we mean something broader than the word usually means today, so it is worth pinning down. &ldquo;Skill&rdquo; has lately come to mean a set of written instructions: a markdown file describing how to do something, which an agent reads and follows. That is one kind of skill, but not the only one. For us a skill is defined by its <em>interface</em> &mdash; a declared purpose, and a way to invoke it. What sits behind that interface is deliberately left open. In practice it is one of three things:</p>
+      <ul class="plain">
+        <li><strong>Written instructions.</strong> Text the agent reads and follows, using its own judgment at each step. The agent stays in the loop.</li>
+        <li><strong>Fixed code.</strong> A deterministic program behind a typed signature, with no model involved once it starts. The agent is out of the loop.</li>
+        <li><strong>Subagents.</strong> One or more separate agent instances, each with its own context and its own loop, handed the work and left to finish it. The agent delegates.</li>
+      </ul>
+      <p>One example, carried through all three. Say the job is to find the mug on a table. Written as instructions, the skill is half a page of prose: point the camera down at the surface, look for a handle, check that what you found is not the sugar bowl. The agent reads that and does it, making each judgment itself. Written as fixed code, the same skill is a function that takes an image and returns coordinates &mdash; no model involved, the same answer every time. Written as subagents, it is one or more separate agents, each with its own loop, sent off to work through a cluttered table and report back what they found. Three quite different things. One name, one stated purpose, and a caller that cannot tell which one it got.</p>
+      <p>The kernel analogy holds here too, and this is the part of it we lean on hardest. When a program calls <code>read()</code>, what answers might be a real file on a disk, or a number the kernel invents on the spot and stores nowhere, or a file served by an ordinary program running outside the kernel entirely. All three satisfy the same interface. The caller cannot tell them apart and has no reason to care. A skill is the same kind of promise: a name, a stated purpose, and a guarantee that invoking it does the thing. What actually runs is left open.</p>
+      <p>Most agent frameworks build two more things into the core: <strong>context management and skill management</strong>. They put them there because every agent needs them. Whatever the task, something has to decide what the model sees, and something has to find the skills the task needs. Without those two, the agent can do nothing. We still take them out of the core and make them skills. They differ from other skills in two ways: they work on the agent itself, not on a task, and they have to be loaded first, before any other skill can be. We call this small group the <strong>seed</strong>. For each of the two, the parts below answer two questions: can it be moved out of the core, and does it need to be?</p>
+
+      <h4><span class="h-num">1</span>Context management: it can leave, and it has to</h4>
+      <p>An LLM has a limited memory: it can only take in so much at once. And even within that limit, it does better with less: a clean context holding only what matters beats a full one cluttered with everything that happened. On every pass through the loop, something has to decide what goes in front of it: the task, which earlier steps to keep, what to look up, and what to leave out when there is no more room. That decision is context management.</p>
+      <p>It can leave the core because the loop does not care how the decision is made. The loop hands the model whatever it is given. So the deciding can be done by a skill outside the core, and a better one can be swapped in without touching the loop.</p>
+      <p>It has to leave because the right way to make that decision can never be defined in advance. Fixing a bug, the agent needs the failing test and the few files it touches; steering a robot arm, it needs the last few camera frames and where the arm is now. And what works only becomes clear as the system sees more of its own runs. That makes it something we want to keep improving, and the core is the one part we never want to change, so it has to live outside the core, as a skill. Microkernel operating systems made the same split for memory. The kernel only notices when a program needs data that is not loaded; a separate program outside the kernel, called a pager, decides what to bring in and what to throw out. The context skill is that pager.</p>
+
+      <h4><span class="h-num">2</span>Skill management: it can leave too, though it looks like it cannot</h4>
+      <p>Skill management is the job of keeping track of skills: finding them, loading them, and picking the right one for the work at hand.</p>
+      <p>At first it looks like this one cannot leave the core. If skill management were itself a skill, something would have to find and load it &mdash; and finding and loading skills is its own job. It would have to load itself before it could run.</p>
+      <p>Linux has exactly this problem, and gets around it. The kernel does not know how to find a driver. When it needs one, it calls an ordinary program, <code>modprobe</code>, which finds the driver and hands it back. The kernel keeps only the ability to plug in what it is handed, plus just enough built-in code to start that first program. We do the same. The core keeps a place to plug skills in and a tiny bootstrap that loads the first few skills, the seed. One of them is the skill manager, and from then on it loads everything else. The bootstrap runs only at startup; after that, it plays no part.</p>
+      <p>So skill management can leave: the loop needs a way to plug a skill in, but not to know where skills come from. And it has to leave, for the same reason context does. Where skills are kept, which one fits the task, which one wins when two share a name: none of this can be settled in advance, all of it gets better with experience, and anything that should keep getting better belongs outside the core.</p>
+
+      <h3><span class="h-num">2.2</span>The skill that improves skills</h3>
+      <p>The two skills above keep the system running. The seed has one more member, and it is the one this post is about: the <strong>self-improving skill</strong>. It looks at what past runs did: what was tried, what failed, what kept coming up. Then it changes skills to match. It can write a new skill, fix one that keeps failing, or turn written instructions that always play out the same way into fixed code that is faster and cheaper. <a class="xref" href="#s5">&sect;5</a> says what does this work, and <a class="xref" href="#s6">&sect;6</a> says how.</p>
+      <p>The self-improving skill is itself a skill, so it can change itself too. That is what ends the infinite regress of <a class="xref" href="#s1">&sect;1</a>. There, every improver needed another improver above it. Here the improver is one of the things it improves, so nothing has to sit above it.</p>
+
+      <Figure3 />
+
+      <p>The same two questions apply to it as to the other two. It can live outside the core, because the loop never needs to know how improvement works; it runs the self-improving skill the way it runs any other. And it has to live outside the core, because it is the part that most needs to keep changing. How to read a run, what counts as a failure, when written instructions are ready to become code: none of that can be settled in advance. If it sat in the core, the core would have to keep changing, and the core is the one part we never want to change. Outside the core it is just another skill, and that is exactly what lets it improve itself.</p>
+
+
+    </section>
+
+
+    <section id="s3">
+      <span class="sec-num">&sect; 03</span>
+      <h2>What the Architecture Buys</h2>
+      <p>In <a class="xref" href="#s1">&sect;1</a> we listed four things we want: <strong>generality</strong>, <strong>reuse</strong>, <strong>interoperability</strong>, and <strong>self-improvement</strong>. The design in <a class="xref" href="#s2">&sect;2</a> delivers all four, and this section goes through them one at a time. None of it depends on what skills are written in. We get to that in <a class="xref" href="#s5">&sect;5</a>.</p>
+
+      <h3>Generality</h3>
+      <p>The core has no task built into it, so the same architecture works in any domain. Running a robot, cleaning up data, managing servers: the core is identical in each, and only the skills plugged into it differ. Taking on a new kind of task means adding skills, not building a new agent.</p>
+
+      <h3>Reuse</h3>
+      <p>A skill is written once and used by every task that needs it. The context skill from <a class="xref" href="#s2">&sect;2.1</a> is the clearest case: every task, whatever it is, needs something to decide what the model sees, and they all use the same one. Nothing gets copied and retyped with the nouns changed.</p>
+      <p>A skill can also change how it works without breaking anything that uses it, because whatever uses it relies only on what it promises to do, not on how it does it. The context skill might start by simply keeping the last few steps in view. Later it can be replaced by one that also pulls in what worked on similar tasks before. Every task that uses it keeps working, never notices the change, and gets the better version at once. <strong>The name stays the same; what is behind it gets better.</strong></p>
+
+      <h3>Interoperability</h3>
+      <p>Existing software enters as the fixed-code kind. A library, a solver, a driver, an SDK is wrapped behind a skill's interface and loaded like anything else. The primitive agent does not know or care that what answers is thirty years old.</p>
+      <h3>Self-improvement</h3>
+      <p>This is the hardest of the four. It needs two things: a part that never changes, and a place where all the change can happen.</p>
+      <p><strong>The core never changes.</strong> A system that rewrites itself needs one part it never rewrites. Suppose a change goes wrong. If the loop itself could be changed, a bad change could break the loop, and then nothing would be running to notice the mistake or put the old version back. Because the loop never changes, a bad change can only break a skill. The loop keeps running, sees that the skill now fails, and can go back to the version that worked. The primitive agent is that fixed part. As <a class="xref" href="#s2">&sect;2.1</a> showed, it is only a loop with nothing clever in it, so it can be written once, checked carefully, and left alone.</p>
+      <p><strong>All the change happens in skills.</strong> A skill can be tested on its own, kept if it works, and thrown away if it does not. That is the smaller unit <a class="xref" href="#s1">&sect;1</a> said was missing.</p>
+      <p><strong>One improvement reaches every skill.</strong> The self-improving skill can revise every skill, itself included. Since it can improve itself, nothing has to sit above it to improve it, and the infinite regress of <a class="xref" href="#s1">&sect;1</a> stops here. And making it better, with a stronger model or a better way of reading past runs, makes every skill it touches from then on better too. Nobody has to go back and edit a hundred skills by hand.</p>
+      <p>So the architecture gives a core with no reason to change, and a place for all the change to go. The split is not arbitrary. Von Neumann arrived at the same two parts in the 1940s, for a different problem, as the next section shows.</p>
+    </section>
+
+
+    <section id="s4">
+      <span class="sec-num">&sect; 04</span>
+      <h2>Back to the 1940s: Von Neumann&rsquo;s Design</h2>
+      <p>The philosophy behind the design in <a class="xref" href="#s2">&sect;2</a> is not new. It was worked out in the late 1940s by John von Neumann <a class="ext" href="#refs">[3, 4]</a>, for a different question: what would a machine need in order to build a copy of itself?</p>
+      <p>The obvious answer fails. To copy itself, a machine needs a complete description of itself. But that description is part of the machine, so it would have to contain a description of itself, which would contain another, and so on without end. Later writers call this an infinite regress <a class="ext" href="#refs">[1, 2]</a>, the same shape as the one in <a class="xref" href="#s1">&sect;1</a>.</p>
+      <p>His way out was the <strong>universal constructor</strong> <a class="ext" href="#refs">[3, 4]</a>. Think of it as two things: a <strong>builder</strong>, and a blueprint of the machine, which von Neumann called the <strong>tape</strong>. To make a new machine, the builder follows the blueprint and builds a second builder. The new machine also needs a blueprint of its own, but nobody draws one: the old blueprint is simply photocopied and handed over. So the blueprint only has to show how to make the machine. It never has to show how to make a blueprint, and the regress never starts. Change works the same way: nobody edits the builder. To get a different machine in the next generation, you change the blueprint.</p>
+      <p>A second idea of von Neumann&rsquo;s matters just as much. Three years earlier, in his design for the <strong>stored-program computer</strong> <a class="ext" href="#refs">[7]</a>, he kept programs in memory as ordinary data, next to the numbers they work on. A fixed processor runs whatever program sits there, and because a program is just data, one program can read and rewrite another.</p>
+      <p><strong>Our design uses both ideas.</strong> From the universal constructor it takes the split: the primitive agent is the builder, fixed, simple and never improved, and the skills are the blueprint. From the stored-program computer it takes code as data: skills are stored as text and code that the system itself can read and rewrite. The self-improving skill is the part that does the rewriting: it reads a skill, changes it, and writes it back. Because it is part of the blueprint itself, it can change itself, and nothing has to sit above it. That is how the infinite regress of <a class="xref" href="#s1">&sect;1</a> stops.</p>
+
+
+
+
+    </section>
+
+
+    <section id="s5">
+      <span class="sec-num">&sect; 05</span>
+      <h2>Beyond von Neumann: A Coding Agent for Self-Improvement</h2>
+      <p>Von Neumann&rsquo;s two ideas still leave one thing out. The universal constructor has a builder and a blueprint, but nothing in it changes the blueprint on purpose: one generation differs from the last only through copying errors. The stored-program computer shows how such a change can be made: a program is just data, so editing the data changes the code. But something still has to decide what to edit, and in his day only a person could. A coding agent can now do this job: it reads code, sees what went wrong when the code ran, and writes a better version. Because our skills are stored as text and code, the coding agent can edit them directly. That is what this design adds to von Neumann&rsquo;s. This section says how the self-improving skill is built, and why that decides what the whole system is written in.</p>
+
+      <h3><span class="h-num">5.1</span>The self-improving skill is a coding agent</h3>
+      <p>Revising a skill means writing a new version of it, based on what past runs showed: what failed, and what kept repeating. Because every skill is stored as text or code, just as the <strong>stored-program computer</strong> of <a class="xref" href="#s4">&sect;4</a> stores programs as data, this is always the same kind of work: editing files. For written instructions, it means editing the text. For fixed code, it means editing the program. For a subagent, it means editing the code that sets the subagent up and starts it. Editing text and code is exactly what a coding agent does, so we build the self-improving skill as a coding agent.</p>
+      <p>The coding agent is itself a skill: a subagent (<a class="xref" href="#s2">&sect;2.1</a>) that runs the same loop as everything else, with a skill for writing code. That coding skill is a skill like any other, so the coding agent can improve it too. <strong>The skill that writes code improves itself.</strong></p>
+
+      <Figure4 />
+
+
+      <h3><span class="h-num">5.2</span>Code as the interface</h3>
+      <p>The self-improving skill does more than rewrite skills one at a time. It also changes how they work together: it connects two skills, or swaps one for a better version without breaking the skills that call it. To do that, it must be able to read and edit the calls between skills too. So we make one design decision: <strong>code is the interface between skills</strong>. The model calls skills, and skills call each other, by writing ordinary code that runs, such as Python.</p>
+      <p>Continuing the mug example from <a class="xref" href="#s2">&sect;2.1</a>, the model might find the mug and pick it up like this:</p>
+      <pre class="code"><code>{"mug = find_mug(camera_top.read())\nfor attempt in range(3):\n    if grasp(right_arm, mug):\n        break\n    mug = find_mug(camera_top.read())"}</code></pre>
+      <p>Here <code>find_mug</code> and <code>grasp</code> are skills. The few lines of code glue them into new behavior: pick up the mug, and look again if the grasp fails. Saved under a name such as <code>pick_up_mug</code>, those lines become a new skill that anything else can call. So the self-improving skill can build a new skill not only by writing it from scratch, but by composing existing skills in code. Three things follow.</p>
+      <p><strong>One interface for all three kinds of skill.</strong> <code>find_mug</code> might be written instructions, a vision function or a subagent. The call looks the same either way: for instructions it hands the text to the model, for code it runs the program, for a subagent it starts the agent. So a skill can change kind without anything that calls it noticing, which <a class="xref" href="#s6">&sect;6.4</a> relies on.</p>
+      <p><strong>More than one step at a time.</strong> With tool calls, as in most agents today, the model picks one tool, waits for the result, then picks the next. The loop and the retry above would take several trips back to the model. In code, they are written once and run.</p>
+      <p><strong>Existing software needs no adapter.</strong> Libraries, solvers, drivers and SDKs are already code, so a skill simply calls them.</p>
+      <p>We use an existing language rather than pseudo-code or a new one because the code has to run: running it is how a change is tested, and how existing libraries are reached.</p>
+
+      </section>
+
+
+    <section id="s6">
+      <span class="sec-num">&sect; 06</span>
+      <h2>How the Self-Improving Skill Works</h2>
+      <p>Under this design, self-improvement is not a property of the system. It is a skill &mdash; a member of the seed, implemented as the coding agent of <a class="xref" href="#s5">&sect;5</a>, and the part of <a class="xref" href="#s4">&sect;4</a> that changes the blueprint &mdash; and this section says how it does its job.</p>
+      <p>It can improve any skill, itself included. The most useful one to improve is the skill of writing code, since every other skill is written with it: improve that, and every skill it maintains improves too.</p>
+      <p>It learns from records of past runs: the task, what was tried, what happened, and how it ended. Every task leaves such a record, whether it fixed a bug or moved a robot arm. There are two ways to use these records, and they differ in where the improvement is kept.</p>
+
+      <h3><span class="h-num">6.1</span>Without training: rewriting the skills</h3>
+      <p>The first option does not change any model. It changes the skills. The improver goes through past runs, keeps what worked, notes what failed, and uses that to rewrite a skill: the context it gives the model, the examples it pulls in when a similar task comes up, its execution workflow, or its code.</p>
+      <p>This is cheap, fast, and works with any model. Its limit is that the models stay the same. What was learned lives in the skills&rsquo; text and code, not in any model.</p>
+
+      <h3><span class="h-num">6.2</span>With training: updating the models</h3>
+      <p>The second option draws on the same past runs, but selects from them the data worth training on. With that data it can retrain the language model the agent runs on, or any learned model inside a skill, such as a vision model or a robot&rsquo;s control policy.</p>
+      <p>This is slow and expensive, but what is learned goes into the models themselves. When the language model improves, every skill that uses it improves at once, including ones that have never been rewritten.</p>
+
+      <h3><span class="h-num">6.3</span>How the two relate</h3>
+      <p>The two work together. Rewriting skills is the inner loop: it takes what one run showed and uses it on the next run, within hours. Model training is the outer loop: it takes what many runs showed and builds it into the models. Both draw on the same past runs; the inner loop uses them right away, and the outer loop waits until enough have piled up. The first makes each skill better at its own job; the second makes the models that every skill relies on better.</p>
+      <div class="example">
+        <span class="example-label">Example</span>
+        <p>Say the robot runs <code>pick_up_mug</code> from <a class="xref" href="#s5">&sect;5.2</a> twenty times, and the records show six failures. In all six, the mug&rsquo;s handle pointed away from the arm, and the gripper closed on the body and slipped. The self-improving skill reads those six records and finds what they share. It edits <code>find_mug</code> to also report which way the handle points, and edits <code>pick_up_mug</code> to approach from the other side when the handle faces away. It tests the new version on the twenty recorded scenes in simulation; the new version succeeds on nineteen, so it is kept, and the old version is saved so it can be restored. That is the inner loop: rewriting skills.</p>
+        <p>The skill now works, but it is slow. <code>find_mug</code> began as written instructions, so on every run the language model looks at the image and reasons its way to the mug, which takes seconds. After a few hundred runs, though, the records hold a few hundred images, each marked with where the mug turned out to be, and a few hundred grasps that worked. The self-improving skill uses them to train a small vision model that finds the mug in milliseconds, and a grasp model that goes straight from the image to the arm&rsquo;s motion. <code>find_mug</code> and <code>pick_up_mug</code> keep their names but now call these models, so everything that uses them gets faster at once. That is the outer loop: training models on data the system has collected itself.</p>
+      </div>
+      <p>Both loops belong to the self-improving skill, so they can be improved too. How it picks what to learn from past runs, and how it trains the models, are themselves things it can rewrite.</p>
+
+      <h3><span class="h-num">6.4</span>Changing a skill's kind</h3>
+      <p>One thing the self-improving skill does is move a skill between kinds. Most skills start as written instructions, because at first nobody knows which cases the work involves. Once the improver sees the same steps repeat across many runs, it rewrites the skill as code, which is faster and cheaper. If that code later meets a case it was not written for, the skill can go back to instructions that the model can think through. And if a skill&rsquo;s work grows too big for one context, or splits into parts that can run on their own, the improver can hand it to one or more subagents, each with its own loop. The name never changes, so nothing that uses the skill notices. Most systems that collect skills only ever add new ones. Here, existing skills keep getting rewritten, and the one doing the rewriting is itself one of them. That is what lets the skills get better over time instead of just growing in number.</p>
+
+      <h3><span class="h-num">6.5</span>Keeping it maintainable</h3>
+      <p>A fair worry is that a system which keeps rewriting itself will grow into something no one can follow. The design pushes against this in three ways. Skills call each other through code, so every dependency is written down and can be read. Each change is tested, kept only if it works, and recorded so it can be undone; since the core never changes, a bad change breaks one skill, not the system. And simplifying is part of the improver&rsquo;s job: merging skills that overlap and deleting ones nothing calls count as improvements, just as adding new ones does. None of this guarantees that the skills stay easy to understand as they grow. That remains an open problem, and for now we expect people to review what the improver changes.</p>
+    </section>
+
+
+    <section id="s7">
+      <span class="sec-num">&sect; 07</span>
+      <h2>A Partial Precedent</h2>
+      <p>Pi is an open-source coding agent by Mario Zechner, built independently of this work, that gets about halfway to the design above <a class="ext" href="#refs">[5]</a>.</p>
+
+      <h3><span class="h-num">7.1</span>Where Pi aligns</h3>
+      <ul class="plain">
+        <li><strong>A small core.</strong> Pi&rsquo;s core is the loop: send the context to the model, run the tools it calls, repeat. It ships four tools (read, write, edit and bash) and a system prompt under a thousand tokens. Everything else is meant to be added.</li>
+        <li><strong>Two of the three kinds of skill.</strong> A Pi <em>skill</em> is a folder with a <code>SKILL.md</code> file: written instructions, listed by name and read only when needed. A Pi <em>extension</em> is a TypeScript file that adds tools, commands, or hooks into the loop: fixed code. In our terms, both are skills.</li>
+        <li><strong>It can extend itself.</strong> Pi is a coding agent, so it can write a new skill or extension and load it with <code>/reload</code>, without restarting.</li>
+      </ul>
+
+      <h3><span class="h-num">7.2</span>Where Pi falls short</h3>
+      <ul class="plain">
+        <li><strong>A self-improving skill.</strong> This is the gap that matters. Pi changes itself only when a person asks. Nothing reads past runs, decides what to rewrite, and rewrites it, and nothing collects data to train a model. Our robotics system Kinex, built on Pi, is adding a first step <a class="ext" href="#refs">[6]</a>: a reflect skill that reads the recording of a task and turns it into new skills, tools and calibration fixes. It runs when asked, not on its own.</li>
+        <li><strong>One way to manage skills.</strong> In Pi, a skill (written instructions) and an extension (code) are used in different ways: the model reads a skill, but calls a tool that an extension adds. So when the self-improving skill rewrites a skill as code, everything that used the old skill has to change too. In our design both are skills and are used the same way, so the rewrite changes nothing else.</li>
+        <li><strong>Context and skill management outside the core.</strong> In Pi, both are built into the core. Compaction, which shortens the history when it gets too long, is one example: extensions can step in through hooks but cannot replace it. Finding skills is built in the same way. This is how Linux treats memory, not how a microkernel does: Linux decides what to keep in memory inside its kernel, while a microkernel leaves that to a separate pager (<a class="xref" href="#s2">&sect;2</a>).</li>
+        <li><strong>Subagents as skills.</strong> Pi leaves them out on purpose. To get one, Pi starts another copy of itself from bash. So in Pi a subagent is not a skill, with a name and a stated purpose; the model sets it up by hand each time. That makes it harder for the self-improving skill to hand a skill&rsquo;s work to subagents, as <a class="xref" href="#s6">&sect;6.4</a> describes.</li>
+      </ul>
+      <p>So Pi has the base: a small fixed loop, and skills of two kinds that a coding agent can write and reload. What it lacks is the self-improving skill, the part this post is about. But Pi&rsquo;s design makes it easy to add one without running into the infinite regress. The self-improving skill would be just another skill, and Pi can already rewrite its skills. So it could rewrite the self-improving skill too, and nothing would have to sit above it. It still could not improve compaction or how skills are found, since those stay in Pi&rsquo;s core. That is why we see Pi as a partial precedent: the base is in place, and the missing piece can be added on top.</p>
+    </section>
+
+
+    <section id="s8">
+      <span class="sec-num">&sect; 08</span>
+      <h2>Conclusion</h2>
+      <p>We started with the infinite regress problem. Improving an agent takes another agent, and improving that one takes a third, so the chain either never ends or stops at an agent nobody improves.</p>
+      <p>Our answer is one principle: <em>everything is a skill</em>. Push it all the way and an agent splits into a primitive agent, a fixed loop that never changes, and skills that can all be rewritten. The self-improving skill is one of those skills, so it can improve itself, and nothing has to sit above it. The chain stops. This is the shape von Neumann found in 1948: a fixed builder, and a blueprint that can be rewritten.</p>
+      <p>What he did not have was a writer that changes the blueprint on purpose. A coding agent is one, so we build the self-improving skill as a coding agent, and the calls between skills are written as code. That one skill then does every kind of improvement: editing a prompt, rewriting slow instructions as code, wrapping an existing library, fixing a step that keeps failing. Today these are separate jobs, usually done by different people in different ways. Pi shows that much of this base already exists; what it lacks is the self-improving skill.</p>
+      <p>So what we describe is not another agent for a particular task. It is the base that agents are built from. An operating system works the same way: its kernel knows nothing about the programs that run on it, which is why so many different programs can. A primitive agent that is only a loop knows nothing about any task, for the same reason. That is the sense of <em>universal</em> in von Neumann&rsquo;s phrase: a builder that can build anything it is given a description of.</p>
+    </section>
+
+
+    <section id="ack" class="refs">
+      <span class="sec-num">Acknowledgments</span>
+      <p>We thank <a class="ext" href="https://about.gaocx.io/">Chenxiao Gao</a> and <a class="ext" href="https://rushi-q.github.io/">Rushi Qiang</a>, who inspired the principle and instantiated it in <a class="kinex-link" href="https://stacx-lab.github.io/kinex/" aria-label="Kinex"><span class="wordmark"><img class="day" src="/kinex/img/kinex-logo-text-day.svg" alt="Kinex" width="814" height="191" /><img class="night" src="/kinex/img/kinex-logo-text-night.svg" alt="" width="814" height="191" /></span></a>, and <a class="ext" href="https://nali.seas.harvard.edu/">Na Li</a> and <a class="ext" href="https://webdocs.cs.ualberta.ca/~dale/">Dale Schuurmans</a> for proofreading and comments.</p>
+    </section>
+
+
+    <section id="refs" class="refs">
+      <span class="sec-num">References</span>
+      <ol>
+        <li>Moshe Sipper and James A. Reggia. &ldquo;Go Forth and Replicate.&rdquo; <cite>Scientific American</cite> 285(2): 34&ndash;43, August 2001. <a class="ext" href="https://www.scientificamerican.com/article/go-forth-and-replicate/">scientificamerican.com</a></li>
+        <li>Sara Imari Walker and Paul C. W. Davies. &ldquo;The Algorithmic Origins of Life.&rdquo; <cite>Journal of the Royal Society Interface</cite> 10(79): 20120869, 2013. <a class="ext" href="https://arxiv.org/abs/1207.4803">arxiv.org/abs/1207.4803</a></li>
+        <li>John von Neumann. &ldquo;The General and Logical Theory of Automata.&rdquo; In L. A. Jeffress (ed.), <cite>Cerebral Mechanisms in Behavior: The Hixon Symposium</cite>, Wiley, 1951, pp. 1&ndash;41. Delivered 1948. The kinematic model.</li>
+        <li>John von Neumann. <cite>Theory of Self-Reproducing Automata.</cite> Edited and completed by Arthur W. Burks. University of Illinois Press, 1966. The cellular model.</li>
+        <li>Mario Zechner. <cite>Pi: a minimal, extensible coding agent.</cite> MIT license. <a class="ext" href="https://github.com/earendil-works/pi">github.com/earendil-works/pi</a>; design notes: &ldquo;What I learned building an opinionated and minimal coding agent,&rdquo; November 30, 2025. <a class="ext" href="https://mariozechner.at/posts/2025-11-30-pi-coding-agent/">mariozechner.at</a></li>
+        <li>Kinex: a robotics agent built on Pi. stacx-lab, 2026. <a class="ext" href="https://stacx-lab.github.io/kinex/">stacx-lab.github.io/kinex</a></li>
+        <li>John von Neumann. <cite>First Draft of a Report on the EDVAC.</cite> Moore School of Electrical Engineering, University of Pennsylvania, 1945.</li>
+
+
+      </ol>
+    </section>

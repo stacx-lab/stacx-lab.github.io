@@ -1,13 +1,13 @@
-# kinex site
+# STACX Lab website
 
-Website for [Kinex](https://github.com/stacx-lab/kinex): landing page and docs.
+Organization website: a lab homepage, [Kinex](https://github.com/stacx-lab/kinex) landing page and docs, and a blog.
 Astro (static) + Pagefind. No UI framework.
 Fonts: Roboto Slab (headings), Lato (body), Commit Mono (code); self-hosted via `@fontsource`, declared in `src/components/Fonts.astro`.
 
 ```sh
 npm ci
-npm run dev        # http://localhost:4321/kinex/  (search needs a build)
-npm run build      # dist/ + pagefind index
+npm run dev        # http://localhost:4321/  (Kinex search needs a build)
+npm run build      # dist/ organization site + Kinex Pagefind index
 npm run preview
 npm run check      # astro check + build + internal link/anchor check
 ```
@@ -29,17 +29,22 @@ the website.
 ## Layout
 
 ```
-src/config.ts                 version, tagline, install cmd, repo, nav, doc groups
-src/content/docs/*.md         docs (one file = one page; index.md = /docs/)
+src/pages/index.astro         / — lab homepage
+src/pages/kinex/               /kinex/ — project homepage and docs routes
+src/pages/blog/                /blog/ — blog roll and generated article routes
+src/content/blog/*.mdx         blog posts and publication metadata
+src/components/blog/           article-specific diagrams
+src/config.ts                 Kinex version, tagline, install cmd, repo, doc groups
+src/content/docs/*.md         docs (one file = one page; index.md = /kinex/docs/)
 src/data/hero-terminal.json   landing-page simulator walkthrough
 src/components/               Terminal, ArchDiagram, DeviceDiagram, Wordmark, Contributors, Sidebar, Toc, Search…
-src/layouts/                  Base, Doc
+src/layouts/                  Base (shared shell), Doc, Blog
 src/styles/                   global.css (tokens, light/dark), prose.css (markdown)
-public/media/                 published camera observations and delivery videos
+public/kinex/                 published Kinex images, camera observations, and videos
 .agents/skills/kinex-session-video/  video-generation skill, scripts, fonts, references
 gallery/.masters/             original archival MP4s (Git LFS; not published)
 gallery/<id>/                 tracked edit timeline/provenance; ignored render outputs
-gallery/index.html            local review page using public/media/gallery/ assets
+gallery/index.html            local review page using public/kinex/media/gallery/ assets
 ```
 
 ## Add a doc page
@@ -58,7 +63,7 @@ sources: ["docs/commands.md"]   # internal source references at the reviewed `si
 ```
 
 Write plain Markdown starting at `##`. Use `.mdx` when a page needs an imported Astro component, as in `architecture.mdx`.
-Link other pages as `/docs/<slug>/`; the base path is added at build time.
+Link other docs as `/docs/<slug>/`; the Kinex prefix is added at build time only for the docs collection. Blog links use site-root paths, such as `/kinex/docs/`.
 The sidebar, prev/next links, one-page view (`/docs/all/`) and search update automatically.
 
 ## Release a new version
@@ -87,7 +92,7 @@ Pause/replay, reduced-motion, and no-JavaScript transcript fallbacks are support
 All seven camera frames come unchanged from one successful session in
 `../backup/new5/view-images/`: overhead, right wrist, left wrist, insertion inspection,
 and final verification after release, withdrawal, and a settling wait. Sources,
-checksums, and source entry references are in `public/media/demo/provenance.json`.
+checksums, and source entry references are in `public/kinex/media/demo/provenance.json`.
 Dialogue and tool displays condense that session; intermediate retries are omitted and
 contact is inspected before release. This is an adapted replay, not a live robot.
 Setup runs in a subshell because `roboenv setup` exports into its current directory.
@@ -95,7 +100,7 @@ Setup runs in a subshell because `roboenv setup` exports into its current direct
 ## Homepage video gallery
 
 `src/components/VideoGallery.astro` sits below the hero. The gallery entries are defined
-in `src/data/gallery.ts`; media files live in `public/media/gallery/<id>/`.
+in `src/data/gallery.ts`; media files live in `public/kinex/media/gallery/<id>/`.
 
 - `abc-yam-cube`: a 75-second real-world dual-YAM cube solve, with a synchronized
   session replay, device map, and camera observations. Source: `../sources/abc-yam-cube`.
@@ -162,7 +167,7 @@ amber, and blue; the purple playhead keeps a contrasting border in both themes.
 Cube and red-cup intervals are selected examples of each capability. The litter
 clip marks the disturbance/recovery interval as robustness, the return for the
 next piece at 00:50–00:59 as spatial memory, and the rest as locomotion/manipulation.
-`public/media/gallery/manifest.json` records master/delivery hashes, file sizes,
+`public/kinex/media/gallery/manifest.json` records master/delivery hashes, file sizes,
 durations, and metadata evidence. Use `url()` for every media link so they resolve
 beneath `/kinex/` in both local builds and GitHub Pages.
 
@@ -180,7 +185,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/kinex-session-video/scripts/tes
 
 Use `gallery/yam-hang-mug/edit.json` as the editable example and
 `gallery/.masters/real-hang-mug.mp4` as an existing layout reference. Preserve
-master files when generating compressed copies for `public/media/gallery/`.
+master files when generating compressed copies for `public/kinex/media/gallery/`.
 
 To download the archival masters after cloning, install Git LFS, then run:
 
@@ -190,20 +195,53 @@ git lfs pull
 ```
 
 Only `gallery/.masters/*.mp4` uses LFS. The compressed MP4/WebM files under
-`public/media/gallery/` remain ordinary Git assets so the existing Pages workflow
+`public/kinex/media/gallery/` remain ordinary Git assets so the existing Pages workflow
 can publish them without an LFS download. Local builds need `git lfs pull` for the ROS 2 video.
 Generated media under `gallery/<id>/` stays local; commit edits and provenance,
-then copy reviewed delivery files into `public/media/gallery/<id>/`. The local
+then copy reviewed delivery files into `public/kinex/media/gallery/<id>/`. The local
 `gallery/index.html` review page references those published copies directly.
 
 ## Deploy
 
-`.github/workflows/deploy.yml` builds on every push to `main` and publishes to GitHub Pages. Before the first deploy, set *Settings → Pages → Source* to
-**GitHub Actions**. CI builds for `https://stacx-lab.github.io/kinex/` and stages
-`dist/` inside `_site/kinex/` before uploading `_site/`. This organization-site
-repository needs that directory so `/kinex/` serves the homepage and `/kinex`
-redirects to it. Documentation lives at `/kinex/docs/`. Local builds use the same
-origin and base path; override them with `SITE_URL` and `BASE_PATH` for other hosts.
+`.github/workflows/deploy.yml` checks and builds on every push to `main` and publishes
+`dist/` directly to GitHub Pages. Set *Settings → Pages → Source* to **GitHub Actions**.
+The build mirrors the public URLs: `/`, `/kinex/`, `/kinex/docs/`, `/blog/`, and
+`/blog/<slug>/`. GitHub Pages redirects directory URLs without the trailing slash.
+The root `404.html` serves missing pages across the site. `SITE_URL` can override
+the origin; the site always builds at the root (there is no `BASE_PATH` setting).
+
+Published Kinex assets live in `public/kinex/`, preserving `/kinex/img/`,
+`/kinex/media/`, and `/kinex/video/` URLs. Bundled shared assets live in `/_astro/`.
+`url()` in `src/lib/url.ts` resolves paths within Kinex; `siteUrl()` resolves paths
+at the organization root. Pagefind indexes only `dist/kinex/` and writes its bundle
+to `/kinex/pagefind/`; blog pages do not load the Kinex search UI.
+
+## Add a blog post
+
+Create `src/content/blog/<slug>.md` or `.mdx` with frontmatter:
+
+```yaml
+---
+title: A new post
+description: A short summary for the blog roll and social previews.
+published: "2026-10"          # publication month, newest first
+# Optional:
+author:
+  name: Author name
+  url: https://example.com/
+readingTime: "5 min read"
+topic: Agents and robotics
+---
+```
+
+Write the body starting at `##`; the shared blog layout renders the title, summary,
+date, and byline. MDX posts can import diagrams from `src/components/blog/`.
+For a contents sidebar, add `contents` entries with `id`, `label`, and `number`,
+matching explicit section IDs in the body. The existing article is an example.
+The filename supplies the URL slug. Posts automatically appear on `/blog/` and
+in the sitemap; no route file, list edit, or deployment copy step is needed.
+Run `npm run check`, then `npm run preview` to review the complete site locally.
+Use trailing slashes in Astro preview; directory redirects are handled by GitHub Pages.
 
 ### Cube video reproduction
 
@@ -232,4 +270,4 @@ The adapter verifies embedded-image hashes against their original tool results,
 keeps hidden thinking out of the replay, and never executes source-session code.
 Generated frames and source-image links stay in an ignored `.cache` directory.
 The archival render goes to `gallery/.masters/abc-yam-cube.mp4`; delivery files
-are encoded separately under `public/media/gallery/abc-yam-cube/`.
+are encoded separately under `public/kinex/media/gallery/abc-yam-cube/`.

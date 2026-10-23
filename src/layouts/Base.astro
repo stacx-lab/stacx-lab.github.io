@@ -8,10 +8,10 @@ import Analytics from '../components/Analytics.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
-interface Props { title?: string; description?: string; bodyClass?: string; footer?: boolean }
-const { title, description = site.description, bodyClass = '', footer = true } = Astro.props;
-const fullTitle = title ? `${title} · Kinex` : `Kinex · ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+interface Props { title?: string; description?: string; bodyClass?: string; footer?: boolean; section?: 'kinex' | 'lab'; article?: boolean }
+const { title, description = site.description, bodyClass = '', footer = true, section = 'kinex', article = false } = Astro.props;
+const fullTitle = section === 'lab' ? (title ? `${title} · STACX Lab` : 'STACX Lab') : title ? `${title} · Kinex` : `Kinex · ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -22,11 +22,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Fonts />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {Astro.url.pathname === '/404/' && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('/img/kinex-logo-day.svg')} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:url" content={canonical} />
     <meta name="theme-color" content="#f7f6f2" />
     <script is:inline>
@@ -41,9 +42,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body class={bodyClass}>
     <a class="sr-only" href="#main">Skip to content</a>
-    <Nav />
+    <Nav section={section} />
     <slot />
-    {footer && <Footer />}
-    <Search />
+    {footer && (section === 'kinex' ? <Footer /> : <footer class="lab-footer wrap"><a href="/">STACX Lab</a><a href="/kinex/">Kinex</a><a href="/blog/">Blog</a></footer>)}
+    {section === 'kinex' && <Search />}
   </body>
 </html>
+
+<style>
+  .lab-footer { display: flex; gap: 24px; padding-block: 24px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); }
+  .lab-footer a:first-child { margin-right: auto; }
+  .lab-footer a:hover { color: var(--accent-ink); }
+</style>

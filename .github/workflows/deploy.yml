@@ -28,28 +28,19 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       - run: npm ci
-      # This organization-site repository serves Kinex from a subdirectory.
       - run: npm run check
         env:
           SITE_URL: https://stacx-lab.github.io
-          BASE_PATH: /kinex
-      # A real directory also lets Pages redirect /kinex to /kinex/.
-      - name: Stage the Pages site
-        run: |
-          mkdir -p _site/kinex
-          cp -R dist/. _site/kinex/
-          cp dist/404.html _site/404.html
-          cp -R blog _site/blog
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: https://stacx-lab.github.io/kinex/
+      url: https://stacx-lab.github.io/
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4

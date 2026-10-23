@@ -52,7 +52,7 @@ def main():
     assert renderer.status(0)[1] == '00:00:00 / 01:02:22'
     assert renderer.status(edit['duration']-1)[1:] == ('01:02:22 / 01:02:22', 'Solved — blue face up')
     master = REPO / 'gallery/.masters/abc-yam-cube.mp4'
-    files = [master] + [REPO / f'public/media/gallery/abc-yam-cube/abc-yam-cube.{ext}' for ext in ['mp4','webm']]
+    files = [master] + [REPO / f'public/kinex/media/gallery/abc-yam-cube/abc-yam-cube.{ext}' for ext in ['mp4','webm']]
     timestamps = []
     for path in files:
         probe = json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0',

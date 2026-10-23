@@ -1,18 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-import { url } from '../lib/url';
 ---
-<Base title="404">
-  <main id="main" class="wrap nf">
-    <pre class="dim">$ kinex run "/ping page"
-<span class="err">✗ Page not found (404)</span></pre>
-    <p><a href={url('/')}>← Home</a> · <a href={url('/docs/')}>Docs</a> · <button type="button" class="lk" data-search-open>Search</button></p>
+<Base title="Page not found" description="This page could not be found." section="lab">
+  <main id="main" class="wrap missing">
+    <p class="kicker">404</p>
+    <h1>Page not found</h1>
+    <p>Try the <a href="/">lab homepage</a>, <a href="/kinex/">Kinex</a>, or the <a href="/blog/">blog</a>.</p>
   </main>
 </Base>
 <style>
-  .nf { padding-block: 120px; font-size: 14px; }
-  pre { font-size: 15px; }
-  .err { color: #e5484d; }
-  a, .lk { color: var(--accent-ink); }
-  .lk { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  .missing { min-height: calc(100vh - 125px); padding-block: 100px; }
+  a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
 </style>

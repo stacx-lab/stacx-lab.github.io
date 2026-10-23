@@ -69,7 +69,7 @@ python3 gallery/abc-yam-cube/build.py
 
 Render preview frames before the full export. Inspect opening, motion, error/recovery, observation, and ending frames at full resolution. Check status text width, actual source-time progression, and the absence of duplicate metadata/output counters. The renderer formats the final status line by default; see the reference for `robot_label`, `status_caption`, and interval-based activity labels.
 
-Keep the archival master under `gallery/.masters/` and delivery files under `public/media/gallery/<id>/`. Start with H.264 `-preset slow -crf 28 -pix_fmt yuv420p -movflags +faststart` and VP9 `-crf 38 -b:v 0 -row-mt 1`, both 1080p30, encoded from the master. The current workflow exports silent video; preserve original audio in the source unless requested otherwise.
+Keep the archival master under `gallery/.masters/` and delivery files under `public/kinex/media/gallery/<id>/`. Start with H.264 `-preset slow -crf 28 -pix_fmt yuv420p -movflags +faststart` and VP9 `-crf 38 -b:v 0 -row-mt 1`, both 1080p30, encoded from the master. The current workflow exports silent video; preserve original audio in the source unless requested otherwise.
 
 **Finish rendering before delivery encoding reads the master.** A new render can invalidate an in-progress MP4 read. Encode delivery copies into a staging directory, then replace the website files after encoding succeeds. Preserve originals and update the poster, checksums, frame counts, duration, and provenance together.
 

@@ -1,5 +1,5 @@
 {
-  "_comment": "30-second adapted replay from backup/new5. Character-by-character text, indeterminate tool activity, original camera frames. Calls are condensed; source evidence is in public/media/demo/provenance.json.",
+  "_comment": "30-second adapted replay from backup/new5. Character-by-character text, indeterminate tool activity, original camera frames. Calls are condensed; source evidence is in public/kinex/media/demo/provenance.json.",
   "shell": [
     {
       "kind": "sh",

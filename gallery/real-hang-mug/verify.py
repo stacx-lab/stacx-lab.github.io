@@ -43,7 +43,7 @@ def main():
     if '--timeline-only' in sys.argv:
         print('Validated one-minute source map, result/image timing, device highlights, and every status label')
         return
-    files=[REPO/'gallery/.masters/real-hang-mug.mp4']+[REPO/f'public/media/gallery/real-hang-mug/real-hang-mug.{ext}' for ext in ['mp4','webm']]
+    files=[REPO/'gallery/.masters/real-hang-mug.mp4']+[REPO/f'public/kinex/media/gallery/real-hang-mug/real-hang-mug.{ext}' for ext in ['mp4','webm']]
     result=[]
     for path in files:
         probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-count_frames','-show_entries','stream=width,height,nb_read_frames:format=duration','-of','json',str(path)]))

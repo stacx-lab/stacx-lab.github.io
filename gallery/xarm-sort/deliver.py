@@ -19,7 +19,7 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         list(pool.map(encode,encoders.items()))
     shutil.copy2(HERE/f'{name}.poster.jpg',stage/f'{name}.poster.jpg')
-    target=REPO/f'public/media/gallery/{name}';target.mkdir(parents=True,exist_ok=True)
+    target=REPO/f'public/kinex/media/gallery/{name}';target.mkdir(parents=True,exist_ok=True)
     for ext in ['mp4','webm','poster.jpg']: shutil.copy2(stage/f'{name}.{ext}',target/f'{name}.{ext}')
     files={ext:dict(bytes=(target/f'{name}.{ext}').stat().st_size,sha256=sha256(target/f'{name}.{ext}')) for ext in ['mp4','webm','poster.jpg']}
     record=dict(id=name,source=str(master.relative_to(REPO)),source_sha256=sha256(master),source_bytes=master.stat().st_size,
@@ -28,7 +28,7 @@ def main():
        metadata_source='GPT-6-Astra from entry 8, before all tool calls; medium from entry 2. Initial inactive configuration GPT-5.5 retained in provenance.',
        source_first_pts_s=0,delivery_first_pts_s=0,files=files,encoder_settings=encoders,
        provenance=f'gallery/{name}/{name}.provenance.json')
-    manifest=REPO/'public/media/gallery/manifest.json';data=json.loads(manifest.read_text())
+    manifest=REPO/'public/kinex/media/gallery/manifest.json';data=json.loads(manifest.read_text())
     data['clips']=[c for c in data['clips'] if c['id']!=name]
     pos=next(i for i,c in enumerate(data['clips']) if c['id']=='real-hang-mug')+1
     data['clips'].insert(pos,record);manifest.write_text(json.dumps(data,indent=2)+'\n')

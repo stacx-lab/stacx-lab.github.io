@@ -1,5 +1,5 @@
 {
-  "name": "kinex-site",
+  "name": "stacx-lab-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist --output-subdir pagefind",
+    "build": "astro build && pagefind --site dist/kinex --output-subdir pagefind",
     "preview": "astro preview",
     "check": "astro check && npm run build && node scripts/check-links.mjs"
   },

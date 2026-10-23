@@ -1,9 +1,9 @@
 ---
 // Every doc on one page: easy to grep, print, or paste into an agent.
-import Doc from '../../layouts/Doc.astro';
+import Doc from '../../../layouts/Doc.astro';
 import { render } from 'astro:content';
-import { getDocs, docHref } from '../../lib/content';
-import { site } from '../../config';
+import { getDocs, docHref } from '../../../lib/content';
+import { site } from '../../../config';
 
 const docs = await getDocs();
 const rendered = await Promise.all(docs.map(async (d) => ({ d, r: await render(d) })));

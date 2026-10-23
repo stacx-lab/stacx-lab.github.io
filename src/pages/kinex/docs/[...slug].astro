@@ -1,7 +1,7 @@
 ---
-import Doc from '../../layouts/Doc.astro';
+import Doc from '../../../layouts/Doc.astro';
 import { render } from 'astro:content';
-import { getDocs, docSlug, type Doc as DocEntry } from '../../lib/content';
+import { getDocs, docSlug, type Doc as DocEntry } from '../../../lib/content';
 
 export async function getStaticPaths() {
   const docs = await getDocs();

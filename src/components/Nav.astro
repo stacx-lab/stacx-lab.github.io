@@ -2,21 +2,24 @@
 import { site } from '../config';
 import { url } from '../lib/url';
 import Wordmark from './Wordmark.astro';
+interface Props { section?: 'kinex' | 'lab' }
+const { section = 'kinex' } = Astro.props;
+const isKinex = section === 'kinex';
 ---
 <header class="topbar">
   <nav class="wrap bar" aria-label="main">
-    <a class="brand" href={url('/')} aria-label="Kinex home">
-      <Wordmark size={20} />
-      <span class="ver">v{site.version}</span>
+    <a class="brand" href={isKinex ? url('/') : '/'} aria-label={isKinex ? 'Kinex home' : 'STACX Lab home'}>
+      {isKinex ? <><Wordmark size={20} /><span class="ver">v{site.version}</span></> : <span class="lab-brand">STACX Lab</span>}
     </a>
     <div class="links">
-      <a class="link" href={url('/docs/')}>Docs</a>
-      <a class="link" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>
+      {isKinex ? <a class="link" href={url('/docs/')}>Docs</a> : <a class="link" href={url('/')}>Kinex</a>}
+      <a class="link" href="/blog/" aria-current={Astro.url.pathname.startsWith('/blog/') ? 'page' : undefined}>Blog</a>
+      {isKinex && <a class="link github" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>}
     </div>
     <div class="tools">
-      <button class="search-trigger" type="button" data-search-open aria-label="search">
+      {isKinex && <button class="search-trigger" type="button" data-search-open aria-label="search">
         <span class="q">Search</span><kbd>/</kbd>
-      </button>
+      </button>}
       <button class="theme" type="button" data-theme-toggle aria-label="toggle theme" title="Toggle theme">
         <span class="sun">☀</span><span class="moon">☾</span>
       </button>
@@ -34,6 +37,8 @@ import Wordmark from './Wordmark.astro';
 </script>
 
 <style>
+  .lab-brand { font-family: var(--font-head); font-weight: 700; white-space: nowrap; }
+  .link[aria-current] { color: var(--accent-ink); }
   .topbar {
     position: sticky; top: 0; z-index: 40; height: var(--topbar);
     background: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -66,4 +71,5 @@ import Wordmark from './Wordmark.astro';
     .links { gap: 12px; }
     .search-trigger { gap: 0; padding: 0 6px; }
   }
+  @media (max-width: 380px) { .github { display: none; } }
 </style>

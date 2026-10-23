@@ -39,7 +39,7 @@ def main():
     assert r.status(timeline.output(308))[0]=='Human disturbance'
     assert r.status(timeline.output(1560))[0]=='Operator check'
     assert r.status(edit['duration']-.1)[1:] == ('00:35:55 / 00:35:55','Two pieces in the bin')
-    files=[REPO/'gallery/.masters/go2-trash-clean.mp4']+[REPO/f'public/media/gallery/go2-trash-clean/go2-trash-clean.{ext}' for ext in ['mp4','webm']]
+    files=[REPO/'gallery/.masters/go2-trash-clean.mp4']+[REPO/f'public/kinex/media/gallery/go2-trash-clean/go2-trash-clean.{ext}' for ext in ['mp4','webm']]
     result=[]
     for path in files:
         probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-count_frames','-show_entries','stream=width,height,nb_read_frames:format=duration','-of','json',str(path)]))

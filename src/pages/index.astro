@@ -1,128 +1,40 @@
 ---
 import Base from '../layouts/Base.astro';
-import Terminal from '../components/Terminal.astro';
-import ArchDiagram from '../components/ArchDiagram.astro';
-import DeviceDiagram from '../components/DeviceDiagram.astro';
-import CopyCmd from '../components/CopyCmd.astro';
-import VideoGallery from '../components/VideoGallery.astro';
-import Contributors from '../components/Contributors.astro';
 import Wordmark from '../components/Wordmark.astro';
-import BenchmarkResults from '../components/BenchmarkResults.astro';
-import { site } from '../config';
-import { url } from '../lib/url';
-const paths = [
-  { k: 'Already using ROS 2?', cmd: 'onboard-ros2', prefix: 'Skill:', body: 'Reuse existing ROS packages with adapters for common interfaces. Supports ROS 2 Jazzy on Ubuntu 24.04.', href: '/docs/ros2/' },
-  { k: 'Play with simulators', cmd: 'roboenv setup', body: 'RoboEnv exposes simulated robots as Kinex devices, with the same interfaces as real hardware.', href: '/docs/simulators/' },
-  { k: 'Work with real robots', cmd: '/onboarding', body: 'Describe the hardware and the task. Kinex connects the devices and calibrates what the task needs.', href: '/docs/real-robots/' },
-];
 ---
-<Base>
-  <main id="main">
-    <section class="hero grid-bg">
-      <div class="wrap hero-in">
-        <div class="pitch">
-          <h1>One Agent for Any Robot.</h1>
-          <p class="sub">
-            Tell <a class="self-link" href={url('/')} aria-label="Kinex home"><Wordmark /></a> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
-            and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>, including <b>ROS 2 devices</b>.
-          </p>
-          <p class="platform-note">Install on macOS and Ubuntu.</p>
-          <CopyCmd cmd={site.install} />
-          <p class="install-note">Prefer to use Pi, Codex, or Claude Code? <a href="https://github.com/stacx-lab/kinex-plugins">Explore kinex-plugins →</a></p>
-          <div class="cta">
-            <a class="btn primary" href={url('/docs/')}>Get started →</a>
-            <a class="btn" href="#gallery">Watch the demos ↓</a>
-          </div>
-          <p class="pi-note">Kinex is built on <a href="https://pi.dev">Pi</a>.</p>
-        </div>
-        <Terminal />
-      </div>
-    </section>
-
-    <VideoGallery />
-
-    <section class="wrap sec architecture" id="architecture" aria-labelledby="architecture-heading">
-      <p class="kicker">02 · Architecture</p>
-      <div class="architecture-part">
-        <h2 id="architecture-heading">Three layers of abstraction for acting with arbitrary robots.</h2>
-        <p class="section-copy">An agent needs a way to turn a goal into physical action. Kinex separates that work into three layers: <strong>skills</strong> describe how to approach a task, <strong>tools</strong> carry out perception, computation, and control, and <strong>devices</strong> expose the robot’s capabilities through typed interfaces. Results flow back to the agent so it can decide what to do next.</p>
-        <ArchDiagram />
-      </div>
-      <div class="architecture-part">
-        <h2>A system of devices rather than a monolithic robot</h2>
-        <p class="section-copy">Kinex exposes a robot as independent devices: a mobile base, torso, arms, grippers, and cameras. The agent writes and runs tools and code to coordinate these devices for each task. This makes workflows more flexible, lets each task compose the robot it needs, and helps them generalize across robot configurations. If a camera is missing, for example, the agent can inspect the remaining devices, use another viewpoint where available, and revise its workflow to fit the capabilities it actually has.</p>
-        <DeviceDiagram />
-      </div>
-    </section>
-
-    <section class="wrap sec benchmark" id="benchmark-results" aria-labelledby="benchmark-heading">
-      <h2 class="kicker" id="benchmark-heading">03 · Benchmark results</h2>
-      <BenchmarkResults />
-    </section>
-
-    <section class="wrap sec">
-      <p class="kicker">04 · Where to start</p>
-      <div class="cards">
-        {paths.map((p) => (
-          <a class="card" href={url(p.href)}>
-            <span class="ck">{p.k}</span>
-            <code class="cc"><span>{p.prefix ?? '$'}</span> {p.cmd}</code>
-            <span class="cb">{p.body}</span>
-            <span class="go">→</span>
-          </a>
-        ))}
-      </div>
-    </section>
-    <Contributors />
+<Base description="Explore Kinex and the STACX Lab blog." section="lab">
+  <main id="main" class="wrap home">
+    <header class="grid-bg intro">
+      <p class="kicker">Agents · Robotics · Systems</p>
+      <h1>STACX Lab</h1>
+      <p>Our projects and ideas.</p>
+    </header>
+    <div class="destinations">
+      <a class="destination" href="/kinex/">
+        <span class="kicker">Project</span>
+        <h2><Wordmark size={30} /></h2>
+        <p>A general harness that connects coding agents to any physical robot.</p>
+        <span class="go">Explore Kinex →</span>
+      </a>
+      <a class="destination" href="/blog/">
+        <span class="kicker">Writing</span>
+        <h2>Blog</h2>
+        <p>Notes on agents, robotics, and the systems we build.</p>
+        <span class="go">Read the blog →</span>
+      </a>
+    </div>
   </main>
 </Base>
-
 <style>
-  .hero { border-bottom: 1px solid var(--rule); }
-  .hero-in {
-    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px;
-    max-width: 1180px;
-    align-items: center; padding-block: 64px 72px;
-  }
-  @media (max-width: 960px) { .hero-in { grid-template-columns: minmax(0, 1fr); padding-block: 48px 56px; gap: 40px; } }
-  .pitch { min-width: 0; container-type: inline-size; }
-  h1 { font-size: clamp(20px, 7.2cqi, 42px); white-space: nowrap; line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 18px; }
-  .sub { color: var(--ink-2); margin: 0 0 26px; }
-  .sub b { color: var(--ink); font-weight: 600; }
-  .platform-note { margin: 0 0 8px; font-size: var(--fs-1); color: var(--ink-2); }
-  .install-note, .pi-note { margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); }
-  .pi-note { margin-top: 18px; }
-  .install-note a, .pi-note a { text-decoration: underline; text-underline-offset: 3px; }
-  .install-note a:hover, .pi-note a:hover { color: var(--accent); }
-  .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-
-  .sec { padding-top: 72px; }
-  main > .sec { border-top: 1px solid var(--rule); margin-top: 72px; }
-  .sec h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 24px; }
-  .benchmark h2.kicker { font-size: var(--fs-0); letter-spacing: var(--tracking); font-weight: 400; margin: 0; }
-  .architecture h2 { margin-bottom: 16px; }
-  @media (min-width: 960px) { #architecture-heading { white-space: nowrap; } }
-  .section-copy { color: var(--ink-2); margin: 0 0 32px; line-height: 1.75; }
-  .section-copy strong { color: var(--ink); font-weight: 600; }
-  .architecture-part + .architecture-part { margin-top: 56px; }
-
-  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; border: 1px solid var(--rule); border-radius: 6px; }
-  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
-  .card { position: relative; display: grid; gap: 10px; align-content: start; padding: 18px 20px 22px; background: var(--panel); }
-  .card + .card { border-left: 1px solid var(--rule); }
-  @media (max-width: 860px) { .card + .card { border-left: 0; border-top: 1px solid var(--rule); } }
-  .card:first-child { border-radius: 6px 0 0 6px; } .card:last-child { border-radius: 0 6px 6px 0; }
-  @media (max-width: 860px) { .card:first-child { border-radius: 6px 6px 0 0; } .card:last-child { border-radius: 0 0 6px 6px; } }
-  .ck { padding-right: 24px; font-family: var(--font-head); font-weight: 700; font-size: 17px; }
-  .cc { font-size: 12px; color: var(--accent-ink); }
-  .cc span { color: var(--ink-3); }
-  .cb { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
-  .go { position: absolute; top: 22px; right: 22px; color: var(--ink-3); transition: transform .15s; }
-  .card:hover { background: var(--bg); }
-  .card:hover .go { color: var(--accent); transform: translateX(4px); }
-
-  .self-link { border-bottom: 1px solid transparent; transition: border-color 0.15s; }
-  .self-link:hover { border-bottom-color: var(--accent); }
-  .inline-link { color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 3px; }
-  .inline-link:hover { text-decoration-color: var(--accent); }
+  .home { max-width: 1040px; min-height: calc(100vh - 125px); padding-bottom: 80px; }
+  .intro { padding-block: 80px 48px; border-bottom: 1px solid var(--rule); }
+  h1 { font-size: var(--fs-5); line-height: 1.1; letter-spacing: -.025em; margin: 16px 0 20px; }
+  .intro > p:last-child { font-size: 21px; color: var(--ink-2); margin: 0; }
+  .destinations { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 32px; }
+  .destination { padding: 28px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); display: flex; flex-direction: column; align-items: start; }
+  .destination:hover { border-color: var(--accent); }
+  h2 { font-size: 30px; line-height: 1.3; margin: 20px 0 12px; }
+  .destination p { margin: 0 0 24px; color: var(--ink-2); max-width: 38ch; }
+  .go { color: var(--accent-ink); font-size: 14px; margin-top: auto; }
+  @media (max-width: 640px) { .intro { padding-block: 48px 32px; } .destinations { grid-template-columns: 1fr; } }
 </style>
