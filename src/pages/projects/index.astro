@@ -1,13 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Wordmark from '../../components/Wordmark.astro';
 import { projects } from '../../data/projects';
 ---
 <Base title="Projects" description="Open-source agent systems, reinforcement learning libraries, and control tools from STACX Lab." section="lab">
   <main id="main" class="wrap projects-page">
-    <header class="intro grid-bg"><p class="kicker">STACX Lab</p><h1>Projects</h1><p>Research in code.</p><p class="description">Open-source tools for agents, learning, and control.</p></header>
+    <header class="intro grid-bg"><p class="kicker">STACX Lab</p><h1>Projects</h1><p class="description">Open-source tools for agents, learning, and control.</p></header>
     <div class="project-grid">{projects.map((project) => <article>
-      <p class="category">{project.category}</p><h2>{project.name}</h2><p class="summary">{project.description}</p>
-      <div class="project-links">{project.website && <a href={project.website}>Website ↗</a>}<a href={project.code}>Code ↗</a></div>
+      <p class="category">{project.category}</p><h2 aria-label={project.name}>{project.name === 'Kinex' ? <Wordmark size={28} /> : project.name}</h2><p class="summary">{project.description}</p>
+      <div class="project-links">{project.website && <a href={project.website}>Website</a>}<a href={project.code}>Code</a></div>
     </article>)}</div>
     <p class="source">Project catalog based on <a href="https://bo-dai.github.io/software.html">Bo Dai’s software page</a>, alongside Kinex.</p>
   </main>

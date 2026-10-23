@@ -63,7 +63,7 @@ const slots = Array.from({ length: slotCount }, (_, slot) => ({ clip: galleryVid
                       <button class="highlight-jump" type="button" data-highlight-time={highlight.moments[0].start} aria-label={`Jump to ${highlight.title} at ${Math.round(highlight.moments[0].start)} seconds`}>
                         <span class="highlight-heading">
                           <strong>{highlight.title}</strong>
-                          <span class="highlight-time">{`${Math.floor(Math.round(highlight.moments[0].start) / 60)}:${String(Math.round(highlight.moments[0].start) % 60).padStart(2, '0')}`} <span aria-hidden="true">↗</span></span>
+                          <span class="highlight-time">{`${Math.floor(Math.round(highlight.moments[0].start) / 60)}:${String(Math.round(highlight.moments[0].start) % 60).padStart(2, '0')}`}</span>
                         </span>
                         <span class="highlight-text">{highlight.text}</span>
                       </button>

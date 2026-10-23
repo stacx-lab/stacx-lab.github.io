@@ -24,12 +24,12 @@ import { students, alumni } from '../data/lab';
       <div class="section-heading"><p class="kicker">People</p><h2 id="personnel-title">Personnel</h2></div>
       <div class="faculty">
         <img src="/images/bo-dai.jpg" alt="Bo Dai" width="160" height="192" loading="lazy" />
-        <div><p class="role">Principal investigator</p><h3><a href="https://bo-dai.github.io/">Bo Dai ↗</a></h3><p>Assistant Professor<br />School of Computational Science & Engineering, Georgia Tech</p><p class="secondary">Also affiliated with Google DeepMind as a Senior Staff Research Scientist.</p><a class="contact" href="mailto:bodai@cc.gatech.edu">bodai@cc.gatech.edu</a></div>
+        <div><p class="role">Principal investigator</p><h3><a href="https://bo-dai.github.io/">Bo Dai</a></h3><p>Assistant Professor<br />School of Computational Science & Engineering, Georgia Tech</p><p class="secondary">Also affiliated with Google DeepMind as a Senior Staff Research Scientist.</p><a class="contact" href="mailto:bodai@cc.gatech.edu">bodai@cc.gatech.edu</a></div>
       </div>
       <h3 class="group-title">Current students</h3>
-      <ul class="people-grid">{students.map((person) => <li><h4>{person.href ? <a href={person.href}>{person.name}<span aria-hidden="true"> ↗</span></a> : person.name}</h4><p>PhD student · Georgia Tech CSE</p></li>)}</ul>
+      <ul class="people-grid">{students.map((person) => <li><h4>{person.href ? <a href={person.href}>{person.name}</a> : person.name}</h4><p>PhD student · Georgia Tech CSE</p></li>)}</ul>
       <h3 class="group-title">Former members</h3>
-      <ul class="people-grid alumni">{alumni.map((person) => <li><h4><a href={person.href}>{person.name}<span aria-hidden="true"> ↗</span></a></h4><p>{person.degree}</p>{person.next && <p class="next">{person.next}</p>}</li>)}</ul>
+      <ul class="people-grid alumni">{alumni.map((person) => <li><h4><a href={person.href}>{person.name}</a></h4><p>{person.degree}</p>{person.next && <p class="next">{person.next}</p>}</li>)}</ul>
       <p class="source">Personnel and affiliations from <a href="https://bo-dai.github.io/team.html">Bo Dai’s team page</a>.</p>
     </section>
   </main>
@@ -62,7 +62,6 @@ import { students, alumni } from '../data/lab';
   .people-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 28px; }
   .people-grid li { padding: 20px 0; border-top: 1px solid var(--rule); min-width: 0; }
   .people-grid h4 { margin: 0 0 6px; font-size: 17px; }
-  .people-grid h4 span { font-family: var(--font-body); color: var(--accent); font-size: 13px; }
   .people-grid p { color: var(--ink-2); font-size: 13px; margin: 0; }
   .people-grid .next { margin-top: 5px; color: var(--ink-3); }
   a:hover { color: var(--accent-ink); }

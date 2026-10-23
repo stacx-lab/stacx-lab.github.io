@@ -14,7 +14,7 @@ const isKinex = section === 'kinex';
     <div class="links">
       {isKinex ? <a class="link" href={url('/docs/')}>Docs</a> : <a class="link" href="/projects/" aria-current={Astro.url.pathname.startsWith('/projects/') ? 'page' : undefined}>Projects</a>}
       <a class="link" href="/blog/" aria-current={Astro.url.pathname.startsWith('/blog/') ? 'page' : undefined}>Blog</a>
-      {isKinex && <a class="link github" href={site.repo} rel="noopener">GitHub<span class="ext">↗</span></a>}
+      {isKinex && <a class="link github" href={site.repo} rel="noopener">GitHub</a>}
     </div>
     <div class="tools">
       {isKinex && <button class="search-trigger" type="button" data-search-open aria-label="search">
@@ -51,7 +51,6 @@ const isKinex = section === 'kinex';
   .links { display: flex; gap: 22px; font-size: 14.5px; }
   .link { color: var(--ink-2); }
   .link:hover { color: var(--ink); }
-  .ext { font-size: 10px; margin-left: 2px; color: var(--ink-3); }
   .tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
   .search-trigger {
     display: flex; align-items: center; gap: 24px; height: 30px; padding: 0 6px 0 10px;
@@ -67,7 +66,7 @@ const isKinex = section === 'kinex';
   :global(:root[data-theme='dark']) .sun, :global(:root[data-theme='light']) .moon { display: none; }
   @media (max-width: 640px) {
     .bar { gap: 14px; }
-    .ver, .ext, .q { display: none; }
+    .ver, .q { display: none; }
     .links { gap: 12px; }
     .search-trigger { gap: 0; padding: 0 6px; }
   }
