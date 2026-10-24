@@ -1,0 +1,21 @@
+---
+interface Props { path?: string }
+const { path = '/' } = Astro.props;
+const destination = new URL(path, 'https://kinex-agent.com').href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kinex has moved</title>
+    <link rel="canonical" href={destination} />
+    <script is:inline define:vars={{ destination }}>
+      window.location.replace(destination + window.location.search + window.location.hash);
+    </script>
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+  </head>
+  <body>
+    <p>Kinex has moved to <a href={destination}>{destination}</a>.</p>
+  </body>
+</html>

@@ -1,23 +1,4 @@
 ---
-// Every doc on one page: easy to grep, print, or paste into an agent.
-import Doc from '../../../layouts/Doc.astro';
-import { render } from 'astro:content';
-import { getDocs, docHref } from '../../../lib/content';
-import { site } from '../../../config';
-
-const docs = await getDocs();
-const rendered = await Promise.all(docs.map(async (d) => ({ d, r: await render(d) })));
-const headings = docs.map((d) => ({ depth: 2, slug: `p-${d.id}`, text: d.data.label ?? d.data.title }));
+import KinexRedirect from '../../../layouts/KinexRedirect.astro';
 ---
-<Doc docs={docs} title={`Kinex v${site.version} docs: Single-page view`} description={`${docs.length} pages. ⌘F away from anything.`} headings={headings} current="__all" searchable={false}>
-  {rendered.map(({ d, r: { Content } }) => (
-    <section class="page">
-      <h2 id={`p-${d.id}`}>{d.data.title} <a class="perma" href={docHref(d)}>→ Page</a></h2>
-      <Content />
-    </section>
-  ))}
-</Doc>
-<style>
-  .page h2 { font-size: 22px; }
-  .perma { font-size: 12px; font-weight: 400; text-decoration: none !important; }
-</style>
+<KinexRedirect path="/docs/all/" />

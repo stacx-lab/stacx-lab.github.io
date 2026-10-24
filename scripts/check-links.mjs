@@ -2,6 +2,7 @@
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 import { getPosts } from '../src/lib/blog-posts.mjs';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -39,7 +40,8 @@ for (const file of htmlFiles) {
     if (resolved.origin !== origin) continue;
     const t = target(resolved.pathname);
     if (!t) { fail(`${relative(dist, file)}: ${ref}`); continue; }
-    if (resolved.hash && t.endsWith('.html') && !ids(t).has(decodeURIComponent(resolved.hash.slice(1)))) {
+    const redirects = t.endsWith('.html') && readFileSync(t, 'utf8').includes('http-equiv="refresh"');
+    if (!redirects && resolved.hash && t.endsWith('.html') && !ids(t).has(decodeURIComponent(resolved.hash.slice(1)))) {
       fail(`${relative(dist, file)}: ${ref} (missing anchor)`);
     }
   }
@@ -82,7 +84,7 @@ for (const route of ['/', '/projects/', '/blog/']) {
 }
 
 // Guard the organization-site layout against accidental base-path regressions.
-const routes = ['/', '/projects/', '/blog/', ...getPosts().map((post) => `/blog/${post.id}/`), '/kinex/', '/kinex/docs/', '/kinex/docs/all/'];
+const routes = ['/', '/projects/', '/blog/', ...getPosts().map((post) => `/blog/${post.id}/`)];
 const sitemap = readFileSync(join(dist, 'sitemap-0.xml'), 'utf8');
 for (const route of routes) {
   const file = target(route);
@@ -92,6 +94,26 @@ for (const route of routes) {
   if (!sitemap.includes(`<loc>${origin}${route}</loc>`)) fail(`Missing sitemap entry: ${route}`);
 }
 if (!target('/404.html')) fail('Missing root 404 page');
-if (!target('/kinex/pagefind/pagefind.js')) fail('Missing Kinex search bundle');
+// Old Kinex URLs must redirect to the corresponding standalone page.
+const kinexRoutes = ['/', '/docs/', '/docs/all/', ...readdirSync(new URL('../src/content/docs/', import.meta.url))
+  .filter((name) => /\.mdx?$/.test(name) && name !== 'index.md')
+  .map((name) => `/docs/${name.replace(/\.mdx?$/, '')}/`)];
+for (const route of kinexRoutes) {
+  const file = target('/kinex' + route);
+  if (!file) { fail(`Missing Kinex redirect: ${route}`); continue; }
+  const html = readFileSync(file, 'utf8');
+  const destination = 'https://kinex-agent.com' + route;
+  if (!html.includes(`rel="canonical" href="${destination}"`)) fail(`Incorrect redirect canonical: ${route}`);
+  if (!html.includes(`http-equiv="refresh" content="0;url=${destination}"`)) fail(`Missing redirect fallback: ${route}`);
+  if (!html.includes('window.location.search + window.location.hash')) fail(`Redirect loses query or anchor: ${route}`);
+  const script = html.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1];
+  if (!script) { fail(`Missing redirect script: ${route}`); continue; }
+  for (const [search, hash] of [['', ''], ['?from=old&mode=1', '#onboarding']]) {
+    let actual;
+    runInNewContext(script, { window: { location: { search, hash, replace: (url) => { actual = url; } } } });
+    if (actual !== destination + search + hash) fail(`Incorrect redirect destination: ${route}`);
+  }
+  if (sitemap.includes(`<loc>${origin}/kinex${route}</loc>`)) fail(`Redirect appears in sitemap: ${route}`);
+}
 console.log(`${htmlFiles.length} pages checked, ${bad} broken link(s) or routing error(s)`);
 process.exit(bad ? 1 : 0);

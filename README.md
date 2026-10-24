@@ -1,6 +1,18 @@
 # STACX Lab website
 
-Organization website: a lab homepage, [Kinex](https://github.com/stacx-lab/kinex) landing page and docs, and a blog.
+Organization website: a lab homepage, projects, blog, and redirects from the old Kinex URLs.
+
+The Kinex landing page and all documentation now live in the separate
+[`kinex-page`](https://github.com/stacx-lab/kinex-page) repository, published at
+**https://kinex-agent.com**. Edit Kinex content there. Deploy that site and configure
+its domain before deploying these redirects. `/kinex/` redirects to the new root;
+`/kinex/docs/` and every existing doc route redirect to the matching `/docs/` path.
+JavaScript preserves query strings and heading anchors; meta refresh and a link
+provide a fallback. These are static HTML redirects, not HTTP 301 responses.
+
+The retained Kinex content here supplies the legacy redirect route list. Its
+assets remain available for existing links. The Kinex authoring and gallery
+production notes below describe the original source archive.
 Astro (static) + Pagefind. No UI framework.
 Fonts: Roboto Slab (headings), Lato (body), Commit Mono (code); self-hosted via `@fontsource`, declared in `src/components/Fonts.astro`.
 
@@ -30,7 +42,7 @@ the website.
 
 ```
 src/pages/index.astro         / — lab homepage
-src/pages/kinex/               /kinex/ — project homepage and docs routes
+src/pages/kinex/               /kinex/ — redirects to kinex-agent.com
 src/pages/projects/            /projects/ — software and project catalog
 src/pages/blog/index.astro     /blog/ — blog roll
 public/blog/<slug>/            self-contained post: index.html, post.json, assets/
@@ -217,8 +229,8 @@ updated in their HTML when moving hosts. The site always builds at the root
 Published Kinex assets live in `public/kinex/`, preserving `/kinex/img/`,
 `/kinex/media/`, and `/kinex/video/` URLs. Bundled shared assets live in `/_astro/`.
 `url()` in `src/lib/url.ts` resolves paths within Kinex; `siteUrl()` resolves paths
-at the organization root. Pagefind indexes only `dist/kinex/` and writes its bundle
-to `/kinex/pagefind/`; blog pages do not load the Kinex search UI.
+at the organization root. Search is now built in `kinex-page`; the lab build
+only emits redirects for Kinex pages and excludes them from its sitemap.
 
 ## Lab content
 
