@@ -10,8 +10,14 @@ import { url } from '../lib/url';
 
 interface Props { title?: string; description?: string; bodyClass?: string; footer?: boolean; section?: 'kinex' | 'lab'; article?: boolean }
 const { title, description = site.description, bodyClass = '', footer = true, section = 'kinex', article = false } = Astro.props;
-const fullTitle = section === 'lab' ? (title ? `${title} · STACX Lab` : 'STACX Lab') : title ? `${title} · Kinex` : `Kinex · ${site.tagline}`;
+const fullTitle = section === 'lab' ? (title ? `${title} · STACX Lab` : 'STACX Lab') : title ? `${title} · Kinex` : 'Kinex · One Agent for Any Robot';
 const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site);
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'STACX Lab',
+  url: new URL('/', Astro.site).href,
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -27,10 +33,12 @@ const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.u
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('/img/kinex-logo-day.svg')} />
     <meta property="og:title" content={fullTitle} />
+    <meta property="og:site_name" content="STACX Lab" />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:url" content={canonical} />
     <meta name="theme-color" content="#f7f6f2" />
+    {Astro.url.pathname === '/' && <script type="application/ld+json" set:html={JSON.stringify(website).replace(/</g, '\\u003c')} />}
     <script is:inline>
       (() => {
         let t = null;
