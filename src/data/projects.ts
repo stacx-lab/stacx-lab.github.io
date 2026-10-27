@@ -2,7 +2,7 @@
 // Kinex and Physical RSI are the projects hosted in this repository.
 export const projects = [
   { name: 'Kinex', category: 'Robotics', description: 'A general harness that connects coding agents to physical robots, simulators, and models.', website: '/kinex/', code: 'https://github.com/stacx-lab/kinex' },
-  { name: 'Physical RSI', category: 'Self-improving agents', description: 'A skill-oriented self-improver that solved all 365 RoboCasa tasks by evolving the robot\'s skills and functions from its own trials.', website: '/physical-rsi/', code: null },
+  { name: 'Physical RSI', category: 'Self-improving agents', description: 'A skill-oriented self-improver that solved all 365 RoboCasa tasks by evolving the robot\'s skills and functions from its own trials.', website: '/physical-rsi/', code: null, logo: { day: '/physical-rsi/img/physical-rsi-logo-day.svg', night: '/physical-rsi/img/physical-rsi-logo-night.svg' } },
   { name: 'STACX', category: 'Agentic reinforcement learning', description: 'STandAloneCompleX: modular infrastructure for end-to-end agentic reinforcement learning.', website: 'https://stacx.github.io/web/', code: 'https://github.com/STACX/stacx/tree/main' },
   { name: 'MLE-Dojo', category: 'Machine learning agents', description: 'Interactive environments for developing LLM agents that perform machine learning engineering tasks.', website: 'https://mle-dojo.github.io/MLE-Dojo-page/', code: 'https://github.com/MLE-Dojo/MLE-Dojo' },
   { name: 'Flow RL', category: 'Generative models & RL', description: 'A high-performance reinforcement learning library built around flow and diffusion models.', website: null, code: 'https://github.com/typoverflow/flow-rl' },
