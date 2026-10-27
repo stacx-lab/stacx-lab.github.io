@@ -6,7 +6,7 @@ import { students, alumni } from '../data/lab';
   <main id="main" class="wrap lab-home">
     <header class="intro grid-bg">
       <p class="kicker">Georgia Tech · Computational Science & Engineering</p>
-      <h1>STACX Lab</h1>
+      <h1 class="title"><img class="mark day" src="/images/stacx-logo-day.svg" alt="" width="192" height="192" /><img class="mark night" src="/images/stacx-logo-night.svg" alt="" width="192" height="192" />STACX Lab</h1>
       <p class="lead">Learning to model the world.<br />Building agents that can act in it.</p>
       <p class="about">We study <strong>agent AI</strong> through generative models, representation learning, and reinforcement learning. Our goal is to give agents the ability to make decisions and plan by modeling the world around them.</p>
       <p class="about">Led by <a href="https://bo-dai.github.io/">Bo Dai</a> at Georgia Tech, our research connects the foundations of learning with practical agent systems.</p>
@@ -38,6 +38,10 @@ import { students, alumni } from '../data/lab';
   .lab-home { max-width: 1120px; padding-bottom: 72px; }
   .intro { padding-block: 64px 48px; border-bottom: 1px solid var(--rule); }
   h1 { font-size: clamp(42px, 7vw, 74px); line-height: 1.08; margin: 22px 0 24px; letter-spacing: -.035em; }
+  .title { display: flex; align-items: center; gap: .28em; }
+  .mark { display: block; width: .95em; height: .95em; flex: none; }
+  .mark.night, :global(:root[data-theme='dark']) .mark.day { display: none; }
+  :global(:root[data-theme='dark']) .mark.night { display: block; }
   .lead { font-family: var(--font-head); font-size: clamp(23px, 3vw, 34px); line-height: 1.4; margin: 0 0 28px; }
   .about { max-width: 74ch; color: var(--ink-2); font-size: 18px; margin: 0 0 16px; }
   .about a, .source a { text-decoration: underline; text-underline-offset: 3px; }
