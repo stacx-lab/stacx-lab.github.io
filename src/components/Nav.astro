@@ -9,7 +9,7 @@ const isKinex = section === 'kinex';
 <header class="topbar">
   <nav class="wrap bar" aria-label="main">
     <a class="brand" href={isKinex ? url('/') : '/'} aria-label={isKinex ? 'Kinex home' : 'STACX Lab home'}>
-      {isKinex ? <><Wordmark size={20} /><span class="ver">v{site.version}</span></> : <span class="lab-brand">STACX Lab</span>}
+      {isKinex ? <><Wordmark size={20} /><span class="ver">v{site.version}</span></> : <span class="lab-brand"><img class="lab-logo day" src="/images/stacx-logo-day.svg" alt="" width="20" height="20" /><img class="lab-logo night" src="/images/stacx-logo-night.svg" alt="" width="20" height="20" />STACX Lab</span>}
     </a>
     <div class="links">
       {isKinex ? <a class="link" href={url('/docs/')}>Docs</a> : <a class="link" href="/projects/" aria-current={Astro.url.pathname.startsWith('/projects/') ? 'page' : undefined}>Projects</a>}
@@ -37,7 +37,10 @@ const isKinex = section === 'kinex';
 </script>
 
 <style>
-  .lab-brand { font-family: var(--font-head); font-weight: 700; white-space: nowrap; }
+  .lab-brand { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-head); font-weight: 700; white-space: nowrap; }
+  .lab-logo { display: block; width: 20px; height: 20px; }
+  .lab-logo.night, :global(:root[data-theme='dark']) .lab-logo.day { display: none; }
+  :global(:root[data-theme='dark']) .lab-logo.night { display: block; }
   .link[aria-current] { color: var(--accent-ink); }
   .topbar {
     position: sticky; top: 0; z-index: 40; height: var(--topbar);
