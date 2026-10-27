@@ -3,12 +3,12 @@ import Base from '../../layouts/Base.astro';
 import { getPosts, postHref, publicationLabel } from '../../lib/blog';
 const posts = await getPosts();
 ---
-<Base title="Blog" description="Notes on agents, robotics, and systems from STACX Lab." section="lab">
+<Base title="Blog" description="Thoughts on agents, robotics, and systems from STACX Lab." section="lab">
   <main id="main" class="wrap blog-index">
     <header class="grid-bg intro">
       <p class="kicker">STACX Lab</p>
       <h1>Blog</h1>
-      <p class="description">Notes on agents, robotics, and systems.</p>
+      <p class="description">Thoughts on agents, robotics, and systems.</p>
     </header>
     <ol class="posts">
       {posts.map((post) => <li>
