@@ -8,7 +8,7 @@ import { projects } from '../../data/projects';
     <header class="intro grid-bg"><p class="kicker">STACX Lab</p><h1>Projects</h1><p class="description">Open-source tools for agents, learning, and control.</p></header>
     <div class="project-grid">{projects.map((project) => <article>
       <p class="category">{project.category}</p><h2 aria-label={project.name}>{project.name === 'Kinex' ? <Wordmark size={28} /> : project.name}</h2><p class="summary">{project.description}</p>
-      <div class="project-links">{project.website && <a href={project.website}>Website</a>}<a href={project.code}>Code</a></div>
+      <div class="project-links">{project.website && <a href={project.website}>Website</a>}{project.code && <a href={project.code}>Code</a>}</div>
     </article>)}</div>
     <p class="source">Project catalog based on <a href="https://bo-dai.github.io/software.html">Bo Dai’s software page</a>, alongside Kinex.</p>
   </main>

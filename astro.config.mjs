@@ -13,7 +13,7 @@ export default defineConfig({
   base: '/',
   trailingSlash: 'always',
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap({ customPages: getPosts().map((post) => new URL(`/blog/${post.id}/`, site).href) }), mdx()],
+  integrations: [sitemap({ customPages: [...getPosts().map((post) => new URL(`/blog/${post.id}/`, site).href), new URL('/physical-rsi/', site).href] }), mdx()],
   markdown: {
     remarkPlugins: [[remarkBaseLinks, { base: '/kinex' }]],
     shikiConfig: {
