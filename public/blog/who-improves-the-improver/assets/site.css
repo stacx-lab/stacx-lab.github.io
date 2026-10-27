@@ -133,7 +133,7 @@ kbd {
   .links { display: flex; gap: 22px; font-size: 14.5px; }
   .link { color: var(--ink-2); }
   .link:hover { color: var(--ink); }
-  .ext { font-size: 10px; margin-left: 2px; color: var(--ink-3); }
+  .topbar .ext { font-size: 10px; margin-left: 2px; color: var(--ink-3); }
   .tools { margin-left: auto; display: flex; gap: 8px; align-items: center; }
   .search-trigger {
     display: flex; align-items: center; gap: 24px; height: 30px; padding: 0 6px 0 10px;
@@ -149,7 +149,7 @@ kbd {
   :root[data-theme='dark'] .sun, :root[data-theme='light'] .moon { display: none; }
   @media (max-width: 640px) {
     .bar { gap: 14px; }
-    .ver, .ext, .q { display: none; }
+    .ver, .topbar .ext, .q { display: none; }
     .links { gap: 12px; }
     .search-trigger { gap: 0; padding: 0 6px; }
   }
