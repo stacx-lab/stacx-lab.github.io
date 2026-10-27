@@ -34,6 +34,7 @@ src/pages/kinex/               /kinex/ — project homepage and docs routes
 src/pages/projects/            /projects/ — software and project catalog
 src/pages/blog/index.astro     /blog/ — blog roll
 public/blog/<slug>/            self-contained post: index.html, post.json, assets/
+public/physical-rsi/          /physical-rsi/ — the Physical RSI demo page, static (index.html, img/, card.jpg)
 src/data/lab.ts                current students and former members
 src/data/projects.ts           project links and descriptions
 src/config.ts                 Kinex version, tagline, install cmd, repo, doc groups
@@ -207,8 +208,8 @@ then copy reviewed delivery files into `public/kinex/media/gallery/<id>/`. The l
 
 `.github/workflows/deploy.yml` checks and builds on every push to `main` and publishes
 `dist/` directly to GitHub Pages. Set *Settings → Pages → Source* to **GitHub Actions**.
-The build mirrors the public URLs: `/`, `/projects/`, `/kinex/`, `/kinex/docs/`, `/blog/`, and
-`/blog/<slug>/`. GitHub Pages redirects directory URLs without the trailing slash.
+The build mirrors the public URLs: `/`, `/projects/`, `/kinex/`, `/kinex/docs/`, `/blog/`,
+`/blog/<slug>/`, and `/physical-rsi/`. GitHub Pages redirects directory URLs without the trailing slash.
 The root `404.html` serves missing pages across the site. `SITE_URL` can override
 the origin of generated pages; standalone article canonical/social URLs must be
 updated in their HTML when moving hosts. The site always builds at the root
