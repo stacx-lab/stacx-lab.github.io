@@ -2669,6 +2669,28 @@ const IMGS = {}; // media lives in img/<name>.jpg; the IMG helper falls back to 
 const IMG = n => IMGS[n] || ('img/' + n + '.jpg');
 const VIDS = {}; // media lives in img/<name>.mp4; the VID helper falls back to it
 const VID = n => VIDS[n] || ('img/' + n + '.mp4');
+// Autoplay is only a request. A browser policy (Edge's "block media autoplay", Firefox's block-all setting) or a
+// system reduced-motion setting, which Windows reports in every Remote Desktop session, can leave a clip on its
+// poster frame. So each clip is asked to play once it is near the viewport, is paused while it is far outside it
+// (Windows browsers share a small pool of hardware decoders, and the page holds fourteen clips), and shows its
+// controls when the browser refuses, so the viewer can start it by hand.
+function playVideo(v) {
+  v.muted = true;
+  const p = v.play();
+  if (p && p.then) p.then(() => { v.dataset.play = 'ok'; }).catch(e => { if (e && e.name === 'AbortError') return; v.dataset.play = 'blocked'; v.controls = true; });
+}
+const VIDEO_IO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target;
+  if (e.isIntersecting) { if (!v.dataset.play || v.dataset.offscreen) { delete v.dataset.offscreen; playVideo(v); } }
+  else { v.dataset.offscreen = '1'; v.pause(); }
+}), { rootMargin: '200px 0px' }) : null;
+function watchVideos(root) {
+  (root || document).querySelectorAll('video[autoplay]').forEach(v => {
+    if (v.dataset.watched) return;
+    v.dataset.watched = '1';
+    if (VIDEO_IO) VIDEO_IO.observe(v); else playVideo(v);
+  });
+}
 let THEME = (location.hash.match(/theme=(day|night)/) || [])[1] || localStorage.getItem('s365best-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day');
 // Version colours: one hue (the accent), monotone lightness, validated as an ordinal ramp against each mode's panel
 // surface (light end >= 2:1, adjacent steps >= 0.06 OKLCH L); day reads light -> dark, night dark -> light.
@@ -2949,7 +2971,7 @@ function renderLearned() {
   const sk = D.skills.filter(s => s.name !== 'rc-code');
   document.getElementById('skills').innerHTML = sk.map((s, i) => {
     const imn = SKILL_IMG[s.name] || Object.keys(D.images)[i], im = D.images[imn] || {};
-    return `<div class="skill"><div class="im"><video src='${VID('skill-' + imn)}' poster='${IMG(imn)}' ${matchMedia('(prefers-reduced-motion: reduce)').matches ? '' : 'autoplay'} muted loop playsinline preload="metadata" aria-label="${esc(taskName(im.task))}"></video></div>
+    return `<div class="skill"><div class="im"><video src='${VID('skill-' + imn)}' poster='${IMG(imn)}' autoplay muted loop playsinline preload="metadata" aria-label="${esc(taskName(im.task))}"></video></div>
       <div class="cap"><span class="no">${String(i + 1).padStart(2, '0')}</span><div><div class="nm">${esc(s.name.replace('robocasa-', ''))}</div>
       <div class="ds">${esc(SKILL_DESC[s.name] || s.desc)}</div><div class="st"><strong>${s.lines} lines · ${s.loads}/${D.usage.trials} library trials</strong><span>${esc(taskName(im.task))}<br>${esc(im.version || '')} · episode ${im.episode ?? '–'}</span></div></div></div></div>`;
   }).join('');
@@ -3134,7 +3156,7 @@ function groupShareSVG() {
   });
   return s + '</svg>';
 }
-let EXG = null, EXF = (location.hash.match(/fn=([A-Za-z_]+)/) || [])[1] || null, EXT0 = 0, EXRAF = 0, EXPAUSED = matchMedia('(prefers-reduced-motion: reduce)').matches, EXAUTO = false, EXVIS = true, EXLOOPS = 0;
+let EXG = null, EXF = (location.hash.match(/fn=([A-Za-z_]+)/) || [])[1] || null, EXT0 = 0, EXRAF = 0, EXPAUSED = false, EXAUTO = false, EXVIS = true, EXLOOPS = 0;
 const EX_PERIOD = 8000;
 function exColours() {
   return { ink: TH.ink, muted: TH.muted, quiet: TH.quiet, line: TH.line, wash: TH.empty, panel: TH.panel, paper: TH.paper, grid: TH.grid, accent: TH.accent,
@@ -3188,7 +3210,7 @@ function exShow() {
   document.getElementById('ex-steps').innerHTML = EXPHASES.map((phase, i) => `<button type="button" data-step="${i}" title="${esc(phase.caption)}" aria-label="Step ${i + 1}: ${esc(phase.caption)}">${String(i + 1).padStart(2, '0')}</button>`).join('');
   document.getElementById('ex-scrub').value = 0;
   exSetPaused(EXPAUSED);
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('#ex-real video').forEach(v => { v.autoplay = false; v.pause(); v.controls = true; });
+  real.querySelectorAll('video[autoplay]').forEach(v => { if (!v.parentElement.hidden) playVideo(v); });
   EXT0 = performance.now(); EXLOOPS = 0;
   exDraw(0); exStart();
 }
@@ -3453,7 +3475,7 @@ function renderHero() {
   document.getElementById('stages').innerHTML = STAGES.map((s, j) => `<div data-j="${j}" role="button" tabindex="0" aria-label="Jump to ${esc(s.title)}">${esc(s.v === 'V0' ? 'Batch 1 · empty' : s.title.replace(' · library ', ' · '))}</div>`).join('');
   document.getElementById('mosaic').innerHTML = HERO_IMGS.filter(n => D.images[n]).map((n, i) => {
     const m = D.images[n];
-    return `<figure class="frame" title="${esc(taskName(m.task))}"><div class="im"><video src='${VID(n)}' poster='${IMG(n)}' ${matchMedia('(prefers-reduced-motion: reduce)').matches ? '' : 'autoplay'} muted loop playsinline preload="metadata" aria-label="${esc(taskName(m.task))}"></video></div><figcaption><span class="no">${String(i + 1).padStart(2, '0')}</span><span><strong>${esc(taskName(m.task))}</strong><small>${esc(m.version)} · episode ${m.episode}</small></span></figcaption></figure>`;
+    return `<figure class="frame" title="${esc(taskName(m.task))}"><div class="im"><video src='${VID(n)}' poster='${IMG(n)}' autoplay muted loop playsinline preload="metadata" aria-label="${esc(taskName(m.task))}"></video></div><figcaption><span class="no">${String(i + 1).padStart(2, '0')}</span><span><strong>${esc(taskName(m.task))}</strong><small>${esc(m.version)} · episode ${m.episode}</small></span></figcaption></figure>`;
   }).join('');
 }
 
@@ -3469,6 +3491,7 @@ function renderAll() {
   document.querySelectorAll('#xmode button').forEach(b => b.classList.toggle('on', b.dataset.x === XMODE));
   document.querySelectorAll('#speed button').forEach(b => b.classList.toggle('on', +b.dataset.s === speed));
   curStage = -1; setPlayLabel(); updateHUD();
+  watchVideos();
 }
 
 document.getElementById('theme').addEventListener('click', () => { THEME = THEME === 'day' ? 'night' : 'day'; localStorage.setItem('s365best-theme', THEME); renderAll(); });
