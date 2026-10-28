@@ -1,0 +1,124 @@
+---
+// Published run and rerun results from public/physical-rsi/index.html (D and BASE).
+import rsi from '../data/physical-rsi.json';
+
+const percent = (count: number) => (100 * count / rsi.tasks).toFixed(1);
+const gain = percent(rsi.final.firstEpisode - rsi.baseline.firstEpisode);
+const x = (episodes: number) => 42 + episodes / 500 * 430;
+const y = (solved: number) => 170 - solved / 400 * 136;
+const curve = `M ${x(0)},${y(0)} ` + rsi.curve.map(([episodes, solved]) => `H ${x(episodes)} V ${y(solved)}`).join(' ');
+const comparisons = [
+  { label: 'On the first episode', before: rsi.baseline.firstEpisode, after: rsi.final.firstEpisode },
+  { label: 'Within three episodes', before: rsi.baseline.withinTrial, after: rsi.final.withinTrial },
+];
+---
+
+<div class="rsi-intro">
+  <h3>Robots that learn from their own experience.</h3>
+  <p>Built on Kinex, <strong><a href={rsi.source}>Physical RSI</a></strong> turns robot trials into reusable skills and functions.
+    Seven rounds of recursive self-improvement produced <strong>{rsi.skills} skills and {rsi.functions} functions</strong>—and solved every RoboCasa task in the run.</p>
+</div>
+
+<div class="rsi-figures">
+  <figure class="result-card coverage">
+    <figcaption>
+      <span class="eyebrow">The self-improvement run</span>
+      <h4><strong>{rsi.tasks}<span> / {rsi.tasks}</span></strong> tasks solved</h4>
+      <p>{rsi.episodes} episodes · {rsi.rounds} rounds of improvement</p>
+    </figcaption>
+    <svg class="curve" viewBox="0 0 510 220" role="img" aria-labelledby="rsi-curve-title rsi-curve-desc">
+      <title id="rsi-curve-title">All 365 RoboCasa tasks solved in 493 episodes</title>
+      <desc id="rsi-curve-desc">Cumulative tasks solved during the self-improvement run. A task counts as solved once any episode succeeds.</desc>
+      <defs>
+        <linearGradient id="rsi-curve-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.24" />
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.02" />
+        </linearGradient>
+      </defs>
+      <text class="axis-title" x="42" y="18">Tasks solved</text>
+      {[0, 100, 200, 300, 400].map((value) => <g>
+        <line class="grid-line" x1="42" x2="472" y1={y(value)} y2={y(value)} />
+        <text class="tick" x="32" y={y(value) + 4} text-anchor="end">{value}</text>
+      </g>)}
+      {[0, 100, 200, 300, 400, 500].map((value) =>
+        <text class="tick" x={x(value)} y="190" text-anchor="middle">{value}</text>
+      )}
+      <path d={`${curve} L ${x(rsi.episodes)},170 L 42,170 Z`} fill="url(#rsi-curve-fill)" />
+      <path d={curve} fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" />
+      <circle cx={x(rsi.episodes)} cy={y(rsi.tasks)} r="9" fill="var(--accent)" opacity="0.15" />
+      <circle cx={x(rsi.episodes)} cy={y(rsi.tasks)} r="4" fill="var(--accent)" />
+      <text class="endpoint" x={x(rsi.episodes) - 14} y={y(rsi.tasks) - 12} text-anchor="end">365 solved</text>
+      <text class="axis-title" x="257" y="213" text-anchor="middle">Episodes spent</text>
+    </svg>
+    <p class="figure-note">Cumulative coverage across the full run.</p>
+  </figure>
+
+  <figure class="result-card rerun">
+    <figcaption>
+      <span class="eyebrow">Rerun with the learned library</span>
+      <h4><strong>+{gain}<span> pp</span></strong> first-episode success</h4>
+      <p>Empty library (V0) → final library (V7)</p>
+    </figcaption>
+    <div class="comparisons">
+      {comparisons.map((comparison) => <div class="comparison">
+        <h5>{comparison.label}</h5>
+        {[
+          { label: 'V0', count: comparison.before, final: false },
+          { label: 'V7', count: comparison.after, final: true },
+        ].map((row) => <div class:list={['bar-row', { learned: row.final }]}>
+          <span class="version">{row.label}</span>
+          <div class="bar-track" aria-hidden="true"><span style={`width: ${percent(row.count)}%`}></span></div>
+          <span class="bar-value">{percent(row.count)}%<span class="sr-only"> ({row.count} of {rsi.tasks} tasks)</span></span>
+        </div>)}
+      </div>)}
+    </div>
+    <p class="figure-note">One trial per task, on the same {rsi.tasks} scenes.</p>
+  </figure>
+</div>
+<div class="rsi-footer">
+  <p>Simulation · one fixed scene per task · improvements to skills and code.</p>
+  <a href={rsi.source}>Explore Physical RSI <span aria-hidden="true">↗</span></a>
+</div>
+
+<style>
+  .rsi-intro { margin-top: 16px; }
+  h3 { margin: 0 0 16px; font-size: var(--fs-4); font-weight: 600; letter-spacing: -0.02em; line-height: 1.35; }
+  .rsi-intro p { max-width: 880px; margin: 0; color: var(--ink-2); line-height: 1.75; }
+  .rsi-intro strong { color: var(--ink); font-weight: 600; }
+  a { text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  .rsi-figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+  .result-card { min-width: 0; margin: 0; padding: 20px 24px 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--panel); display: flex; flex-direction: column; }
+  .coverage { background: linear-gradient(145deg, var(--accent-bg), var(--panel) 60%); }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); }
+  h4 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 10px 0 6px; font-family: var(--font-body); font-size: 14px; font-weight: 400; }
+  h4 strong { font-family: var(--font-head); font-size: clamp(32px, 3.5vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -0.045em; color: var(--accent-ink); }
+  h4 strong span { font-size: 0.52em; font-weight: 400; letter-spacing: -0.02em; }
+  figcaption p { margin: 0; color: var(--ink-2); font-size: var(--fs-1); }
+  .curve { display: block; width: 100%; height: auto; margin-top: 16px; overflow: visible; }
+  .curve text { font-family: var(--font-body); }
+  .grid-line { stroke: var(--rule); stroke-dasharray: 3 5; }
+  .tick { font-size: 11px; fill: var(--ink-2); }
+  .axis-title { font-size: 12px; fill: var(--ink-2); }
+  .endpoint { font-size: 13px; font-weight: 700; fill: var(--accent-ink); }
+  .comparisons { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: 18px; padding-block: 16px; }
+  h5 { margin: 0 0 8px; font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+  .bar-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) 54px; gap: 12px; align-items: center; }
+  .bar-row + .bar-row { margin-top: 6px; }
+  .version { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); }
+  .bar-track { height: 16px; border-radius: 3px; background: var(--bg-2); overflow: hidden; }
+  .bar-track span { display: block; height: 100%; background: var(--ink-3); border-radius: inherit; }
+  .learned .bar-track span { background: var(--accent); }
+  .bar-value { font-variant-numeric: tabular-nums; text-align: right; font-size: 14px; color: var(--ink-2); }
+  .learned .bar-value { font-weight: 700; color: var(--accent-ink); }
+  .figure-note { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink-2); font-size: 12px; }
+  .rsi-footer { margin-top: 18px; font-size: var(--fs-1); }
+  .rsi-footer p { margin: 0 0 12px; color: var(--ink-2); }
+  @media (max-width: 760px) {
+    .rsi-figures { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .result-card { padding: 18px 20px 14px; }
+    .tick { font-size: 16px; }
+    .axis-title, .endpoint { font-size: 18px; }
+  }
+  @media (max-width: 380px) { .result-card { padding-inline: 16px; } .bar-row { gap: 8px; } }
+</style>

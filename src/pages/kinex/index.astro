@@ -8,6 +8,7 @@ import VideoGallery from '../../components/VideoGallery.astro';
 import Contributors from '../../components/Contributors.astro';
 import Wordmark from '../../components/Wordmark.astro';
 import BenchmarkResults from '../../components/BenchmarkResults.astro';
+import PhysicalRSI from '../../components/PhysicalRSI.astro';
 import { site } from '../../config';
 import { url } from '../../lib/url';
 const paths = [
@@ -60,8 +61,13 @@ const paths = [
       <BenchmarkResults />
     </section>
 
+    <section class="wrap sec physical-rsi" id="physical-rsi" aria-labelledby="rsi-heading">
+      <h2 class="kicker" id="rsi-heading">04 · Physical recursive self-improvement</h2>
+      <PhysicalRSI />
+    </section>
+
     <section class="wrap sec">
-      <p class="kicker">04 · Where to start</p>
+      <p class="kicker">05 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
           <a class="card" href={url(p.href)}>
@@ -99,7 +105,7 @@ const paths = [
   .sec { padding-top: 72px; }
   main > .sec { border-top: 1px solid var(--rule); margin-top: 72px; }
   .sec h2 { font-size: var(--fs-4); letter-spacing: -0.02em; font-weight: 600; margin: 6px 0 24px; }
-  .benchmark h2.kicker { font-size: var(--fs-0); letter-spacing: var(--tracking); font-weight: 400; margin: 0; }
+  .benchmark h2.kicker, .physical-rsi h2.kicker { font-size: var(--fs-0); letter-spacing: var(--tracking); font-weight: 400; margin: 0; }
   .architecture h2 { margin-bottom: 16px; }
   @media (min-width: 960px) { #architecture-heading { white-space: nowrap; } }
   .section-copy { color: var(--ink-2); margin: 0 0 32px; line-height: 1.75; }
