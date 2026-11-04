@@ -1,6 +1,6 @@
 # STACX Lab website
 
-Organization website: a lab homepage, [Kinex](https://github.com/stacx-lab/kinex) landing page and docs, and a blog.
+Organization website: a lab homepage, [Kinex](https://kinex-agent.org/) legacy landing page and docs redirects, and a blog.
 Astro (static) + Pagefind. No UI framework.
 Fonts: Roboto Slab (headings), Lato (body), Commit Mono (code); self-hosted via `@fontsource`, declared in `src/components/Fonts.astro`.
 
@@ -66,7 +66,7 @@ sources: ["docs/commands.md"]   # internal source references at the reviewed `si
 ```
 
 Write plain Markdown starting at `##`. Use `.mdx` when a page needs an imported Astro component, as in `architecture.mdx`.
-Link other docs as `/docs/<slug>/`; the Kinex prefix is added at build time only for the docs collection. Blog links use site-root paths, such as `/kinex/docs/`.
+Link other docs as `/docs/<slug>/`; the current Kinex domain is added at build time for documentation links. Blog links to Kinex should use `https://kinex-agent.org/` or `https://kinex-agent.org/docs/<slug>/`.
 The sidebar, prev/next links, one-page view (`/docs/all/`) and search update automatically.
 
 ## Release a new version
@@ -210,6 +210,12 @@ then copy reviewed delivery files into `public/kinex/media/gallery/<id>/`. The l
 `dist/` directly to GitHub Pages. Set *Settings → Pages → Source* to **GitHub Actions**.
 The build mirrors the public URLs: `/`, `/projects/`, `/kinex/`, `/kinex/docs/`, `/blog/`,
 `/blog/<slug>/`, and `/physical-rsi/`. GitHub Pages redirects directory URLs without the trailing slash.
+Kinex page URLs redirect to `https://kinex-agent.org/`, with the `/kinex` prefix
+removed (for example, `/kinex/docs/cli/` → `https://kinex-agent.org/docs/cli/`).
+The shared layout uses an immediate browser redirect that preserves query strings
+and fragments, plus a meta-refresh fallback when JavaScript is disabled. These
+are static HTML redirects, not HTTP 301 responses. Legacy pages are excluded
+from the lab sitemap. Their source content remains in this repo.
 The root `404.html` serves missing pages across the site. `SITE_URL` can override
 the origin of generated pages; standalone article canonical/social URLs must be
 updated in their HTML when moving hosts. The site always builds at the root
@@ -217,8 +223,8 @@ updated in their HTML when moving hosts. The site always builds at the root
 
 Published Kinex assets live in `public/kinex/`, preserving `/kinex/img/`,
 `/kinex/media/`, and `/kinex/video/` URLs. Bundled shared assets live in `/_astro/`.
-`url()` in `src/lib/url.ts` resolves paths within Kinex; `siteUrl()` resolves paths
-at the organization root. Pagefind indexes only `dist/kinex/` and writes its bundle
+`url()` in `src/lib/url.ts` resolves retained Kinex asset paths; `kinexUrl()` links
+to pages on `https://kinex-agent.org/`; `siteUrl()` resolves paths at the organization root. Pagefind indexes only `dist/kinex/` and writes its bundle
 to `/kinex/pagefind/`; blog pages do not load the Kinex search UI.
 
 ## Lab content

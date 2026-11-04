@@ -1,6 +1,6 @@
 ---
 // Animated version of kinex/assets/architecture.svg. Hover a definition to light up its layer.
-import { url } from '../lib/url';
+import { kinexUrl } from '../lib/url';
 interface Props { diagramOnly?: boolean }
 const { diagramOnly = false } = Astro.props;
 const layers = [
@@ -64,7 +64,7 @@ const layers = [
   {!diagramOnly && <ul class="defs">
     {layers.map((l, i) => (
       <li class={`d-${l.id}`}>
-        <a href={url(l.href)}>
+        <a href={kinexUrl(l.href)}>
           <span class="n">0{i + 1}</span>
           <span class="nm">{l.name}</span>
           <span class="w">{l.what}</span>

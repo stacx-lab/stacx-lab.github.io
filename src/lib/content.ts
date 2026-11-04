@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { docGroups } from '../config';
-import { url } from './url';
+import { kinexUrl } from './url';
 
 export type Doc = CollectionEntry<'docs'>;
 
@@ -12,4 +12,4 @@ export async function getDocs(): Promise<Doc[]> {
 }
 
 export const docSlug = (d: Doc) => (d.id === 'index' ? undefined : d.id);
-export const docHref = (d: Doc) => url(d.id === 'index' ? '/docs/' : `/docs/${d.id}/`);
+export const docHref = (d: Doc) => kinexUrl(d.id === 'index' ? '/docs/' : `/docs/${d.id}/`);

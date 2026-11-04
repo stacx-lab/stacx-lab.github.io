@@ -13,9 +13,12 @@ export default defineConfig({
   base: '/',
   trailingSlash: 'always',
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap({ customPages: [...getPosts().map((post) => new URL(`/blog/${post.id}/`, site).href), new URL('/physical-rsi/', site).href] }), mdx()],
+  integrations: [sitemap({
+    filter: (page) => !/^\/kinex(?:\/|$)/.test(new URL(page).pathname),
+    customPages: [...getPosts().map((post) => new URL(`/blog/${post.id}/`, site).href), new URL('/physical-rsi/', site).href],
+  }), mdx()],
   markdown: {
-    remarkPlugins: [[remarkBaseLinks, { base: '/kinex' }]],
+    remarkPlugins: [[remarkBaseLinks, { base: '/kinex', linkBase: 'https://kinex-agent.org' }]],
     shikiConfig: {
       themes: { light: 'min-light', dark: 'min-dark' },
       defaultColor: false,

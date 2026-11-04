@@ -2,6 +2,7 @@
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 import { getPosts } from '../src/lib/blog-posts.mjs';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -53,6 +54,7 @@ for (const file of htmlFiles) {
 for (const { file, css } of stylesheets) {
   const pageUrl = new URL('/' + relative(dist, file), origin);
   for (const [, ref] of css.matchAll(/url\(['"]?([^)'"\s]+)['"]?\)/g)) {
+    if (ref.startsWith('data:')) continue; // Embedded fonts/images are self-contained.
     const resolved = new URL(ref, pageUrl);
     if (resolved.origin === origin && !target(resolved.pathname)) fail(`${relative(dist, file)}: ${ref}`);
     const postPath = pageUrl.pathname.match(/^\/blog\/[^/]+\//)?.[0];
@@ -64,7 +66,9 @@ for (const { file, css } of stylesheets) {
 for (const { id, data } of getPosts()) {
   const path = `/blog/${id}/`;
   const html = readFileSync(target(path), 'utf8');
-  if (!html.includes(`<h1>${data.title}</h1>`)) fail(`Post title differs from metadata: ${id}`);
+  const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
+  const titleText = heading.replace(/<br\s*\/?\s*>/gi, ': ').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  if (titleText !== data.title) fail(`Post title differs from metadata: ${id}`);
   for (const [tag] of html.matchAll(/<(?:link|script|img|source|video)\b[^>]*>/g)) {
     if (tag.startsWith('<link') && !/rel="(?:stylesheet|icon|preload)"/.test(tag)) continue;
     for (const [, ref] of tag.matchAll(/(?:href|src|poster)="([^"]+)"/g)) {
@@ -82,7 +86,7 @@ for (const route of ['/', '/projects/', '/blog/']) {
 }
 
 // Guard the organization-site layout against accidental base-path regressions.
-const routes = ['/', '/projects/', '/blog/', ...getPosts().map((post) => `/blog/${post.id}/`), '/kinex/', '/kinex/docs/', '/kinex/docs/all/'];
+const routes = ['/', '/projects/', '/blog/', ...getPosts().map((post) => `/blog/${post.id}/`)];
 const sitemap = readFileSync(join(dist, 'sitemap-0.xml'), 'utf8');
 for (const route of routes) {
   const file = target(route);
@@ -93,5 +97,28 @@ for (const route of routes) {
 }
 if (!target('/404.html')) fail('Missing root 404 page');
 if (!target('/kinex/pagefind/pagefind.js')) fail('Missing Kinex search bundle');
+
+// Every legacy Kinex page redirects to its equivalent on the new domain.
+for (const route of ['/kinex/', '/kinex/docs/', '/kinex/docs/all/']) {
+  if (!target(route)) fail(`Missing legacy redirect route: ${route}`);
+}
+for (const file of htmlFiles.filter((file) => relative(dist, file).startsWith('kinex/'))) {
+  const route = '/' + relative(dist, file).replace(/index\.html$/, '');
+  const destination = 'https://kinex-agent.org' + route.slice('/kinex'.length);
+  const html = readFileSync(file, 'utf8');
+  if (!html.includes(`rel="canonical" href="${destination}"`)) fail(`Incorrect redirect canonical: ${route}`);
+  if (!html.includes(`http-equiv="refresh" content="0;url=${destination}"`)) fail(`Missing no-JavaScript redirect: ${route}`);
+  const redirectScript = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((match) => match[1]).find((script) => script.includes('window.location.replace'));
+  if (!redirectScript) fail(`Missing browser redirect: ${route}`);
+  else {
+    for (const [search, hash] of [['', ''], ['?from=lab&value=a%2Fb', '#getting-started']]) {
+      let redirected;
+      runInNewContext(redirectScript, { window: { location: { search, hash, replace: (url) => { redirected = url; } } } });
+      if (redirected !== destination + search + hash) fail(`Redirect loses destination/query/anchor: ${route}`);
+    }
+  }
+  if (sitemap.includes(`<loc>${origin}${route}</loc>`)) fail(`Redirect appears in sitemap: ${route}`);
+}
 console.log(`${htmlFiles.length} pages checked, ${bad} broken link(s) or routing error(s)`);
 process.exit(bad ? 1 : 0);

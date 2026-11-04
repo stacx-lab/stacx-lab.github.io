@@ -11,7 +11,10 @@ import { url } from '../lib/url';
 interface Props { title?: string; description?: string; bodyClass?: string; footer?: boolean; section?: 'kinex' | 'lab'; article?: boolean }
 const { title, description = site.description, bodyClass = '', footer = true, section = 'kinex', article = false } = Astro.props;
 const fullTitle = section === 'lab' ? (title ? `${title} · STACX Lab` : 'STACX Lab') : title ? `${title} · Kinex` : 'Kinex · One Agent for Any Robot';
-const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site);
+const kinexDestination = section === 'kinex'
+  ? new URL(Astro.url.pathname.replace(/^\/kinex(?=\/|$)/, '') || '/', 'https://kinex-agent.org')
+  : undefined;
+const canonical = kinexDestination ?? new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site);
 const website = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -23,6 +26,12 @@ const website = {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    {kinexDestination && <>
+      <script is:inline define:vars={{ destination: kinexDestination.href }}>
+        window.location.replace(destination + window.location.search + window.location.hash);
+      </script>
+      <meta http-equiv="refresh" content={`0;url=${kinexDestination.href}`} />
+    </>}
     <meta name="google-site-verification" content="djM_XWr4XHkznyLLU88cj_eK8UeYDzS4JoAgIy0kYPI" />
     <Analytics />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,6 +59,7 @@ const website = {
     <slot name="head" />
   </head>
   <body class={bodyClass}>
+    {kinexDestination && <p>Kinex has moved to <a href={kinexDestination.href}>{kinexDestination.href}</a>.</p>}
     <a class="sr-only" href="#main">Skip to content</a>
     <Nav section={section} />
     <slot />

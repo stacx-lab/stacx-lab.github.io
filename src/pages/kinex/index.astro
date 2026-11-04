@@ -10,7 +10,7 @@ import Wordmark from '../../components/Wordmark.astro';
 import BenchmarkResults from '../../components/BenchmarkResults.astro';
 import PhysicalRSI from '../../components/PhysicalRSI.astro';
 import { site } from '../../config';
-import { url } from '../../lib/url';
+import { kinexUrl } from '../../lib/url';
 const paths = [
   { k: 'Already using ROS 2?', cmd: 'onboard-ros2', prefix: 'Skill:', body: 'Reuse existing ROS packages with adapters for common interfaces. Supports ROS 2 Jazzy on Ubuntu 24.04.', href: '/docs/ros2/' },
   { k: 'Play with simulators', cmd: 'roboenv setup', body: 'RoboEnv exposes simulated robots as Kinex devices, with the same interfaces as real hardware.', href: '/docs/simulators/' },
@@ -24,14 +24,14 @@ const paths = [
         <div class="pitch">
           <h1>One Agent for Any Robot.</h1>
           <p class="sub">
-            Tell <a class="self-link" href={url('/')} aria-label="Kinex home"><Wordmark /></a> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
+            Tell <a class="self-link" href={kinexUrl('/')} aria-label="Kinex home"><Wordmark /></a> about your robot and the job to do. It adapts to your robot, carries out tasks autonomously,
             and learns from every run, both in <b>simulation</b> or on <b>real hardware</b>, including <b>ROS 2 devices</b>.
           </p>
           <p class="platform-note">Install on macOS and Ubuntu.</p>
           <CopyCmd cmd={site.install} />
           <p class="install-note">Prefer to use Pi, Codex, or Claude Code? <a href="https://github.com/stacx-lab/kinex-plugins">Explore kinex-plugins →</a></p>
           <div class="cta">
-            <a class="btn primary" href={url('/docs/')}>Get started →</a>
+            <a class="btn primary" href={kinexUrl('/docs/')}>Get started →</a>
             <a class="btn" href="#gallery">Watch the demos ↓</a>
           </div>
           <p class="pi-note">Kinex is built on <a href="https://pi.dev">Pi</a>.</p>
@@ -70,7 +70,7 @@ const paths = [
       <p class="kicker">05 · Where to start</p>
       <div class="cards">
         {paths.map((p) => (
-          <a class="card" href={url(p.href)}>
+          <a class="card" href={kinexUrl(p.href)}>
             <span class="ck">{p.k}</span>
             <code class="cc"><span>{p.prefix ?? '$'}</span> {p.cmd}</code>
             <span class="cb">{p.body}</span>

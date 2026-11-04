@@ -1,6 +1,6 @@
 ---
 import { docGroups } from '../config';
-import { url } from '../lib/url';
+import { kinexUrl } from '../lib/url';
 import { docHref, type Doc } from '../lib/content';
 
 interface Props { docs: Doc[]; current?: string }
@@ -21,7 +21,7 @@ const groups = docGroups
     </div>
   ))}
   <div class="grp extra">
-    <a href={url('/docs/all/')} class:list={{ on: current === '__all' }}>≡ Single-page view</a>
+    <a href={kinexUrl('/docs/all/')} class:list={{ on: current === '__all' }}>≡ Single-page view</a>
   </div>
 </nav>
 <style>
