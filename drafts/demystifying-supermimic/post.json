@@ -1,0 +1,9 @@
+{
+  "title": "Demystifying SuperMimic: A Model-Based RL Perspective",
+  "description": "SuperMimic in model-based RL: pathwise policy gradients, the SVG connection, focused ablations, and predictive representations for control.",
+  "published": "2026-11",
+  "author": {
+    "name": "Bo Dai",
+    "url": "https://bo-dai.github.io/"
+  }
+}
