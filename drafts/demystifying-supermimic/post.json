@@ -1,9 +1,12 @@
 {
   "title": "Demystifying SuperMimic: A Model-Based RL Perspective",
-  "description": "SuperMimic in model-based RL: pathwise policy gradients, the SVG connection, focused ablations, and predictive representations for control.",
+  "description": "SuperMimic in model-based RL: pathwise policy gradients, the SVG connection, why the update is stable in the humanoid control loop, and predictive representations for control.",
   "published": "2026-11",
   "author": {
-    "name": "Bo Dai",
-    "url": "https://bo-dai.github.io/"
-  }
+    "name": "Feiyang Wu and Bo Dai"
+  },
+  "authors": [
+    { "name": "Feiyang Wu" },
+    { "name": "Bo Dai", "url": "https://bo-dai.github.io/" }
+  ]
 }
