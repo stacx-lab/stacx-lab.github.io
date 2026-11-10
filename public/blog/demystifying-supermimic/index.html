@@ -853,6 +853,98 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>On a 29-joint chain built to G1's shape, where the exact pathwise gradient through the true dynamics can be computed, the two estimators' gradients on the replay windows they train on compare as follows.</p>
 <div class="table-scroll" tabindex="0" aria-label="Table 5. Gradient quality against the exact gradient (H = 32, G1 network sizes)."><table><caption><b>Table 5. Gradient quality against the exact gradient (H = 32, G1 network sizes).</b></caption><thead><tr><th>Measure</th><th>Recorded-window SVG</th><th>Imagined BPTT</th></tr></thead><tbody><tr><td>Cosine to the exact gradient</td><td>0.90 to 0.98</td><td>0.75 to 0.92</td></tr><tr><td>Model-bias share of the error</td><td>0.01 to 0.02</td><td>0.3 to 0.6</td></tr><tr><td>Change with window age, 0 to 35 updates</td><td>none</td><td>degrades</td></tr></tbody></table></div>
 <p>On LAFAN1, the better gradient estimate yields a better result.</p>
+<figure class="figure chart-figure" id="recorded-window-board-figure">
+<div class="figure-top"><span class="eyebrow">RESULT / TRAINING CURVES</span><span class="micro"></span></div>
+<h3>LAFAN1</h3>
+<div class="chart-wrap"><svg class="chart-svg" viewBox="0 0 720 318" width="720" height="318" role="img" aria-label="Board success rate and local tracking error by training hours on LAFAN1. After four hours SVG on recorded windows reaches 0.650 success and 17.2 mm; SuperMimic 0.625 and 19.4 mm." xmlns="http://www.w3.org/2000/svg">
+<g class="ch-leg" data-s="bptt" tabindex="0" role="button" aria-pressed="true"><title>Click to hide or show this series</title><rect x="52" y="9" width="102" height="18" fill="transparent"/><line class="ch-line s-sf ch-dash" x1="56" x2="78" y1="18" y2="18"/><text class="ch-label" x="84" y="22">SuperMimic</text></g>
+<g class="ch-leg" data-s="rw" tabindex="0" role="button" aria-pressed="true"><title>Click to hide or show this series</title><rect x="168" y="9" width="55" height="18" fill="transparent"/><line class="ch-line s-rp " x1="172" x2="194" y1="18" y2="18"/><text class="ch-label" x="200" y="22">SVG</text></g>
+<text class="ch-title" x="56" y="54">Success rate ↑</text>
+<line class="ch-grid" x1="56" x2="261" y1="216.7" y2="216.7"/>
+<text class="ch-tick" x="50" y="220.2" text-anchor="end">0.2</text>
+<line class="ch-grid" x1="56" x2="261" y1="187.3" y2="187.3"/>
+<text class="ch-tick" x="50" y="190.8" text-anchor="end">0.3</text>
+<line class="ch-grid" x1="56" x2="261" y1="158.0" y2="158.0"/>
+<text class="ch-tick" x="50" y="161.5" text-anchor="end">0.4</text>
+<line class="ch-grid" x1="56" x2="261" y1="128.7" y2="128.7"/>
+<text class="ch-tick" x="50" y="132.2" text-anchor="end">0.5</text>
+<line class="ch-grid" x1="56" x2="261" y1="99.3" y2="99.3"/>
+<text class="ch-tick" x="50" y="102.8" text-anchor="end">0.6</text>
+<line class="ch-axis" x1="56" x2="261" y1="246" y2="246"/>
+<text class="ch-tick" x="56.0" y="260" text-anchor="middle">0</text>
+<text class="ch-tick" x="105.4" y="260" text-anchor="middle">1</text>
+<text class="ch-tick" x="154.8" y="260" text-anchor="middle">2</text>
+<text class="ch-tick" x="204.2" y="260" text-anchor="middle">3</text>
+<text class="ch-tick" x="253.6" y="260" text-anchor="middle">4</text>
+<text class="ch-tick" x="158.5" y="275" text-anchor="middle">training hours (one H200)</text>
+<polyline class="ch-line s-sf ch-dash" data-s="bptt" points="78.5,224.0 101.5,187.3 124.4,165.3 147.4,143.3 168.7,136.0 190.6,136.0 212.4,121.3 234.3,128.7 253.6,92.0"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="78.5" cy="224.0" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="101.5" cy="187.3" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="124.4" cy="165.3" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="147.4" cy="143.3" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="168.7" cy="136.0" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="190.6" cy="136.0" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="212.4" cy="121.3" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="234.3" cy="128.7" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="253.6" cy="92.0" r="4"/>
+<polyline class="ch-line s-rp " data-s="rw" points="76.3,180.0 97.4,165.3 118.4,180.0 139.5,143.3 160.1,114.0 181.2,136.0 202.3,106.7 223.3,92.0 243.8,92.0 253.6,84.7"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="76.3" cy="180.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="97.4" cy="165.3" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="118.4" cy="180.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="139.5" cy="143.3" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="160.1" cy="114.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="181.2" cy="136.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="202.3" cy="106.7" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="223.3" cy="92.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="243.8" cy="92.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="253.6" cy="84.7" r="4"/>
+<text data-s="rw" class="ch-label" x="270" y="85.8" text-anchor="start">SVG <tspan class="ch-strong">0.650</tspan></text>
+<text data-s="bptt" class="ch-label" x="270" y="98.8" text-anchor="start">SuperMimic <tspan class="ch-strong">0.625</tspan></text>
+<rect class="ch-hit" x="56" y="70" width="205" height="176" data-ch='{"xr": [0.0, 4.15], "xlog": 0, "yr": [0.1, 0.7], "ylog": 0, "xs": [0.41, 0.45, 0.84, 0.92, 1.26, 1.38, 1.69, 1.85, 2.11, 2.28, 2.53, 2.72, 2.96, 3.17, 3.39, 3.61, 3.8, 4.0], "xl": "training time", "xf": ["0.41 h", "0.45 h", "0.84 h", "0.92 h", "1.26 h", "1.38 h", "1.69 h", "1.85 h", "2.11 h", "2.28 h", "2.53 h", "2.72 h", "2.96 h", "3.17 h", "3.39 h", "3.61 h", "3.80 h", "4.00 h"], "title": "Success rate", "series": [{"n": "SuperMimic", "k": "bptt", "y": [null, 0.175, null, 0.3, null, 0.375, null, 0.45, null, 0.475, null, 0.475, null, 0.525, null, 0.5, null, 0.625], "c": "f-sf", "f": ["", "0.175", "", "0.300", "", "0.375", "", "0.450", "", "0.475", "", "0.475", "", "0.525", "", "0.500", "", "0.625"]}, {"n": "SVG", "k": "rw", "y": [0.325, null, 0.375, null, 0.325, null, 0.45, null, 0.55, null, 0.475, null, 0.575, null, 0.625, null, 0.625, 0.65], "c": "f-rp", "f": ["0.325", "", "0.375", "", "0.325", "", "0.450", "", "0.550", "", "0.475", "", "0.575", "", "0.625", "", "0.625", "0.650"]}]}'/>
+<text class="ch-title" x="404" y="54">Local error, MPJPE-L (mm) ↓</text>
+<line class="ch-grid" x1="404" x2="609" y1="246.0" y2="246.0"/>
+<text class="ch-tick" x="398" y="249.5" text-anchor="end">15</text>
+<line class="ch-grid" x1="404" x2="609" y1="194.2" y2="194.2"/>
+<text class="ch-tick" x="398" y="197.7" text-anchor="end">20</text>
+<line class="ch-grid" x1="404" x2="609" y1="142.5" y2="142.5"/>
+<text class="ch-tick" x="398" y="146.0" text-anchor="end">25</text>
+<line class="ch-grid" x1="404" x2="609" y1="90.7" y2="90.7"/>
+<text class="ch-tick" x="398" y="94.2" text-anchor="end">30</text>
+<line class="ch-axis" x1="404" x2="609" y1="246" y2="246"/>
+<text class="ch-tick" x="404.0" y="260" text-anchor="middle">0</text>
+<text class="ch-tick" x="453.4" y="260" text-anchor="middle">1</text>
+<text class="ch-tick" x="502.8" y="260" text-anchor="middle">2</text>
+<text class="ch-tick" x="552.2" y="260" text-anchor="middle">3</text>
+<text class="ch-tick" x="601.6" y="260" text-anchor="middle">4</text>
+<text class="ch-tick" x="506.5" y="275" text-anchor="middle">training hours (one H200)</text>
+<polyline class="ch-line s-sf ch-dash" data-s="bptt" points="426.5,82.5 449.5,141.1 472.4,159.0 495.4,189.1 516.7,197.2 538.6,204.4 560.4,205.9 582.3,206.5 601.6,200.0"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="426.5" cy="82.5" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="449.5" cy="141.1" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="472.4" cy="159.0" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="495.4" cy="189.1" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="516.7" cy="197.2" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="538.6" cy="204.4" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="560.4" cy="205.9" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="582.3" cy="206.5" r="4"/>
+<circle class="ch-mark f-sf" data-s="bptt" cx="601.6" cy="200.0" r="4"/>
+<polyline class="ch-line s-rp " data-s="rw" points="424.3,184.0 445.4,201.7 466.4,216.2 487.5,220.0 508.1,200.6 529.2,225.2 550.3,205.5 571.3,204.2 591.8,214.5 601.6,223.5"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="424.3" cy="184.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="445.4" cy="201.7" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="466.4" cy="216.2" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="487.5" cy="220.0" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="508.1" cy="200.6" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="529.2" cy="225.2" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="550.3" cy="205.5" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="571.3" cy="204.2" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="591.8" cy="214.5" r="4"/>
+<circle class="ch-mark f-rp" data-s="rw" cx="601.6" cy="223.5" r="4"/>
+<text data-s="bptt" class="ch-label" x="618" y="204.0" text-anchor="start">SuperMimic <tspan class="ch-strong">19.4</tspan></text>
+<text data-s="rw" class="ch-label" x="618" y="227.5" text-anchor="start">SVG <tspan class="ch-strong">17.2</tspan></text>
+<rect class="ch-hit" x="404" y="70" width="205" height="176" data-ch='{"xr": [0.0, 4.15], "xlog": 0, "yr": [15.0, 32.0], "ylog": 0, "xs": [0.41, 0.45, 0.84, 0.92, 1.26, 1.38, 1.69, 1.85, 2.11, 2.28, 2.53, 2.72, 2.96, 3.17, 3.39, 3.61, 3.8, 4.0], "xl": "training time", "xf": ["0.41 h", "0.45 h", "0.84 h", "0.92 h", "1.26 h", "1.38 h", "1.69 h", "1.85 h", "2.11 h", "2.28 h", "2.53 h", "2.72 h", "2.96 h", "3.17 h", "3.39 h", "3.61 h", "3.80 h", "4.00 h"], "title": "Local error, MPJPE-L (mm)", "series": [{"n": "SuperMimic", "k": "bptt", "y": [null, 30.79501489102992, null, 25.13593078203164, null, 23.40650780313777, null, 20.492521418725623, null, 19.714221241500113, null, 19.016403669268144, null, 18.875437203254226, null, 18.813610465744997, null, 19.440640297104483], "c": "f-sf", "f": ["", "30.8", "", "25.1", "", "23.4", "", "20.5", "", "19.7", "", "19.0", "", "18.9", "", "18.8", "", "19.4"]}, {"n": "SVG", "k": "rw", "y": [20.988493105132545, null, 19.276182222475782, null, 17.877710243141323, null, 17.50725060275449, null, 19.38566495764411, null, 17.012604020498426, null, 18.911414887872688, null, 19.03600485256495, null, 18.038361735440276, 17.172648521184158], "c": "f-rp", "f": ["21.0", "", "19.3", "", "17.9", "", "17.5", "", "19.4", "", "17.0", "", "18.9", "", "19.0", "", "18.0", "17.2"]}]}'/>
+<text class="ch-note" x="56" y="303">G1 · LAFAN1, 40 clips · 4,096 environments · H = 32 · one checkpoint per 25M frames</text>
+</svg></div>
+ <figcaption><b>LAFAN1.</b> Success rate and local tracking error on all 40 clips, by training time.</figcaption>
+</figure>
 <div class="table-scroll" tabindex="0" aria-label="Table 6. LAFAN1 tracking board, live actor."><table><caption><b>Table 6. LAFAN1 tracking board, live actor.</b></caption><thead><tr><th>Arm, 4 h, 40 clips</th><th>Success</th><th>MPJPE-L (mm)</th></tr></thead><tbody><tr><td>Imagined BPTT</td><td>0.625</td><td>19.4</td></tr><tr><td>Recorded-window SVG</td><td>0.650</td><td>17.2</td></tr></tbody></table></div>
 <h3 id="vi-inspiration"><blog-text data-edit-id="vi-010">Inspiration from the variational inference literature</blog-text></h3>
 <p><blog-text data-edit-id="vi-010a">SuperMimic's pathwise gradient works because its control interface keeps the dynamics stable and smooth. When we cannot guarantee this, for example under direct torque control or stiff contact, pathwise gradients can explode, while score-function gradients stay unbiased but noisy. The variational inference literature faced the same trade-off and proposed estimators that combine the two.</blog-text></p>
