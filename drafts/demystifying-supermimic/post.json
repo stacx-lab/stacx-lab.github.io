@@ -1,5 +1,5 @@
 {
-  "title": "Demystifying SuperMimic: A Model-Based RL Perspective",
+  "title": "Demystifying SuperMimic and Beyond: A Model-Based RL Perspective",
   "description": "SuperMimic in model-based RL: pathwise policy gradients, the SVG connection, why the update is stable in the humanoid control loop, and predictive representations for control.",
   "published": "2026-11",
   "author": {
