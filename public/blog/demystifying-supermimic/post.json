@@ -6,7 +6,13 @@
     "name": "Feiyang Wu and Bo Dai"
   },
   "authors": [
-    { "name": "Feiyang Wu" },
-    { "name": "Bo Dai", "url": "https://bo-dai.github.io/" }
+    {
+      "name": "Feiyang Wu",
+      "url": "https://feiyangwu.com/"
+    },
+    {
+      "name": "Bo Dai",
+      "url": "https://bo-dai.github.io/"
+    }
   ]
 }
