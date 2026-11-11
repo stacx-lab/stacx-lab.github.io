@@ -1,0 +1,9 @@
+{
+  "title": "What Does Score Centering Really Optimize?",
+  "description": "A note on score centering for off-policy LLM RL: it is one-step on-policy policy gradient on the sampler.",
+  "published": "2026-11",
+  "author": {
+    "name": "Bo Dai",
+    "url": "https://bo-dai.github.io/"
+  }
+}
