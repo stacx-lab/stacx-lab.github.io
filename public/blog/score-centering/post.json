@@ -1,6 +1,6 @@
 {
   "title": "What Does Score Centering Really Optimize?",
-  "description": "A note on score centering for LLM RL: the sampler's on-policy gradient in logit space, mapped through the trainer's Jacobian. What remains is the error of asynchronous distributed training.",
+  "description": "A note on score centering for LLM RL: it makes the update valid by switching to the sampler's on-policy update in logit space, mapped through the trainer's Jacobian; relative to the trainer it stays biased, which only off-policy correction removes.",
   "published": "2026-11",
   "author": {
     "name": "Bo Dai",
