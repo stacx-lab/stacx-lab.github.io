@@ -4,7 +4,8 @@ const root = new URL('../../public/blog/', import.meta.url);
 
 /**
  * Each post owns its HTML, metadata, and assets in public/blog/<slug>/.
- * @returns {{ id: string, data: { title: string, description: string, published: string, author?: { name: string, url?: string } } }[]}
+ * `published` is YYYY-MM or YYYY-MM-DD (the list shows the month); pinned posts come first.
+ * @returns {{ id: string, data: { title: string, description: string, published: string, pinned?: boolean, author?: { name: string, url?: string } } }[]}
  */
 export function getPosts() {
   return readdirSync(root, { withFileTypes: true })
@@ -15,11 +16,13 @@ export function getPosts() {
       if (!existsSync(new URL(`${id}/index.html`, root))) throw new Error(`Missing blog HTML: ${id}`);
       if (typeof data.title !== 'string' || !data.title.trim() ||
           typeof data.description !== 'string' || !data.description.trim() ||
-          typeof data.published !== 'string' || !/^\d{4}-(0[1-9]|1[0-2])$/.test(data.published) ||
+          typeof data.published !== 'string' || !/^\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?$/.test(data.published) ||
+          (data.pinned !== undefined && typeof data.pinned !== 'boolean') ||
           (data.author && typeof data.author.name !== 'string')) {
         throw new Error(`Invalid blog metadata: ${id}/post.json`);
       }
       return { id, data };
     })
-    .sort((a, b) => b.data.published.localeCompare(a.data.published) || a.id.localeCompare(b.id));
+    .sort((a, b) => Number(!!b.data.pinned) - Number(!!a.data.pinned) ||
+      b.data.published.localeCompare(a.data.published) || a.id.localeCompare(b.id));
 }
