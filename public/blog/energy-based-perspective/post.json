@@ -1,0 +1,9 @@
+{
+  "title": "An Energy-Based Perspective on Machine Learning",
+  "description": "Any energy-based model is three choices: the energy, inference, and learning. Discriminative, generative, representation, RL, and inference-time methods are EBMs that differ in these choices.",
+  "published": "2026-11",
+  "author": {
+    "name": "Bo Dai",
+    "url": "https://bo-dai.github.io/"
+  }
+}
